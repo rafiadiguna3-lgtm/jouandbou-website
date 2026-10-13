@@ -1,0 +1,6 @@
+const panel=document.getElementById('zubair'),scroll=panel.querySelector('.project-scroll'),videos=[...panel.querySelectorAll('video[data-carousel-src]')],visible=new Set();
+function release(v){v.pause();v.removeAttribute('src');v.load();}
+function sync(){for(const v of videos){if(panel.open&&!panel.classList.contains('is-closing')&&!document.hidden&&visible.has(v)){if(!v.getAttribute('src'))v.src=v.dataset.carouselSrc;}else if(!panel.open||panel.classList.contains('is-closing')||document.hidden){if(v.getAttribute('src'))release(v);}else v.pause();}}
+const observer=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting)visible.add(e.target);else visible.delete(e.target);}sync();},{root:scroll,threshold:.5});videos.forEach(v=>observer.observe(v));
+for(const v of videos)v.addEventListener('play',()=>{for(const other of videos)if(other!==v)other.pause();if(!panel.open||document.hidden)v.pause();});
+new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['open','class']});panel.addEventListener('project-will-close',()=>videos.forEach(release));panel.addEventListener('close',()=>videos.forEach(release));document.addEventListener('visibilitychange',sync);

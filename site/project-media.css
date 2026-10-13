@@ -1,0 +1,42 @@
+/* Film and copy share the same content box at every breakpoint. */
+.project-page .project-content>.film-hero{width:100%;padding:0;height:auto;min-height:0;max-height:none;aspect-ratio:16/9;margin:0 0 48px;background:#fafafa}
+.project-page .project-content>.film-hero video{width:100%;height:100%;object-fit:contain}
+.project-page .project-content>.film-hero :is(#film-toggle,.film-toggle){right:12px;bottom:12px}
+.editorial-project .social-film{width:100%;padding:0;margin:0 0 48px}
+.editorial-project .social-film .film-toggle svg{fill:currentColor;filter:none}
+.instagram-update{margin-top:56px}
+.instagram-update>h2{font-size:18px;font-weight:400;letter-spacing:-.3px;margin:0 0 20px}
+.instagram-update>p{margin:0 0 28px;max-width:66ch}
+.instagram-update .bento-grid{margin-top:28px}
+@media(max-width:760px){.project-page .project-content>.film-hero{margin-bottom:36px}.instagram-update{margin-top:40px}}
+
+.editorial-project .social-film.landscape-film{aspect-ratio:16/9;height:auto;max-height:none}.editorial-project .social-film.portrait-film{aspect-ratio:4/5;height:auto;max-height:none}.editorial-project .social-film .film-toggle{color:#fff;filter:drop-shadow(0 1px 3px #0008)}
+
+/* Photos only change slide; image surfaces never pan, scale or dismiss the panel. */
+.project-page img{pointer-events:none;-webkit-user-drag:none;user-select:none;transform:none!important;transition:none!important}.project-page .slide-track{touch-action:pan-x pan-y;overscroll-behavior-x:contain}.project-page .gallery-slide{scroll-snap-stop:always}.project-page .gallery-slide:hover img{transform:none!important}
+
+/* Gallery navigation uses controls; gestures scroll the page vertically. */
+.project-page .slide-track{overflow-x:hidden!important;touch-action:pan-y!important;overscroll-behavior-x:none}
+.project-page img.expandable-photo{pointer-events:auto!important;cursor:zoom-in;touch-action:pan-y;-webkit-touch-callout:none}.expandable-photo:focus-visible{outline:2px solid #333;outline-offset:3px}
+dialog.photo-viewer{position:fixed;inset:0;margin:0;padding:64px 60px 48px;width:100vw;height:100dvh;max-width:none;max-height:none;box-sizing:border-box;border:0;border-radius:0;background:#fff;overflow:hidden}dialog.photo-viewer::backdrop{background:#fff}.photo-viewer img{width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}.photo-viewer button{position:absolute;border:0;background:#fff;color:#222;width:44px;height:44px;padding:0;cursor:pointer;font:32px/1 sans-serif;touch-action:manipulation}.photo-viewer-close{top:calc(12px + env(safe-area-inset-top));right:12px}.photo-viewer-prev{left:8px;top:calc(50% - 22px)}.photo-viewer-next{right:8px;top:calc(50% - 22px)}.photo-viewer button:disabled{opacity:.25;cursor:default}.photo-viewer-count{position:absolute;bottom:calc(16px + env(safe-area-inset-bottom));left:0;width:100%;text-align:center;font:12px Lato,sans-serif;color:#666}@media(max-width:760px){dialog.photo-viewer{padding:calc(64px + env(safe-area-inset-top)) 44px calc(48px + env(safe-area-inset-bottom))}}
+/* Horizontal photo strips match the About Us gallery, with a next-photo preview. */
+.project-ribbon{width:100%;min-width:0;margin:28px 0 40px;clear:both}
+.project-ribbon-track{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
+.project-ribbon-track::-webkit-scrollbar{display:none}
+.project-ribbon-item{flex:0 0 42%;min-width:0;margin:0;scroll-snap-align:start;scroll-snap-stop:normal;aspect-ratio:4/5;background:#f1f1ee;overflow:hidden}
+.project-ribbon-item img{display:block;width:100%;height:100%;object-fit:contain;aspect-ratio:auto!important}
+.project-ribbon-controls{display:flex;justify-content:space-between;padding-top:10px}
+.project-ribbon-controls button{width:44px;height:44px;display:grid;place-items:center;border:0;background:transparent;color:#252620;cursor:pointer;touch-action:manipulation}
+.project-ribbon-controls button:disabled{opacity:.25;cursor:default}
+.project-ribbon-controls button:active{transform:scale(.94)}
+@media(max-width:760px){.project-ribbon-item{flex-basis:82%}.project-ribbon{margin:24px 0 32px}.project-ribbon-track{gap:10px}}
+
+/* Photos accept native horizontal swipes, including directly on the image. */
+.project-page .project-ribbon-track img.expandable-photo{touch-action:pan-x pan-y!important}
+.project-ribbon-track{cursor:grab}.project-ribbon-track.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.project-ribbon-controls{justify-content:center;padding-top:12px}.ribbon-position{font:11px Lato,sans-serif;color:#8a8b83;letter-spacing:.04em}
+.photo-viewer :is(.photo-viewer-prev,.photo-viewer-next){display:none}
+.photo-viewer img{touch-action:pan-y;pointer-events:auto}
+.photo-viewer-dots{position:absolute;bottom:calc(40px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;max-width:70vw;overflow:auto;gap:6px;padding:4px}
+.photo-viewer-dots button{position:static;width:20px;height:20px;font-size:0;flex-shrink:0;background:transparent;padding:6px}
+.photo-viewer-dots button::after{content:'';display:block;width:6px;height:6px;border-radius:50%;background:#b6b7b1}.photo-viewer-dots button[aria-current=true]::after{background:#292b26}

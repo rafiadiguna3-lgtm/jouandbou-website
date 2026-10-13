@@ -1,0 +1,25 @@
+{
+  "name": "jou-and-bou-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Independently deployable copy of the published Jou and Bou frontend",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "http-server site -p 5173 -a 0.0.0.0 -c-1",
+    "build": "node scripts/build.mjs",
+    "preview": "http-server dist -p 4173 -a 0.0.0.0 -c-1",
+    "test": "node --test tests/assets.test.mjs",
+    "test:browser": "playwright test",
+    "test:reference": "node scripts/compare-live.mjs",
+    "manifest:update": "node scripts/update-manifest.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "http-server": "14.1.1",
+    "pixelmatch": "8.0.0",
+    "pngjs": "7.0.0"
+  }
+}

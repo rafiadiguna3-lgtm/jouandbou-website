@@ -1,0 +1,157 @@
+/* Compact search and a gesture-driven project card. */
+#hint,.map-zoom{display:none!important}
+.search-wrap,.search-open .search-wrap,body:has(#focus:not([hidden])) .search-wrap{
+ display:block;position:fixed;top:calc(var(--jb-header) + 24px + env(safe-area-inset-top));left:28px;right:auto;
+ width:46px;padding:0;border:0;border-radius:24px;background:transparent;box-shadow:none;
+ transition:width .38s cubic-bezier(.22,1,.36,1);z-index:6;
+}
+.search-open .search-wrap,body.search-open:has(#focus:not([hidden])) .search-wrap{width:min(300px,calc(100vw - 56px))}
+#search-toggle{position:absolute;left:0;top:0;margin:0;width:46px;height:46px;display:flex;align-items:center;justify-content:center;z-index:2;color:#777;border-radius:50%}
+.search-box{height:46px;min-height:46px;padding:0 0 0 44px;gap:0;background:#f2f2f2f2;border:1px solid #e5e5e5;border-radius:24px;box-shadow:none;overflow:hidden}
+.search-box input{width:100%;font-size:16px;opacity:0;transform:translateX(-12px);transition:opacity .22s,transform .38s;pointer-events:none;color:#454545;font-weight:400}
+.search-open .search-box{padding-right:14px}
+.search-open .search-box input{opacity:1;transform:translateX(0);pointer-events:auto}
+#results{position:absolute;top:52px;left:0;width:100%;margin:0;padding:6px;background:#fafafa;border:1px solid #e6e6e6;border-radius:14px;max-height:min(45dvh,350px);overflow:auto;box-shadow:0 8px 25px #00000009}
+#results button{font-size:14px;min-height:46px}
+#focus{transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .25s;transform:translateY(var(--sheet-drag,0px));touch-action:none}
+#focus[data-sheet=hidden]{opacity:0;transform:translateY(calc(100% + 60px));pointer-events:none}
+#sheet-handle{display:none}
+#hide-project{position:absolute;right:6px;top:4px;min-width:36px;min-height:36px;font-size:20px;color:#777}
+#restore-project{position:fixed;bottom:calc(40px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:5;padding:10px 20px;min-height:44px;max-width:calc(100vw - 40px);background:#f3f3f3f2;border:1px solid #ddd;border-radius:24px;font-family:var(--jb-display);font-size:14px;touch-action:none}
+#focus:not([hidden]){animation:project-card-in .35s cubic-bezier(.22,1,.36,1)}
+@keyframes project-card-in{from{opacity:0;translate:0 16px}to{opacity:1;translate:0 0}}
+body.has-selection:not(.model-view) #focus{top:auto;bottom:30px;border:1px solid #d7d7d2;min-width:300px;border-radius:0;padding:20px 24px}
+body.has-selection:not(.model-view) #focus .project-story{display:none}
+.back-cross{display:none}
+.view-about #restore-project,.view-contact #restore-project{display:none!important}
+@media(max-width:760px),(hover:none),(pointer:coarse),(any-pointer:coarse){
+ .search-wrap,.search-open .search-wrap,body:has(#focus:not([hidden])) .search-wrap{left:24px;top:calc(var(--jb-header) + 28px + env(safe-area-inset-top));width:46px;right:auto}
+ .search-open .search-wrap,body.search-open:has(#focus:not([hidden])) .search-wrap{width:min(240px,calc(100vw - 48px))}
+ #search-toggle{display:flex}
+ #focus,body.has-selection:not(.model-view) #focus{
+  left:max(24px,calc((100vw - 600px)/2));right:max(24px,calc((100vw - 600px)/2));top:auto;bottom:calc(clamp(54px,8dvh,76px) + env(safe-area-inset-bottom));width:auto;min-width:0;max-width:none;
+  max-height:min(48dvh,390px);overflow:visible;padding:22px 18px 16px;background:#f4f4f4f7;border:1px solid #d7d7d2;border-radius:0;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 14px;align-items:center;
+ }
+ #focus .eyebrow{grid-column:1;font-size:13px;margin:0 0 5px;color:#707070;text-transform:none}
+ #focus h1{grid-column:1;margin:0 0 5px;font-size:22px;line-height:1.2;letter-spacing:-.4px}
+ #focus #category{grid-column:1;font-size:12px;margin:0;line-height:1.5;color:#737373}
+ #focus #more{grid-column:2;grid-row:2;padding:0 10px;min-height:36px;width:auto;white-space:nowrap;background:#fff;border:0;font-size:13px;display:flex;align-items:center;gap:8px}
+ #focus #more span{float:none}
+ #sheet-handle{display:flex;position:absolute;left:50%;top:-20px;width:80px;height:38px;padding:0;transform:translateX(-50%);align-items:center;justify-content:center;touch-action:none}
+ #sheet-handle span{width:32px;height:3px;border-radius:3px;background:#b3b3af}
+ #hide-project{right:0;top:-1px;width:32px;height:28px;min-width:32px;min-height:28px;font-size:17px}
+ #focus #area,#focus .project-story{display:none}
+ #focus[data-sheet=expanded]{touch-action:pan-y}
+ #focus[data-sheet=expanded] #area:not([hidden]){display:block;grid-column:1/-1;margin:16px 0 0}
+ #focus[data-sheet=expanded] .project-story:has(p:not([hidden])){display:block;grid-column:1/-1;max-height:24dvh;overflow:auto;touch-action:pan-y;margin-top:18px;overscroll-behavior:contain}
+ #focus .project-story h2{font-size:16px;margin:0 0 8px}
+ #focus .project-story p{font-size:14px;margin:0;line-height:1.65}
+ #back{left:auto;right:24px;top:calc(var(--jb-header) + 26px + env(safe-area-inset-top));width:44px;height:44px;min-height:44px;padding:0;display:flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:#f1f1f1;font-size:27px}
+ .back-label{display:none}.back-cross{display:block;font-weight:400}
+ .house-label{padding-bottom:46px}
+ #modelStatus{bottom:calc(160px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){#focus,.search-wrap,.search-box input{animation:none;transition:none}}
+
+/* Project names live in the card; no floating label stage over the map. */
+@media(hover:none),(pointer:coarse),(any-pointer:coarse){#labels{display:none!important}}
+.sheet-dragging #focus{transition:none}
+
+/* Clear hierarchy and a three-line animated navigation mark. */
+#menu-toggle span{transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .2s;transform-origin:center}
+#menu-toggle[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+#menu-toggle[aria-expanded=true] span:nth-child(2){opacity:0;transform:scaleX(.3)}
+#menu-toggle[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+body.has-selection:not(.model-view) #focus{cursor:pointer}
+#focus #more span{transition:transform .28s cubic-bezier(.22,1,.36,1)}
+#focus #more:hover span{transform:translateX(4px)}
+@media(min-width:761px) and (hover:hover) and (pointer:fine){
+ body.model-view #focus{top:50%;bottom:auto;transform:translateY(calc(-50% + var(--sheet-drag,0px)));width:290px;padding:22px 20px;max-height:calc(100dvh - 220px);overflow:auto;background:transparent}
+ body.model-view #focus[data-sheet=hidden]{opacity:0;pointer-events:none}
+ #focus .eyebrow{font-size:13px;color:#777;margin-bottom:8px}
+ #focus h1{font-size:30px;line-height:1.2;margin:0 0 12px}
+ #focus .project-story{margin-top:24px}
+ #focus .project-story h2{font-size:12px;font-weight:400;color:#888;margin:0 0 10px}
+ #focus .project-story p{font-size:14px;line-height:1.75;color:#555;margin:0 0 24px}
+ #focus #more{font-size:14px;min-height:44px;width:180px}
+}
+@media(max-width:760px),(hover:none),(pointer:coarse),(any-pointer:coarse){
+ #focus #more{grid-row:3;min-height:40px;font-size:12px;padding:0 9px}
+ #focus h1{grid-column:1/-1;padding-right:12px;margin-bottom:9px}
+ #focus #category{grid-row:3}
+}
+
+/* Mobile card proportions follow the supplied 336 × 100 reference. */
+@media(max-width:760px),(hover:none),(pointer:coarse),(any-pointer:coarse){
+ #focus,body.has-selection:not(.model-view) #focus{left:max(16px,calc((100vw - 600px)/2));right:max(16px,calc((100vw - 600px)/2));min-height:100px;padding:18px 20px 16px;grid-template-columns:minmax(0,1fr) auto;gap:0 12px;background:#f2f2f2;border-color:#d1d2c8}
+ #focus .eyebrow{grid-column:1;grid-row:1;font-size:12px;line-height:1.3;margin:0 0 5px;color:#66685e}
+ #focus h1{grid-column:1;grid-row:2;font-size:clamp(18px,5vw,20px);font-weight:400;line-height:1.15;letter-spacing:-.65px;margin:0 0 6px;padding:0}
+ #focus #category{grid-column:1;grid-row:3;font-family:var(--jb-display);font-size:11px;font-weight:300;line-height:1.3;margin:0;color:#555}
+ #focus #more{grid-column:2;grid-row:2;align-self:center;margin:0;padding:0 9px;min-height:36px;background:#fff;font-family:var(--jb-display);font-size:12px;gap:7px}
+ #hide-project{top:-2px;right:-1px;color:#999}
+}
+
+/* Selection navigation sits at the centre of each phone screen edge. */
+#house-browse{display:none;position:fixed;left:16px;right:16px;top:50%;transform:translateY(-50%);z-index:4;align-items:center;justify-content:space-between;pointer-events:none}
+#house-browse button{pointer-events:auto;position:relative;width:44px;height:44px;padding:0;display:grid;place-items:center;background:transparent;border-radius:50%;transition:opacity .2s,transform .2s;touch-action:manipulation}
+#house-browse button::before{content:"";position:absolute;inset:6px;border-radius:50%;background:#f2f2f2ed;transition:background .2s,transform .25s}
+#house-browse button:active::before{background:#e6e6e6}
+#house-browse svg{position:relative;width:17px;height:17px;fill:none;stroke:#252525;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#house-browse button:disabled{opacity:.25;pointer-events:none}
+@media(max-width:760px),(hover:none),(pointer:coarse),(any-pointer:coarse){#house-browse:not([hidden]){display:flex;animation:project-card-in .3s cubic-bezier(.22,1,.36,1)}}
+.view-about #house-browse,.view-contact #house-browse{display:none!important}
+
+/* Safari must leave canvas double-taps and pinches to the 3D controller. */
+#map{touch-action:none}
+
+/* The phone card keeps its reference width on larger touch screens too. */
+@media(max-width:760px),(hover:none),(pointer:coarse),(any-pointer:coarse){
+ #focus,body.has-selection:not(.model-view) #focus{left:max(16px,calc((100vw - 336px)/2));right:auto;width:min(336px,calc(100vw - 32px));min-width:0;max-width:336px}
+}
+
+/* First tap reveals only a name pill; the full sheet belongs to the 3D view. */
+#hide-project{display:none!important}
+/* Touch/programmatic focus must not leave Safari rings around the whole card. */
+body:not([data-input-mode=keyboard]) :is(#focus,button,a,.project-scroll):focus{outline:none!important}
+body[data-input-mode=keyboard] #focus:focus-visible{outline:2px solid #555;outline-offset:4px}
+.project-page .project-close{top:10px;right:10px;width:44px;height:44px;padding:0;display:grid;place-items:center;font-size:26px;line-height:1;border-radius:50%;background:#f2f2f2;overflow:hidden}
+body[data-input-mode=keyboard] .project-page .project-close:focus-visible{outline-offset:-3px}
+/* Compact, heavier three-line mark; preserve its 44px touch target. */
+#menu-toggle{align-items:center;gap:4px}
+#menu-toggle span{width:19px;height:2px;flex:none;background:#191919}
+#menu-toggle[aria-expanded=true] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+#menu-toggle[aria-expanded=true] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+/* Scroll and custom map gestures remain active; native double-tap zoom does not. */
+html,body{touch-action:manipulation}
+body,body *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+body.model-view #focus :is(h1,h2,p),body.model-view #focus :is(h1,h2,p) *,dialog :is(h1,h2,h3,p,small,figcaption),dialog :is(h1,h2,h3,p,small,figcaption) *,dialog .slide-caption>span,input,textarea,[contenteditable="true"]{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+img,video,canvas,svg{-webkit-user-drag:none;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+@media(max-width:700px){
+ header #main-nav{display:flex;flex-direction:column;gap:0;transform-origin:top right;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-12px) scale(.94);transition:opacity .22s ease,transform .38s cubic-bezier(.22,1,.36,1),visibility 0s .38s}
+ header #main-nav.menu-open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0) scale(1);transition-delay:0s}
+ header #main-nav>a,header #main-nav>button{opacity:0;transform:translateY(10px);transition:opacity .18s ease,transform .3s cubic-bezier(.22,1,.36,1);transition-delay:0s}
+ header #main-nav.menu-open>a,header #main-nav.menu-open>button{opacity:1;transform:translateY(0)}
+ header #main-nav.menu-open>:nth-child(1){transition-delay:.045s}
+ header #main-nav.menu-open>:nth-child(2){transition-delay:.09s}
+ header #main-nav.menu-open>:nth-child(3){transition-delay:.135s}
+ header #main-nav>button:active,header #main-nav>a:active{transform:scale(.97);transition-delay:0s}
+}
+@media(prefers-reduced-motion:reduce){header #main-nav,header #main-nav>*{transition:none!important}}
+#focus{scale:var(--sheet-scale,1);transition:transform .48s cubic-bezier(.22,1,.36,1),scale .48s cubic-bezier(.22,1,.36,1),opacity .28s}
+.sheet-dragging #focus{transition:none}
+@media(max-width:760px),(hover:none),(pointer:coarse),(any-pointer:coarse){
+ body.has-selection:not(.model-view) #focus{left:50%;right:auto;transform:translate(-50%,var(--sheet-drag,0px));width:max-content;min-width:0;max-width:min(336px,calc(100vw - 48px));min-height:44px;padding:12px 22px;display:block;border:1px solid #d7d7d2;border-radius:28px;background:#f2f2f2f5;cursor:pointer;user-select:none}
+ body.has-selection:not(.model-view) #focus h1{font:400 16px/1.25 var(--jb-display);letter-spacing:-.2px;margin:0;padding:0;text-align:center}
+ body.has-selection:not(.model-view) #focus #number,body.has-selection:not(.model-view) #focus #category,body.has-selection:not(.model-view) #focus #area,body.has-selection:not(.model-view) #focus #more,body.has-selection:not(.model-view) #focus .project-story,body.has-selection:not(.model-view) #focus #sheet-handle{display:none!important}
+ body.has-selection:not(.model-view) #focus[data-sheet=hidden]{transform:translate(-50%,calc(100% + 60px))}
+ #restore-project{bottom:calc(clamp(54px,8dvh,76px) + env(safe-area-inset-bottom));font:400 16px/1.25 var(--jb-display);min-height:44px;padding:12px 22px;border-radius:28px;max-width:min(336px,calc(100vw - 48px));user-select:none}
+}
+
+/* Use one neutral clear control instead of the browser's colored search cross. */
+#search::-webkit-search-cancel-button,#search::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}
+.search-open .search-box{padding-right:42px}
+#search-clear{position:absolute;right:5px;top:1px;width:36px;height:44px;display:grid;place-items:center;padding:0;color:#737373;border-radius:50%;z-index:2;touch-action:manipulation}
+#search-clear svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+#search-clear:active{color:#191919}
+body:not(.search-open) #search-clear{display:none}

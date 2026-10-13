@@ -1,0 +1,1 @@
+{"placement":{"x":110,"z":48},"closedBase":true,"baseGeometry":"source-floor-outline","vertexCount":76761,"triangleCount":25587,"compressed":true,"ranges":[{"start":0,"count":76761,"material":0,"layer":"source"}],"bounds":{"min":[-3.8559253215789795,0.00299999862909317,-8.5],"max":[3.855921745300293,9.494300842285156,8.5]},"removedExactDuplicateTriangles":19}

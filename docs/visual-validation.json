@@ -1,0 +1,44 @@
+{
+  "source": "https://jouandbou.rafiadiguna3.chatgpt.site/",
+  "limitations": [
+    "HTTPS resource unavailable in this environment: fonts.googleapis.com"
+  ],
+  "comparisons": [
+    {
+      "name": "desktop-home",
+      "differentPixels": 76,
+      "fraction": 0.00005864197530864198,
+      "passed": true
+    },
+    {
+      "name": "desktop-about",
+      "differentPixels": 1015,
+      "fraction": 0.000783179012345679,
+      "passed": true
+    },
+    {
+      "name": "desktop-project",
+      "differentPixels": 0,
+      "fraction": 0,
+      "passed": true
+    },
+    {
+      "name": "phone-home",
+      "differentPixels": 511,
+      "fraction": 0.00155243650504314,
+      "passed": true
+    },
+    {
+      "name": "phone-about",
+      "differentPixels": 215,
+      "fraction": 0.0006531777858792076,
+      "passed": true
+    },
+    {
+      "name": "phone-project",
+      "differentPixels": 0,
+      "fraction": 0,
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+/* Editorial pages retain the neighborhood's selected model behind them. */
+dialog.project-fullpage{inset:0!important;margin:0!important;width:100%!important;height:100dvh!important;max-width:none!important;max-height:none!important;border:0!important;border-radius:0!important;background:#fafafa;box-shadow:none!important;padding:0!important;font-family:var(--jb-copy)}
+dialog.project-fullpage::backdrop{background:transparent;backdrop-filter:none}
+.project-fullpage .project-scroll{height:100%;padding:70px 0 60px!important;overflow-y:auto;overscroll-behavior:contain}
+.project-fullpage .project-content,.project-fullpage .editorial-content{width:min(1040px,100%);margin:auto;box-sizing:border-box;padding:24px clamp(22px,5vw,60px) 64px}
+.project-fullpage h1,.project-fullpage h2,.project-fullpage .project-heading,.project-fullpage .editorial-heading{font-family:var(--jb-display)}
+.project-fullpage p,.project-fullpage figcaption{font-family:var(--jb-copy)}
+.project-return-nav{position:absolute;inset:0 0 auto;height:64px;background:#fafafaf2;z-index:5;display:flex;align-items:center;padding:0 clamp(22px,5vw,60px);backdrop-filter:blur(12px);border-bottom:1px solid #ededeb}
+.project-return{font:400 13px var(--jb-display);color:#66685e;background:none;border:0;min-height:44px;cursor:pointer;transition:color .2s,opacity .2s}
+.project-return:hover{color:#171817}.project-return:active{opacity:.55}
+.project-fullpage .project-close{position:absolute!important;top:10px!important;right:20px!important;z-index:8!important;background:transparent!important;box-shadow:none!important}
+.project-fullpage .film-hero{width:100%;margin-bottom:48px}
+.project-fullpage .slider-controls,.project-fullpage .project-ribbon-controls{display:none!important}
+.project-fullpage .slide-track{display:flex;overflow-x:auto!important;touch-action:pan-x pan-y!important;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.project-fullpage .slide-track::-webkit-scrollbar{display:none}
+.project-fullpage .slide-track>*,.project-fullpage .gallery-slide{flex:0 0 100%;min-width:100%;scroll-snap-align:start}
+.project-fullpage .gallery-slide img{width:100%;height:100%;object-fit:cover!important;aspect-ratio:auto!important;display:block}
+.project-fullpage .project-ribbon-item img{width:100%;height:100%;object-fit:cover!important;aspect-ratio:auto!important}
+.project-fullpage .project-ribbon-track{cursor:grab}.project-fullpage .is-dragging{cursor:grabbing;scroll-snap-type:none}
+.project-fullpage img[data-project-image]{background:#eeeeeb;opacity:0;transition:opacity .24s ease!important}
+.project-fullpage img[data-project-image].image-ready{opacity:1}
+@media(max-width:700px){.project-fullpage .project-scroll{padding-top:64px!important}.project-return-nav{height:60px;padding-left:22px}.project-fullpage .project-close{right:12px!important}.project-fullpage .project-content,.project-fullpage .editorial-content{padding:20px 22px 48px}}
+@media(prefers-reduced-motion:reduce){.project-fullpage img[data-project-image],.project-return{transition:none!important}}
+/* Compact location sheet; geographic map tiles remain interactive. */
+#studio-map .leaflet-tile-pane{filter:grayscale(.85) invert(1) hue-rotate(175deg) saturate(.55) brightness(.72) contrast(1.3)}
+#studio-location-card{inset:auto auto 28px 12px!important;width:min(320px,calc(100% - 24px));max-height:calc(100% - 80px);border-radius:16px!important;background:#10141a!important;box-shadow:0 10px 35px #0006}
+.studio-card-copy{padding:18px!important}.studio-card-copy h2{font-size:18px!important;padding-right:30px}.studio-card-copy>p{font-size:11px!important;margin:6px 0 12px!important}
+.studio-card-close{position:absolute!important;right:8px;top:8px;width:32px!important;height:32px!important;float:none!important}
+.studio-card-actions{gap:6px!important}.studio-card-actions a{padding:10px 8px!important;font-size:11px!important}
+.studio-card-copy address{font-size:11px!important;line-height:1.6!important}.studio-hours{padding:12px 0!important}.studio-card-phone{font-size:12px!important}
+.project-fullpage .slide-caption button,.project-fullpage .slide-count{display:none!important}
+.project-fullpage .bento-card>img,.project-fullpage .photo-pair img,.project-fullpage .editorial-wide>img{object-fit:cover!important;background:transparent!important}
+.project-fullpage .film-hero{height:auto!important;max-height:none!important;aspect-ratio:16/9;padding:0!important}
+.project-fullpage .film-hero video{width:100%;height:100%;object-fit:cover}
+.project-fullpage .film-hero button{bottom:14px!important;right:14px!important}
+.project-return-nav{height:var(--jb-header);padding:0 72px 0 16px;border-bottom:none;background:#fafafa;backdrop-filter:none}
+.project-return-nav .brand{color:#212121;text-decoration:none}.project-return-nav .brand img{width:56px;height:56px;object-fit:contain}.project-fullpage .project-close{top:6px!important;right:16px!important;width:44px;height:44px}
+.project-fullpage .project-scroll{padding-top:var(--jb-header)!important}
+@media(max-width:760px){.project-return-nav{padding-left:8px}.project-return-nav .brand img{width:48px;height:48px}.project-fullpage .project-close{right:8px!important;top:6px!important}}
+
+.project-fullpage .slider-controls,.project-fullpage .project-ribbon-controls{display:flex!important;justify-content:center;padding:12px 0 0;min-height:28px;gap:0}
+.project-fullpage .project-ribbon-controls[hidden]{display:none!important}
+.project-fullpage .ribbon-position{display:none}
+.project-photo-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:0;max-width:100%}
+.project-photo-dots button{position:static!important;display:grid!important;place-items:center;width:22px;height:24px;min-width:0;min-height:0;padding:0!important;border:0!important;background:transparent!important;border-radius:0;cursor:pointer}
+.project-photo-dots button::after{content:'';width:7px;height:7px;border-radius:50%;background:#c8c8c6;transition:background-color .24s ease}
+.project-photo-dots button[aria-current=true]::after{background:#343532}
+.project-photo-dots button:focus-visible{outline:1px solid #666;outline-offset:1px}
+
+.project-fullpage .slide-track,.project-fullpage .project-ribbon-track{overflow-x:auto!important;overflow-y:hidden!important;touch-action:pan-x pan-y!important;overscroll-behavior-x:contain;overscroll-behavior-y:auto;-webkit-overflow-scrolling:touch;min-width:0;max-width:100%}
+.project-fullpage .slide-track img.expandable-photo,.project-fullpage .project-ribbon-track img.expandable-photo{touch-action:pan-x pan-y!important;user-select:none;-webkit-user-drag:none}
+.project-fullpage .gallery-slide,.project-fullpage .project-ribbon-item{overflow:hidden;flex-shrink:0}
+.project-fullpage .slider,.project-fullpage .project-ribbon{min-width:0;max-width:100%}
+
+.project-fullpage .gallery-slide .zubair-carousel-video{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;background:#fafafa;touch-action:pan-x pan-y}

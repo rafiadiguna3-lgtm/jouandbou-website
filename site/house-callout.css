@@ -1,0 +1,25 @@
+.house-callout{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity 150ms ease-out;z-index:4}
+.house-callout.is-visible{opacity:1}
+.house-callout-leader{position:absolute;inset:0;width:100%;height:100%;overflow:visible;fill:none;stroke:#74746d;stroke-width:1;stroke-dasharray:4 4;pointer-events:none}
+.house-callout-leader path{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(.02);opacity:0;transition:transform 340ms cubic-bezier(.22,1,.36,1),opacity 160ms ease}
+.house-callout.is-visible .house-callout-leader path{transform:scaleY(1);opacity:1}
+.house-callout-card{position:absolute;height:48px;padding:5px 12px 14px;transform-origin:0 0;background:none;border:0;color:#333;text-align:left;pointer-events:none;font:inherit;opacity:0;clip-path:inset(0 100% 0 0);transition:opacity 160ms ease,clip-path 320ms cubic-bezier(.22,1,.36,1) 75ms}
+.house-callout.is-visible .house-callout-card{opacity:1;clip-path:inset(0);pointer-events:auto}
+.house-callout-frame{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:visible}
+.house-callout-frame path{fill:#fafafaf7;stroke:#9b9b93;stroke-width:.8;vector-effect:non-scaling-stroke;transition:fill 130ms ease,stroke 130ms ease}
+.house-callout-name{display:inline-block;font-size:18px;line-height:24px;font-weight:400;white-space:nowrap;overflow:visible}
+.house-callout-number{display:block;font-size:9px;line-height:13px;color:#777;letter-spacing:.3px}
+.house-callout-card:hover .house-callout-frame path{fill:#fff;stroke:#50504b}
+.house-callout-card:active{opacity:.65!important}
+.house-callout-card:focus-visible{outline:2px solid #555;outline-offset:3px}
+.house-callout-card.opens-left .house-callout-frame{transform:scaleX(-1)}
+.house-callout-card.opens-left{text-align:right}
+body.view-about .house-callout,body.view-contact .house-callout,body:has(dialog[open]) .house-callout{visibility:hidden;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.house-callout,.house-callout *{transition:none!important}}
+
+.house-callout-name,.house-callout-number{position:relative;z-index:1}
+
+.house-callout-card{left:0;top:0;will-change:transform;contain:layout style}
+.house-callout-old{position:absolute;left:12px;top:5px;font-size:18px;line-height:24px;white-space:nowrap;opacity:0;z-index:1;pointer-events:none}
+.house-callout-card.opens-left .house-callout-old{left:auto;right:12px}
+.house-callout-name{will-change:opacity,transform}

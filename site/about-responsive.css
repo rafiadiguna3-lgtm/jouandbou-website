@@ -1,0 +1,60 @@
+/* About content only. The shared header and footer retain their existing design. */
+@media (min-width:1101px){#about-page .about-feed-track{grid-auto-columns:25%}}
+@media (max-width:1100px){
+ #about-page{padding-top:56px;font:15px/1.75 var(--jb-copy)}
+ #about-page :is(.about-container,.about-narrow){width:min(680px,calc(100% - 64px))}
+ #about-page h1{font:700 19px/1.4 var(--jb-display);margin-bottom:64px}
+ #about-page h2{font:400 18px/1.45 var(--jb-display)}
+ #about-page h3{font:400 16px/1.5 var(--jb-display);margin-bottom:20px}
+ #about-page p{margin-bottom:20px}
+ #about-page .about-intro{grid-template-columns:110px minmax(0,1fr);gap:36px}
+ #about-page .about-intro .studio-mark{width:110px}
+ #about-page .about-intro>div{padding-top:0}
+ #about-page .joy-boy{gap:40px;margin-block:48px 56px}
+ #about-page .joy-boy img{max-width:190px;margin:0 auto 24px}
+ #about-page .joy-boy p{padding:0}
+ #about-page .about-band{padding:36px 32px}
+ #about-page .about-mission p{max-width:640px;font-size:14px;line-height:1.75}
+ #about-page .about-services{padding-block:48px 56px}
+ #about-page .about-services>h2{margin-bottom:36px!important}
+ #about-page .about-service-row{grid-template-columns:180px minmax(0,1fr);gap:36px}
+ #about-page .about-service-row>img{width:180px}
+ #about-page .about-scope{grid-template-columns:minmax(0,1fr) 240px;gap:36px;margin-top:56px}
+ #about-page .about-scope>img{width:240px}
+ #about-page .about-categories>img{width:170px;margin-block:28px}
+ #about-page .about-categories .about-pair{gap:36px}
+ #about-page .about-works{padding-block:56px}
+ #about-page .about-works>h2{margin-bottom:32px!important}
+ #about-page .about-feed{width:calc(100% - 64px);max-width:960px;margin:0 auto 56px}
+ #about-page .about-feed-track{grid-auto-columns:33.333333%}
+ #about-page .about-feed-controls{margin-top:12px;font-size:14px}
+}
+@media (max-width:760px){
+ #about-page{padding-top:40px;font-size:14px;line-height:1.8;scrollbar-gutter:auto}
+ #about-page :is(.about-container,.about-narrow){width:min(440px,calc(100% - 48px))}
+ #about-page h1{font-size:18px;margin-bottom:40px}
+ #about-page h2{font-size:17px}
+ #about-page h3{font-size:15px}
+ #about-page .about-intro{grid-template-columns:1fr;gap:28px}
+ #about-page .about-intro .studio-mark{width:92px;margin:auto}
+ #about-page .about-intro p{margin-bottom:18px}
+ #about-page .joy-boy{grid-template-columns:1fr;gap:36px;margin-block:36px 40px}
+ #about-page .joy-boy img{max-width:164px;margin-bottom:18px}
+ #about-page .joy-boy p{font-size:14px;line-height:1.8}
+ #about-page .about-band{padding:28px 24px}
+ #about-page .about-mission p{max-width:440px;font-size:13px;line-height:1.75}
+ #about-page .about-service-row{grid-template-columns:1fr;gap:28px}
+ #about-page .about-service-row>img{width:210px;margin:auto}
+ #about-page .about-services{padding-block:36px 40px}
+ #about-page .about-services>h2{margin-bottom:28px!important}
+ #about-page .about-scope{grid-template-columns:1fr;gap:24px;margin-top:36px}
+ #about-page .about-scope>img{width:min(280px,100%);margin:auto}
+ #about-page .about-categories .about-narrow{width:min(440px,100%)}
+ #about-page .about-categories .about-pair{grid-template-columns:1fr;gap:20px}
+ #about-page .about-categories>img{width:150px;margin-block:24px}
+ #about-page .about-works{padding-block:40px}
+ #about-page .about-works .about-pair{gap:18px}
+ #about-page .about-work span{font-size:14px;margin-top:16px}
+ #about-page .about-feed{width:calc(100% - 48px);margin-bottom:40px}
+ #about-page .about-feed-track{grid-auto-columns:50%}
+}

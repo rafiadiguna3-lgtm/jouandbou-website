@@ -1,0 +1,18 @@
+dialog.details-motion[open]{animation:none!important}
+dialog.details-motion.is-closing{pointer-events:none}
+dialog.details-motion::backdrop{animation:details-backdrop-in .35s ease both}
+dialog.details-motion.is-closing::backdrop{animation:details-backdrop-out .24s ease both}
+.details-motion [data-details-reveal]{opacity:0;transform:translateY(18px);transition:opacity .65s ease var(--reveal-delay,0ms),transform .75s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms)}
+.details-motion [data-details-reveal].is-revealed{opacity:1;transform:translateY(0)}
+#about-page .about-feed-track{touch-action:pan-x pan-y;overscroll-behavior-x:contain}
+@keyframes details-backdrop-in{from{background-color:rgba(0,0,0,0)}to{background-color:rgba(0,0,0,.28)}}
+@keyframes details-backdrop-out{from{background-color:rgba(0,0,0,.28)}to{background-color:rgba(0,0,0,0)}}
+@media(prefers-reduced-motion:reduce){dialog.details-motion::backdrop{animation:none!important}.details-motion [data-details-reveal]{opacity:1;transform:none;transition:none}}
+
+/* Failure-safe: observers never decide whether project content is visible. */
+.details-motion [data-details-reveal],.details-motion [data-details-reveal].is-revealed{opacity:1;transform:none;transition:none}
+
+.project-page.details-motion::backdrop{animation:none!important}
+.project-page.details-motion [data-details-reveal],.project-page.details-motion .reveal{opacity:1!important;transform:none!important;animation:none!important;transition:none!important}
+.project-fullpage img[data-project-image]{transition:none!important}
+header.detail-header-context #menu-toggle span{transition:none!important}

@@ -1,0 +1,22 @@
+{
+  "house": 39,
+  "source": "https://www.instagram.com/stories/highlights/18351871696169736/",
+  "coverage": "Three publicly accessible preview photos; not the complete authenticated highlight",
+  "items": [
+    {
+      "src": "assets/jh39/progress/01.jpg",
+      "alt": "JH39 project visit cover",
+      "duration": 6000
+    },
+    {
+      "src": "assets/jh39/progress/02.jpg",
+      "alt": "JH39 facade during masonry construction",
+      "duration": 6000
+    },
+    {
+      "src": "assets/jh39/progress/03.jpg",
+      "alt": "JH39 worker and scaffolding during construction",
+      "duration": 6000
+    }
+  ]
+}
