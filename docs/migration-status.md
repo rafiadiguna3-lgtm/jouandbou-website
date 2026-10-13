@@ -93,3 +93,22 @@ screenshots: [desktop home](screenshots/desktop-home.png),
 [phone home](screenshots/phone-home.png),
 [desktop project](screenshots/desktop-project.png),
 [phone project](screenshots/phone-project.png).
+
+## Vercel staging preparation
+
+The same `migration/jou-and-bou` branch now includes Vercel Preview settings,
+a Production-build rejection guard, pinned Node.js 24.x, upload exclusions and
+hosted tests for 3D/details/fonts/map tiles. The Draft PR stays open and unmerged.
+All published frontend files and the 15 pending image files remain unchanged.
+
+Vercel's official static builder passed locally and verified all 885 output
+hashes. Two deployment-configuration checks and four local browser tests passed.
+**A hosted Vercel deployment has not been created or verified**: a new account-bound
+staging project must first be created using the user steps in
+[vercel-staging.md](vercel-staging.md). No staging URL, authenticated Vercel access
+or hosted build logs are available yet. Staging font and map checks are prepared,
+not reported as passed. Build-output size is about 220 MiB; actual Vercel upload
+limits remain to be verified.
+
+The photograph-completeness failure remains pending until the original assets
+are supplied. This migration is not production-ready.

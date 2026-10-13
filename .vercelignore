@@ -1,0 +1,16 @@
+.git/
+node_modules/
+dist/
+.vercel/
+.env*
+test-results/
+playwright-report/
+tests/
+playwright*.mjs
+docs/screenshots/
+docs/migration-status.md
+docs/visual-validation.json
+docs/vercel-staging.md
+docs/vercel-build-validation.json
+scripts/compare-live.mjs
+scripts/update-manifest.mjs

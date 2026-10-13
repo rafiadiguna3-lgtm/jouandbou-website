@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Independently deployable copy of the published Jou and Bou frontend",
   "engines": {
-    "node": ">=22"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "http-server site -p 5173 -a 0.0.0.0 -c-1",
@@ -14,7 +14,10 @@
     "test": "node --test tests/assets.test.mjs",
     "test:browser": "playwright test",
     "test:reference": "node scripts/compare-live.mjs",
-    "manifest:update": "node scripts/update-manifest.mjs"
+    "manifest:update": "node scripts/update-manifest.mjs",
+    "build:vercel": "node scripts/vercel-build.mjs",
+    "test:staging": "playwright test --config playwright.staging.config.mjs",
+    "test:deployment-config": "node --test tests/deployment-config.test.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

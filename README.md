@@ -11,7 +11,7 @@ source URLs, byte sizes, and SHA-256 hashes of every retrieved file.
 
 ## Develop and build
 
-Use Node.js 22 or newer (validated with Node.js 24.19.0).
+Use Node.js 24 (validated with Node.js 24.19.0).
 
 ```sh
 npm ci
@@ -76,3 +76,10 @@ services and are not owned by this static deployment.
 For intentional source edits, run `npm run manifest:update` to update the corresponding entries in
 `docs/source-manifest.json` while retaining the original hashes, and document that the files have diverged from the
 published capture; preserve the original capture provenance.
+
+## Vercel staging
+
+See [the step-by-step staging guide](docs/vercel-staging.md). Vercel Preview builds
+use `npm run build:vercel` and publish `dist/`. Production builds are blocked,
+automatic Git deployments are disabled, and responses are marked `noindex`.
+This is staging preparation, not a hosted deployment verification.
