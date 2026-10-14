@@ -1,7 +1,7 @@
 {
   "source": "Native Sites Git repository",
   "captured_at": "2026-10-14T13:38:55.964863+00:00",
-  "scope": "Native v143 dist synchronized, with 15 documented exact-original/variant repairs in GitHub only; review update, not final release.",
+  "scope": "Native Sites v143 frontend with 15 documented photo repairs and a documented initial-route visibility fix in GitHub only; review update.",
   "files": [
     {
       "path": "about-journal.mjs",
@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 6618,
-      "sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
+      "bytes": 6762,
+      "sha256": "36b1f4c401f2cea37eb90e9e833b1802b3610a0d6a7b0703127b2d85fdfa5a30",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -62,10 +62,19 @@
           "sha256": "1509ddffdcdfbd76c779177b56fde246df7627ea48a0d3d38c36986141a388f3",
           "bytes": 4834,
           "github_commit": "a0eeec7ba4d0f0f3052d3a54898171b4b613bd82"
+        },
+        {
+          "sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
+          "bytes": 6618,
+          "github_commit": "d670554f826975acae1dc8e2b81de1857ada7cee"
         }
       ],
       "native_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
-      "native_bytes": 6618
+      "native_bytes": 6618,
+      "published_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
+      "published_bytes": 6618,
+      "modified_locally": true,
+      "modification_reason": "Prevent homepage flash on reload by hiding content before routing and revealing the current hash section only when ready."
     },
     {
       "path": "app.mjs",
@@ -13156,8 +13165,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 105307,
-      "sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
+      "bytes": 105659,
+      "sha256": "eaa10462e6c16f1230bf062869a74fde61457917ebf8bb89453b45eab384485c",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13174,10 +13183,19 @@
           "sha256": "b425ab2a895a484bf60482b3555de4a776bbe856f20e0f49662548ebc29d64f9",
           "bytes": 104069,
           "github_commit": "a0eeec7ba4d0f0f3052d3a54898171b4b613bd82"
+        },
+        {
+          "sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
+          "bytes": 105307,
+          "github_commit": "d670554f826975acae1dc8e2b81de1857ada7cee"
         }
       ],
       "native_sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
-      "native_bytes": 105307
+      "native_bytes": 105307,
+      "published_sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
+      "published_bytes": 105307,
+      "modified_locally": true,
+      "modification_reason": "Prevent homepage flash on reload by hiding content before routing and revealing the current hash section only when ready."
     },
     {
       "path": "interaction-comfort.mjs",
@@ -32724,19 +32742,19 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "2e8ab59400f460ff9c95d43ef2bae82da1b7c339e49656d7df149cf702957265",
+  "dist_tree_sha256": "1713aca04dfd6a006b17ba8577a4b9d8f57c706b3232edd3c9a213d4c9732d9a",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
-      "996 native frontend files match unchanged; only 15 repaired images differ",
       "npm run build",
       "npm test: 4/4",
       "npm run test:deployment-config: 2/2",
-      "npm run test:browser: 6/6, desktop/mobile Bou routing and scroll restoration included",
       "754 raster/SVG images parsed or decoded; no empty image files",
       "396 responsive variants: thumbnail dimensions and source-image similarity verified using full-resolution sources for existing variants and documented bases for repairs",
       "48+ JavaScript modules: syntax checks",
-      "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded"
+      "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded",
+      "994 native files match; deviations are 15 photo repairs and 2 reload-routing files",
+      "npm run test:browser: 11/11; includes 5 reload cases with delayed routing, Bou desktop/mobile and existing 3D/video regressions"
     ],
     "FAIL": [],
     "BLOCKED": [

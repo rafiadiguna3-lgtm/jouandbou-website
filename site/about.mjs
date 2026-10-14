@@ -28,11 +28,12 @@ function showRoute(){
  bouClose.hidden=!bouActive;
  bouClose.setAttribute('aria-label',location.hash.startsWith('#bou-works/')?'Back to Bou Works':'Back to About Us');
  if(bouActive){document.getElementById('main-nav').classList.remove('menu-open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');const destination=location.hash;const restoreTop=bouScrollPositions.get(destination)||0;
- renderBou(destination.slice(11)).then(()=>{if(location.hash===destination&&!bou.hidden)bou.scrollTo({top:restoreTop,left:0,behavior:'instant'});});}
+ renderBou(destination.slice(11)).then(()=>{if(location.hash===destination&&!bou.hidden){bou.scrollTo({top:restoreTop,left:0,behavior:'instant'});document.documentElement.removeAttribute('data-route-pending');}});}
  if(page&&!bouActive&&shownRoute!==route)panel.scrollTo({top:0,left:0,behavior:'instant'});
  shownRoute=route;
  if(page){closeSearch();document.querySelectorAll('dialog[open]').forEach(d=>d.close());panel.focus({preventScroll:true});}
  updateTitle();
+ if(!bouActive)document.documentElement.removeAttribute('data-route-pending');
 }
 
 studio.onclick=()=>{if(location.hash!=='#about')location.hash='about';else about.scrollTo({top:0,behavior:'smooth'});};
