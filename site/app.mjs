@@ -29,6 +29,14 @@ try{engine=new NeighborhoodRenderer(canvas,world,onModelChange)}catch{engine=new
 const browseOrder=[0,9,13,29,...glbIds.filter(id=>id!==51)].sort((a,b)=>houseNumber(a)-houseNumber(b)).concat(44,51);
 const order=browseOrder;
 const baseScale=()=>compactLandscape()?Math.min(w/80,(h-70)/34):w<700?Math.min(w/48,(h-120)/48):Math.min(w/108,(h-250)/45);
+// Reference homepage: the whole neighborhood, slightly right and below center.
+function homeCamera(){
+ const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0},points=world.faces.flatMap(face=>face.v.map(point=>project(point,pose,0,0)));
+ const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
+ const scale=Math.min(w*.762/(right-left),h*.96/(bottom-top));
+ const u=(left+right)/2-w*.033/scale,v=(top+bottom)/2-h*.05/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
+ return {...pose,x:u*co+v/sp*si,z:-u*si+v/sp*co,scale};
+}
 function limit(){if(!front&&!drag)constrain(goal,bounds,w,h)}
 const labels=names.map((name,i)=>{if(i===29)name='Marboy House';const b=document.createElement('button');b.className='house-label';b.disabled=!canExplore(i);b.hidden=!canExplore(i);b.tabIndex=canExplore(i)?0:-1;b.innerHTML=`<strong>${title(i)}</strong><span>${name}</span>`;b.setAttribute('aria-label',`Preview ${name}; activate again to explore in 3D`);b.onfocus=()=>{hover=i;start()};b.onblur=()=>{hover=-1;start()};b.onpointerenter=e=>{if(!desktopInput()||e.pointerType!=='mouse')return;hover=i;start()};b.onpointerleave=()=>{hover=-1;start()};b.onclick=e=>{if(!moved)activateHouse(i,e.pointerType)};$('labels').append(b);return b});
 const houseCallout=createHouseCallout(id=>openHouse(id),direction=>browseHouse(direction,{quick:true}));
@@ -220,6 +228,7 @@ function pick(x,y,padding=desktopInput()?6:16){let nearest=-1,dist=Infinity;for(
 let lastResetTap=null;
 function resetView(){
  if(front){modelZoom=1;setFront();}
+ else if(previewId<0){goal=homeCamera();zoom=goal.scale/baseScale();}
  else{zoom=previewId>=0?(desktopInput()?1.25:.9):1;goal={x:previewId>=0?position(current)[0]:camera.x,y:2,z:previewId>=0?position(current)[1]:camera.z,yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};}
  lastResetTap=null;$('announce').textContent='View reset to normal zoom';flyCamera();start();
 }
@@ -276,11 +285,11 @@ function syncProjectRoute(){
 for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&location.hash===`#project/${panel.dataset.projectRoute}`)history.replaceState(null,'','#projects');});
 addEventListener('hashchange',syncProjectRoute);addEventListener('popstate',syncProjectRoute);
 $('more').onclick=openProjectDetails;
-$('projects').onclick=()=>{document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();zoom=1;goal={x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};current=0;updateUI();flyCamera();start()};
+$('projects').onclick=()=>{document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();goal=homeCamera();zoom=goal.scale/baseScale();current=0;updateUI();flyCamera();start()};
 
 function info(title,text){$('infoTitle').textContent=title;$('infoText').textContent=text;$('info').showModal()}
 document.querySelectorAll('.close').forEach(b=>b.onclick=()=>b.closest('dialog').close());
-window.addEventListener('keydown',e=>{if(document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog[open]')||e.target.closest('input, .search-wrap'))return;if(e.key==='Escape'){if(front)back();else clearPreview();}if(['+','=','-'].includes(e.key)){e.preventDefault();zoomBy(e.key==='-'?1/1.12:1.12);}if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();if(front)orbitTo(goal.yaw+(e.key==='ArrowRight'?1:-1)*Math.PI/8);else select(order[Math.max(0,Math.min(order.length-1,order.indexOf(current)+(e.key==='ArrowRight'?1:-1)))])}});window.addEventListener('resize',resize);window.visualViewport?.addEventListener('resize',resize);goal.scale=baseScale();camera.scale=goal.scale;resize();updateUI();
+window.addEventListener('keydown',e=>{if(document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog[open]')||e.target.closest('input, .search-wrap'))return;if(e.key==='Escape'){if(front)back();else clearPreview();}if(['+','=','-'].includes(e.key)){e.preventDefault();zoomBy(e.key==='-'?1/1.12:1.12);}if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();if(front)orbitTo(goal.yaw+(e.key==='ArrowRight'?1:-1)*Math.PI/8);else select(order[Math.max(0,Math.min(order.length-1,order.indexOf(current)+(e.key==='ArrowRight'?1:-1)))])}});window.addEventListener('resize',resize);window.visualViewport?.addEventListener('resize',resize);goal=homeCamera();zoom=goal.scale/baseScale();Object.assign(camera,goal);resize();updateUI();
 
 const search=$('search'),results=$('results');
 const searchNames=names.map((name,i)=>{if(i===29)return 'Marboy House';return /^(?:jh\d+|jou\s*house\s*\d+)$/i.test(name)?title(i):name;});

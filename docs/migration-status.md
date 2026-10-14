@@ -132,3 +132,15 @@ affected browser regression (12/12), search/hover tests (3/3), phone swipe test.
 FAIL: none remaining. BLOCKED: real Safari/iPhone and hosted browser validation;
 Cloudflare preview/external map/font hosts remain outside the network allowlist.
 This remains an update for review, not a final release.
+
+## Default homepage framing
+
+Rollback: `e99ab452ada9c3a61cb188911956be10bc297d4c`.
+The initial camera now frames the complete neighborhood to the supplied screenshot:
+76.2% viewport width, up to 96% viewport height, centered slightly right/down.
+Framing uses the native world geometry and the existing yaw/pitch. Direct URL entry,
+reload, Projects/home return and unselected view reset share the same camera pose.
+Selected-house click/swipe/keyboard zoom targets and 3D entry/exit remain unchanged.
+No asset, layout, deployment settings or live Sites changes.
+
+PASS: build, asset integrity 4/4, framing browser tests 2/2 and related camera/swipe/search tests 5/5. An initial exact float comparison failed at 1e-14 precision; numeric tolerance corrected and framing tests passed. FAIL: none remaining. BLOCKED: real Safari/iPhone and hosted browser checks remain unverified.

@@ -88,8 +88,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 36934,
-      "sha256": "39c281b356cd2e889fef4c0f199701ab9fe45ac55a42cd1be5aeb5a3b97b1e34",
+      "bytes": 37641,
+      "sha256": "07beecf4b6c53c5b840946790b3d1d06d331b8466ddb649aa752a78226ff2598",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -136,6 +136,11 @@
           "sha256": "fc775b80f0d679c6836117f90e0f770e15caee1e956d8de143cb380d4ab7a9f7",
           "bytes": 36672,
           "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
+        },
+        {
+          "sha256": "39c281b356cd2e889fef4c0f199701ab9fe45ac55a42cd1be5aeb5a3b97b1e34",
+          "bytes": 36934,
+          "github_commit": "e99ab452ada9c3a61cb188911956be10bc297d4c"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -143,7 +148,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
+      "modification_reason": "Preserve previous search/swipe/camera fixes; frame the whole neighborhood to the user reference on first URL entry, homepage return and unselected view reset."
     },
     {
       "path": "apple-touch-icon.png",
@@ -32499,7 +32504,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "5b63c664a98428d4f639e9714c5c9d112409eace",
+  "rollback_commit_sha": "e99ab452ada9c3a61cb188911956be10bc297d4c",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32886,7 +32891,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "9d39c43fbe5e86d74641c0e18b2501796939e7596fadc0922d2150eb666d77d7",
+  "dist_tree_sha256": "58ddd3e495bfd1c78cb9ad00c30297efaa8569266fbd802f9960784ec235e468",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32901,7 +32906,8 @@
       "Browser targeted regression PASS: keyboard/Next/exit targets at multiple zoom levels, desktop 3D/video, eight project dialogs, contact/About and phone navigation (5/5); interaction pause/resume also PASS",
       "Search desktop/phone reset and first-stage selection plus hover regression PASS (3/3).",
       "First-stage phone swipe: 60% camera duration, same destination, tap still opens 3D; browser regression PASS.",
-      "Affected browser regression PASS (12/12); build and asset integrity PASS (4/4); camera-flight unit suite PASS."
+      "Affected browser regression PASS (12/12); build and asset integrity PASS (4/4); camera-flight unit suite PASS.",
+      "Reference homepage framing: desktop/phone direct entry, reload and home return PASS (2/2); camera target, swipe and search regressions PASS (5/5)."
     ],
     "FAIL": [],
     "BLOCKED": [
