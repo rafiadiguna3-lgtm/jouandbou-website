@@ -1,12 +1,39 @@
+import {renderBou} from './bou.mjs?v=147';
 import './contact-map.mjs?v=141';
 import {journalPosts} from './about-journal.mjs';
 const about=document.getElementById('about-page'),studio=document.getElementById('studio'),projects=document.getElementById('projects'),brand=document.querySelector('.brand');
 const originalProjects=projects.onclick;
 const contact=document.getElementById('contact-page'),contactLink=document.getElementById('contact');
+const bou=document.getElementById('bou-page');
+const bouClose=document.createElement('button');
+bouClose.id='bou-close';bouClose.type='button';bouClose.hidden=true;bouClose.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+brand.closest('header').append(bouClose);
+function closeBou(){location.hash=location.hash.startsWith('#bou-works/')?'bou-works':'about';}
+bouClose.onclick=closeBou;
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('view-bou')){event.preventDefault();closeBou();}});
 let shownRoute;
-function updateTitle(){const page=location.hash==='#about'?'about us':location.hash==='#contact'?'contact us':document.querySelector('dialog.project-page[open],dialog#detail[open]')?'project details':'';document.title=page?`jou and bou - ${page}`:'jou and bou';}
+const bouScrollPositions=new Map();
+function updateTitle(){const page=location.hash==='#about'?'about us':location.hash==='#contact'?'contact us':location.hash.startsWith('#bou-works')?'bou works':document.querySelector('dialog.project-page[open],dialog#detail[open]')?'project details':'';document.title=page?`jou and bou - ${page}`:'jou and bou';}
 for(const panel of document.querySelectorAll('dialog.project-page,dialog#detail'))new MutationObserver(updateTitle).observe(panel,{attributes:true,attributeFilter:['open']});
-function showRoute(){const active=location.hash==='#about',contactActive=location.hash==='#contact',page=active||contactActive;about.hidden=!active;contact.hidden=!contactActive;document.body.classList.toggle('view-about',active);document.body.classList.toggle('view-contact',contactActive);document.getElementById('viewport').inert=page;for(const el of [studio,projects,contactLink])el.removeAttribute('aria-current');(active?studio:contactActive?contactLink:projects).setAttribute('aria-current','page');const route=active?'about':contactActive?'contact':'projects';if(page&&shownRoute!==route)(active?about:contact).scrollTo({top:0,left:0,behavior:'instant'});shownRoute=route;if(page){closeSearch();document.querySelectorAll('dialog[open]').forEach(d=>d.close());(active?about:contact).focus({preventScroll:true});}updateTitle();}
+function showRoute(){
+ if(/^#bou(?:\/|$)/.test(location.hash))history.replaceState(null,'',location.hash.replace(/^#bou/,'#bou-works'));
+ if(shownRoute?.startsWith('#bou-works')&&shownRoute!==location.hash&&!bou.hidden)bouScrollPositions.set(shownRoute,bou.scrollTop);
+ const active=location.hash==='#about',contactActive=location.hash==='#contact',bouActive=/^#bou-works(?:\/|$)/.test(location.hash),page=active||contactActive||bouActive;
+ const panel=active?about:contactActive?contact:bou;
+ about.hidden=!active;contact.hidden=!contactActive;bou.hidden=!bouActive;
+ document.body.classList.toggle('view-about',active||bouActive);document.body.classList.toggle('view-bou',bouActive);document.body.classList.toggle('view-contact',contactActive);
+ document.getElementById('viewport').inert=page;
+ for(const el of [studio,projects,contactLink])el.removeAttribute('aria-current');(active||bouActive?studio:contactActive?contactLink:projects).setAttribute('aria-current','page');
+ const route=bouActive?location.hash:active?'about':contactActive?'contact':'projects';
+ bouClose.hidden=!bouActive;
+ bouClose.setAttribute('aria-label',location.hash.startsWith('#bou-works/')?'Back to Bou Works':'Back to About Us');
+ if(bouActive){document.getElementById('main-nav').classList.remove('menu-open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');const destination=location.hash;const restoreTop=bouScrollPositions.get(destination)||0;
+ renderBou(destination.slice(11)).then(()=>{if(location.hash===destination&&!bou.hidden)bou.scrollTo({top:restoreTop,left:0,behavior:'instant'});});}
+ if(page&&!bouActive&&shownRoute!==route)panel.scrollTo({top:0,left:0,behavior:'instant'});
+ shownRoute=route;
+ if(page){closeSearch();document.querySelectorAll('dialog[open]').forEach(d=>d.close());panel.focus({preventScroll:true});}
+ updateTitle();
+}
 
 studio.onclick=()=>{if(location.hash!=='#about')location.hash='about';else about.scrollTo({top:0,behavior:'smooth'});};
 projects.onclick=()=>{location.hash='projects';showRoute();originalProjects?.();};
@@ -20,7 +47,7 @@ const prev=document.getElementById('feed-prev'),next=document.getElementById('fe
 
 const searchToggle=document.getElementById('search-toggle'),searchWrap=document.querySelector('.search-wrap'),searchInput=document.getElementById('search');
 function closeSearch(){document.body.classList.remove('search-open');searchToggle.setAttribute('aria-expanded','false');searchInput.inert=true;searchInput.tabIndex=-1;document.getElementById('results').hidden=true;searchInput.setAttribute('aria-expanded','false');}
-searchToggle.onclick=()=>{if(location.hash==='#about'||location.hash==='#contact'){history.pushState(null,'','#projects');showRoute();}const open=!document.body.classList.contains('search-open');document.body.classList.toggle('search-open',open);searchToggle.setAttribute('aria-expanded',String(open));if(open){searchInput.inert=false;searchInput.tabIndex=0;searchInput.focus();}else closeSearch();};
+searchToggle.onclick=()=>{if(location.hash==='#about'||location.hash==='#contact'||location.hash.startsWith('#bou-works')){history.pushState(null,'','#projects');showRoute();}const open=!document.body.classList.contains('search-open');document.body.classList.toggle('search-open',open);searchToggle.setAttribute('aria-expanded',String(open));if(open){searchInput.inert=false;searchInput.tabIndex=0;searchInput.focus();}else closeSearch();};
 document.addEventListener('pointerdown',e=>{if(!e.target.closest('.search-wrap,#search-toggle'))closeSearch();});
 searchWrap.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();searchToggle.focus();}});
 document.getElementById('results').addEventListener('click',e=>{if(e.target.closest('button'))closeSearch();});

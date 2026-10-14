@@ -1,0 +1,302 @@
+[
+  {
+    "path": "assets/jangkrik/02.fast-1280.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/jangkrik/02.webp",
+      "source_sha256": "738493512dea7596dd984977a4bc17f872b5b89c7a992ea03776aba95b273ff8",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 48208,
+    "final_sha256": "23541347a0a8209c829a07c758b80f2c85b3610eedf68d87cf5898c0e29fa584",
+    "dimensions": [
+      1023,
+      1280
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/jangkrik/02.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Exact original bytes recovered from native full-resolution backup; matches historical dist hash",
+    "provenance": {
+      "path": "assets/jangkrik/02.webp",
+      "source": "source-assets/full-resolution/assets/jangkrik/02.webp",
+      "historical_original": {
+        "commit": "ca69e9859c22430f9b0bd23950e1ebe38b37a22f",
+        "bytes": 220566,
+        "sha256": "738493512dea7596dd984977a4bc17f872b5b89c7a992ea03776aba95b273ff8",
+        "matches_full_resolution": true
+      }
+    },
+    "final_bytes": 220566,
+    "final_sha256": "738493512dea7596dd984977a4bc17f872b5b89c7a992ea03776aba95b273ff8",
+    "dimensions": [
+      1439,
+      1800
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/marboy/photos/15.fast-800.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/marboy/photos/15.webp",
+      "source_sha256": "531ddd43a2377a4957f1e893c88ade854ec99f9e5321186b49e481c16e2b3b8c",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 37340,
+    "final_sha256": "edb5c3bd2eb1dab0ffa4e70045c81886dec2f426c805dc3ac586ec2cc6a9f45c",
+    "dimensions": [
+      800,
+      533
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rempoa/photos/17.fast-1280.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/rempoa/photos/17.webp",
+      "source_sha256": "e79433b51b1b8e510b0fa8af041da6a0e2d48d8adf6796cd4625aeb1104cbbd2",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 212586,
+    "final_sha256": "3f6b3e95bc45c02e1e6977bb8cc74f792a17ca3866dcbb3b1bf07345a52e7478",
+    "dimensions": [
+      1280,
+      854
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rempoa/photos/17.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Exact original bytes recovered from native full-resolution backup; matches historical dist hash",
+    "provenance": {
+      "path": "assets/rempoa/photos/17.webp",
+      "source": "source-assets/full-resolution/assets/rempoa/photos/17.webp",
+      "historical_original": {
+        "commit": "918032a25c1e0eb36558bdec9dfd5c5f95721f96",
+        "bytes": 1016218,
+        "sha256": "e79433b51b1b8e510b0fa8af041da6a0e2d48d8adf6796cd4625aeb1104cbbd2",
+        "matches_full_resolution": true
+      }
+    },
+    "final_bytes": 1016218,
+    "final_sha256": "e79433b51b1b8e510b0fa8af041da6a0e2d48d8adf6796cd4625aeb1104cbbd2",
+    "dimensions": [
+      2200,
+      1467
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rempoa/photos/23.fast-800.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/rempoa/photos/23.webp",
+      "source_sha256": "f856c1dd2c4f1b0ef0845b76e6ce87bafe434d141b6e04d13fab604fcc606b8c",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 26824,
+    "final_sha256": "1228cc25016592e77435993be7d6017fe1bd336da5da984d86f98ca8549d39b6",
+    "dimensions": [
+      534,
+      800
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rempoa/photos/6.fast-1280.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/rempoa/photos/6.webp",
+      "source_sha256": "e1b436d39fc8624afbb585ca7e329ac8fdda39d772f6696c170d2832010725ca",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 102658,
+    "final_sha256": "12a69dcfc4f809d044aec28aab51245ceb3622840dcb35d432561f87f3b9af5d",
+    "dimensions": [
+      854,
+      1280
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rempoa/photos/6.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Exact original bytes recovered from native full-resolution backup; matches historical dist hash",
+    "provenance": {
+      "path": "assets/rempoa/photos/6.webp",
+      "source": "source-assets/full-resolution/assets/rempoa/photos/6.webp",
+      "historical_original": {
+        "commit": "918032a25c1e0eb36558bdec9dfd5c5f95721f96",
+        "bytes": 501774,
+        "sha256": "e1b436d39fc8624afbb585ca7e329ac8fdda39d772f6696c170d2832010725ca",
+        "matches_full_resolution": true
+      }
+    },
+    "final_bytes": 501774,
+    "final_sha256": "e1b436d39fc8624afbb585ca7e329ac8fdda39d772f6696c170d2832010725ca",
+    "dimensions": [
+      1467,
+      2200
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rumah-anas/instagram/CPDa03CAEIb-05.fast-1280.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/rumah-anas/instagram/CPDa03CAEIb-05.webp",
+      "source_sha256": "3b8c5b0eab5fbd1d324a93a3607530078d05fdf4e589fc28f264c7fd14ff5f1c",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 102868,
+    "final_sha256": "3f963d39b7ff96bdf503f1fc0c40f81095da1bdca4459b65d6e62bc66b8cf2fe",
+    "dimensions": [
+      1023,
+      1280
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rumah-anas/instagram/CPDa03CAEIb-05.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Exact original bytes recovered from native full-resolution backup; matches historical dist hash",
+    "provenance": {
+      "path": "assets/rumah-anas/instagram/CPDa03CAEIb-05.webp",
+      "source": "source-assets/full-resolution/assets/rumah-anas/instagram/CPDa03CAEIb-05.webp",
+      "historical_original": {
+        "commit": "8b7b7a2efb978ec97f42a5c95bd0cdc030e300f7",
+        "bytes": 316852,
+        "sha256": "3b8c5b0eab5fbd1d324a93a3607530078d05fdf4e589fc28f264c7fd14ff5f1c",
+        "matches_full_resolution": true
+      }
+    },
+    "final_bytes": 316852,
+    "final_sha256": "3b8c5b0eab5fbd1d324a93a3607530078d05fdf4e589fc28f264c7fd14ff5f1c",
+    "dimensions": [
+      1439,
+      1800
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rumah-anas/instagram/CPDa03CAEIb-06.fast-1280.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/rumah-anas/instagram/CPDa03CAEIb-06.webp",
+      "source_sha256": "460a907c8630c137ae5ba3290222e2bffab7bf4d82446a6011ef537f1fc03df8",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 75994,
+    "final_sha256": "64c7a2454099ea0bdfe673de99226abbb4a335c0e5855b7b60c9654794a469a2",
+    "dimensions": [
+      1024,
+      1280
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rumah-anas/instagram/CPDa03CAEIb-06.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Exact original bytes recovered from native full-resolution backup; matches historical dist hash",
+    "provenance": {
+      "path": "assets/rumah-anas/instagram/CPDa03CAEIb-06.webp",
+      "source": "source-assets/full-resolution/assets/rumah-anas/instagram/CPDa03CAEIb-06.webp",
+      "historical_original": {
+        "commit": "8b7b7a2efb978ec97f42a5c95bd0cdc030e300f7",
+        "bytes": 201322,
+        "sha256": "460a907c8630c137ae5ba3290222e2bffab7bf4d82446a6011ef537f1fc03df8",
+        "matches_full_resolution": true
+      }
+    },
+    "final_bytes": 201322,
+    "final_sha256": "460a907c8630c137ae5ba3290222e2bffab7bf4d82446a6011ef537f1fc03df8",
+    "dimensions": [
+      1440,
+      1800
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rumasoka/02.fast-800.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/rumasoka/02.webp",
+      "source_sha256": "64d78c43ac00372e59cb804296d789e0b5b30ccd60bd382f099bb70ca3cdb5f4",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 21056,
+    "final_sha256": "97bb876b2faf3ba4a7cdb59b66b06b6fb2de758562d95364af6c97b0f6672152",
+    "dimensions": [
+      800,
+      625
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rumasoka/instagram/CyI8miRJmG0-04.fast-1280.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Generated matching responsive variant using native Pillow pipeline (RGB, Lanczos, quality 80, method 4), no crop/padding/upscale",
+    "provenance": {
+      "base_path": "assets/rumasoka/instagram/CyI8miRJmG0-04.webp",
+      "source_sha256": "d1149d9b5960eb81b655e22112fc7d34e8da9094a32322efbbd5e572e5f5f6cb",
+      "pipeline": "scripts/pack-project-photos.py at b11a057b82e2f9002b280d0658bc1119f02db331"
+    },
+    "final_bytes": 204514,
+    "final_sha256": "59fd622e5ae5efe1038f3de02081cf68132cb0487c1b3d827cbc767ef62dd9a3",
+    "dimensions": [
+      1280,
+      1280
+    ],
+    "decoded": true
+  },
+  {
+    "path": "assets/rumasoka/instagram/CyI8miRJmG0-04.webp",
+    "previous_bytes": 0,
+    "previous_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "method": "Exact original bytes recovered from native full-resolution backup; matches historical dist hash",
+    "provenance": {
+      "path": "assets/rumasoka/instagram/CyI8miRJmG0-04.webp",
+      "source": "source-assets/full-resolution/assets/rumasoka/instagram/CyI8miRJmG0-04.webp",
+      "historical_original": {
+        "commit": "b73940ab2039e51bad3f3437cfba5c5ddfbd77a3",
+        "bytes": 358386,
+        "sha256": "d1149d9b5960eb81b655e22112fc7d34e8da9094a32322efbbd5e572e5f5f6cb",
+        "matches_full_resolution": true
+      }
+    },
+    "final_bytes": 358386,
+    "final_sha256": "d1149d9b5960eb81b655e22112fc7d34e8da9094a32322efbbd5e572e5f5f6cb",
+    "dimensions": [
+      1440,
+      1440
+    ],
+    "decoded": true
+  }
+]

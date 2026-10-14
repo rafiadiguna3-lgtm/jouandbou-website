@@ -299,7 +299,7 @@ document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
 
-await import("./about.mjs?v=141");
+await import("./about.mjs?v=147");
 
 // Wait for the imported models and a painted scene, rather than a fake progress percentage.
 Promise.resolve(engine.firstReady||engine.ready).then(()=>requestAnimationFrame(()=>{render();requestAnimationFrame(()=>document.dispatchEvent(new Event('jou:scene-ready')));})).catch(()=>document.dispatchEvent(new Event('jou:scene-ready')));

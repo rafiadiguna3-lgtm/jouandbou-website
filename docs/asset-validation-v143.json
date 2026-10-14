@@ -1,0 +1,26 @@
+{
+  "images": {
+    "image_files_decoded": 754,
+    "responsive_variants_checked": 396,
+    "image_errors": [],
+    "syntax_errors": [],
+    "responsive_comparison": "Same source, Lanczos thumbnail dimensions, RGB mean absolute pixel difference <=15; lossy WebP comparison, not byte identity",
+    "max_mean_absolute_pixel_difference": 4.055,
+    "file_count": 1011,
+    "largest_file_bytes": 2097152
+  },
+  "videos": [
+    {
+      "manifest": "assets/rempoa/film-hq/manifest.json",
+      "parts": 35,
+      "decoded": true,
+      "error": ""
+    },
+    {
+      "manifest": "assets/marboy/film-hq/manifest.json",
+      "parts": 40,
+      "decoded": true,
+      "error": ""
+    }
+  ]
+}
