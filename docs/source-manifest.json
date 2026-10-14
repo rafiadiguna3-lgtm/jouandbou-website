@@ -1,7 +1,7 @@
 {
   "source": "Native Sites Git repository",
   "captured_at": "2026-10-14T13:38:55.964863+00:00",
-  "scope": "Native v143 frontend with documented photo recovery, reload-routing visibility fix, and homepage interaction optimizations; review update.",
+  "scope": "Native v143 frontend with documented photo recovery, reload/performance fixes and contact touch-gesture fix; review update.",
   "files": [
     {
       "path": "about-journal.mjs",
@@ -13039,8 +13039,8 @@
     },
     {
       "path": "contact-map.mjs",
-      "bytes": 6915,
-      "sha256": "39624f7a672910f9ff223679d8264981ce02d5364d9937a216822b418395a428",
+      "bytes": 6976,
+      "sha256": "570c4c0161405312d10301b9d3418d0c68a7dc8f4aa1f1e98984c219c6d93f31",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/contact-map.mjs"
       ],
@@ -13052,10 +13052,19 @@
           "sha256": "726586be83028868c3326ac37205b7dc0415eb2c8b1310bb7ab1a5ec298cb1e2",
           "bytes": 6650,
           "github_commit": "5c51f031311d3fd1b81a374294925075b36ce5e4"
+        },
+        {
+          "sha256": "39624f7a672910f9ff223679d8264981ce02d5364d9937a216822b418395a428",
+          "bytes": 6915,
+          "github_commit": "3f888a19d6ee01a4c7bd37e306d1f792cc6e4dd7"
         }
       ],
       "native_sha256": "39624f7a672910f9ff223679d8264981ce02d5364d9937a216822b418395a428",
-      "native_bytes": 6915
+      "native_bytes": 6915,
+      "published_sha256": "39624f7a672910f9ff223679d8264981ce02d5364d9937a216822b418395a428",
+      "published_bytes": 6915,
+      "modified_locally": true,
+      "modification_reason": "Allow single-finger page scrolling over contact maps; use cooperative two-finger map pan/zoom on touch devices, preserving desktop mouse drag."
     },
     {
       "path": "entry-refine.css",
@@ -32751,7 +32760,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "32e8f5f8c97bf67f8d4e4812804e2be2bd5bdee6037ffee40553c9e6682b8277",
+  "dist_tree_sha256": "d85d8833a8ae0fbf215630674dc09a7a7247dd7b951852ce6147eeb9648e0371",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32762,8 +32771,8 @@
       "396 responsive variants: thumbnail dimensions and source-image similarity verified using full-resolution sources for existing variants and documented bases for repairs",
       "48+ JavaScript modules: syntax checks",
       "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded",
-      "993 native files match; deviations are 15 photo repairs and 3 documented application files",
-      "npm run test:browser: 12/12; reload, Bou, 3D/video/mobile, interaction pause/resume"
+      "992 native files match; deviations are 15 photo repairs and 4 documented application files",
+      "14 browser cases verified: existing regressions passed; contact gesture tests 2/2 passed after waiting for Leaflet zoom animation before starting the next gesture"
     ],
     "FAIL": [],
     "BLOCKED": [
