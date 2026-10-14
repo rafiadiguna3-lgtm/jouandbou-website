@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
-test('next-house browsing keeps far/medium/near zoom and exit restores the browse zoom',async({page})=>{
+test('next-house browsing and exit reach the original prescribed distances',async({page})=>{
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.route('**/app.mjs?*',async route=>{await route.fulfill({status:200,contentType:'application/javascript',body:(await readFile(new URL('../../dist/app.mjs',import.meta.url),'utf8'))+'\nwindow.cameraQA=()=>({camera:{...camera},goal:{...goal},front,flight:!!cameraFlight});'});});
  await page.goto('/',{waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.cameraQA,null,{timeout:10000});
@@ -10,10 +10,10 @@ test('next-house browsing keeps far/medium/near zoom and exit restores the brows
  for(const controls of [['map-zoom-out','map-zoom-out'],['map-zoom-in','map-zoom-in'],['map-zoom-in','map-zoom-in']]){
   for(const id of controls)await page.locator('#map').dispatchEvent('wheel',{deltaY:id==='map-zoom-out'?120:-120,deltaMode:0,bubbles:true,cancelable:true});
   const before=await settled();
-  await page.locator('#house-next').click();const after=await settled();expect(after.scale).toBeCloseTo(before.scale,5);
+  await page.locator('#house-next').click();const after=await settled();const baseScale=await page.evaluate(()=>Math.min(innerWidth/108,(innerHeight-250)/45));expect(after.scale).toBeCloseTo(baseScale*1.25,5);
   await page.locator('.house-callout-card').click();await expect(page.locator('body')).toHaveClass(/model-view/);await expect(page).not.toHaveURL(/#project\//);
   await expect(page.locator('#modelStatus')).toBeHidden({timeout:30000});sample=await settled();
-  await page.locator('#back').click();sample=await settled();expect(sample.scale).toBeCloseTo(before.scale,5);
+  await page.locator('#back').click();sample=await settled();expect(sample.scale).toBeCloseTo(baseScale*1.15,5);
  }
  expect(errors).toEqual([]);
 });

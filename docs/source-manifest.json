@@ -83,8 +83,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 36613,
-      "sha256": "ce4d0a4a07e170589cd421d227d84b70cb0abd4f81c8c1e7eb6cf87ef3066c48",
+      "bytes": 36512,
+      "sha256": "79019df990290bf031d8597c647889aac6f7eef639c02cbdb2ea608fff06457e",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -116,6 +116,11 @@
           "sha256": "ed6ccab75d011ce404ae23ae8c91e4f58ca9fbc350a87aba77d7c8912bb8b3f5",
           "bytes": 36445,
           "github_commit": "580d344bc490a3e441ed45e36a38248f418ddd57"
+        },
+        {
+          "sha256": "ce4d0a4a07e170589cd421d227d84b70cb0abd4f81c8c1e7eb6cf87ef3066c48",
+          "bytes": 36613,
+          "github_commit": "88ee022bd2bf3fdefaca020882e9abfde3ea93a6"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -123,7 +128,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Restrained camera easing and distance/zoom-aware timing; keep browse zoom between houses and restore pre-explore zoom/orientation on return. Only actual details opening records the project route."
+      "modification_reason": "Restore the intentionally prescribed overview target zoom/orientation on house clicks/Next and 3D exit; retain the softer camera-flight curve."
     },
     {
       "path": "apple-touch-icon.png",
@@ -32447,7 +32452,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "580d344bc490a3e441ed45e36a38248f418ddd57",
+  "rollback_commit_sha": "88ee022bd2bf3fdefaca020882e9abfde3ea93a6",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32834,7 +32839,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "10c8c01c753f7d9b8eeb9c91174b997bcbadf8540fd703437f08f51041b3ebc0",
+  "dist_tree_sha256": "013cae0e3967d87d6553a759c269a27729f4eee724747eb9e98e1855e9b6b761",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32847,7 +32852,7 @@
       "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded",
       "988 native files match; deviations are 15 photo repairs and 8 documented application files; 1 local gallery module",
       "4 camera-flight unit tests PASS: bounded/soft motion across zoom scales and interrupted-flight continuity",
-      "18 browser cases verified: existing suite 17/17 passed; project-links/gallery 3/3 rerun after the Explore routing guard; new far/medium/near zoom-preservation and exit test 1/1 passed"
+      "Original click/Next/exit target-distance browser test 1/1 PASS after restoring prescribed zoom; camera unit tests 4/4 and asset tests 4/4 rerun PASS. Prior existing suite 17/17 PASS."
     ],
     "FAIL": [],
     "BLOCKED": [
