@@ -1,7 +1,7 @@
 {
   "source": "Native Sites Git repository",
   "captured_at": "2026-10-14T13:38:55.964863+00:00",
-  "scope": "Native Sites v143 frontend with 15 documented photo repairs and a documented initial-route visibility fix in GitHub only; review update.",
+  "scope": "Native v143 frontend with documented photo recovery, reload-routing visibility fix, and homepage interaction optimizations; review update.",
   "files": [
     {
       "path": "about-journal.mjs",
@@ -78,8 +78,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 34109,
-      "sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
+      "bytes": 34557,
+      "sha256": "8385fc6b554e355deb7746d7c19291d0051e59a293c15fcfbd84f01660f26198",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -96,10 +96,19 @@
           "sha256": "4b6a3ff292cf57458dd9178a9bd461d83fd44c92ec401519e4964ecdb5f1a0ca",
           "bytes": 34109,
           "github_commit": "a0eeec7ba4d0f0f3052d3a54898171b4b613bd82"
+        },
+        {
+          "sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
+          "bytes": 34109,
+          "github_commit": "51ff3e778e31aa8529f025dcd5d4f6dfa5876447"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
-      "native_bytes": 34109
+      "native_bytes": 34109,
+      "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
+      "published_bytes": 34109,
+      "modified_locally": true,
+      "modification_reason": "Reduce redundant label/status DOM writes and pointer-media queries during animation; defer background geometry loading until homepage drag/zoom motion settles."
     },
     {
       "path": "apple-touch-icon.png",
@@ -32742,7 +32751,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "1713aca04dfd6a006b17ba8577a4b9d8f57c706b3232edd3c9a213d4c9732d9a",
+  "dist_tree_sha256": "32e8f5f8c97bf67f8d4e4812804e2be2bd5bdee6037ffee40553c9e6682b8277",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32753,14 +32762,15 @@
       "396 responsive variants: thumbnail dimensions and source-image similarity verified using full-resolution sources for existing variants and documented bases for repairs",
       "48+ JavaScript modules: syntax checks",
       "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded",
-      "994 native files match; deviations are 15 photo repairs and 2 reload-routing files",
-      "npm run test:browser: 11/11; includes 5 reload cases with delayed routing, Bou desktop/mobile and existing 3D/video regressions"
+      "993 native files match; deviations are 15 photo repairs and 3 documented application files",
+      "npm run test:browser: 12/12; reload, Bou, 3D/video/mobile, interaction pause/resume"
     ],
     "FAIL": [],
     "BLOCKED": [
       "Safari/iPhone real device behavior not tested",
       "External YouTube embed, fonts, map tile delivery not verified: network allowlist excludes external hosts",
-      "Hosted Cloudflare preview browser checks: pages.dev blocked by network policy; GitHub deployment bot status will be checked after push"
+      "Hosted Cloudflare preview browser checks: pages.dev blocked by network policy; GitHub deployment bot status will be checked after push",
+      "First-visit detailed-model latency and real-device frame performance not measured; progressive startup model replacement remains."
     ]
   }
 }
