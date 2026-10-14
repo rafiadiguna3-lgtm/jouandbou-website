@@ -1,4 +1,4 @@
-import {readModelData,createModelQueue} from './model-data.mjs?v=126';
+import {readModelData,createModelQueue} from './model-data.mjs?v=139';
 import {glbIds,mobileAsset} from './glb-assets.mjs?v=114';
 import * as THREE from './vendor/three.module.js';
 
@@ -15,12 +15,13 @@ const fragmentShader=`
 uniform float colorAmount;
 uniform float opacity;
 uniform float modelSurface;
+uniform float glassSurface;
 varying vec4 vColor;
 varying vec3 vWorld;
 void main(){
  vec3 color=vColor.rgb;
  float luminance=dot(color,vec3(.2126,.7152,.0722));
- color=mix(modelSurface>.5?vec3(.94):vec3(luminance),color,colorAmount);
+ color=mix(modelSurface>.5&&glassSurface<.5?vec3(.94):vec3(luminance),color,colorAmount);
  if(modelSurface>.5){
   vec3 surfaceNormal=cross(dFdx(vWorld),dFdy(vWorld));
   vec3 n=surfaceNormal/max(length(surfaceNormal),.000001);
@@ -30,9 +31,9 @@ void main(){
  gl_FragColor=vec4(color,vColor.a*opacity);
 }`;
 
-function material(modelSurface=0){return new THREE.ShaderMaterial({
+function material(modelSurface=0,glassSurface=0){return new THREE.ShaderMaterial({
  vertexShader,fragmentShader,side:THREE.DoubleSide,
- uniforms:{colorAmount:{value:0},opacity:{value:1},modelSurface:{value:modelSurface}},
+ uniforms:{colorAmount:{value:0},opacity:{value:1},modelSurface:{value:modelSurface},glassSurface:{value:glassSurface}},
  transparent:true,depthWrite:true
 })}
 function tint(shade,ground){
@@ -97,17 +98,22 @@ export class NeighborhoodRenderer{
   while(this.interacting)await new Promise(resolve=>setTimeout(resolve,120));
   const positions=new Float32Array(buffer,0,meta.vertexCount*3);
   const colors=new Uint8Array(buffer,meta.vertexCount*12,meta.vertexCount*4);
+  const sharedPosition=new THREE.BufferAttribute(positions,3),sharedColor=new THREE.BufferAttribute(colors,4,true);
   for(const range of meta.ranges){
    const geometry=new THREE.BufferGeometry();
-   geometry.setAttribute('position',new THREE.BufferAttribute(meta.indexCount?positions:positions.subarray(range.start*3,(range.start+range.count)*3),3));
-   geometry.setAttribute('surfaceColor',new THREE.BufferAttribute(meta.indexCount?colors:colors.subarray(range.start*4,(range.start+range.count)*4),4,true));
+   geometry.setAttribute('position',meta.indexCount?sharedPosition:new THREE.BufferAttribute(positions.subarray(range.start*3,(range.start+range.count)*3),3));
+   geometry.setAttribute('surfaceColor',meta.indexCount?sharedColor:new THREE.BufferAttribute(colors.subarray(range.start*4,(range.start+range.count)*4),4,true));
    if(meta.indexCount){const indices=new Uint32Array(buffer,meta.vertexCount*16,meta.indexCount);geometry.setIndex(new THREE.BufferAttribute(indices.subarray(range.start,range.start+range.count),1));}
-   geometry.computeBoundingSphere();
-   const m=material(1);
+   if(meta.indexCount&&range.transparent){
+    const box=new THREE.Box3(),point=new THREE.Vector3(),indices=geometry.index.array;
+    for(const i of indices)box.expandByPoint(point.fromArray(positions,i*3));
+    geometry.boundingSphere=box.getBoundingSphere(new THREE.Sphere());
+   }else geometry.computeBoundingSphere();
+   const m=material(1,range.layer==='glass'?1:0);
    // Keep opaque architecture out of Three's camera-dependent alpha sorting.
    // Fixed depth priority resolves nearly coplanar material overlays from DAE.
    m.transparent=!!range.transparent;m.depthWrite=!range.transparent;m.forceSinglePass=true;
-   m.polygonOffset=true;m.polygonOffsetFactor=0;
+   m.polygonOffset=!range.transparent;m.polygonOffsetFactor=0;
    m.polygonOffsetUnits=-(range.material+1)*2;
    if(!range.transparent)m.fragmentShader=m.fragmentShader.replace('vColor.a*opacity','opacity');
    const mesh=new THREE.Mesh(geometry,m);mesh.position.set(meta.placement.x,0,meta.placement.z);

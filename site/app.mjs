@@ -1,3 +1,4 @@
+import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-flight.mjs?v=143';
 import {createTouchOrbit} from './touch-orbit.mjs?v=129';
 import {prepareCollection} from './photo-album-cache.mjs?v=129';
 import './photo-offline.mjs?v=128';
@@ -8,8 +9,8 @@ import {wheelIntent,panDelta} from './wheel-input.mjs';
 import {glbIds} from './glb-assets.mjs?v=114';
 import {canExplore} from './project-access.mjs?v=114';
 import './interaction-comfort.mjs';
-import {NeighborhoodRenderer} from './renderer.mjs?v=126';
-import {SoftwareRenderer} from './software-renderer.mjs?v=126';
+import {NeighborhoodRenderer} from './renderer.mjs?v=139';
+import {SoftwareRenderer} from './software-renderer.mjs?v=139';
 import {mapBounds,fitScale,constrain,searchHouses} from './navigation.mjs?v=114';
 import {buildWorld,project,names,spacing,position,title,houseNumber,description,orientation} from './models.mjs?v=114';
 const $=id=>document.getElementById(id),canvas=$('map'),world=buildWorld(),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let w=innerWidth,h=innerHeight,current=0,front=false,previewId=-1,hover=-1,drag=null,moved=false,raf=0,zoom=1,modelZoom=1;
@@ -21,7 +22,7 @@ const camera={x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:10,t:0};let goal={...camera
 const bounds=mapBounds(world.faces);
 const modelStatus=document.createElement('p'); modelStatus.id='modelStatus';modelStatus.setAttribute('role','status');modelStatus.hidden=true;document.body.append(modelStatus);
 function updateModelStatus(){if(engine.contextLost){modelStatus.hidden=false;modelStatus.textContent='Restoring 3D view…';return;}const id=front?current:hover;const expected=canExplore(id);modelStatus.hidden=!expected||engine.modelMetas.has(id);modelStatus.textContent=engine.modelErrors?.has(id)?'The house could not load. Refresh to retry.':'Loading 3D model…'}
-const onModelChange=()=>{if(front&&engine.modelMetas.get(current)&&engine.modelMetas.get(current)!==activeModelMeta){activeModelMeta=engine.modelMetas.get(current);setFront()} if(engine.modelMetas){ for(const [id,meta] of engine.modelMetas){world.anchors[id]=[meta.placement.x,meta.bounds.max[1]+.7,meta.placement.z];} } updateModelStatus();start(); };
+const onModelChange=()=>{if(front&&engine.modelMetas.get(current)&&engine.modelMetas.get(current)!==activeModelMeta){activeModelMeta=engine.modelMetas.get(current);setFront();flyCamera()} if(engine.modelMetas){ for(const [id,meta] of engine.modelMetas){world.anchors[id]=[meta.placement.x,meta.bounds.max[1]+.7,meta.placement.z];} } updateModelStatus();start(); };
 let activeModelMeta;
 let engine;
 try{engine=new NeighborhoodRenderer(canvas,world,onModelChange)}catch{engine=new SoftwareRenderer(canvas,world,onModelChange)}
@@ -31,7 +32,7 @@ const baseScale=()=>compactLandscape()?Math.min(w/80,(h-70)/34):w<700?Math.min(w
 function limit(){if(!front&&!drag)constrain(goal,bounds,w,h)}
 const labels=names.map((name,i)=>{if(i===29)name='Marboy House';const b=document.createElement('button');b.className='house-label';b.disabled=!canExplore(i);b.hidden=!canExplore(i);b.tabIndex=canExplore(i)?0:-1;b.innerHTML=`<strong>${title(i)}</strong><span>${name}</span>`;b.setAttribute('aria-label',`Preview ${name}; activate again to explore in 3D`);b.onfocus=()=>{hover=i;start()};b.onblur=()=>{hover=-1;start()};b.onpointerenter=e=>{if(!desktopInput()||e.pointerType!=='mouse')return;hover=i;start()};b.onpointerleave=()=>{hover=-1;start()};b.onclick=e=>{if(!moved)activateHouse(i,e.pointerType)};$('labels').append(b);return b});
 const houseCallout=createHouseCallout(id=>openHouse(id));
-function resize(){w=innerWidth;h=innerHeight;document.body.classList.toggle('touch-layout',!desktopInput());document.body.classList.toggle('landscape-layout',compactLandscape());engine.resize(w,h);if(front){const yaw=goal.yaw,pitch=goal.pitch;setFront();goal.yaw=yaw;goal.pitch=pitch;centerUpdatedModel();}else goal.scale=baseScale()*zoom;limit();Object.assign(camera,goal);updateBrowse();start()}
+function resize(){cameraFlight=null;w=innerWidth;h=innerHeight;document.body.classList.toggle('touch-layout',!desktopInput());document.body.classList.toggle('landscape-layout',compactLandscape());engine.resize(w,h);if(front){const yaw=goal.yaw,pitch=goal.pitch;setFront();goal.yaw=yaw;goal.pitch=pitch;centerUpdatedModel();}else goal.scale=baseScale()*zoom;limit();Object.assign(camera,goal);updateBrowse();start()}
 function calloutHouseShape(id){
  const meta=engine.modelMetas.get(id);if(!meta)return null;
  const {min,max}=meta.bounds,points=[];
@@ -44,8 +45,9 @@ if(desktopInput())labels.forEach((b,i)=>{const p=project(world.anchors[i],camera
 }
 
 
-let lastFrame=0;
-function tick(now){raf=0;const dt=Math.min(32,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&camera.t>.995)centerUpdatedModel(camera);for(let i=0;i<hoverLevels.length;i++){const target=canExplore(i)&&((desktopInput()&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}render();raf=active?requestAnimationFrame(tick):0}
+let lastFrame=0,cameraFlight=null;
+function flyCamera(){limit();cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now());}
+function tick(now){raf=0;const dt=Math.min(32,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;if(cameraFlight){const sample=sampleCameraFlight(cameraFlight,now);Object.assign(camera,sample.state);if(sample.done){Object.assign(camera,goal);cameraFlight=null;}else active=true;}else for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&!cameraFlight&&camera.t>.995)centerUpdatedModel(camera);for(let i=0;i<hoverLevels.length;i++){const target=canExplore(i)&&((desktopInput()&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}render();raf=active?requestAnimationFrame(tick):0}
 function start(){limit();if(document.hidden||document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog.project-page[open],dialog#detail[open]'))return;if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}
 function updateUI(){updateBrowse();$('number').textContent=current===51?'':current===44?'jou.commercial 01':`jou.house ${String(houseNumber(current)).padStart(2,'0')}`;$('name').textContent=current===29?'Marboy House':names[current];$('projectStoryTitle').textContent='About the project';$('projectStory').textContent=description(current);$('projectStory').hidden=!description(current);$('area').textContent=current===38?'Area · 120–180 / 128 sqm':'';$('area').hidden=current!==38;$('more').firstChild.textContent=front?'Project details ':'Explore 3D ';$('more').querySelector('span').innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';$('category').textContent=current===51?'':current===44?'Commercial Project':'Rsdtl Project';$('focus').setAttribute('aria-label',`${names[current]} project information`);$('restore-project').textContent=current===29?'Marboy House':names[current];$('announce').textContent=`${names[current]}, ${front?'front view':'neighborhood view'}`}
 let sheetState='peek',sheetDrag=null,sheetSwipe=null;
@@ -119,7 +121,7 @@ function centerUpdatedModel(state=goal){
 }
 
 function centerUpdatedModelIfFront(){if(front){centerUpdatedModel();start();}}
-function orbitTo(yaw,pitch=goal.pitch){if(!front)return;goal.yaw=yaw;goal.pitch=Math.max(-1.2,Math.min(1.45,pitch));centerUpdatedModel();start()}
+function orbitTo(yaw,pitch=goal.pitch){if(!front)return;cameraFlight=null;goal.yaw=yaw;goal.pitch=Math.max(-1.2,Math.min(1.45,pitch));centerUpdatedModel();start()}
 function setFront(){
  modelPan={x:0,y:0};
  const {min:lo,max:hi}=modelBounds(),view=modelViewport();
@@ -136,7 +138,7 @@ function showProjectCard(){
 function previewHouse(i,{center=false}={}){
  if(!canExplore(i))return;
  cardPress=null;current=i;window.jouPreparePhotos?.get(({0:'rumah-anas',9:'rumasoka',12:'rr-house',18:'jangkrik',19:'zubair',26:'flute',29:'marboy',44:'rempoa'})[i])?.();engine.ensureModel?.(i);previewId=i;hover=-1;
- if(center){zoom=desktopInput()?1.25:.9;goal={x:position(i)[0],y:2,z:position(i)[1],yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};}
+ if(center){zoom=desktopInput()?1.25:.9;goal={x:position(i)[0],y:2,z:position(i)[1],yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};flyCamera();}
  showProjectCard();start();
 }
 function browseNeighbor(direction){
@@ -147,7 +149,7 @@ function browseNeighbor(direction){
  return direction>0?residential.find(id=>houseNumber(id)>houseNumber(current))??44:residential.findLast(id=>houseNumber(id)<houseNumber(current));
 }
 function updateBrowse(){
- $('house-browse').hidden=desktopInput()?(!front&&previewId<0):(front||previewId<0);
+ $('house-browse').hidden=front||previewId<0;
  for(const [id,direction] of [['house-prev',-1],['house-next',1]]){
   const next=browseNeighbor(direction);$(id).disabled=next===undefined;
   $(id).setAttribute('aria-label',next===undefined?(direction<0?'First project':'Last project'):`${direction<0?'Previous':'Next'} project: ${title(next)} · ${names[next]}`);
@@ -173,27 +175,23 @@ function clearPreview(){
  if(front)return;previewId=-1;hover=-1;$('focus').hidden=true;$('restore-project').hidden=true;
  document.body.classList.remove('has-selection');updateBrowse();start();
 }
-let viewFade=null;
-function softenViewChange(){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!canvas.animate)return;viewFade?.cancel();viewFade=canvas.animate([{opacity:.55},{opacity:1}],{duration:320,easing:'ease-out'});}
 function openHouse(i){
  touchOrbit.cancel();
  if(!canExplore(i))return;
- softenViewChange();
  modelZoom=1;current=i;window.jouPreparePhotos?.get(({0:'rumah-anas',9:'rumasoka',12:'rr-house',18:'jangkrik',19:'zubair',26:'flute',29:'marboy',44:'rempoa'})[i])?.();engine.ensureModel?.(i);activeModelMeta=engine.modelMetas.get(i);front=true;previewId=-1;
  document.querySelector('.search-wrap').hidden=true;hover=-1;
- document.body.classList.add('model-view');showProjectCard();setFront();$('back').hidden=false;
+ document.body.classList.add('model-view');showProjectCard();setFront();flyCamera();$('back').hidden=false;
  canvas.style.cursor='grab';start();
 }
 function back(){
- softenViewChange();
  front=false;touchOrbit.cancel();document.body.classList.remove('model-view');document.querySelector('.search-wrap').hidden=false;
  zoom=1.15;goal={x:position(current)[0],y:2,z:position(current)[1],yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};
  $('back').hidden=true;previewId=current;hover=desktopInput()?current:-1;
- showProjectCard();
+ showProjectCard();flyCamera();
  start();
 }
 function select(i){if(!canExplore(i))return;current=Math.max(0,Math.min(names.length-1,i));if(front)setFront();else{goal.x=position(current)[0];goal.z=position(current)[1];hover=-1;previewHouse(current);goal.scale=baseScale()*zoom}updateUI();start()}
-function zoomBy(amount){if(front){const next=Math.max(.6,Math.min(3,modelZoom*amount));goal.scale*=next/modelZoom;modelZoom=next;centerUpdatedModel();start();return;}const minZoom=fitScale(bounds,w,h)*.9/baseScale();zoom=Math.max(minZoom,Math.min(1.5,zoom*amount));goal.scale=baseScale()*zoom;start()}
+function zoomBy(amount){cameraFlight=null;if(front){const next=Math.max(.6,Math.min(3,modelZoom*amount));goal.scale*=next/modelZoom;modelZoom=next;centerUpdatedModel();start();return;}const minZoom=fitScale(bounds,w,h)*.9/baseScale();zoom=Math.max(minZoom,Math.min(1.5,zoom*amount));goal.scale=baseScale()*zoom;start()}
 $('back').onclick=back;
 // A card revealed on pointerup must not consume the same Safari compatibility click.
 let cardPress=null;
@@ -223,7 +221,7 @@ let lastResetTap=null;
 function resetView(){
  if(front){modelZoom=1;setFront();}
  else{zoom=previewId>=0?(desktopInput()?1.25:.9):1;goal={x:previewId>=0?position(current)[0]:camera.x,y:2,z:previewId>=0?position(current)[1]:camera.z,yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};}
- lastResetTap=null;$('announce').textContent='View reset to normal zoom';start();
+ lastResetTap=null;$('announce').textContent='View reset to normal zoom';flyCamera();start();
 }
 function resetTap(e){
  const key=front?`model-${current}`:'map',now=e.timeStamp;
@@ -235,19 +233,20 @@ const touches=new Map();let pinchDistance=0,pinchCenter=null,twoGesture=null,con
 const touchOrbit=createTouchOrbit(canvas,{
  eligible:()=>front&&!desktopInput()&&!document.querySelector('dialog[open]'),
  read:()=>({w,h,yaw:goal.yaw,pitch:goal.pitch,scale:goal.scale,zoom:modelZoom,pan:modelPan,bounds:modelBounds(),placement:engine.modelMetas.get(current)?.placement?[engine.modelMetas.get(current).placement.x,engine.modelMetas.get(current).placement.z]:position(current)}),
- change:state=>{moved=true;goal.yaw=state.yaw;goal.pitch=state.pitch;goal.scale=state.scale;modelZoom=state.zoom;modelPan=state.pan;centerUpdatedModel();start();},
+ change:state=>{cameraFlight=null;moved=true;goal.yaw=state.yaw;goal.pitch=state.pitch;goal.scale=state.scale;modelZoom=state.zoom;modelPan=state.pan;centerUpdatedModel();start();},
  multi:()=>{drag=null;moved=true;},start:()=>engine.setInteracting?.(true),end:()=>engine.setInteracting?.(false)
 });
 // Map gestures retain ordinary pinch zoom; model gestures belong to OrbitControls.
 canvas.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'||front)return;touches.set(e.pointerId,[e.clientX,e.clientY]);if(touches.size===2){const [a,b]=[...touches.values()];pinchDistance=Math.hypot(a[0]-b[0],a[1]-b[1]);drag=null;moved=true;}});
 canvas.addEventListener('pointermove',e=>{if(front||!touches.has(e.pointerId))return;touches.set(e.pointerId,[e.clientX,e.clientY]);if(touches.size===2){const [a,b]=[...touches.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]);if(pinchDistance>0)zoomBy(d/pinchDistance);pinchDistance=d;moved=true;}});
 for(const event of ['pointerup','pointercancel'])canvas.addEventListener(event,e=>{touches.delete(e.pointerId);if(pinchDistance){drag=null;moved=true;pinchDistance=0;}});
-canvas.addEventListener('pointerdown',e=>{if(e.button!==0||touches.size>1||touchOrbit.count>1)return;engine.setInteracting?.(true);if(!front){goal.x=camera.x;goal.z=camera.z;}drag={modelHit:front&&engine.hitsModel(current,e.clientX,e.clientY,camera,w,h),hit:front?-1:pick(e.clientX,e.clientY),touch:e.pointerType==='touch',x:e.clientX,y:e.clientY,camera:{...camera},lastX:e.clientX,lastY:e.clientY,lastTime:e.timeStamp,vx:0,vz:0};moved=false;canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener('pointerdown',e=>{cameraFlight=null;if(e.button!==0||touches.size>1||touchOrbit.count>1)return;engine.setInteracting?.(true);if(!front){goal.x=camera.x;goal.z=camera.z;}drag={modelHit:front&&engine.hitsModel(current,e.clientX,e.clientY,camera,w,h),hit:front?-1:pick(e.clientX,e.clientY),touch:e.pointerType==='touch',x:e.clientX,y:e.clientY,camera:{...camera},lastX:e.clientX,lastY:e.clientY,lastTime:e.timeStamp,vx:0,vz:0};moved=false;canvas.setPointerCapture(e.pointerId)});
 canvas.addEventListener('pointermove',e=>{if(touches.size>1||continuedPan)return;if(touchOrbit.handles(e)){if(drag&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>7)moved=true;return;}if(front){if(drag){const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>(drag.touch?7:4)){moved=true;$('viewport').classList.add('dragging');orbitTo(drag.camera.yaw-dx*.008,drag.camera.pitch+dy*.006)}}return;}if(!drag){if(!desktopInput()||e.pointerType!=='mouse')return;const p=pick(e.clientX,e.clientY,0);if(p!==hover){hover=p;canvas.style.cursor=p<0?'grab':'pointer';if(previewId<0){if(p>=0){current=p;showProjectCard();}else{$('focus').hidden=true;document.body.classList.remove('has-selection');}}start()}return}const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(Math.hypot(dx,dy)>(drag.touch?8:5)){if(!moved)clearPreview();moved=true;$('viewport').classList.add('dragging');const co=Math.cos(drag.camera.yaw),si=Math.sin(drag.camera.yaw),s=drag.camera.scale,sp=Math.sin(drag.camera.pitch);const elapsed=Math.max(8,e.timeStamp-drag.lastTime),mx=e.clientX-drag.lastX,my=e.clientY-drag.lastY;drag.vx=(-mx/s*co-my/s/sp*si)/elapsed;drag.vz=(mx/s*si-my/s/sp*co)/elapsed;drag.lastX=e.clientX;drag.lastY=e.clientY;drag.lastTime=e.timeStamp;goal.x=drag.camera.x-dx/s*co-dy/s/sp*si;goal.z=drag.camera.z+dx/s*si-dy/s/sp*co;constrain(goal,bounds,w,h,true);start()}});
 canvas.addEventListener('pointerup',e=>{engine.setInteracting?.(touches.size>0||touchOrbit.active);if(!drag)return;const released=drag;drag=null;$('viewport').classList.remove('dragging');if(front){if(!moved&&released.modelHit&&engine.hitsModel(current,e.clientX,e.clientY,camera,w,h)){lastResetTap=null;openProjectDetails();}else if(!moved&&!desktopInput()&&!engine.hitsModel(current,e.clientX,e.clientY,camera,w,h)){lastResetTap=null;back();}else if(moved)lastResetTap=null;return;}if(moved&&!reduce&&e.timeStamp-released.lastTime<90){goal.x+=Math.max(-5,Math.min(5,released.vx*60));goal.z+=Math.max(-5,Math.min(5,released.vz*60));}if(!moved){const i=released.hit>=0?released.hit:pick(e.clientX,e.clientY);if(i>=0){lastResetTap=null;activateHouse(i,e.pointerType);}else{if(e.pointerType==='touch')resetTap(e);clearPreview();}}else{lastResetTap=null;hover=-1;updateUI();start()}setTimeout(()=>moved=false,0)});
 canvas.addEventListener('pointercancel',()=>{lastResetTap=null;engine.setInteracting?.(touchOrbit.active);drag=null;$('viewport').classList.remove('dragging')});canvas.addEventListener('pointerleave',()=>{if(!drag){hover=-1;start()}});
 let wheelGesture=null;
 canvas.addEventListener('wheel',e=>{
+ cameraFlight=null;
  e.preventDefault();const unit=e.deltaMode===1?16:e.deltaMode===2?h:1;
  wheelGesture=wheelIntent(e,wheelGesture);
  if(wheelGesture.kind==='pan'&&front){modelPan.x=Math.max(-w*.35,Math.min(w*.35,modelPan.x-e.deltaX*unit));modelPan.y=Math.max(-h*.3,Math.min(h*.3,modelPan.y-e.deltaY*unit));centerUpdatedModel();start();return;}
@@ -259,7 +258,7 @@ canvas.addEventListener('wheel',e=>{
 },{passive:false});
 function openProjectDetails(){if(front&&[36,38,40,41,42,43,45,46,47].includes(current)){const panel=$('jh37');panel.dataset.house=String(({36:37,38:39,40:41,41:42,42:43,43:44,45:49,46:50,47:46})[current]);panel.setAttribute('aria-label',title(current)+' — under construction');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(!front){openHouse(current);return;}if(current===19||current===12){const panel=$(current===19?'zubair':'rr-house');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===18||current===26){const panel=$(current===18?'jangkrik':'flute');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===0||current===9){const panel=$(current===0?'rumah-anas':'rumasoka');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===44){$('rempoa').showModal();$('rempoa').querySelector('.project-scroll').scrollTop=0;window.resetRempoaStage?.();return;}if(current===29){$('marboy').showModal();$('marboy').querySelector('.project-scroll').scrollTop=0;window.resetProjectStage?.();return;}$('detailNumber').textContent=title(current);$('detailName').textContent=names[current];$('description').textContent=description(current);$('detail').querySelector('.intro').textContent=current===51?'':current===44?'Commercial / Padel':'Residential';$('detail').showModal()}
 $('more').onclick=openProjectDetails;
-$('projects').onclick=()=>{document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();zoom=1;goal={x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};current=0;updateUI();start()};
+$('projects').onclick=()=>{document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();zoom=1;goal={x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};current=0;updateUI();flyCamera();start()};
 
 function info(title,text){$('infoTitle').textContent=title;$('infoText').textContent=text;$('info').showModal()}
 document.querySelectorAll('.close').forEach(b=>b.onclick=()=>b.closest('dialog').close());
@@ -300,7 +299,7 @@ document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
 
-await import("./about.mjs?v=112");
+await import("./about.mjs?v=141");
 
 // Wait for the imported models and a painted scene, rather than a fake progress percentage.
 Promise.resolve(engine.firstReady||engine.ready).then(()=>requestAnimationFrame(()=>{render();requestAnimationFrame(()=>document.dispatchEvent(new Event('jou:scene-ready')));})).catch(()=>document.dispatchEvent(new Event('jou:scene-ready')));

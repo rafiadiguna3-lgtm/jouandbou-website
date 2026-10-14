@@ -1,4 +1,4 @@
-import {readModelData,createModelQueue} from './model-data.mjs?v=95';
+import {readModelData,createModelQueue} from './model-data.mjs?v=139';
 import {glbIds,mobileAsset} from './glb-assets.mjs?v=114';
 import {project} from './models.mjs?v=114';
 

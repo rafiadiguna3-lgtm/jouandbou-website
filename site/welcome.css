@@ -1,0 +1,8 @@
+#welcome-screen{position:fixed;inset:0;z-index:10000;background:#fafafa;display:grid;place-items:center;isolation:isolate;transition:opacity .34s ease,visibility 0s linear .34s;touch-action:none;user-select:none}
+#welcome-screen .welcome-copy{text-align:center;position:absolute;top:53%;top:53svh;left:50%;transform:translate(-50%,-50%);width:calc(100% - 48px);max-width:520px}
+#welcome-screen .welcome-copy p{font:400 clamp(24px,3vw,34px)/1.25 Lato,Arial,sans-serif;letter-spacing:-1px;margin:0 0 5px;animation:welcome-line .65s cubic-bezier(.22,1,.36,1) both}
+#welcome-screen .welcome-copy span{display:block;font:400 clamp(13px,1.6vw,18px)/1.4 Lato,Arial,sans-serif;color:#686b60;animation:welcome-line .65s .1s cubic-bezier(.22,1,.36,1) both}
+#welcome-screen .welcome-brand{position:absolute;bottom:max(16svh,calc(env(safe-area-inset-bottom) + 48px));left:0;right:0;text-align:center;font:300 clamp(19px,1.8vw,24px)/1.2 Lato,Arial,sans-serif;letter-spacing:.2px;animation:welcome-line .7s .18s cubic-bezier(.22,1,.36,1) both}
+#welcome-screen.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+@keyframes welcome-line{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){#welcome-screen{transition:none}#welcome-screen .welcome-copy p,#welcome-screen .welcome-copy span,#welcome-screen .welcome-brand{animation:none}}

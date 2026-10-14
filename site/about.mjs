@@ -1,13 +1,18 @@
-import './contact-map.mjs?v=112';
+import './contact-map.mjs?v=141';
 import {journalPosts} from './about-journal.mjs';
 const about=document.getElementById('about-page'),studio=document.getElementById('studio'),projects=document.getElementById('projects'),brand=document.querySelector('.brand');
 const originalProjects=projects.onclick;
 const contact=document.getElementById('contact-page'),contactLink=document.getElementById('contact');
-function showRoute(){const active=location.hash==='#about',contactActive=location.hash==='#contact',page=active||contactActive;about.hidden=!active;contact.hidden=!contactActive;document.body.classList.toggle('view-about',active);document.body.classList.toggle('view-contact',contactActive);document.getElementById('viewport').inert=page;for(const el of [studio,projects,contactLink])el.removeAttribute('aria-current');(active?studio:contactActive?contactLink:projects).setAttribute('aria-current','page');if(page){closeSearch();document.querySelectorAll('dialog[open]').forEach(d=>d.close());(active?about:contact).focus({preventScroll:true});}document.title=active?'About us — Jou & Bou':contactActive?'Contact us — Jou & Bou':'Jou & Bou — A neighborhood of ideas';}
+let shownRoute;
+function updateTitle(){const page=location.hash==='#about'?'about us':location.hash==='#contact'?'contact us':document.querySelector('dialog.project-page[open],dialog#detail[open]')?'project details':'';document.title=page?`jou and bou - ${page}`:'jou and bou';}
+for(const panel of document.querySelectorAll('dialog.project-page,dialog#detail'))new MutationObserver(updateTitle).observe(panel,{attributes:true,attributeFilter:['open']});
+function showRoute(){const active=location.hash==='#about',contactActive=location.hash==='#contact',page=active||contactActive;about.hidden=!active;contact.hidden=!contactActive;document.body.classList.toggle('view-about',active);document.body.classList.toggle('view-contact',contactActive);document.getElementById('viewport').inert=page;for(const el of [studio,projects,contactLink])el.removeAttribute('aria-current');(active?studio:contactActive?contactLink:projects).setAttribute('aria-current','page');const route=active?'about':contactActive?'contact':'projects';if(page&&shownRoute!==route)(active?about:contact).scrollTo({top:0,left:0,behavior:'instant'});shownRoute=route;if(page){closeSearch();document.querySelectorAll('dialog[open]').forEach(d=>d.close());(active?about:contact).focus({preventScroll:true});}updateTitle();}
 
 studio.onclick=()=>{if(location.hash!=='#about')location.hash='about';else about.scrollTo({top:0,behavior:'smooth'});};
 projects.onclick=()=>{location.hash='projects';showRoute();originalProjects?.();};
+document.querySelector('.about-work[href="#projects"]').onclick=e=>{e.preventDefault();projects.click();};
 brand.onclick=e=>{e.preventDefault();closeSearch();location.hash='projects';showRoute();originalProjects?.();};
+contactLink.onclick=()=>{if(location.hash==='#contact')contact.scrollTo({top:0,behavior:'smooth'});};
 addEventListener('hashchange',showRoute);
 const track=document.querySelector('.about-feed-track');
 for(const post of journalPosts){const a=document.createElement('a');a.href=post.url;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',`${post.alt}; visit Jou and Bou on Instagram`);const img=document.createElement('img');img.src=post.image;img.alt=post.alt;img.width=post.width;img.height=post.height;img.loading='lazy';img.decoding='async';a.append(img);track.append(a);}
