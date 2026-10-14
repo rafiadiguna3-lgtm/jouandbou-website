@@ -170,3 +170,14 @@ selection and swipe behavior are unchanged. No assets deleted or deployment sett
 modified. This remains a review update.
 
 PASS: build, asset integrity 4/4, desktop/phone framing and instant section return browser tests 2/2. Numeric assertions use tolerance for floating point rounding. FAIL: none remaining. BLOCKED: real iPhone/Safari and hosted browser checks remain unverified.
+
+## Bottom-right neighborhood controls
+
+Rollback: `d8ea3a0b2db4c1ef5d654774fa100b8ca9d5ac43`. Circular 46px buttons match the search component.
+A minimal four-corner fit-view icon resets instantly to the desktop/phone default
+framing and clears house selection. Existing zoom handlers are exposed as plus/minus.
+The vertical component uses 28px desktop margins and 20px/18px phone margins with
+bottom safe-area spacing. Hidden in 3D, other sections and dialogs. No assets deleted
+or deployment configuration modified.
+
+PASS: build, assets 4/4, desktop/phone controls and framing browser tests 2/2. FAIL: none. BLOCKED: real iPhone/Safari and hosted browser checks remain unverified.

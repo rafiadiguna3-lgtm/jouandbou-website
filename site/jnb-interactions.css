@@ -19,3 +19,11 @@ button .jnb-icon{margin:auto}
 }
 @keyframes jnb-results-in{from{opacity:0;translate:0 -5px;scale:.98}to{opacity:1;translate:0 0;scale:1}}
 @media(prefers-reduced-motion:reduce){.jnb-icon,#results{animation:none!important;transition:none!important}:is(.slide-prev,.slide-next,#feed-prev,#feed-next,.close,#back,#search-toggle,#search-clear,#more,#restore-project,.construction-progress){transition:none!important}}
+
+/* Neighborhood controls match the circular search control. */
+.map-zoom{display:flex!important;flex-direction:column;gap:8px;right:28px;bottom:calc(28px + env(safe-area-inset-bottom));z-index:4}
+.map-zoom button{width:46px;height:46px;border:1px solid #e4e4e0;border-radius:50%;background:#f3f3f1;color:#777;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;font-size:24px;font-weight:400}
+.map-zoom button:hover{background:#f3f3f1}
+#map-reset .jnb-icon{width:20px;height:20px;stroke-width:1.7}
+body:is(.view-about,.view-contact,.view-bou,.model-view) .map-zoom,body:has(dialog[open]) .map-zoom{display:none!important}
+@media(max-width:700px){.map-zoom{right:20px;bottom:calc(18px + env(safe-area-inset-bottom))}}

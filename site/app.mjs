@@ -331,6 +331,7 @@ document.addEventListener('wheel',closeMenu,{capture:true,passive:true});
 document.addEventListener('touchmove',closeMenu,{capture:true,passive:true});
 document.addEventListener('scroll',closeMenu,{capture:true,passive:true});
 addEventListener('hashchange',closeMenu);
+$('map-reset').onclick=()=>{if(front)return;clearPreview();current=0;goal=homeCamera();zoom=goal.scale/baseScale();cameraFlight=null;Object.assign(camera,goal);updateUI();start();};
 document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});

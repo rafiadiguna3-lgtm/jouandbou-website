@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 38218,
-      "sha256": "aa5322b9bddc6319a4bb99b9865a1128536947a1746544b977329208aa5bac88",
+      "bytes": 38400,
+      "sha256": "1ab750adaabf8fffa9e516cd432d75449e90bbbadb52c28f29a8c7d04492406d",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -156,6 +156,11 @@
           "sha256": "8ecc6dc713e5f38992714f2a2189548c624f06f83377445e063ec03c42b585cf",
           "bytes": 38309,
           "github_commit": "a862b9fcd59e2f4aac12404d108fbac0c2459ef5"
+        },
+        {
+          "sha256": "aa5322b9bddc6319a4bb99b9865a1128536947a1746544b977329208aa5bac88",
+          "bytes": 38218,
+          "github_commit": "d8ea3a0b2db4c1ef5d654774fa100b8ca9d5ac43"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -163,7 +168,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Further zoom out desktop homepage to the latest reference. All section-to-home returns are instant without camera animation; phone framing and house-selection targets preserved."
+      "modification_reason": "Add search-style circular default-view and zoom controls at bottom right. Default view resets instantly to platform-specific homepage framing; hide controls outside neighborhood."
     },
     {
       "path": "apple-touch-icon.png",
@@ -13291,8 +13296,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 105676,
-      "sha256": "8c549b8c963fd287e9166a79cbae3e0140504965aba1ab2aa72f01afc3181057",
+      "bytes": 105902,
+      "sha256": "b4e052f2f5de286e63a5ca47626f2e83c2bab88c0af9bc08fc50121ede5d37aa",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13319,6 +13324,11 @@
           "sha256": "eaa10462e6c16f1230bf062869a74fde61457917ebf8bb89453b45eab384485c",
           "bytes": 105659,
           "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
+        },
+        {
+          "sha256": "8c549b8c963fd287e9166a79cbae3e0140504965aba1ab2aa72f01afc3181057",
+          "bytes": 105676,
+          "github_commit": "d8ea3a0b2db4c1ef5d654774fa100b8ca9d5ac43"
         }
       ],
       "native_sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
@@ -13326,7 +13336,7 @@
       "published_sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
       "published_bytes": 105307,
       "modified_locally": true,
-      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
+      "modification_reason": "Add search-style circular default-view and zoom controls at bottom right. Default view resets instantly to platform-specific homepage framing; hide controls outside neighborhood."
     },
     {
       "path": "interaction-comfort.mjs",
@@ -13343,8 +13353,8 @@
     },
     {
       "path": "jnb-interactions.css",
-      "bytes": 1945,
-      "sha256": "62ab6e40a510713ed5258c9a1673d8466befe59554fe08645ab8803501fbae14",
+      "bytes": 2707,
+      "sha256": "170e1033f5c97bbdf77854df85600ba668e179c48703b9bfccf22bd828154b79",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/jnb-interactions.css"
       ],
@@ -13361,9 +13371,14 @@
           "sha256": "06395931e02b251c06e319db6fce1119e87d811f496bce3c1f53350e6bf36329",
           "bytes": 2057,
           "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
+        },
+        {
+          "sha256": "62ab6e40a510713ed5258c9a1673d8466befe59554fe08645ab8803501fbae14",
+          "bytes": 1945,
+          "github_commit": "d8ea3a0b2db4c1ef5d654774fa100b8ca9d5ac43"
         }
       ],
-      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
+      "modification_reason": "Add search-style circular default-view and zoom controls at bottom right. Default view resets instantly to platform-specific homepage framing; hide controls outside neighborhood."
     },
     {
       "path": "jnb-interactions.mjs",
@@ -32519,7 +32534,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "a862b9fcd59e2f4aac12404d108fbac0c2459ef5",
+  "rollback_commit_sha": "d8ea3a0b2db4c1ef5d654774fa100b8ca9d5ac43",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32906,7 +32921,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "1b7292dbe6398426c4b02926e4c0a29e6349ff996c1a8926ed3fffd3e817c291",
+  "dist_tree_sha256": "41572622fb44f471ae39a97e7def7a186b2ec6043073dd786eeac247bd7240f3",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32924,7 +32939,8 @@
       "Affected browser regression PASS (12/12); build and asset integrity PASS (4/4); camera-flight unit suite PASS.",
       "Reference homepage framing: desktop/phone direct entry, reload and home return PASS (2/2); camera target, swipe and search regressions PASS (5/5).",
       "Desktop reference overview and map-center section return; original phone default framing; swipe/3D/detail/phone navigation browser regression PASS (7/7).",
-      "Further desktop zoom out, original phone framing and instant About/Contact return: browser PASS (2/2); build and asset integrity PASS (4/4)."
+      "Further desktop zoom out, original phone framing and instant About/Contact return: browser PASS (2/2); build and asset integrity PASS (4/4).",
+      "Circular default-view controls: desktop/phone zoom then instant reset, homepage framing and section return PASS (2/2); build and assets PASS (4/4)."
     ],
     "FAIL": [],
     "BLOCKED": [
