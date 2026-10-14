@@ -45,8 +45,8 @@ if(desktopInput())labels.forEach((b,i)=>{const hidden=front||!canExplore(i);if(b
 }
 
 
-let lastFrame=0,cameraFlight=null;
-function flyCamera(){limit();cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now());}
+let lastFrame=0,cameraFlight=null,browseCamera=null;
+function flyCamera(){limit();cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now(),{viewportDiagonal:Math.hypot(w,h)});}
 function tick(now){raf=0;const dt=Math.min(32,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;if(cameraFlight){const sample=sampleCameraFlight(cameraFlight,now);Object.assign(camera,sample.state);if(sample.done){Object.assign(camera,goal);cameraFlight=null;}else active=true;}else for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&!cameraFlight&&camera.t>.995)centerUpdatedModel(camera);const desktop=desktopInput();for(let i=0;i<hoverLevels.length;i++){const target=canExplore(i)&&((desktop&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}render();raf=active?requestAnimationFrame(tick):0}
 function start(){limit();if(document.hidden||document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog.project-page[open],dialog#detail[open]'))return;if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}
 function updateUI(){updateBrowse();$('number').textContent=current===51?'':current===44?'jou.commercial 01':`jou.house ${String(houseNumber(current)).padStart(2,'0')}`;$('name').textContent=current===29?'Marboy House':names[current];$('projectStoryTitle').textContent='About the project';$('projectStory').textContent=description(current);$('projectStory').hidden=!description(current);$('area').textContent=current===38?'Area · 120–180 / 128 sqm':'';$('area').hidden=current!==38;$('more').firstChild.textContent=front?'Project details ':'Explore 3D ';$('more').querySelector('span').innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';$('category').textContent=current===51?'':current===44?'Commercial Project':'Rsdtl Project';$('focus').setAttribute('aria-label',`${names[current]} project information`);$('restore-project').textContent=current===29?'Marboy House':names[current];$('announce').textContent=`${names[current]}, ${front?'front view':'neighborhood view'}`}
@@ -138,7 +138,7 @@ function showProjectCard(){
 function previewHouse(i,{center=false}={}){
  if(!canExplore(i))return;
  cardPress=null;current=i;window.jouPreparePhotos?.get(({0:'rumah-anas',9:'rumasoka',12:'rr-house',18:'jangkrik',19:'zubair',26:'flute',29:'marboy',44:'rempoa'})[i])?.();engine.ensureModel?.(i);previewId=i;hover=-1;
- if(center){zoom=desktopInput()?1.25:.9;goal={x:position(i)[0],y:2,z:position(i)[1],yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};flyCamera();}
+ if(center){goal={...goal,x:position(i)[0],y:2,z:position(i)[1],scale:baseScale()*zoom,t:0};flyCamera();}
  showProjectCard();start();
 }
 function browseNeighbor(direction){
@@ -178,6 +178,7 @@ function clearPreview(){
 function openHouse(i){
  touchOrbit.cancel();
  if(!canExplore(i))return;
+ if(!front)browseCamera={zoom,yaw:goal.yaw,pitch:goal.pitch};
  modelZoom=1;current=i;window.jouPreparePhotos?.get(({0:'rumah-anas',9:'rumasoka',12:'rr-house',18:'jangkrik',19:'zubair',26:'flute',29:'marboy',44:'rempoa'})[i])?.();engine.ensureModel?.(i);activeModelMeta=engine.modelMetas.get(i);front=true;previewId=-1;
  document.querySelector('.search-wrap').hidden=true;hover=-1;
  document.body.classList.add('model-view');showProjectCard();setFront();flyCamera();$('back').hidden=false;
@@ -185,7 +186,7 @@ function openHouse(i){
 }
 function back(){
  front=false;touchOrbit.cancel();document.body.classList.remove('model-view');document.querySelector('.search-wrap').hidden=false;
- zoom=1.15;goal={x:position(current)[0],y:2,z:position(current)[1],yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};
+ zoom=browseCamera?.zoom??1.15;goal={x:position(current)[0],y:2,z:position(current)[1],yaw:browseCamera?.yaw??-.57,pitch:browseCamera?.pitch??.61,scale:baseScale()*zoom,t:0};
  $('back').hidden=true;previewId=current;hover=desktopInput()?current:-1;
  showProjectCard();flyCamera();
  start();
@@ -261,7 +262,7 @@ function openProjectDetailsContent(){if(front&&[36,38,40,41,42,43,45,46,47].incl
 const projectSlugs=new Map([...new Set([29,0,9,13,44,...glbIds])].map(id=>[id,({29:'marboy',18:'jangkrik',26:'flute'})[id]||names[id].toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')]));
 const projectPanels=[...document.querySelectorAll('dialog.project-page,dialog#detail')];
 function markProjectPanel(slug){const panel=projectPanels.find(panel=>panel.open);if(panel)panel.dataset.projectRoute=slug;}
-function openProjectDetails(){openProjectDetailsContent();if(!front)return;const slug=projectSlugs.get(current);if(!slug)return;markProjectPanel(slug);if(location.hash!==`#project/${slug}`)history.pushState(null,'',`#project/${slug}`);}
+function openProjectDetails(){const wasFront=front;openProjectDetailsContent();if(!wasFront||!front)return;const slug=projectSlugs.get(current);if(!slug)return;markProjectPanel(slug);if(location.hash!==`#project/${slug}`)history.pushState(null,'',`#project/${slug}`);}
 function syncProjectRoute(){
  document.querySelectorAll('dialog.photo-viewer[open]').forEach(panel=>panel.close());
  if(!location.hash.startsWith('#project/')){for(const panel of projectPanels)if(panel.open)panel.close();return;}
