@@ -35,8 +35,8 @@ function homeCamera(){
  if(!desktopInput())return {x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};
  const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0},points=world.faces.flatMap(face=>face.v.map(point=>project(point,pose,0,0)));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
- const scale=Math.min(w*.762/(right-left),h*.96/(bottom-top));
- const u=(left+right)/2-w*.033/scale,v=(top+bottom)/2-h*.05/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
+ const scale=Math.min(w*.62/(right-left),h*.77/(bottom-top));
+ const u=(left+right)/2-w*.026/scale,v=(top+bottom)/2-h*.042/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
  const centerU=(left+right)/2,centerV=(top+bottom)/2;homeAnchor=[centerU*co+centerV/sp*si,2,-centerU*si+centerV/sp*co];
  return {...pose,x:u*co+v/sp*si,z:-u*si+v/sp*co,scale};
 }
@@ -59,11 +59,10 @@ if(desktopInput())labels.forEach((b,i)=>{const hidden=front||!canExplore(i);if(b
 let lastFrame=0,cameraFlight=null;
 function flyCamera(quick=false,focusOverride=null){limit();const meta=engine.modelMetas.get(current),bounds=modelBounds(),place=meta?.placement,at=place?[place.x,place.z]:position(current),focus=focusOverride??[at[0]+(bounds.min[0]+bounds.max[0])/2,(bounds.min[1]+bounds.max[1])/2,at[1]+(bounds.min[2]+bounds.max[2])/2];cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now(),{viewportDiagonal:Math.hypot(w,h),focus,durationScale:quick?.6:1});}
 function flyHomeCamera(fromSection=false){
+ if(fromSection){cameraFlight=null;Object.assign(camera,goal);return;}
  if(!desktopInput()){flyCamera();return;}
- // A hidden section camera must not sweep across the neighborhood on return.
- if(fromSection)Object.assign(camera,goal,{scale:goal.scale*.985});
  flyCamera(false,homeAnchor);
- if(cameraFlight)cameraFlight.duration=fromSection?320:Math.min(650,cameraFlight.duration);
+ if(cameraFlight)cameraFlight.duration=Math.min(650,cameraFlight.duration);
 }
 function tick(now){raf=0;const dt=Math.min(32,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;if(cameraFlight){const sample=sampleCameraFlight(cameraFlight,now);Object.assign(camera,sample.state);if(sample.done){Object.assign(camera,goal);cameraFlight=null;}else active=true;}else for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&!cameraFlight&&camera.t>.995)centerUpdatedModel(camera);const desktop=desktopInput();for(let i=0;i<hoverLevels.length;i++){const target=canExplore(i)&&((desktop&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}render();raf=active?requestAnimationFrame(tick):0}
 function start(){limit();if(document.hidden||document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog.project-page[open],dialog#detail[open]'))return;if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}

@@ -158,3 +158,15 @@ Ordinary desktop homepage return also anchors to the map center. House selection
 swipe targets and 3D interaction stay as before. No deployment configuration changes.
 
 PASS: build, asset integrity (4/4), browser regression (7/7). FAIL: none. BLOCKED: real Safari/iPhone and hosted browser testing remain unverified.
+
+## Wider desktop homepage and instant section return
+
+Rollback: `a862b9fcd59e2f4aac12404d108fbac0c2459ef5`.
+Desktop reference framing now uses 62% viewport width and up to 77% height,
+with the neighborhood slightly right/below center. Phone default framing remains
+unchanged. Returning from About, Contact or Bou via Projects or the brand instantly
+sets the homepage camera, without any pan, zoom or flight animation. Normal house
+selection and swipe behavior are unchanged. No assets deleted or deployment settings
+modified. This remains a review update.
+
+PASS: build, asset integrity 4/4, desktop/phone framing and instant section return browser tests 2/2. Numeric assertions use tolerance for floating point rounding. FAIL: none remaining. BLOCKED: real iPhone/Safari and hosted browser checks remain unverified.

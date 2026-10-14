@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 38309,
-      "sha256": "8ecc6dc713e5f38992714f2a2189548c624f06f83377445e063ec03c42b585cf",
+      "bytes": 38218,
+      "sha256": "aa5322b9bddc6319a4bb99b9865a1128536947a1746544b977329208aa5bac88",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -151,6 +151,11 @@
           "sha256": "07beecf4b6c53c5b840946790b3d1d06d331b8466ddb649aa752a78226ff2598",
           "bytes": 37641,
           "github_commit": "54d0f8a37db21168b44883dc38de8a7bbcb70cec"
+        },
+        {
+          "sha256": "8ecc6dc713e5f38992714f2a2189548c624f06f83377445e063ec03c42b585cf",
+          "bytes": 38309,
+          "github_commit": "a862b9fcd59e2f4aac12404d108fbac0c2459ef5"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -158,7 +163,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Desktop-only reference framing; restore original phone pose and zoom. Desktop section return uses a subtle 1.5 percent zoom anchored to map center instead of sweeping from the previous house camera."
+      "modification_reason": "Further zoom out desktop homepage to the latest reference. All section-to-home returns are instant without camera animation; phone framing and house-selection targets preserved."
     },
     {
       "path": "apple-touch-icon.png",
@@ -32514,7 +32519,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "54d0f8a37db21168b44883dc38de8a7bbcb70cec",
+  "rollback_commit_sha": "a862b9fcd59e2f4aac12404d108fbac0c2459ef5",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32901,7 +32906,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "0d17bd91e165bf0e25e9620eb3ec65dfa5654e80df727b43082bfd7ce038ab04",
+  "dist_tree_sha256": "1b7292dbe6398426c4b02926e4c0a29e6349ff996c1a8926ed3fffd3e817c291",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32918,7 +32923,8 @@
       "First-stage phone swipe: 60% camera duration, same destination, tap still opens 3D; browser regression PASS.",
       "Affected browser regression PASS (12/12); build and asset integrity PASS (4/4); camera-flight unit suite PASS.",
       "Reference homepage framing: desktop/phone direct entry, reload and home return PASS (2/2); camera target, swipe and search regressions PASS (5/5).",
-      "Desktop reference overview and map-center section return; original phone default framing; swipe/3D/detail/phone navigation browser regression PASS (7/7)."
+      "Desktop reference overview and map-center section return; original phone default framing; swipe/3D/detail/phone navigation browser regression PASS (7/7).",
+      "Further desktop zoom out, original phone framing and instant About/Contact return: browser PASS (2/2); build and asset integrity PASS (4/4)."
     ],
     "FAIL": [],
     "BLOCKED": [
