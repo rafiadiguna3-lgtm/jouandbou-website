@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 7101,
-      "sha256": "ca42d3df88391ce9101fe4e8bd73899c860b3ada45d02cdc0cd4274dd862f811",
+      "bytes": 7280,
+      "sha256": "565a88f57a6aab2bb7513b743c482e5fe0fe2f18ea187ab41c59465b4789f50c",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -77,6 +77,11 @@
           "sha256": "43b348b9f1a509802656c2cb6ca81aeefe73b04d640ecb235b7b1f1790f45d48",
           "bytes": 6802,
           "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
+        },
+        {
+          "sha256": "ca42d3df88391ce9101fe4e8bd73899c860b3ada45d02cdc0cd4274dd862f811",
+          "bytes": 7101,
+          "github_commit": "54d0f8a37db21168b44883dc38de8a7bbcb70cec"
         }
       ],
       "native_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
@@ -84,12 +89,12 @@
       "published_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
       "published_bytes": 6618,
       "modified_locally": true,
-      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
+      "modification_reason": "Desktop-only reference framing; restore original phone pose and zoom. Desktop section return uses a subtle 1.5 percent zoom anchored to map center instead of sweeping from the previous house camera."
     },
     {
       "path": "app.mjs",
-      "bytes": 37641,
-      "sha256": "07beecf4b6c53c5b840946790b3d1d06d331b8466ddb649aa752a78226ff2598",
+      "bytes": 38309,
+      "sha256": "8ecc6dc713e5f38992714f2a2189548c624f06f83377445e063ec03c42b585cf",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -141,6 +146,11 @@
           "sha256": "39c281b356cd2e889fef4c0f199701ab9fe45ac55a42cd1be5aeb5a3b97b1e34",
           "bytes": 36934,
           "github_commit": "e99ab452ada9c3a61cb188911956be10bc297d4c"
+        },
+        {
+          "sha256": "07beecf4b6c53c5b840946790b3d1d06d331b8466ddb649aa752a78226ff2598",
+          "bytes": 37641,
+          "github_commit": "54d0f8a37db21168b44883dc38de8a7bbcb70cec"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -148,7 +158,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Preserve previous search/swipe/camera fixes; frame the whole neighborhood to the user reference on first URL entry, homepage return and unselected view reset."
+      "modification_reason": "Desktop-only reference framing; restore original phone pose and zoom. Desktop section return uses a subtle 1.5 percent zoom anchored to map center instead of sweeping from the previous house camera."
     },
     {
       "path": "apple-touch-icon.png",
@@ -32504,7 +32514,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "e99ab452ada9c3a61cb188911956be10bc297d4c",
+  "rollback_commit_sha": "54d0f8a37db21168b44883dc38de8a7bbcb70cec",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32891,7 +32901,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "58ddd3e495bfd1c78cb9ad00c30297efaa8569266fbd802f9960784ec235e468",
+  "dist_tree_sha256": "0d17bd91e165bf0e25e9620eb3ec65dfa5654e80df727b43082bfd7ce038ab04",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32907,7 +32917,8 @@
       "Search desktop/phone reset and first-stage selection plus hover regression PASS (3/3).",
       "First-stage phone swipe: 60% camera duration, same destination, tap still opens 3D; browser regression PASS.",
       "Affected browser regression PASS (12/12); build and asset integrity PASS (4/4); camera-flight unit suite PASS.",
-      "Reference homepage framing: desktop/phone direct entry, reload and home return PASS (2/2); camera target, swipe and search regressions PASS (5/5)."
+      "Reference homepage framing: desktop/phone direct entry, reload and home return PASS (2/2); camera target, swipe and search regressions PASS (5/5).",
+      "Desktop reference overview and map-center section return; original phone default framing; swipe/3D/detail/phone navigation browser regression PASS (7/7)."
     ],
     "FAIL": [],
     "BLOCKED": [

@@ -37,9 +37,10 @@ function showRoute(){
 }
 
 studio.onclick=()=>{if(location.hash!=='#about')location.hash='about';else about.scrollTo({top:0,behavior:'smooth'});};
-projects.onclick=()=>{location.hash='projects';showRoute();originalProjects?.();};
+const fromOtherSection=()=>document.body.matches('.view-about,.view-contact');
+projects.onclick=()=>{const fromSection=fromOtherSection();location.hash='projects';showRoute();originalProjects?.({fromSection});};
 document.querySelector('.about-work[href="#projects"]').onclick=e=>{e.preventDefault();projects.click();};
-brand.onclick=e=>{e.preventDefault();closeSearch();location.hash='projects';showRoute();originalProjects?.();};
+brand.onclick=e=>{e.preventDefault();const fromSection=fromOtherSection();closeSearch();location.hash='projects';showRoute();originalProjects?.({fromSection});};
 contactLink.onclick=()=>{if(location.hash==='#contact')contact.scrollTo({top:0,behavior:'smooth'});};
 addEventListener('hashchange',showRoute);
 const track=document.querySelector('.about-feed-track');

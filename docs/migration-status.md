@@ -144,3 +144,17 @@ Selected-house click/swipe/keyboard zoom targets and 3D entry/exit remain unchan
 No asset, layout, deployment settings or live Sites changes.
 
 PASS: build, asset integrity 4/4, framing browser tests 2/2 and related camera/swipe/search tests 5/5. An initial exact float comparison failed at 1e-14 precision; numeric tolerance corrected and framing tests passed. FAIL: none remaining. BLOCKED: real Safari/iPhone and hosted browser checks remain unverified.
+
+## Desktop-only overview and restrained section return
+
+Rollback: `54d0f8a37db21168b44883dc38de8a7bbcb70cec`.
+The reference overview is desktop-only. Phone/tablet touch layouts return to the
+original initial camera (x=25, y=2, z=15, scale=baseScale), including homepage return.
+Phone view reset and camera travel retain their preceding behavior.
+Desktop Projects/brand navigation from About, Contact or Bou starts at the homepage
+pose with only a 1.5% scale adjustment over 320ms, anchored to the map center.
+There is no visible travel from a previously selected house across the neighborhood.
+Ordinary desktop homepage return also anchors to the map center. House selection,
+swipe targets and 3D interaction stay as before. No deployment configuration changes.
+
+PASS: build, asset integrity (4/4), browser regression (7/7). FAIL: none. BLOCKED: real Safari/iPhone and hosted browser testing remain unverified.
