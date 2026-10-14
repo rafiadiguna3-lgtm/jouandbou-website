@@ -257,7 +257,24 @@ canvas.addEventListener('wheel',e=>{
  }
  zoomBy(Math.exp(-Math.max(-120,Math.min(120,e.deltaY*unit))*(e.ctrlKey?.008:.002)));
 },{passive:false});
-function openProjectDetails(){if(front&&[36,38,40,41,42,43,45,46,47].includes(current)){const panel=$('jh37');panel.dataset.house=String(({36:37,38:39,40:41,41:42,42:43,43:44,45:49,46:50,47:46})[current]);panel.setAttribute('aria-label',title(current)+' — under construction');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(!front){openHouse(current);return;}if(current===19||current===12){const panel=$(current===19?'zubair':'rr-house');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===18||current===26){const panel=$(current===18?'jangkrik':'flute');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===0||current===9){const panel=$(current===0?'rumah-anas':'rumasoka');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===44){$('rempoa').showModal();$('rempoa').querySelector('.project-scroll').scrollTop=0;window.resetRempoaStage?.();return;}if(current===29){$('marboy').showModal();$('marboy').querySelector('.project-scroll').scrollTop=0;window.resetProjectStage?.();return;}$('detailNumber').textContent=title(current);$('detailName').textContent=names[current];$('description').textContent=description(current);$('detail').querySelector('.intro').textContent=current===51?'':current===44?'Commercial / Padel':'Residential';$('detail').showModal()}
+function openProjectDetailsContent(){if(front&&[36,38,40,41,42,43,45,46,47].includes(current)){const panel=$('jh37');panel.dataset.house=String(({36:37,38:39,40:41,41:42,42:43,43:44,45:49,46:50,47:46})[current]);panel.setAttribute('aria-label',title(current)+' — under construction');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(!front){openHouse(current);return;}if(current===19||current===12){const panel=$(current===19?'zubair':'rr-house');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===18||current===26){const panel=$(current===18?'jangkrik':'flute');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===0||current===9){const panel=$(current===0?'rumah-anas':'rumasoka');panel.showModal();panel.querySelector('.project-scroll').scrollTop=0;return;}if(current===44){$('rempoa').showModal();$('rempoa').querySelector('.project-scroll').scrollTop=0;window.resetRempoaStage?.();return;}if(current===29){$('marboy').showModal();$('marboy').querySelector('.project-scroll').scrollTop=0;window.resetProjectStage?.();return;}$('detailNumber').textContent=title(current);$('detailName').textContent=names[current];$('description').textContent=description(current);$('detail').querySelector('.intro').textContent=current===51?'':current===44?'Commercial / Padel':'Residential';$('detail').showModal()}
+const projectSlugs=new Map([...new Set([29,0,9,13,44,...glbIds])].map(id=>[id,({29:'marboy',18:'jangkrik',26:'flute'})[id]||names[id].toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')]));
+const projectPanels=[...document.querySelectorAll('dialog.project-page,dialog#detail')];
+function markProjectPanel(slug){const panel=projectPanels.find(panel=>panel.open);if(panel)panel.dataset.projectRoute=slug;}
+function openProjectDetails(){openProjectDetailsContent();if(!front)return;const slug=projectSlugs.get(current);if(!slug)return;markProjectPanel(slug);if(location.hash!==`#project/${slug}`)history.pushState(null,'',`#project/${slug}`);}
+function syncProjectRoute(){
+ document.querySelectorAll('dialog.photo-viewer[open]').forEach(panel=>panel.close());
+ if(!location.hash.startsWith('#project/')){for(const panel of projectPanels)if(panel.open)panel.close();return;}
+ let slug;try{slug=decodeURIComponent(location.hash.slice(9)).toLowerCase().replace(/\s+/g,'-');}catch{slug='';}
+ const entry=[...projectSlugs].find(([,value])=>value===slug);
+ if(!entry){for(const panel of projectPanels)if(panel.open)panel.close();history.replaceState(null,'','#projects');document.documentElement.removeAttribute('data-route-pending');return;}
+ if(!projectPanels.some(panel=>panel.open&&panel.dataset.projectRoute===slug)){
+  for(const panel of projectPanels)if(panel.open)panel.close();openHouse(entry[0]);openProjectDetailsContent();markProjectPanel(slug);
+ }
+ history.replaceState(null,'',`#project/${slug}`);document.documentElement.removeAttribute('data-route-pending');
+}
+for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&location.hash===`#project/${panel.dataset.projectRoute}`)history.replaceState(null,'','#projects');});
+addEventListener('hashchange',syncProjectRoute);addEventListener('popstate',syncProjectRoute);
 $('more').onclick=openProjectDetails;
 $('projects').onclick=()=>{document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();zoom=1;goal={x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};current=0;updateUI();flyCamera();start()};
 
@@ -301,6 +318,7 @@ document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
 
 await import("./about.mjs?v=147");
+syncProjectRoute();
 
 // Wait for the imported models and a painted scene, rather than a fake progress percentage.
 Promise.resolve(engine.firstReady||engine.ready).then(()=>requestAnimationFrame(()=>{render();requestAnimationFrame(()=>document.dispatchEvent(new Event('jou:scene-ready')));})).catch(()=>document.dispatchEvent(new Event('jou:scene-ready')));

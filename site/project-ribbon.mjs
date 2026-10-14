@@ -1,7 +1,9 @@
+import {galleryArrows} from './gallery-arrows.mjs';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 for(const ribbon of document.querySelectorAll('.project-ribbon,.slider')){
  const track=ribbon.querySelector('.project-ribbon-track,.slide-track'),controls=ribbon.querySelector('.project-ribbon-controls,.slider-controls');
  if(!track)continue;
+ galleryArrows(ribbon,track);
  const ui=controls||ribbon.appendChild(document.createElement('div'));ui.classList.add('project-ribbon-controls');ui.replaceChildren();const count=document.createElement('span');count.className='ribbon-position';count.setAttribute('aria-live','polite');ui.append(count);
  const items=[...track.children];let pressed=null,dragged=false;
  const dots=document.createElement('div');dots.className='project-photo-dots';dots.setAttribute('aria-label','Choose photo');ui.append(dots);

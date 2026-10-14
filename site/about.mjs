@@ -33,7 +33,7 @@ function showRoute(){
  shownRoute=route;
  if(page){closeSearch();document.querySelectorAll('dialog[open]').forEach(d=>d.close());panel.focus({preventScroll:true});}
  updateTitle();
- if(!bouActive)document.documentElement.removeAttribute('data-route-pending');
+ if(!bouActive&&!location.hash.startsWith('#project/'))document.documentElement.removeAttribute('data-route-pending');
 }
 
 studio.onclick=()=>{if(location.hash!=='#about')location.hash='about';else about.scrollTo({top:0,behavior:'smooth'});};

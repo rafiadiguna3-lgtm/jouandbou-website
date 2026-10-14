@@ -1,7 +1,7 @@
 {
   "source": "Native Sites Git repository",
   "captured_at": "2026-10-14T13:38:55.964863+00:00",
-  "scope": "Native v143 frontend with documented photo recovery, reload/performance fixes and contact touch-gesture fix; review update.",
+  "scope": "Native v143 frontend with documented photo recovery and interaction fixes, project-specific hash routing and gallery arrow controls; ongoing review.",
   "files": [
     {
       "path": "about-journal.mjs",
@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 6762,
-      "sha256": "36b1f4c401f2cea37eb90e9e833b1802b3610a0d6a7b0703127b2d85fdfa5a30",
+      "bytes": 6802,
+      "sha256": "43b348b9f1a509802656c2cb6ca81aeefe73b04d640ecb235b7b1f1790f45d48",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -67,6 +67,11 @@
           "sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
           "bytes": 6618,
           "github_commit": "d670554f826975acae1dc8e2b81de1857ada7cee"
+        },
+        {
+          "sha256": "36b1f4c401f2cea37eb90e9e833b1802b3610a0d6a7b0703127b2d85fdfa5a30",
+          "bytes": 6762,
+          "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
         }
       ],
       "native_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
@@ -74,12 +79,12 @@
       "published_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
       "published_bytes": 6618,
       "modified_locally": true,
-      "modification_reason": "Prevent homepage flash on reload by hiding content before routing and revealing the current hash section only when ready."
+      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
     },
     {
       "path": "app.mjs",
-      "bytes": 34557,
-      "sha256": "8385fc6b554e355deb7746d7c19291d0051e59a293c15fcfbd84f01660f26198",
+      "bytes": 36445,
+      "sha256": "ed6ccab75d011ce404ae23ae8c91e4f58ca9fbc350a87aba77d7c8912bb8b3f5",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -101,6 +106,11 @@
           "sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
           "bytes": 34109,
           "github_commit": "51ff3e778e31aa8529f025dcd5d4f6dfa5876447"
+        },
+        {
+          "sha256": "8385fc6b554e355deb7746d7c19291d0051e59a293c15fcfbd84f01660f26198",
+          "bytes": 34557,
+          "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -108,7 +118,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Reduce redundant label/status DOM writes and pointer-media queries during animation; defer background geometry loading until homepage drag/zoom motion settles."
+      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
     },
     {
       "path": "apple-touch-icon.png",
@@ -589,6 +599,16 @@
       ]
     },
     {
+      "path": "assets/bou/diantara-icon.svg",
+      "bytes": 10702,
+      "sha256": "0e4c6d06937489130cdb23ec3141a9bfc03f62b949fbfe200e4e26d27b8dc368",
+      "native_sha256": "0e4c6d06937489130cdb23ec3141a9bfc03f62b949fbfe200e4e26d27b8dc368",
+      "native_bytes": 10702,
+      "source_urls": [
+        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/diantara-icon.svg"
+      ]
+    },
+    {
       "path": "assets/bou/diantara/01.webp",
       "bytes": 3306,
       "sha256": "3d0bab1b2ce88bdc9062a118a54b477d871d81945c85b4a9a2e0f8980092d807",
@@ -629,13 +649,13 @@
       ]
     },
     {
-      "path": "assets/bou/diantara-icon.svg",
-      "bytes": 10702,
-      "sha256": "0e4c6d06937489130cdb23ec3141a9bfc03f62b949fbfe200e4e26d27b8dc368",
-      "native_sha256": "0e4c6d06937489130cdb23ec3141a9bfc03f62b949fbfe200e4e26d27b8dc368",
-      "native_bytes": 10702,
+      "path": "assets/bou/ikat-icon.svg",
+      "bytes": 16383,
+      "sha256": "4a605474e7e10e78ae3b8550ec49da60b69e1d29935dfe0b3d5a66517158e269",
+      "native_sha256": "4a605474e7e10e78ae3b8550ec49da60b69e1d29935dfe0b3d5a66517158e269",
+      "native_bytes": 16383,
       "source_urls": [
-        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/diantara-icon.svg"
+        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/ikat-icon.svg"
       ]
     },
     {
@@ -689,13 +709,13 @@
       ]
     },
     {
-      "path": "assets/bou/ikat-icon.svg",
-      "bytes": 16383,
-      "sha256": "4a605474e7e10e78ae3b8550ec49da60b69e1d29935dfe0b3d5a66517158e269",
-      "native_sha256": "4a605474e7e10e78ae3b8550ec49da60b69e1d29935dfe0b3d5a66517158e269",
-      "native_bytes": 16383,
+      "path": "assets/bou/koru-icon.svg",
+      "bytes": 10626,
+      "sha256": "f2f7875699111c333f32276c9406996ebaabe269810315aba15216700be9fdcb",
+      "native_sha256": "f2f7875699111c333f32276c9406996ebaabe269810315aba15216700be9fdcb",
+      "native_bytes": 10626,
       "source_urls": [
-        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/ikat-icon.svg"
+        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/koru-icon.svg"
       ]
     },
     {
@@ -739,13 +759,13 @@
       ]
     },
     {
-      "path": "assets/bou/koru-icon.svg",
-      "bytes": 10626,
-      "sha256": "f2f7875699111c333f32276c9406996ebaabe269810315aba15216700be9fdcb",
-      "native_sha256": "f2f7875699111c333f32276c9406996ebaabe269810315aba15216700be9fdcb",
-      "native_bytes": 10626,
+      "path": "assets/bou/raindeer-icon.svg",
+      "bytes": 13559,
+      "sha256": "013569e7569a006a32967323b174ba7b26e8bbb448dd1769ac6bfa0333d7fff2",
+      "native_sha256": "013569e7569a006a32967323b174ba7b26e8bbb448dd1769ac6bfa0333d7fff2",
+      "native_bytes": 13559,
       "source_urls": [
-        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/koru-icon.svg"
+        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/raindeer-icon.svg"
       ]
     },
     {
@@ -809,13 +829,13 @@
       ]
     },
     {
-      "path": "assets/bou/raindeer-icon.svg",
-      "bytes": 13559,
-      "sha256": "013569e7569a006a32967323b174ba7b26e8bbb448dd1769ac6bfa0333d7fff2",
-      "native_sha256": "013569e7569a006a32967323b174ba7b26e8bbb448dd1769ac6bfa0333d7fff2",
-      "native_bytes": 13559,
+      "path": "assets/bou/sabang-icon.svg",
+      "bytes": 16279,
+      "sha256": "335a4e1185eac6a755d04aafdc7719bf8d69c5066d6ffd1894521ab5cd452827",
+      "native_sha256": "335a4e1185eac6a755d04aafdc7719bf8d69c5066d6ffd1894521ab5cd452827",
+      "native_bytes": 16279,
       "source_urls": [
-        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/raindeer-icon.svg"
+        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/sabang-icon.svg"
       ]
     },
     {
@@ -889,13 +909,13 @@
       ]
     },
     {
-      "path": "assets/bou/sabang-icon.svg",
-      "bytes": 16279,
-      "sha256": "335a4e1185eac6a755d04aafdc7719bf8d69c5066d6ffd1894521ab5cd452827",
-      "native_sha256": "335a4e1185eac6a755d04aafdc7719bf8d69c5066d6ffd1894521ab5cd452827",
-      "native_bytes": 16279,
+      "path": "assets/bou/selebu-icon.svg",
+      "bytes": 14766,
+      "sha256": "478bb593687e3b2c1f540657996ba2effb62672708ed9b2bab1d98b4a7a7b076",
+      "native_sha256": "478bb593687e3b2c1f540657996ba2effb62672708ed9b2bab1d98b4a7a7b076",
+      "native_bytes": 14766,
       "source_urls": [
-        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/sabang-icon.svg"
+        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/selebu-icon.svg"
       ]
     },
     {
@@ -959,13 +979,13 @@
       ]
     },
     {
-      "path": "assets/bou/selebu-icon.svg",
-      "bytes": 14766,
-      "sha256": "478bb593687e3b2c1f540657996ba2effb62672708ed9b2bab1d98b4a7a7b076",
-      "native_sha256": "478bb593687e3b2c1f540657996ba2effb62672708ed9b2bab1d98b4a7a7b076",
-      "native_bytes": 14766,
+      "path": "assets/bou/temu-icon.svg",
+      "bytes": 20410,
+      "sha256": "ea0a531049337fd109d62517b30c888827e3c35172ad0b2603d2d1af54b1b77b",
+      "native_sha256": "ea0a531049337fd109d62517b30c888827e3c35172ad0b2603d2d1af54b1b77b",
+      "native_bytes": 20410,
       "source_urls": [
-        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/selebu-icon.svg"
+        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/temu-icon.svg"
       ]
     },
     {
@@ -1026,16 +1046,6 @@
       "native_bytes": 145362,
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/temu/06.webp"
-      ]
-    },
-    {
-      "path": "assets/bou/temu-icon.svg",
-      "bytes": 20410,
-      "sha256": "ea0a531049337fd109d62517b30c888827e3c35172ad0b2603d2d1af54b1b77b",
-      "native_sha256": "ea0a531049337fd109d62517b30c888827e3c35172ad0b2603d2d1af54b1b77b",
-      "native_bytes": 20410,
-      "source_urls": [
-        "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/assets/bou/temu-icon.svg"
       ]
     },
     {
@@ -12944,13 +12954,24 @@
     },
     {
       "path": "bou.mjs",
-      "bytes": 4391,
-      "sha256": "3f863d3f4caf37f10df844904a4feca0baf867970aa240522e98c8f2dcb2f4eb",
+      "bytes": 4579,
+      "sha256": "d016688a8d2e12ebc806bb5ee474abb6ebbfd517e7ffa83908734b6a107cbfac",
       "native_sha256": "3f863d3f4caf37f10df844904a4feca0baf867970aa240522e98c8f2dcb2f4eb",
       "native_bytes": 4391,
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/bou.mjs"
-      ]
+      ],
+      "published_sha256": "3f863d3f4caf37f10df844904a4feca0baf867970aa240522e98c8f2dcb2f4eb",
+      "published_bytes": 4391,
+      "modified_locally": true,
+      "previous_hashes": [
+        {
+          "sha256": "3f863d3f4caf37f10df844904a4feca0baf867970aa240522e98c8f2dcb2f4eb",
+          "bytes": 4391,
+          "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
+        }
+      ],
+      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
     },
     {
       "path": "camera-flight.mjs",
@@ -13133,6 +13154,16 @@
       "native_bytes": 1699
     },
     {
+      "path": "gallery-arrows.mjs",
+      "bytes": 1473,
+      "sha256": "103f839bf8a239778652465598c58534b74d880521753754741501b0bf6afa49",
+      "source_urls": [
+        "repository-local://migration/jou-and-bou/gallery-arrows.mjs"
+      ],
+      "modified_locally": true,
+      "modification_reason": "Requested always-visible touch gallery arrows; desktop hover/focus controls."
+    },
+    {
       "path": "geometry.mjs",
       "bytes": 8582,
       "sha256": "e811733cfed7f5e54b7a8be8c9220e61cd456fd430c491f23fb07d7011281404",
@@ -13183,8 +13214,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 105659,
-      "sha256": "eaa10462e6c16f1230bf062869a74fde61457917ebf8bb89453b45eab384485c",
+      "bytes": 105676,
+      "sha256": "8c549b8c963fd287e9166a79cbae3e0140504965aba1ab2aa72f01afc3181057",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13206,6 +13237,11 @@
           "sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
           "bytes": 105307,
           "github_commit": "d670554f826975acae1dc8e2b81de1857ada7cee"
+        },
+        {
+          "sha256": "eaa10462e6c16f1230bf062869a74fde61457917ebf8bb89453b45eab384485c",
+          "bytes": 105659,
+          "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
         }
       ],
       "native_sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
@@ -13213,7 +13249,7 @@
       "published_sha256": "3974c7fe3fac64877b38c11346e14ec847f3f6cf0e5f677faf884bd140a0d29c",
       "published_bytes": 105307,
       "modified_locally": true,
-      "modification_reason": "Prevent homepage flash on reload by hiding content before routing and revealing the current hash section only when ready."
+      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
     },
     {
       "path": "interaction-comfort.mjs",
@@ -13515,8 +13551,8 @@
     },
     {
       "path": "project-media.css",
-      "bytes": 5350,
-      "sha256": "cd507bf94a43940ef5e83673d6ab4cbc5cd95510d23053097146c901d7e6e47c",
+      "bytes": 6474,
+      "sha256": "57f49238da458f74b504caba0dddddc09f3ce6ea7dc26e44eee28abcf7e3d87e",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/project-media.css"
       ],
@@ -13524,7 +13560,18 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/project-media.css?v=95"
       ],
       "native_sha256": "cd507bf94a43940ef5e83673d6ab4cbc5cd95510d23053097146c901d7e6e47c",
-      "native_bytes": 5350
+      "native_bytes": 5350,
+      "published_sha256": "cd507bf94a43940ef5e83673d6ab4cbc5cd95510d23053097146c901d7e6e47c",
+      "published_bytes": 5350,
+      "modified_locally": true,
+      "previous_hashes": [
+        {
+          "sha256": "cd507bf94a43940ef5e83673d6ab4cbc5cd95510d23053097146c901d7e6e47c",
+          "bytes": 5350,
+          "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
+        }
+      ],
+      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
     },
     {
       "path": "project-motion.css",
@@ -13580,8 +13627,8 @@
     },
     {
       "path": "project-ribbon.mjs",
-      "bytes": 3194,
-      "sha256": "e177dbd9e7c6ec88cc2ece054f6834f17ddf8106aaff2f8f24c64a423822dd57",
+      "bytes": 3276,
+      "sha256": "575db1631ef65736d1766f3d287c99cc84c8378bc07e4b724bbcc8fb5dde4fc4",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/project-ribbon.mjs"
       ],
@@ -13589,7 +13636,18 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/project-ribbon.mjs?v=105"
       ],
       "native_sha256": "e177dbd9e7c6ec88cc2ece054f6834f17ddf8106aaff2f8f24c64a423822dd57",
-      "native_bytes": 3194
+      "native_bytes": 3194,
+      "published_sha256": "e177dbd9e7c6ec88cc2ece054f6834f17ddf8106aaff2f8f24c64a423822dd57",
+      "published_bytes": 3194,
+      "modified_locally": true,
+      "previous_hashes": [
+        {
+          "sha256": "e177dbd9e7c6ec88cc2ece054f6834f17ddf8106aaff2f8f24c64a423822dd57",
+          "bytes": 3194,
+          "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
+        }
+      ],
+      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
     },
     {
       "path": "project-social-films.mjs",
@@ -32373,7 +32431,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "a0eeec7ba4d0f0f3052d3a54898171b4b613bd82",
+  "rollback_commit_sha": "70c8903630853cea7a9b1903a73806cf93365eaf",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32760,7 +32818,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "d85d8833a8ae0fbf215630674dc09a7a7247dd7b951852ce6147eeb9648e0371",
+  "dist_tree_sha256": "dd286d253e55dbc160e7e511abbc68239545419218237fb0c9d95a627ce45ea8",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32771,8 +32829,8 @@
       "396 responsive variants: thumbnail dimensions and source-image similarity verified using full-resolution sources for existing variants and documented bases for repairs",
       "48+ JavaScript modules: syntax checks",
       "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded",
-      "992 native files match; deviations are 15 photo repairs and 4 documented application files",
-      "14 browser cases verified: existing regressions passed; contact gesture tests 2/2 passed after waiting for Leaflet zoom animation before starting the next gesture"
+      "989 native files match; deviations are 15 photo repairs and 7 documented application files; 1 new local gallery-controls module",
+      "npm run test:browser: 17/17, including project deep links/reload/history, phone gallery arrows, desktop hover, Bou, contact gestures, 3D/video, homepage loading"
     ],
     "FAIL": [],
     "BLOCKED": [
