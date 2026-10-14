@@ -83,8 +83,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 36512,
-      "sha256": "79019df990290bf031d8597c647889aac6f7eef639c02cbdb2ea608fff06457e",
+      "bytes": 36672,
+      "sha256": "fc775b80f0d679c6836117f90e0f770e15caee1e956d8de143cb380d4ab7a9f7",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -121,6 +121,11 @@
           "sha256": "ce4d0a4a07e170589cd421d227d84b70cb0abd4f81c8c1e7eb6cf87ef3066c48",
           "bytes": 36613,
           "github_commit": "88ee022bd2bf3fdefaca020882e9abfde3ea93a6"
+        },
+        {
+          "sha256": "79019df990290bf031d8597c647889aac6f7eef639c02cbdb2ea608fff06457e",
+          "bytes": 36512,
+          "github_commit": "b2ee651b72755e35435d23ddf12889a9e036b297"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -128,7 +133,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Restore the intentionally prescribed overview target zoom/orientation on house clicks/Next and 3D exit; retain the softer camera-flight curve."
+      "modification_reason": "Use the selected house as a projected-motion anchor to avoid curved pan/zoom sweeps; adapt bounded timing and route overview keyboard navigation through the same prescribed target as clicks."
     },
     {
       "path": "apple-touch-icon.png",
@@ -12985,8 +12990,8 @@
     },
     {
       "path": "camera-flight.mjs",
-      "bytes": 1061,
-      "sha256": "ebe3e441498a98e2762d9aeb26a72c5abea5c6a60ba42f8d6c7236d37b22a61b",
+      "bytes": 1932,
+      "sha256": "f6b2c1c899053495c26258dd7b4dcd88d4422aa33ed4133960dc891cedf9d7b3",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/camera-flight.mjs"
       ],
@@ -13000,9 +13005,14 @@
           "sha256": "6f659b91052428c15ee70a7e99e8639a434b4d8d5bb758059dd68af1d42bbc74",
           "bytes": 899,
           "github_commit": "580d344bc490a3e441ed45e36a38248f418ddd57"
+        },
+        {
+          "sha256": "ebe3e441498a98e2762d9aeb26a72c5abea5c6a60ba42f8d6c7236d37b22a61b",
+          "bytes": 1061,
+          "github_commit": "b2ee651b72755e35435d23ddf12889a9e036b297"
         }
       ],
-      "modification_reason": "Restrained camera easing and distance/zoom-aware timing; keep browse zoom between houses and restore pre-explore zoom/orientation on return. Only actual details opening records the project route."
+      "modification_reason": "Use the selected house as a projected-motion anchor to avoid curved pan/zoom sweeps; adapt bounded timing and route overview keyboard navigation through the same prescribed target as clicks."
     },
     {
       "path": "construction-animation.mjs",
@@ -32452,7 +32462,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "88ee022bd2bf3fdefaca020882e9abfde3ea93a6",
+  "rollback_commit_sha": "b2ee651b72755e35435d23ddf12889a9e036b297",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32839,7 +32849,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "013cae0e3967d87d6553a759c269a27729f4eee724747eb9e98e1855e9b6b761",
+  "dist_tree_sha256": "f994b22d47cace1a5127c6b6680231d0a388fc8ef0490bd91d9267394262ee34",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32851,8 +32861,8 @@
       "48+ JavaScript modules: syntax checks",
       "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded",
       "988 native files match; deviations are 15 photo repairs and 8 documented application files; 1 local gallery module",
-      "4 camera-flight unit tests PASS: bounded/soft motion across zoom scales and interrupted-flight continuity",
-      "Original click/Next/exit target-distance browser test 1/1 PASS after restoring prescribed zoom; camera unit tests 4/4 and asset tests 4/4 rerun PASS. Prior existing suite 17/17 PASS."
+      "5 camera-flight unit tests PASS, including selected-house straight projected motion and exact endpoint retention",
+      "Browser targeted regression PASS: keyboard/Next/exit targets at multiple zoom levels, desktop 3D/video, eight project dialogs, contact/About and phone navigation (5/5); interaction pause/resume also PASS"
     ],
     "FAIL": [],
     "BLOCKED": [
