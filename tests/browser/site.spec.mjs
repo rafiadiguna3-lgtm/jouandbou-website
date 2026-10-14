@@ -8,7 +8,7 @@ async function select(page, name, mobile = false) {
   await page.locator('#search-toggle').click();
   await page.locator('#search').fill(name);
   await page.locator('#results button').first().click();
-  if (mobile) {
+  {
     await expect(page.locator('.house-callout-card')).toBeVisible();
     await page.locator('.house-callout-card').click();
   }

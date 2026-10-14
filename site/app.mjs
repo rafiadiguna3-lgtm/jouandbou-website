@@ -31,7 +31,7 @@ const order=browseOrder;
 const baseScale=()=>compactLandscape()?Math.min(w/80,(h-70)/34):w<700?Math.min(w/48,(h-120)/48):Math.min(w/108,(h-250)/45);
 function limit(){if(!front&&!drag)constrain(goal,bounds,w,h)}
 const labels=names.map((name,i)=>{if(i===29)name='Marboy House';const b=document.createElement('button');b.className='house-label';b.disabled=!canExplore(i);b.hidden=!canExplore(i);b.tabIndex=canExplore(i)?0:-1;b.innerHTML=`<strong>${title(i)}</strong><span>${name}</span>`;b.setAttribute('aria-label',`Preview ${name}; activate again to explore in 3D`);b.onfocus=()=>{hover=i;start()};b.onblur=()=>{hover=-1;start()};b.onpointerenter=e=>{if(!desktopInput()||e.pointerType!=='mouse')return;hover=i;start()};b.onpointerleave=()=>{hover=-1;start()};b.onclick=e=>{if(!moved)activateHouse(i,e.pointerType)};$('labels').append(b);return b});
-const houseCallout=createHouseCallout(id=>openHouse(id));
+const houseCallout=createHouseCallout(id=>openHouse(id),direction=>browseHouse(direction,{quick:true}));
 function resize(){cameraFlight=null;w=innerWidth;h=innerHeight;document.body.classList.toggle('touch-layout',!desktopInput());document.body.classList.toggle('landscape-layout',compactLandscape());engine.resize(w,h);if(front){const yaw=goal.yaw,pitch=goal.pitch;setFront();goal.yaw=yaw;goal.pitch=pitch;centerUpdatedModel();}else goal.scale=baseScale()*zoom;limit();Object.assign(camera,goal);updateBrowse();start()}
 function calloutHouseShape(id){
  const meta=engine.modelMetas.get(id);if(!meta)return null;
@@ -46,7 +46,7 @@ if(desktopInput())labels.forEach((b,i)=>{const hidden=front||!canExplore(i);if(b
 
 
 let lastFrame=0,cameraFlight=null;
-function flyCamera(){limit();const meta=engine.modelMetas.get(current),bounds=modelBounds(),place=meta?.placement,at=place?[place.x,place.z]:position(current),focus=[at[0]+(bounds.min[0]+bounds.max[0])/2,(bounds.min[1]+bounds.max[1])/2,at[1]+(bounds.min[2]+bounds.max[2])/2];cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now(),{viewportDiagonal:Math.hypot(w,h),focus});}
+function flyCamera(quick=false){limit();const meta=engine.modelMetas.get(current),bounds=modelBounds(),place=meta?.placement,at=place?[place.x,place.z]:position(current),focus=[at[0]+(bounds.min[0]+bounds.max[0])/2,(bounds.min[1]+bounds.max[1])/2,at[1]+(bounds.min[2]+bounds.max[2])/2];cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now(),{viewportDiagonal:Math.hypot(w,h),focus,durationScale:quick?.6:1});}
 function tick(now){raf=0;const dt=Math.min(32,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;if(cameraFlight){const sample=sampleCameraFlight(cameraFlight,now);Object.assign(camera,sample.state);if(sample.done){Object.assign(camera,goal);cameraFlight=null;}else active=true;}else for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&!cameraFlight&&camera.t>.995)centerUpdatedModel(camera);const desktop=desktopInput();for(let i=0;i<hoverLevels.length;i++){const target=canExplore(i)&&((desktop&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}render();raf=active?requestAnimationFrame(tick):0}
 function start(){limit();if(document.hidden||document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog.project-page[open],dialog#detail[open]'))return;if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}
 function updateUI(){updateBrowse();$('number').textContent=current===51?'':current===44?'jou.commercial 01':`jou.house ${String(houseNumber(current)).padStart(2,'0')}`;$('name').textContent=current===29?'Marboy House':names[current];$('projectStoryTitle').textContent='About the project';$('projectStory').textContent=description(current);$('projectStory').hidden=!description(current);$('area').textContent=current===38?'Area · 120–180 / 128 sqm':'';$('area').hidden=current!==38;$('more').firstChild.textContent=front?'Project details ':'Explore 3D ';$('more').querySelector('span').innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';$('category').textContent=current===51?'':current===44?'Commercial Project':'Rsdtl Project';$('focus').setAttribute('aria-label',`${names[current]} project information`);$('restore-project').textContent=current===29?'Marboy House':names[current];$('announce').textContent=`${names[current]}, ${front?'front view':'neighborhood view'}`}
@@ -85,7 +85,7 @@ for(const el of [$('focus'),$('restore-project')]){
  });
  el.addEventListener('pointerup',e=>{
   if(!sheetDrag||sheetDrag.id!==e.pointerId)return;const {dx,dy,state}=sheetDrag;sheetDrag=null;document.body.classList.remove('sheet-dragging');
-  if(!front&&el.id==='focus'&&Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2){sheetSwipe=el;e.preventDefault();el.style.removeProperty('--sheet-drag');browseHouse(dx<0?1:-1);return;}
+  if(!front&&el.id==='focus'&&Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2){sheetSwipe=el;e.preventDefault();el.style.removeProperty('--sheet-drag');browseHouse(dx<0?1:-1,{quick:true});return;}
   if(Math.abs(dx)>12&&Math.abs(dx)>Math.abs(dy)){sheetSwipe=el;el.style.removeProperty('--sheet-drag');el.style.removeProperty('--sheet-scale');return;}
   if(Math.abs(dy)>12){sheetSwipe=el;e.preventDefault();
    if(!front){if(dy<-35)openHouse(current);else setSheet('compact');}
@@ -135,10 +135,10 @@ function showProjectCard(){
  $('focus').hidden=false;document.body.classList.add('has-selection');setSheet('peek');updateUI();
  if(!reduce)$('name').animate?.([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:280,easing:'cubic-bezier(.22,1,.36,1)'});
 }
-function previewHouse(i,{center=false}={}){
+function previewHouse(i,{center=false,quick=false}={}){
  if(!canExplore(i))return;
  cardPress=null;current=i;window.jouPreparePhotos?.get(({0:'rumah-anas',9:'rumasoka',12:'rr-house',18:'jangkrik',19:'zubair',26:'flute',29:'marboy',44:'rempoa'})[i])?.();engine.ensureModel?.(i);previewId=i;hover=-1;
- if(center){zoom=desktopInput()?1.25:.9;goal={x:position(i)[0],y:2,z:position(i)[1],yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};flyCamera();}
+ if(center){zoom=desktopInput()?1.25:.9;goal={x:position(i)[0],y:2,z:position(i)[1],yaw:-.57,pitch:.61,scale:baseScale()*zoom,t:0};flyCamera(quick);}
  showProjectCard();start();
 }
 function browseNeighbor(direction){
@@ -156,10 +156,10 @@ function updateBrowse(){
  }
 }
 const browsePressAnimations=new Map();
-function browseHouse(direction){
+function browseHouse(direction,{quick=false}={}){
  if(!front&&previewId<0)return;const next=browseNeighbor(direction);if(next===undefined)return;
  if(front){openHouse(next);return;}
- previewHouse(next,{center:true});
+ previewHouse(next,{center:true,quick});
  if(!reduce){
   const button=$(direction<0?'house-prev':'house-next'),icon=button.querySelector('svg');
   browsePressAnimations.get(button)?.forEach(animation=>animation.cancel());
@@ -285,7 +285,7 @@ window.addEventListener('keydown',e=>{if(document.body.classList.contains('view-
 const search=$('search'),results=$('results');
 const searchNames=names.map((name,i)=>{if(i===29)return 'Marboy House';return /^(?:jh\d+|jou\s*house\s*\d+)$/i.test(name)?title(i):name;});
 function closeResults(){results.hidden=true;search.setAttribute('aria-expanded','false')}
-function showResults(){$('search-clear').hidden=!search.value.length;const matches=searchHouses(searchNames,search.value).filter(({i})=>canExplore(i));results.replaceChildren();if(!search.value.trim()){closeResults();return}results.hidden=false;search.setAttribute('aria-expanded','true');if(!matches.length){const p=document.createElement('p');p.textContent='No projects found';results.append(p)}for(const {name,i} of matches){const b=document.createElement('button');b.textContent=name;b.onclick=()=>{closeResults();search.blur();if(desktopInput())openHouse(i);else previewHouse(i,{center:true})};results.append(b)}}
+function showResults(){$('search-clear').hidden=!search.value.length;const matches=searchHouses(searchNames,search.value).filter(({i})=>canExplore(i));results.replaceChildren();if(!search.value.trim()){closeResults();return}results.hidden=false;search.setAttribute('aria-expanded','true');if(!matches.length){const p=document.createElement('p');p.textContent='No projects found';results.append(p)}for(const {name,i} of matches){const b=document.createElement('button');b.textContent=name;b.onclick=()=>{closeResults();search.blur();if(front){front=false;touchOrbit.cancel();document.body.classList.remove('model-view');document.querySelector('.search-wrap').hidden=false;$('back').hidden=true;}previewHouse(i,{center:true})};results.append(b)}}
 $('search-clear').onclick=()=>{search.value='';$('search-clear').hidden=true;closeResults();search.focus();};
 search.addEventListener('input',showResults);search.addEventListener('focus',()=>{if(search.value)showResults()});search.addEventListener('keydown',e=>{if(e.key==='Escape'){closeResults();search.blur()}if(e.key==='ArrowDown'){e.preventDefault();results.querySelector('button')?.focus()}if(e.key==='Enter'){e.preventDefault();results.querySelector('button')?.click()}});results.addEventListener('keydown',e=>{const buttons=[...results.querySelectorAll('button')],i=buttons.indexOf(document.activeElement);if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();buttons[(i+(e.key==='ArrowDown'?1:buttons.length-1))%buttons.length]?.focus()}if(e.key==='Escape'){closeResults();search.focus()}});document.addEventListener('pointerdown',e=>{if(!e.target.closest('.search-wrap'))closeResults()});
 

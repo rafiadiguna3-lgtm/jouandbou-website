@@ -8,14 +8,19 @@ export function calloutLayout(anchor,width,height,cardWidth,scale=1,shape=null){
  const join=right?left+(cardWidth-1)*scale:left+scale;
  return {left,top,join,ax,ay,right};
 }
-export function createHouseCallout(onActivate){
+export function createHouseCallout(onActivate,onBrowse){
  const node=document.createElement('div');node.className='house-callout';node.setAttribute('aria-hidden','true');
  node.innerHTML='<svg class="house-callout-leader" aria-hidden="true"><path/></svg><button class="house-callout-card" type="button" tabindex="-1"><svg class="house-callout-frame" viewBox="0 0 180 48" preserveAspectRatio="none" aria-hidden="true"><path d="M.5 .5H179.5V34.5H13L.5 47Z"/></svg><span class="house-callout-old" aria-hidden="true"></span><span class="house-callout-name"></span></button>';
  document.body.append(node);
  const card=node.querySelector('button'),leader=node.querySelector('.house-callout-leader path'),name=node.querySelector('.house-callout-name'),old=node.querySelector('.house-callout-old'),frame=node.querySelector('.house-callout-frame'),framePath=frame.querySelector('path');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let selected=-1,textWidth=0,target=null,display=null,raf=0,lastTime=0,opensLeft=false,textAnimations=[];
- card.addEventListener('click',()=>{if(selected>=0)onActivate(selected)});
+ let gesture=null,suppressClick=false;
+ card.style.touchAction='pan-y';
+ card.addEventListener('pointerdown',e=>{if(!onBrowse||e.button!==0)return;suppressClick=false;gesture={id:e.pointerId,x:e.clientX,y:e.clientY};card.setPointerCapture(e.pointerId);});
+ card.addEventListener('pointerup',e=>{if(!gesture||gesture.id!==e.pointerId)return;const dx=e.clientX-gesture.x,dy=e.clientY-gesture.y;gesture=null;if(Math.abs(dx)>30&&Math.abs(dx)>Math.abs(dy)*1.2){suppressClick=true;e.preventDefault();onBrowse(dx<0?1:-1);}});
+ card.addEventListener('pointercancel',()=>{gesture=null;suppressClick=false;});
+ card.addEventListener('click',e=>{if(suppressClick){suppressClick=false;e.preventDefault();return;}if(selected>=0)onActivate(selected)});
  function stopText(){textAnimations.forEach(a=>a?.cancel());textAnimations=[];}
  function paint(){
   const g=display,s=g.scale;frame.setAttribute('viewBox',`0 0 ${g.cw} 48`);framePath.setAttribute('d',`M.5 .5H${g.cw-.5}V34.5H13L.5 47Z`);

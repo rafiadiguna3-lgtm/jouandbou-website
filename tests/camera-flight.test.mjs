@@ -33,3 +33,10 @@ test('zoom and turning keep the selected house on a straight projected path',asy
  }
  const final=sampleCameraFlight(flight,flight.duration).state;for(const key of Object.keys(to))assert.ok(Math.abs(final[key]-flight.to[key])<1e-7,'original destination retained');
 });
+
+test('swipe uses 60 percent of click duration with identical anchor and endpoints',()=>{
+ const to={...from,x:35,z:18,scale:12},focus=[35,4,18];
+ const click=cameraFlight(from,to,0,{focus}),swipe=cameraFlight(from,to,0,{focus,durationScale:.6});
+ assert.equal(swipe.duration,click.duration*.6);
+ for(const p of [0,.25,.5,.75,1])assert.deepEqual(sampleCameraFlight(swipe,swipe.duration*p),sampleCameraFlight(click,click.duration*p));
+});

@@ -112,3 +112,23 @@ limits remain to be verified.
 
 The photograph-completeness failure remains pending until the original assets
 are supplied. This migration is not production-ready.
+
+## Search and first-stage swipe review update
+
+Rollback: `5b63c664a98428d4f639e9714c5c9d112409eace`.
+Search results and Enter now select the first-stage house callout on desktop and
+phone. A subsequent tap enters 3D. Search text/results are cleared after selection,
+cancel, Escape or dismissal, and on reopening. Search/clear hover rotation and
+background effects are removed.
+
+First-stage horizontal swipes on the callout or focus card use 60% of normal camera
+travel time. The easing, selected-house anchor and prescribed zoom destination are
+preserved; clicks and keyboard timing remain unchanged. Vertical scrolling and tap
+activation are preserved. Only application files, tests and documentation changed;
+no files removed or deployment configuration changed.
+
+PASS: build (1012 files), asset integrity (4/4), camera-flight unit suite,
+affected browser regression (12/12), search/hover tests (3/3), phone swipe test.
+FAIL: none remaining. BLOCKED: real Safari/iPhone and hosted browser validation;
+Cloudflare preview/external map/font hosts remain outside the network allowlist.
+This remains an update for review, not a final release.

@@ -1,7 +1,7 @@
 {
   "source": "Native Sites Git repository",
   "captured_at": "2026-10-14T13:38:55.964863+00:00",
-  "scope": "Native v143 frontend with documented photo recovery, route/gallery/gesture fixes and restrained house-camera transitions; ongoing review.",
+  "scope": "Native v143 frontend with documented photo recovery, route/gallery/gesture fixes and restrained house-camera transitions; ongoing review. Search first-stage/reset and faster first-stage house swipe.",
   "files": [
     {
       "path": "about-journal.mjs",
@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 6802,
-      "sha256": "43b348b9f1a509802656c2cb6ca81aeefe73b04d640ecb235b7b1f1790f45d48",
+      "bytes": 7101,
+      "sha256": "ca42d3df88391ce9101fe4e8bd73899c860b3ada45d02cdc0cd4274dd862f811",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -72,6 +72,11 @@
           "sha256": "36b1f4c401f2cea37eb90e9e833b1802b3610a0d6a7b0703127b2d85fdfa5a30",
           "bytes": 6762,
           "github_commit": "70c8903630853cea7a9b1903a73806cf93365eaf"
+        },
+        {
+          "sha256": "43b348b9f1a509802656c2cb6ca81aeefe73b04d640ecb235b7b1f1790f45d48",
+          "bytes": 6802,
+          "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
         }
       ],
       "native_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
@@ -79,12 +84,12 @@
       "published_sha256": "ff8d0aadd9162f3fec39c3c4d956ecd27074452c6f57f75da57207d16a21db68",
       "published_bytes": 6618,
       "modified_locally": true,
-      "modification_reason": "Requested project-specific hash URLs with reload/history support, or discoverable multi-photo navigation on touch devices."
+      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
     },
     {
       "path": "app.mjs",
-      "bytes": 36672,
-      "sha256": "fc775b80f0d679c6836117f90e0f770e15caee1e956d8de143cb380d4ab7a9f7",
+      "bytes": 36934,
+      "sha256": "39c281b356cd2e889fef4c0f199701ab9fe45ac55a42cd1be5aeb5a3b97b1e34",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -126,6 +131,11 @@
           "sha256": "79019df990290bf031d8597c647889aac6f7eef639c02cbdb2ea608fff06457e",
           "bytes": 36512,
           "github_commit": "b2ee651b72755e35435d23ddf12889a9e036b297"
+        },
+        {
+          "sha256": "fc775b80f0d679c6836117f90e0f770e15caee1e956d8de143cb380d4ab7a9f7",
+          "bytes": 36672,
+          "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
         }
       ],
       "native_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
@@ -133,7 +143,7 @@
       "published_sha256": "a095ff6a1e5c538e70b016d8a68e3a7d1e458d3f6a8fab8b7a4436c75b225171",
       "published_bytes": 34109,
       "modified_locally": true,
-      "modification_reason": "Use the selected house as a projected-motion anchor to avoid curved pan/zoom sweeps; adapt bounded timing and route overview keyboard navigation through the same prescribed target as clicks."
+      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
     },
     {
       "path": "apple-touch-icon.png",
@@ -12990,8 +13000,8 @@
     },
     {
       "path": "camera-flight.mjs",
-      "bytes": 1932,
-      "sha256": "f6b2c1c899053495c26258dd7b4dcd88d4422aa33ed4133960dc891cedf9d7b3",
+      "bytes": 1962,
+      "sha256": "700f4ba733a2a4984481860aecc0de6f33867aae8aab396eda1cdb16ca4856b1",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/camera-flight.mjs"
       ],
@@ -13010,9 +13020,14 @@
           "sha256": "ebe3e441498a98e2762d9aeb26a72c5abea5c6a60ba42f8d6c7236d37b22a61b",
           "bytes": 1061,
           "github_commit": "b2ee651b72755e35435d23ddf12889a9e036b297"
+        },
+        {
+          "sha256": "f6b2c1c899053495c26258dd7b4dcd88d4422aa33ed4133960dc891cedf9d7b3",
+          "bytes": 1932,
+          "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
         }
       ],
-      "modification_reason": "Use the selected house as a projected-motion anchor to avoid curved pan/zoom sweeps; adapt bounded timing and route overview keyboard navigation through the same prescribed target as clicks."
+      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
     },
     {
       "path": "construction-animation.mjs",
@@ -13232,8 +13247,8 @@
     },
     {
       "path": "house-callout.mjs",
-      "bytes": 4271,
-      "sha256": "1d14801d9b70ea46e4061392b3a6e554f7f739f14d8b75597ae9c4f5ed90b41a",
+      "bytes": 4944,
+      "sha256": "02a035e21ff7d14d5186275b5b1477d0bdf1dab16d30ceaf3e90365d0c772404",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/house-callout.mjs"
       ],
@@ -13241,7 +13256,18 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/house-callout.mjs?v=123"
       ],
       "native_sha256": "1d14801d9b70ea46e4061392b3a6e554f7f739f14d8b75597ae9c4f5ed90b41a",
-      "native_bytes": 4271
+      "native_bytes": 4271,
+      "published_sha256": "1d14801d9b70ea46e4061392b3a6e554f7f739f14d8b75597ae9c4f5ed90b41a",
+      "published_bytes": 4271,
+      "modified_locally": true,
+      "previous_hashes": [
+        {
+          "sha256": "1d14801d9b70ea46e4061392b3a6e554f7f739f14d8b75597ae9c4f5ed90b41a",
+          "bytes": 4271,
+          "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
+        }
+      ],
+      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
     },
     {
       "path": "index.html",
@@ -13297,8 +13323,8 @@
     },
     {
       "path": "jnb-interactions.css",
-      "bytes": 2057,
-      "sha256": "06395931e02b251c06e319db6fce1119e87d811f496bce3c1f53350e6bf36329",
+      "bytes": 1945,
+      "sha256": "62ab6e40a510713ed5258c9a1673d8466befe59554fe08645ab8803501fbae14",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/jnb-interactions.css"
       ],
@@ -13306,7 +13332,18 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/jnb-interactions.css?v=92"
       ],
       "native_sha256": "06395931e02b251c06e319db6fce1119e87d811f496bce3c1f53350e6bf36329",
-      "native_bytes": 2057
+      "native_bytes": 2057,
+      "published_sha256": "06395931e02b251c06e319db6fce1119e87d811f496bce3c1f53350e6bf36329",
+      "published_bytes": 2057,
+      "modified_locally": true,
+      "previous_hashes": [
+        {
+          "sha256": "06395931e02b251c06e319db6fce1119e87d811f496bce3c1f53350e6bf36329",
+          "bytes": 2057,
+          "github_commit": "5b63c664a98428d4f639e9714c5c9d112409eace"
+        }
+      ],
+      "modification_reason": "Search selections enter overview first; clear search on cancel/selection; remove search hover effects; quicker first-stage swipe with original anchored path and destination."
     },
     {
       "path": "jnb-interactions.mjs",
@@ -32462,7 +32499,7 @@
   "project_id": "appgprj_6ab09b8e6ae88191bf61717b47c9d5e2",
   "version": 143,
   "commit_sha": "b11a057b82e2f9002b280d0658bc1119f02db331",
-  "rollback_commit_sha": "b2ee651b72755e35435d23ddf12889a9e036b297",
+  "rollback_commit_sha": "5b63c664a98428d4f639e9714c5c9d112409eace",
   "empty_images": [],
   "sync_comparison": {
     "source_count": 1011,
@@ -32849,7 +32886,7 @@
     }
   ],
   "native_dist_tree_sha256": "836138cda90e7d3bd6575115a01378451b010ff3d45e35fffb3b7b738668042a",
-  "dist_tree_sha256": "f994b22d47cace1a5127c6b6680231d0a388fc8ef0490bd91d9267394262ee34",
+  "dist_tree_sha256": "9d39c43fbe5e86d74641c0e18b2501796939e7596fadc0922d2150eb666d77d7",
   "validation": {
     "PASS": [
       "native source fetch, exact commit verified, git fsck",
@@ -32860,9 +32897,11 @@
       "396 responsive variants: thumbnail dimensions and source-image similarity verified using full-resolution sources for existing variants and documented bases for repairs",
       "48+ JavaScript modules: syntax checks",
       "Marboy and Rempoa film streams: all 75 fragments reconstructed and ffmpeg decoded",
-      "988 native files match; deviations are 15 photo repairs and 8 documented application files; 1 local gallery module",
       "5 camera-flight unit tests PASS, including selected-house straight projected motion and exact endpoint retention",
-      "Browser targeted regression PASS: keyboard/Next/exit targets at multiple zoom levels, desktop 3D/video, eight project dialogs, contact/About and phone navigation (5/5); interaction pause/resume also PASS"
+      "Browser targeted regression PASS: keyboard/Next/exit targets at multiple zoom levels, desktop 3D/video, eight project dialogs, contact/About and phone navigation (5/5); interaction pause/resume also PASS",
+      "Search desktop/phone reset and first-stage selection plus hover regression PASS (3/3).",
+      "First-stage phone swipe: 60% camera duration, same destination, tap still opens 3D; browser regression PASS.",
+      "Affected browser regression PASS (12/12); build and asset integrity PASS (4/4); camera-flight unit suite PASS."
     ],
     "FAIL": [],
     "BLOCKED": [

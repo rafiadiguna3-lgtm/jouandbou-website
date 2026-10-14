@@ -19,6 +19,6 @@ test('drag settling and wheel zoom defer background loading, then resume it',asy
  await page.mouse.up();
  await expect.poll(()=>page.evaluate(()=>window.modelLoadingPauses.includes(true))).toBe(true);
  await expect.poll(()=>page.evaluate(()=>window.modelLoadingPauses.at(-1)),{timeout:15000}).toBe(false);
- await page.locator('#search-toggle').click();await page.locator('#search').fill('Marboy');await page.locator('#results button').first().click();
+ await page.locator('#search-toggle').click();await page.locator('#search').fill('Marboy');await page.locator('#results button').first().click();await page.locator('.house-callout-card').click();
  await expect(page.locator('#focus')).toBeVisible();await expect(page.locator('#modelStatus')).toBeHidden({timeout:30000});
 });

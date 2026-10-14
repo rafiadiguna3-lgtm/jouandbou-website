@@ -4,7 +4,7 @@ test('project URLs open correct details, reload, and follow Back/Forward',async(
   await page.goto('/#project/'+slug);await expect(page.locator('#'+id)).toBeVisible();
   await expect(page).toHaveURL(new RegExp('#project/'+slug+'$'));
  }
- await page.goto('/#projects');await page.reload();await page.locator('#search-toggle').click();await page.locator('#search').fill('Rumah Anas');await page.locator('#results button').first().click();await page.locator('#more').click();
+ await page.goto('/#projects');await page.reload();await page.locator('#search-toggle').click();await page.locator('#search').fill('Rumah Anas');await page.locator('#results button').first().click();await page.locator('.house-callout-card').click();await page.locator('#more').click();
  await expect(page).toHaveURL(/#project\/rumah-anas$/);
  await page.goBack();await expect(page.locator('#rumah-anas')).toBeHidden();
  await page.goForward();await expect(page.locator('#rumah-anas')).toBeVisible();
