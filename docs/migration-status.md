@@ -275,3 +275,10 @@ the existing `#bou-works` section. The current work underline follows the route;
 only interior design remains a future content option. Restored copy now reacts
 to fresh camera-target changes, so residual zoom easing cannot immediately hide
 text that the user has just reopened.
+
+## Closer smartphone opening map
+
+Increased only the phone/touch opening camera scale by 35%, keeping the same
+upper-left map alignment and text whitespace. Reload, reset and home navigation
+use this closer composition; desktop framing and the intro/search gesture
+thresholds remain unchanged.

@@ -5,7 +5,7 @@ for(const viewport of [{width:2048,height:1104},{width:390,height:844}])test(`ho
  const context=await browser.newContext({viewport,hasTouch:viewport.width<700,isMobile:viewport.width<700});const page=await context.newPage();
  await page.route('**/app.mjs*',async route=>route.fulfill({contentType:'text/javascript',body:await readFile('dist/app.mjs','utf8')+'\nwindow.homeQA=()=>({camera:{...camera},goal:{...goal},expected:homeCamera(),front,previewId,flight:!!cameraFlight,flightData:cameraFlight&&{focus:cameraFlight.focus,duration:cameraFlight.duration,from:cameraFlight.from,to:cameraFlight.to},homeAnchor});'}));
  await page.goto('/');await page.waitForFunction(()=>window.homeQA);const initial=await page.evaluate(()=>window.homeQA());for(const key of Object.keys(initial.camera))expect(initial.camera[key]).toBeCloseTo(initial.expected[key],7);expect(initial.previewId).toBe(-1);
- if(viewport.width===390){expect(initial.camera.scale).toBeLessThan(2);await expect(page.locator('#phone-intro')).toBeVisible();await expect(page.locator('#search-toggle')).toBeHidden();}
+ if(viewport.width===390){expect(initial.camera.scale).toBeGreaterThan(2.2);expect(initial.camera.scale).toBeLessThan(2.3);await expect(page.locator('#phone-intro')).toBeVisible();await expect(page.locator('#search-toggle')).toBeHidden();}
  if(viewport.width===2048){expect(initial.camera.scale).toBeGreaterThan(3.1);expect(initial.camera.scale).toBeLessThan(3.25);}
  await page.locator('#map').dispatchEvent('wheel',{deltaY:-200,deltaMode:0});await page.reload();await page.waitForFunction(()=>window.homeQA);expect((await page.evaluate(()=>window.homeQA())).camera).toEqual(initial.camera);
  if(viewport.width===390)await revealPhoneSearch(page);

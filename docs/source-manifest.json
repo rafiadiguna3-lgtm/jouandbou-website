@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 39049,
-      "sha256": "4266a470eecdc2a7bb317a979a2cfc35f2f599a581b12eda18236abecd4a040d",
+      "bytes": 39054,
+      "sha256": "a0c26913fa0ed493e905a8b5cf6151ce6dce3f3b2df91e75f5b71b544ea5389e",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],

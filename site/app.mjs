@@ -36,7 +36,7 @@ function homeCamera(){
  const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0},points=world.faces.flatMap(face=>face.v.map(point=>project(point,pose,0,0)));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
  if(!desktopInput()){
-  const scale=Math.min(w*1.7/(right-left),h*.68/(bottom-top));
+  const scale=1.35*Math.min(w*1.7/(right-left),h*.68/(bottom-top));
   const u=left+(w/2-w*(compactLandscape()?.42:.18))/scale,v=top+(h/2-h*.32)/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
   const x=u*co+v/sp*si,z=-u*si+v/sp*co;homeAnchor=[x,2,z];phoneHome={...pose,x,z,scale};return {...phoneHome};
  }
