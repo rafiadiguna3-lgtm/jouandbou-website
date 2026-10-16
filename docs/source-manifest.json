@@ -13296,8 +13296,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 106254,
-      "sha256": "0bb454cdfcf1f071c06557789454db0e4101fcaeb9138c933ef8ac561480fd90",
+      "bytes": 105902,
+      "sha256": "b4e052f2f5de286e63a5ca47626f2e83c2bab88c0af9bc08fc50121ede5d37aa",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13843,16 +13843,13 @@
     },
     {
       "path": "rotate-tip.mjs",
-      "bytes": 3219,
-      "sha256": "e6d44b228690448bbdb22d9d32769c96980a69e29f9875c8000e5804fae9d518",
+      "bytes": 2432,
+      "sha256": "7ec3010a26203834dbe9f57ae103205c4565072c6155d1f9546793c10f3beeb3",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/rotate-tip.mjs"
       ],
       "native_sha256": "7ec3010a26203834dbe9f57ae103205c4565072c6155d1f9546793c10f3beeb3",
-      "native_bytes": 2432,
-      "published_sha256": "7ec3010a26203834dbe9f57ae103205c4565072c6155d1f9546793c10f3beeb3",
-      "published_bytes": 2432,
-      "modified_locally": true
+      "native_bytes": 2432
     },
     {
       "path": "safari-pinned-tab.svg",
