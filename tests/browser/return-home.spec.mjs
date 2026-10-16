@@ -1,3 +1,4 @@
+import {revealPhoneSearch} from './helpers/phone-search.mjs';
 import {test,expect,devices} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 import {cameraFlight} from '../../site/camera-flight.mjs';
@@ -15,6 +16,7 @@ for(const mobile of [false,true])test(`home controls animate around the selected
  const reset=await page.evaluate(()=>{const before=window.cameraQA();document.querySelector('#map-reset').click();return {before,after:window.cameraQA()};});
  expect(reset.after.flight).toBeTruthy();expect(reset.after.flight.focus).toEqual(reset.after.homeAnchor);expect(reset.after.camera).toEqual(reset.before.camera);
  {const returned=(await settled()).goal;for(const key of Object.keys(home))expect(returned[key]).toBeCloseTo(home[key],7);}
+ if(mobile)await revealPhoneSearch(page);
  await page.locator('#search-toggle').click();await page.locator('#search').fill('Marboy');await page.locator('#results button').first().click();
  await page.locator('.house-callout-card').click();await expect(page.locator('#modelStatus')).toBeHidden({timeout:30000});await settled();
  const exit=await page.evaluate(()=>{const before=window.cameraQA();document.querySelector('header .brand span').click();return {before,after:window.cameraQA(),diagonal:Math.hypot(innerWidth,innerHeight)};});

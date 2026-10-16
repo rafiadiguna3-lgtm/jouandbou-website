@@ -1,3 +1,4 @@
+import {createPhoneIntro} from './phone-intro.mjs';
 import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-flight.mjs?v=143';
 import {createTouchOrbit} from './touch-orbit.mjs?v=129';
 import {prepareCollection} from './photo-album-cache.mjs?v=129';
@@ -30,11 +31,16 @@ const browseOrder=[0,9,13,29,...glbIds.filter(id=>id!==51)].sort((a,b)=>houseNum
 const order=browseOrder;
 const baseScale=()=>compactLandscape()?Math.min(w/80,(h-70)/34):w<700?Math.min(w/48,(h-120)/48):Math.min(w/108,(h-250)/45);
 // Reference homepage: the whole neighborhood, slightly right and below center.
-let homeAnchor=null;
+let homeAnchor=null,phoneHome=null;
 function homeCamera(){
- if(!desktopInput()){homeAnchor=[25,2,15];return {x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};}
  const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0},points=world.faces.flatMap(face=>face.v.map(point=>project(point,pose,0,0)));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
+ if(!desktopInput()){
+  const scale=Math.min(w*1.7/(right-left),h*.68/(bottom-top));
+  const u=left+(w/2-w*(compactLandscape()?.42:.1))/scale,v=top+(h/2-h*.28)/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
+  const x=u*co+v/sp*si,z=-u*si+v/sp*co;homeAnchor=[x,2,z];phoneHome={...pose,x,z,scale};return {...phoneHome};
+ }
+ phoneHome=null;
  const scale=Math.min(w*.62/(right-left),h*.77/(bottom-top));
  const u=(left+right)/2-w*.026/scale,v=(top+bottom)/2-h*.042/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
  const centerU=(left+right)/2,centerV=(top+bottom)/2;homeAnchor=[centerU*co+centerV/sp*si,2,-centerU*si+centerV/sp*co];
@@ -43,7 +49,8 @@ function homeCamera(){
 function limit(){if(!front&&!drag)constrain(goal,bounds,w,h)}
 const labels=names.map((name,i)=>{if(i===29)name='Marboy House';const b=document.createElement('button');b.className='house-label';b.disabled=!canExplore(i);b.hidden=!canExplore(i);b.tabIndex=canExplore(i)?0:-1;b.innerHTML=`<strong>${title(i)}</strong><span>${name}</span>`;b.setAttribute('aria-label',`Preview ${name}; activate again to explore in 3D`);b.onfocus=()=>{hover=i;start()};b.onblur=()=>{hover=-1;start()};b.onpointerenter=e=>{if(!desktopInput()||e.pointerType!=='mouse')return;hover=i;start()};b.onpointerleave=()=>{hover=-1;start()};b.onclick=e=>{if(!moved)activateHouse(i,e.pointerType)};$('labels').append(b);return b});
 const houseCallout=createHouseCallout(id=>openHouse(id),direction=>browseHouse(direction,{quick:true}));
-function resize(){cameraFlight=null;w=innerWidth;h=innerHeight;document.body.classList.toggle('touch-layout',!desktopInput());document.body.classList.toggle('landscape-layout',compactLandscape());engine.resize(w,h);if(front){const yaw=goal.yaw,pitch=goal.pitch;setFront();goal.yaw=yaw;goal.pitch=pitch;centerUpdatedModel();}else goal.scale=baseScale()*zoom;limit();Object.assign(camera,goal);updateBrowse();start()}
+const phoneIntro=createPhoneIntro();
+function resize(){const atPhoneHome=phoneHome&&!front&&Math.abs(camera.scale-phoneHome.scale)<.01&&Math.hypot(camera.x-phoneHome.x,camera.z-phoneHome.z)<.01;cameraFlight=null;w=innerWidth;h=innerHeight;document.body.classList.toggle('touch-layout',!desktopInput());document.body.classList.toggle('landscape-layout',compactLandscape());engine.resize(w,h);if(front){const yaw=goal.yaw,pitch=goal.pitch;setFront();goal.yaw=yaw;goal.pitch=pitch;centerUpdatedModel();}else{const nextHome=!desktopInput()?homeCamera():null;if(atPhoneHome&&nextHome){goal=nextHome;zoom=goal.scale/baseScale();}else goal.scale=baseScale()*zoom;}limit();Object.assign(camera,goal);updateBrowse();start()}
 function calloutHouseShape(id){
  const meta=engine.modelMetas.get(id);if(!meta)return null;
  const {min,max}=meta.bounds,points=[];
@@ -51,7 +58,7 @@ function calloutHouseShape(id){
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]);
  return {roofTop:Math.min(...ys),span:Math.max(...xs)-Math.min(...xs),height:Math.max(...ys)-Math.min(...ys)};
 }
-function render(){houseCallout.update(previewId,previewId===29?'Marboy House':names[previewId],previewId>=0?title(previewId):'',previewId>=0?project(world.anchors[previewId],camera,w,h).slice(0,2):null,w,h,previewId>=0&&!front,camera.scale,previewId>=0?calloutHouseShape(previewId):null);updateModelStatus();engine.render(camera,w,h,current,front,hoverLevels);
+function render(){phoneIntro.update({phone:!desktopInput(),front,view:camera,home:phoneHome});houseCallout.update(previewId,previewId===29?'Marboy House':names[previewId],previewId>=0?title(previewId):'',previewId>=0?project(world.anchors[previewId],camera,w,h).slice(0,2):null,w,h,previewId>=0&&!front,camera.scale,previewId>=0?calloutHouseShape(previewId):null);updateModelStatus();engine.render(camera,w,h,current,front,hoverLevels);
 if(desktopInput())labels.forEach((b,i)=>{const hidden=front||!canExplore(i);if(b.hidden!==hidden)b.hidden=hidden;if(hidden)return;b.classList.toggle('shown',i===hover);const p=project(world.anchors[i],camera,w,h),left=`${Math.max(12,Math.min(w-160,p[0]))}px`,top=`${Math.max(210,Math.min(h-100,p[1]))}px`;if(b.style.left!==left)b.style.left=left;if(b.style.top!==top)b.style.top=top})
 }
 

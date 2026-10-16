@@ -1,3 +1,4 @@
+import {revealPhoneSearch} from './helpers/phone-search.mjs';
 import { test, expect } from '@playwright/test';
 async function ready(page) {
   await page.goto('/');
@@ -5,6 +6,7 @@ async function ready(page) {
   await expect(page.locator('#map')).toBeVisible();
 }
 async function select(page, name, mobile = false) {
+  if(mobile)await revealPhoneSearch(page);
   await page.locator('#search-toggle').click();
   await page.locator('#search').fill(name);
   await page.locator('#results button').first().click();

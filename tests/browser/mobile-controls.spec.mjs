@@ -1,3 +1,4 @@
+import {revealPhoneSearch} from './helpers/phone-search.mjs';
 import {test,expect,devices} from '@playwright/test';
 
 for(const {name,legacy} of [{name:'iPhone 13',legacy:false},{name:'Pixel 7',legacy:false},{name:'Pixel 7',legacy:true}]){
@@ -13,6 +14,7 @@ for(const {name,legacy} of [{name:'iPhone 13',legacy:false},{name:'Pixel 7',lega
   await page.goto('/');await page.waitForFunction(()=>document.querySelector('header [aria-current]'));
   const width=()=>page.locator('.search-wrap').evaluate(el=>el.getBoundingClientRect().width);
   await expect.poll(width).toBe(46);
+  await expect(page.locator('#search-toggle')).toBeHidden();await revealPhoneSearch(page);
   for(const selector of ['#search-toggle','#map-reset','#map-zoom-in','#map-zoom-out']){
    const box=await page.locator(selector).boundingBox();expect(box.width).toBe(46);expect(box.height).toBe(46);
   }

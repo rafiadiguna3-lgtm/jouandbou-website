@@ -240,3 +240,22 @@ The ampersand is escaped once in HTML and reads as `&` in the DOM. The existing
 image. The runtime homepage title matches the HTML title to avoid a refresh
 flash. This supersedes the previous choice of homepage title and description;
 Google's final presentation still depends on deployment and recrawling.
+
+## Smartphone landing experiment
+
+Phone/touch layouts open with a smaller neighborhood offset toward the lower
+right, the supplied jou/bou works and service choices, and short exploration
+instructions. Dragging or zooming progressively fades and shifts the copy;
+search and a small introduction toggle appear after that transition. The toggle
+can restore/hide the copy; further map movement dismisses a restored introduction,
+and resetting the map restores the initial composition. Reduced-motion settings
+remove transition animations. Desktop retains its existing camera and search.
+
+Per the user's clarification, work/service choices only change active styling
+for now: no new sections, content filtering, or Bou navigation were added.
+The two new phone-intro files are locally authored additions; their manifest
+provenance is the repository, not the original published capture.
+
+Removed the obsolete phone selected-card search offset so the introduction
+arrow always stays below the search button, including after a keyboard result
+selection. Search remains visible when its input is open during viewport changes.

@@ -1,9 +1,10 @@
+import {revealPhoneSearch} from './helpers/phone-search.mjs';
 import {test,expect} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 test('phone first-stage swipe changes house faster, preserves stage and tap',async({browser})=>{
  const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});const page=await context.newPage();
  await page.route('**/app.mjs*',async route=>route.fulfill({contentType:'text/javascript',body:await readFile('dist/app.mjs','utf8')+'\nwindow.swipeQA=()=>({current,front,duration:cameraFlight?.duration,goal:{...goal}});'}));
- await page.goto('/');await page.locator('#search-toggle').click();await page.locator('#search').fill('Rumah Anas');await page.locator('#results button').first().click();
+ await page.goto('/');await revealPhoneSearch(page);await page.locator('#search-toggle').click();await page.locator('#search').fill('Rumah Anas');await page.locator('#results button').first().click();
  await page.waitForFunction(()=>window.swipeQA&&!window.swipeQA().duration);
  await page.locator('#house-next').click();const click=await page.evaluate(()=>window.swipeQA());await page.waitForFunction(()=>!window.swipeQA().duration);
  await page.locator('#house-prev').click();await page.waitForFunction(()=>!window.swipeQA().duration);

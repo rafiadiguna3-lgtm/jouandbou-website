@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 38342,
-      "sha256": "164b4242622280db7cc8d2225d3617f6f9945745235bddac56e0a965846620a1",
+      "bytes": 39043,
+      "sha256": "bab9c48593341b158b2eb5f3f2e69b8ba6a934f6e32d9868626104c0d453db99",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13299,8 +13299,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 107185,
-      "sha256": "7b93aa4e11db0a1ba2829cc9903b691ffcb1c501a3b973a2e9e3876925aa3e50",
+      "bytes": 108228,
+      "sha256": "b9fedfba16165f9a835cd71bfa3bb9c637f2305d8c984b9719fc7bd347cccd1e",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13892,8 +13892,8 @@
     },
     {
       "path": "style.css",
-      "bytes": 20754,
-      "sha256": "5f4bbde2de4e6a09c1b14a72f4ad4934bb746ccc3dd40e335a1fef40c666a8a6",
+      "bytes": 20700,
+      "sha256": "fc2f7635af435d1d94a3d25f381f68f513d19db72b7bf1ed7522aa0aa80fdc93",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/style.css"
       ],
@@ -14140,6 +14140,28 @@
       ],
       "native_sha256": "77cd210321d4de96998964d77e4ae005d8a28acf8fa02e39dc67152fd24062d6",
       "native_bytes": 1211
+    },
+    {
+      "path": "phone-intro.css",
+      "bytes": 3323,
+      "sha256": "f37b21372040d832673f909147a3261ea83af6922a60351843da3428d43ca407",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.css"
+      ],
+      "authored_locally": true,
+      "modified_locally": true
+    },
+    {
+      "path": "phone-intro.mjs",
+      "bytes": 2363,
+      "sha256": "808ab4f00c3c355ea7160c2c28ddbd25575f4efc5f34e5089f0442b919b84890",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.mjs"
+      ],
+      "authored_locally": true,
+      "modified_locally": true,
+      "published_sha256": "0f6bbad96abf44aa3893dc32365a81d9be9029a1137a6412d200d32ff0787da8",
+      "published_bytes": 2274
     }
   ],
   "previous_sources": [
