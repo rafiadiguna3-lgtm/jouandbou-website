@@ -6,12 +6,13 @@ for(const name of ['iPhone 13','Pixel 7'])test(`${name} landing choices, camera 
  const intro=page.locator('#phone-intro'),guide=page.locator('#phone-intro-guide'),search=page.locator('#search-toggle'),toggle=page.locator('#phone-intro-toggle');
  await expect(intro).toHaveCSS('opacity','1');await expect(guide).toHaveCSS('opacity','1');await expect(search).toBeHidden();
  await expect(page.locator('#phone-jou-works')).toHaveAttribute('aria-current','page');
- await page.locator('[data-work=bou]').click();await expect(page.locator('[data-work=bou]')).toHaveAttribute('aria-current','page');expect(new URL(page.url()).hash).toBe('');
- await page.locator('[data-service=interior-design]').click();await expect(page.locator('[data-service=interior-design]')).toHaveAttribute('aria-pressed','true');
- await page.locator('#map-zoom-in').click();await expect.poll(()=>intro.evaluate(e=>Number(e.style.getPropertyValue('--intro-opacity')))).toBeLessThan(1);
+ await page.locator('[data-work=bou]').click();await expect(page).toHaveURL(/#bou-works$/);await expect(page.locator('.bou-index')).toBeVisible();await expect(page.locator('[data-work=bou]')).toHaveAttribute('aria-current','page');
+ await page.locator('header .brand').click();await expect(page).toHaveURL(/#projects$/);await expect(intro).toHaveCSS('opacity','1');await expect(page.locator('#phone-jou-works')).toHaveAttribute('aria-current','page');
+ await page.locator('[data-service=interior-design]').click();await expect(page.locator('[data-service=interior-design]')).toHaveAttribute('aria-pressed','true');await expect(page).toHaveURL(/#projects$/);
+ await page.locator('#map-zoom-in').click();await expect.poll(()=>intro.evaluate(e=>Number(e.style.getPropertyValue('--intro-opacity')))).toBeLessThan(.65);
  await revealPhoneSearch(page);await expect(intro).toHaveCSS('opacity','0');await expect(toggle).toBeVisible();
- await toggle.click();await expect(intro).toHaveCSS('opacity','1');await expect(toggle).toHaveAttribute('aria-expanded','true');
- await toggle.click();await expect(intro).toHaveCSS('opacity','0');await expect(toggle).toHaveAttribute('aria-expanded','false');
+ await toggle.click();await expect(intro).toHaveCSS('opacity','1');await expect(toggle).toHaveAttribute('aria-expanded','true');await expect(search).toBeHidden();await expect(page.locator('.search-wrap')).toHaveCSS('opacity','0');
+ await toggle.click();await expect(intro).toHaveCSS('opacity','0');await expect(toggle).toHaveAttribute('aria-expanded','false');await expect(search).toBeVisible();await expect(page.locator('.search-wrap')).toHaveCSS('opacity','1');
  await search.click();await page.locator('#search').fill('Marboy');
  await page.setViewportSize({width:devices[name].viewport.width,height:550});await expect(page.locator('#search')).toBeVisible();
  await page.locator('#search').press('Escape');await page.setViewportSize(devices[name].viewport);

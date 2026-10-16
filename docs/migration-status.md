@@ -259,3 +259,19 @@ provenance is the repository, not the original published capture.
 Removed the obsolete phone selected-card search offset so the introduction
 arrow always stays below the search button, including after a keyboard result
 selection. Search remains visible when its input is open during viewport changes.
+
+## Smartphone landing spacing and faster transitions
+
+Reduced work labels to roughly 22px and service/guide copy to 11.5px, lowered
+the heading, increased spacing between guide paragraphs, and shifted the initial
+neighborhood farther right/down to leave more open space. Camera-driven copy
+now finishes fading after about 32% of the normalized movement (previously 70%),
+with 120ms opacity / 160ms slide transitions. Restoring the text fades/slides
+search out; hiding the text brings search back. The small toggle stays available
+in both states, and reduced-motion preferences disable these transitions.
+
+Work navigation clarification: jou works returns to the map and bou works opens
+the existing `#bou-works` section. The current work underline follows the route;
+only interior design remains a future content option. Restored copy now reacts
+to fresh camera-target changes, so residual zoom easing cannot immediately hide
+text that the user has just reopened.

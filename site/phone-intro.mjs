@@ -8,13 +8,13 @@ export function createPhoneIntro(){
   if(!phone||!home){document.body.classList.remove('phone-exploring','phone-intro-open');intro.inert=true;guide.inert=true;toggle.hidden=true;return;}
   const progress=movement(view,home),atHome=progress<.025;
   if(atHome&&!wasHome){manual=null;manualView=null;}wasHome=atHome;
-  if(manualView&&movement(view,manualView)>.12){manual=null;manualView=null;}
-  let opacity=manual===true?1:manual===false?0:Math.max(0,1-progress/.7);
+  if(manualView&&movement(state.goal||view,manualView)>.05){manual=null;manualView=null;}
+  let opacity=manual===true?1:manual===false?0:Math.max(0,1-progress/.32);
   const searching=document.body.classList.contains('search-open');
   if(front||searching)opacity=0;
-  const exploring=progress>=.7||manual!==null||front||searching;
+  const exploring=progress>=.32||manual!==null||front||searching;
   document.body.classList.toggle('phone-exploring',exploring);
-  document.body.classList.toggle('phone-intro-open',manual===true&&!front);
+  document.body.classList.toggle('phone-intro-open',manual===true&&!front&&!searching);
   for(const element of [intro,guide]){
    element.style.setProperty('--intro-opacity',opacity.toFixed(3));
    element.style.setProperty('--intro-slide',`${((1-opacity)*18).toFixed(2)}px`);
@@ -25,10 +25,15 @@ export function createPhoneIntro(){
   toggle.setAttribute('aria-expanded',String(opacity>.5));
   toggle.setAttribute('aria-label',opacity>.5?'Hide introduction':'Show introduction');
  }
- toggle.onclick=()=>{manual=toggle.getAttribute('aria-expanded')!=='true';manualView={...last.view};update(last);};
- for(const button of intro.querySelectorAll('[data-work]'))button.onclick=()=>{
-  for(const option of intro.querySelectorAll('[data-work]')){if(option===button)option.setAttribute('aria-current','page');else option.removeAttribute('aria-current');}
+ toggle.onclick=()=>{manual=toggle.getAttribute('aria-expanded')!=='true';manualView={...(last.goal||last.view)};update(last);};
+ const syncWork=()=>{
+  const work=location.hash.startsWith('#bou-works')?'bou':'jou';
+  for(const option of intro.querySelectorAll('[data-work]')){if(option.dataset.work===work)option.setAttribute('aria-current','page');else option.removeAttribute('aria-current');}
  };
+ for(const button of intro.querySelectorAll('[data-work]'))button.onclick=()=>{
+  if(button.dataset.work==='bou')location.hash='bou-works';else document.getElementById('projects').click();
+ };
+ addEventListener('hashchange',syncWork);syncWork();
  for(const button of intro.querySelectorAll('[data-service]'))button.onclick=()=>{
   for(const option of intro.querySelectorAll('[data-service]'))option.setAttribute('aria-pressed',String(option===button));
  };
