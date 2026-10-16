@@ -9,8 +9,11 @@ export function galleryArrows(container,track){
   button.onclick=()=>track.scrollBy({left:stride()*direction,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
   container.append(button);return button;
  });
- const stride=()=>Math.max(1,items[1].offsetLeft-items[0].offsetLeft);
- function update(){const index=Math.max(0,Math.min(items.length-1,Math.round(track.scrollLeft/stride())));buttons[0].disabled=index===0;buttons[1].disabled=index===items.length-1;for(const button of buttons)button.style.top=`${track.offsetTop+track.clientHeight/2}px`;}
- track.addEventListener('scroll',update,{passive:true});const observer=new ResizeObserver(update);observer.observe(track);update();
- return ()=>{observer.disconnect();track.removeEventListener('scroll',update);buttons.forEach(button=>button.remove());container.classList.remove('gallery-with-arrows');};
+ let step=1,frame=0;
+ const stride=()=>step;
+ function update(){frame=0;const index=Math.max(0,Math.min(items.length-1,Math.round(track.scrollLeft/step)));buttons[0].disabled=index===0;buttons[1].disabled=index===items.length-1;}
+ function schedule(){if(!frame)frame=requestAnimationFrame(update);}
+ function measure(){step=Math.max(1,items[1].offsetLeft-items[0].offsetLeft);const top=`${track.offsetTop+track.clientHeight/2}px`;for(const button of buttons)if(button.style.top!==top)button.style.top=top;schedule();}
+ track.addEventListener('scroll',schedule,{passive:true});const observer=new ResizeObserver(measure);observer.observe(track);observer.observe(items[0]);measure();
+ return ()=>{cancelAnimationFrame(frame);observer.disconnect();track.removeEventListener('scroll',schedule);buttons.forEach(button=>button.remove());container.classList.remove('gallery-with-arrows');};
 }

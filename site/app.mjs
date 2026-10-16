@@ -1,7 +1,6 @@
 import {createPhoneIntro} from './phone-intro.mjs';
 import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-flight.mjs?v=143';
 import {createTouchOrbit} from './touch-orbit.mjs?v=129';
-import {prepareCollection} from './photo-album-cache.mjs?v=129';
 import './photo-offline.mjs?v=128';
 import {landscapeModelScale} from './landscape-model.mjs?v=124';
 import {createHouseCallout} from './house-callout.mjs?v=123';
@@ -71,7 +70,8 @@ function flyHomeCamera(fromSection=false,focus=null){
  flyCamera(false,focus??homeAnchor);
 }
 function tick(now){raf=0;const dt=Math.min(32,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;if(cameraFlight){const sample=sampleCameraFlight(cameraFlight,now);Object.assign(camera,sample.state);if(sample.done){Object.assign(camera,goal);cameraFlight=null;}else active=true;}else for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&!cameraFlight&&camera.t>.995)centerUpdatedModel(camera);const desktop=desktopInput();for(let i=0;i<hoverLevels.length;i++){const target=canExplore(i)&&((desktop&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}render();raf=active?requestAnimationFrame(tick):0}
-function start(){limit();if(document.hidden||document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog.project-page[open],dialog#detail[open]'))return;if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}
+function mapVisible(){return !document.hidden&&!document.body.matches('.view-about,.view-contact')&&!document.querySelector('dialog.project-page[open],dialog#detail[open]');}
+function start(){limit();const visible=mapVisible();engine.setVisible?.(visible);if(!visible){cancelAnimationFrame(raf);raf=0;lastFrame=0;return;}if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}
 function updateUI(){updateBrowse();$('number').textContent=current===51?'':current===44?'jou.commercial 01':`jou.house ${String(houseNumber(current)).padStart(2,'0')}`;$('name').textContent=current===29?'Marboy House':names[current];$('projectStoryTitle').textContent='About the project';$('projectStory').textContent=description(current);$('projectStory').hidden=!description(current);$('area').textContent=current===38?'Area · 120–180 / 128 sqm':'';$('area').hidden=current!==38;$('more').firstChild.textContent=front?'Project details ':'Explore 3D ';$('more').querySelector('span').innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';$('category').textContent=current===51?'':current===44?'Commercial Project':'Rsdtl Project';$('focus').setAttribute('aria-label',`${names[current]} project information`);$('restore-project').textContent=current===29?'Marboy House':names[current];$('announce').textContent=`${names[current]}, ${front?'front view':'neighborhood view'}`}
 let sheetState='peek',sheetDrag=null,sheetSwipe=null;
 function setSheet(state){
@@ -351,7 +351,7 @@ await import("./about.mjs?v=147");
 syncProjectRoute();
 
 // Wait for the imported models and a painted scene, rather than a fake progress percentage.
-Promise.resolve(engine.firstReady||engine.ready).then(()=>requestAnimationFrame(()=>{render();requestAnimationFrame(()=>document.dispatchEvent(new Event('jou:scene-ready')));})).catch(()=>document.dispatchEvent(new Event('jou:scene-ready')));
+Promise.resolve(engine.firstReady||engine.ready).then(()=>requestAnimationFrame(()=>{if(mapVisible())render();requestAnimationFrame(()=>document.dispatchEvent(new Event('jou:scene-ready')));})).catch(()=>document.dispatchEvent(new Event('jou:scene-ready')));
 
 import "./construction-animation.mjs?v=88";
 
@@ -363,13 +363,13 @@ import "./project-image-memory.mjs?v=129";
 
 // Project pages use the existing canvas bitmap; no 3D work runs behind a gallery.
 for(const panel of document.querySelectorAll('dialog.project-page,dialog#detail')){
- const pauseMap=()=>{touchOrbit.cancel();cancelAnimationFrame(raf);raf=0;lastFrame=0;drag=null;touches.clear();pinchDistance=0;continuedPan=null;pinchCenter=null;twoGesture=null;engine.setInteracting?.(panel.open);$('viewport').classList.remove('dragging');};
+ const pauseMap=()=>{touchOrbit.cancel();cancelAnimationFrame(raf);raf=0;lastFrame=0;drag=null;touches.clear();pinchDistance=0;continuedPan=null;pinchCenter=null;twoGesture=null;engine.setInteracting?.(panel.open);engine.setVisible?.(mapVisible());$('viewport').classList.remove('dragging');};
  new MutationObserver(()=>{if(panel.open)pauseMap();else start();}).observe(panel,{attributes:true,attributeFilter:['open']});
  panel.addEventListener('close',()=>{pauseMap();start();});
 }
-document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf);raf=0;lastFrame=0;}else start();});
+document.addEventListener('visibilitychange',start);
 
-addEventListener('hashchange',()=>{if(document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')){cancelAnimationFrame(raf);raf=0;lastFrame=0;}else start();});
+addEventListener('hashchange',start);
 
 import "./project-header-motion.mjs?v=115";
 
@@ -378,4 +378,4 @@ import "./project-header-motion.mjs?v=115";
 import "./zubair-carousel.mjs?v=113";
 
 window.jouPhotoBusy=()=>engine.interacting&&!document.querySelector('dialog.project-page[open],dialog#detail[open]');
-Promise.resolve(engine.ready).then(()=>setTimeout(prepareCollection,1200));
+// Photo albums are prepared on project selection, rather than preloading the entire collection.

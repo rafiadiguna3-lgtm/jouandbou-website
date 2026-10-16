@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 39054,
-      "sha256": "a0c26913fa0ed493e905a8b5cf6151ce6dce3f3b2df91e75f5b71b544ea5389e",
+      "bytes": 38920,
+      "sha256": "9de8423299d039186ac1849c428e0e10db114a80014625d538723bf5b7246a1a",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13229,13 +13229,15 @@
     },
     {
       "path": "gallery-arrows.mjs",
-      "bytes": 1473,
-      "sha256": "103f839bf8a239778652465598c58534b74d880521753754741501b0bf6afa49",
+      "bytes": 1711,
+      "sha256": "07f733d255362140439e9b9fd1a0053571451490fe5cd140b2bb14096128c3b1",
       "source_urls": [
         "repository-local://migration/jou-and-bou/gallery-arrows.mjs"
       ],
       "modified_locally": true,
-      "modification_reason": "Requested always-visible touch gallery arrows; desktop hover/focus controls."
+      "modification_reason": "Requested always-visible touch gallery arrows; desktop hover/focus controls.",
+      "published_sha256": "103f839bf8a239778652465598c58534b74d880521753754741501b0bf6afa49",
+      "published_bytes": 1473
     },
     {
       "path": "geometry.mjs",
@@ -13411,8 +13413,8 @@
     },
     {
       "path": "model-data.mjs",
-      "bytes": 3941,
-      "sha256": "95d9bcc057f6ffa44a63c5524e5fb2b495007ead561a0924b7fa9097df67277a",
+      "bytes": 4114,
+      "sha256": "3030838104de528928e2e5ab1bfe340e9682e0b3d5fb46022e5e8c8cb8d6c73b",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/model-data.mjs"
       ],
@@ -13773,8 +13775,8 @@
     },
     {
       "path": "renderer.mjs",
-      "bytes": 11574,
-      "sha256": "61cb939cb66f243b1b85e33c9872b45632ff1d4007f3e5bafaf229cc866532c7",
+      "bytes": 12868,
+      "sha256": "7542504ab0b97a0f197ddb424883a9b75c2a44ad0b0d121a639681a68b82a1b0",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/renderer.mjs"
       ],
@@ -13872,8 +13874,8 @@
     },
     {
       "path": "software-renderer.mjs",
-      "bytes": 8977,
-      "sha256": "720cd38cdecd71d1fee924ff2286da44610437cef49989774a8dcb6836db63a3",
+      "bytes": 9180,
+      "sha256": "b25d124b824259f4e8995c18ee0bccc59d97f5cb32a5663fc382e4daa8ca0663",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/software-renderer.mjs"
       ],
@@ -13888,7 +13890,10 @@
         }
       ],
       "native_sha256": "720cd38cdecd71d1fee924ff2286da44610437cef49989774a8dcb6836db63a3",
-      "native_bytes": 8977
+      "native_bytes": 8977,
+      "published_sha256": "720cd38cdecd71d1fee924ff2286da44610437cef49989774a8dcb6836db63a3",
+      "published_bytes": 8977,
+      "modified_locally": true
     },
     {
       "path": "style.css",

@@ -7,7 +7,7 @@ import {project} from './models.mjs?v=114';
 export class SoftwareRenderer {
  constructor(canvas,world,onChange){
   this.ctx=canvas.getContext('2d');this.canvas=canvas;this.world=world;this.onChange=onChange;this.modelState='loading';
-  this.models=new Map();this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.load(id,mobileAsset(id))}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}});this.firstReady=this.modelQueue.firstReady;this.ready=this.modelQueue.ready.then(()=>{this.modelState='ready';this.onChange()});
+  this.models=new Map();this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.load(id,mobileAsset(id))}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{demand:true,concurrency:1});this.firstReady=this.modelQueue.firstReady;this.ready=this.modelQueue.ready.then(()=>{this.modelState='ready';this.onChange()});
  }
  hitsModel(id,x,y,view,w,h){
   const model=this.models.get(id);if(!model)return false;
@@ -19,10 +19,11 @@ export class SoftwareRenderer {
    if(area>0?u>=0&&v>=0&&q>=0:u<=0&&v<=0&&q<=0)return true;
   }return false;
  }
+ setVisible(value){this.suspended=!value;this.modelQueue.setPaused(this.suspended);}
  ensureModel(id){this.modelQueue?.prioritize(id)}
  async load(id,asset){
   const model={};
-  const {meta,buffer:data}=await readModelData(asset);model.modelMeta=meta;const n=meta.vertexCount;
+  const {meta,buffer:data}=await readModelData(asset);while(this.suspended||document.hidden)await new Promise(resolve=>setTimeout(resolve,120));model.modelMeta=meta;const n=meta.vertexCount;
   model.positions=new Float32Array(data,0,n*3);model.colors=new Uint8Array(data,n*12,n*4);
   model.priorities=new Float32Array(n/3);
   model.triangleShade=new Float32Array(n/3);

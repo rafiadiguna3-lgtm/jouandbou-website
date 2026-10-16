@@ -13,7 +13,7 @@ for(const switchEarly of [false,true])test(`selected desktop model renders with 
   await expect.poll(()=>blocked.size).toBe(2);
   await page.locator('#search-toggle').click();await page.locator('#search').fill('Flute');await page.locator('#results button').first().click();await page.locator('.house-callout-card').click();
   if(switchEarly){await expect.poll(()=>selectedStarted).toBe(true);await page.evaluate(()=>window.selectModelQA(33));releaseSelected();}
-  await page.waitForFunction(()=>window.modelQA().loaded,null,{timeout:10000});
+  await page.waitForFunction(()=>{const state=window.modelQA();return state.loaded&&state.focused===state.current;},null,{timeout:10000});
   expect(await page.evaluate(()=>window.modelQA())).toEqual({loaded:true,current:switchEarly?33:26,focused:switchEarly?33:26});
   await expect(page.locator('#modelStatus')).toBeHidden();
  }finally{release();releaseSelected();}

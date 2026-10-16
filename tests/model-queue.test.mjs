@@ -26,3 +26,12 @@ test('readiness retains all initial critical houses and failures do not stall th
  const failed=createModelQueue([1,2],async()=>{throw new Error('unavailable');});await failed.ready;await failed.firstReady;
  assert.equal(started.length,4);
 });
+test('demand mode stops after critical houses and admits only requested or selected models',async()=>{
+ const started=[];
+ const queue=createModelQueue([1,2,3,4,5,6],async id=>{started.push(id);},{demand:true,concurrency:1});
+ await queue.firstReady;await flush();assert.deepEqual(started,[1,2,3]);
+ queue.request([5]);await flush();assert.deepEqual(started,[1,2,3,5]);
+ queue.setPaused(true);queue.prioritize(6);await flush();assert.deepEqual(started,[1,2,3,5,6]);
+ queue.request([4]);await flush();assert.ok(!started.includes(4));
+ queue.setPaused(false);await queue.ready;assert.deepEqual(started,[1,2,3,5,6,4]);
+});
