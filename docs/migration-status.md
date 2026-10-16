@@ -194,3 +194,17 @@ and reduced-motion preferences remain respected.
 The source manifest was refreshed for this intentional app change and for the
 existing migration-branch index.html, which previously differed from its recorded
 hash. Original capture hashes are retained; the index itself was not changed.
+
+## Smartphone controls on older Android browsers
+
+Compact search rules no longer share selector lists with `:has()`, which caused
+older browsers to discard the entire rule and fall back to a full-width search.
+The bottom project sheet and related controls use `vh` by default and enable
+`dvh` only after an explicit browser support check. Model-view zoom visibility no longer depends on `:has()`,
+and the search container explicitly respects its hidden attribute. Circular
+search and map buttons remove native styling and retain equal fixed dimensions
+on all smartphone layouts. Source hashes record these intentional CSS changes.
+
+Browser regression coverage includes iPhone and Android Chromium emulation,
+portrait and landscape, plus stylesheet fault injection for missing `:has()` and
+`dvh` support. This is compatibility simulation, not a physical-device test.

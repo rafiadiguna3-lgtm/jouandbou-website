@@ -1,17 +1,20 @@
+/* Gate dynamic viewport units so older browsers keep valid computed values. */
+:root{--jb-vh:1vh}
+@supports(height:100dvh){:root{--jb-vh:1dvh}}
 /* Compact search and a gesture-driven project card. */
 #hint,.map-zoom{display:none!important}
-.search-wrap,.search-open .search-wrap,body:has(#focus:not([hidden])) .search-wrap{
+.search-wrap,.search-open .search-wrap{
  display:block;position:fixed;top:calc(var(--jb-header) + 24px + env(safe-area-inset-top));left:28px;right:auto;
  width:46px;padding:0;border:0;border-radius:24px;background:transparent;box-shadow:none;
  transition:width .38s cubic-bezier(.22,1,.36,1);z-index:6;
 }
-.search-open .search-wrap,body.search-open:has(#focus:not([hidden])) .search-wrap{width:min(300px,calc(100vw - 56px))}
+.search-open .search-wrap{width:min(300px,calc(100vw - 56px))}
 #search-toggle{position:absolute;left:0;top:0;margin:0;width:46px;height:46px;display:flex;align-items:center;justify-content:center;z-index:2;color:#777;border-radius:50%}
 .search-box{height:46px;min-height:46px;padding:0 0 0 44px;gap:0;background:#f2f2f2f2;border:1px solid #e5e5e5;border-radius:24px;box-shadow:none;overflow:hidden}
 .search-box input{width:100%;font-size:16px;opacity:0;transform:translateX(-12px);transition:opacity .22s,transform .38s;pointer-events:none;color:#454545;font-weight:400}
 .search-open .search-box{padding-right:14px}
 .search-open .search-box input{opacity:1;transform:translateX(0);pointer-events:auto}
-#results{position:absolute;top:52px;left:0;width:100%;margin:0;padding:6px;background:#fafafa;border:1px solid #e6e6e6;border-radius:14px;max-height:min(45dvh,350px);overflow:auto;box-shadow:0 8px 25px #00000009}
+#results{position:absolute;top:52px;left:0;width:100%;margin:0;padding:6px;background:#fafafa;border:1px solid #e6e6e6;border-radius:14px;max-height:min(calc(var(--jb-vh) * 45),350px);overflow:auto;box-shadow:0 8px 25px #00000009}
 #results button{font-size:14px;min-height:46px}
 #focus{transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .25s;transform:translateY(var(--sheet-drag,0px));touch-action:none}
 #focus[data-sheet=hidden]{opacity:0;transform:translateY(calc(100% + 60px));pointer-events:none}
@@ -25,12 +28,12 @@ body.has-selection:not(.model-view) #focus .project-story{display:none}
 .back-cross{display:none}
 .view-about #restore-project,.view-contact #restore-project{display:none!important}
 @media(max-width:760px),(hover:none),(pointer:coarse),(any-pointer:coarse){
- .search-wrap,.search-open .search-wrap,body:has(#focus:not([hidden])) .search-wrap{left:24px;top:calc(var(--jb-header) + 28px + env(safe-area-inset-top));width:46px;right:auto}
- .search-open .search-wrap,body.search-open:has(#focus:not([hidden])) .search-wrap{width:min(240px,calc(100vw - 48px))}
+ .search-wrap,.search-open .search-wrap{left:24px;top:calc(var(--jb-header) + 28px + env(safe-area-inset-top));width:46px;right:auto}
+ .search-open .search-wrap{width:min(240px,calc(100vw - 48px))}
  #search-toggle{display:flex}
  #focus,body.has-selection:not(.model-view) #focus{
-  left:max(24px,calc((100vw - 600px)/2));right:max(24px,calc((100vw - 600px)/2));top:auto;bottom:calc(clamp(54px,8dvh,76px) + env(safe-area-inset-bottom));width:auto;min-width:0;max-width:none;
-  max-height:min(48dvh,390px);overflow:visible;padding:22px 18px 16px;background:#f4f4f4f7;border:1px solid #d7d7d2;border-radius:0;
+  left:max(24px,calc((100vw - 600px)/2));right:max(24px,calc((100vw - 600px)/2));top:auto;bottom:calc(clamp(54px,calc(var(--jb-vh) * 8),76px) + env(safe-area-inset-bottom));width:auto;min-width:0;max-width:none;
+  max-height:min(calc(var(--jb-vh) * 48),390px);overflow:visible;padding:22px 18px 16px;background:#f4f4f4f7;border:1px solid #d7d7d2;border-radius:0;
   display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 14px;align-items:center;
  }
  #focus .eyebrow{grid-column:1;font-size:13px;margin:0 0 5px;color:#707070;text-transform:none}
@@ -44,7 +47,7 @@ body.has-selection:not(.model-view) #focus .project-story{display:none}
  #focus #area,#focus .project-story{display:none}
  #focus[data-sheet=expanded]{touch-action:pan-y}
  #focus[data-sheet=expanded] #area:not([hidden]){display:block;grid-column:1/-1;margin:16px 0 0}
- #focus[data-sheet=expanded] .project-story:has(p:not([hidden])){display:block;grid-column:1/-1;max-height:24dvh;overflow:auto;touch-action:pan-y;margin-top:18px;overscroll-behavior:contain}
+ #focus[data-sheet=expanded] .project-story:has(p:not([hidden])){display:block;grid-column:1/-1;max-height:calc(var(--jb-vh) * 24);overflow:auto;touch-action:pan-y;margin-top:18px;overscroll-behavior:contain}
  #focus .project-story h2{font-size:16px;margin:0 0 8px}
  #focus .project-story p{font-size:14px;margin:0;line-height:1.65}
  #back{left:auto;right:24px;top:calc(var(--jb-header) + 26px + env(safe-area-inset-top));width:44px;height:44px;min-height:44px;padding:0;display:flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:#f1f1f1;font-size:27px}
@@ -67,7 +70,7 @@ body.has-selection:not(.model-view) #focus{cursor:pointer}
 #focus #more span{transition:transform .28s cubic-bezier(.22,1,.36,1)}
 #focus #more:hover span{transform:translateX(4px)}
 @media(min-width:761px) and (hover:hover) and (pointer:fine){
- body.model-view #focus{top:50%;bottom:auto;transform:translateY(calc(-50% + var(--sheet-drag,0px)));width:290px;padding:22px 20px;max-height:calc(100dvh - 220px);overflow:auto;background:transparent}
+ body.model-view #focus{top:50%;bottom:auto;transform:translateY(calc(-50% + var(--sheet-drag,0px)));width:290px;padding:22px 20px;max-height:calc(calc(var(--jb-vh) * 100) - 220px);overflow:auto;background:transparent}
  body.model-view #focus[data-sheet=hidden]{opacity:0;pointer-events:none}
  #focus .eyebrow{font-size:13px;color:#777;margin-bottom:8px}
  #focus h1{font-size:30px;line-height:1.2;margin:0 0 12px}
@@ -145,7 +148,7 @@ img,video,canvas,svg{-webkit-user-drag:none;-webkit-user-select:none!important;u
  body.has-selection:not(.model-view) #focus h1{font:400 16px/1.25 var(--jb-display);letter-spacing:-.2px;margin:0;padding:0;text-align:center}
  body.has-selection:not(.model-view) #focus #number,body.has-selection:not(.model-view) #focus #category,body.has-selection:not(.model-view) #focus #area,body.has-selection:not(.model-view) #focus #more,body.has-selection:not(.model-view) #focus .project-story,body.has-selection:not(.model-view) #focus #sheet-handle{display:none!important}
  body.has-selection:not(.model-view) #focus[data-sheet=hidden]{transform:translate(-50%,calc(100% + 60px))}
- #restore-project{bottom:calc(clamp(54px,8dvh,76px) + env(safe-area-inset-bottom));font:400 16px/1.25 var(--jb-display);min-height:44px;padding:12px 22px;border-radius:28px;max-width:min(336px,calc(100vw - 48px));user-select:none}
+ #restore-project{bottom:calc(clamp(54px,calc(var(--jb-vh) * 8),76px) + env(safe-area-inset-bottom));font:400 16px/1.25 var(--jb-display);min-height:44px;padding:12px 22px;border-radius:28px;max-width:min(336px,calc(100vw - 48px));user-select:none}
 }
 
 /* Use one neutral clear control instead of the browser's colored search cross. */
@@ -155,3 +158,6 @@ img,video,canvas,svg{-webkit-user-drag:none;-webkit-user-select:none!important;u
 #search-clear svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
 #search-clear:active{color:#191919}
 body:not(.search-open) #search-clear{display:none}
+
+/* Author display rules must respect the model view hidden state. */
+.search-wrap[hidden]{display:none!important}

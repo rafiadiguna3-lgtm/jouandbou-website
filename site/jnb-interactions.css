@@ -25,5 +25,16 @@ button .jnb-icon{margin:auto}
 .map-zoom button{width:46px;height:46px;border:1px solid #e4e4e0;border-radius:50%;background:#f3f3f1;color:#777;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation;font-size:24px;font-weight:400}
 .map-zoom button:hover{background:#f3f3f1}
 #map-reset .jnb-icon{width:20px;height:20px;stroke-width:1.7}
-body:is(.view-about,.view-contact,.view-bou,.model-view) .map-zoom,body:has(dialog[open]) .map-zoom{display:none!important}
+body:is(.view-about,.view-contact,.view-bou,.model-view) .map-zoom{display:none!important}
+/* Keep optional :has support separate from essential view visibility. */
+body:has(dialog[open]) .map-zoom{display:none!important}
 @media(max-width:700px){.map-zoom{right:20px;bottom:calc(18px + env(safe-area-inset-bottom))}}
+
+/* Identical circular controls across smartphone browser defaults. */
+@media(max-width:760px),(hover:none),(pointer:coarse){
+ #search-toggle,.map-zoom button{
+  -webkit-appearance:none;appearance:none;box-sizing:border-box;
+  width:46px;height:46px;min-width:46px;max-width:46px;min-height:46px;max-height:46px;
+  flex:0 0 46px;padding:0;border-radius:50%;
+ }
+}
