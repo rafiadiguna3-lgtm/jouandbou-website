@@ -1,4 +1,4 @@
-import {revealPhoneSearch} from './helpers/phone-search.mjs';
+import {installPhoneMapProbe,selectPhoneProject} from './helpers/phone-map.mjs';
 import { test, expect } from '@playwright/test';
 async function ready(page) {
   await page.goto('/');
@@ -6,10 +6,8 @@ async function ready(page) {
   await expect(page.locator('#map')).toBeVisible();
 }
 async function select(page, name, mobile = false) {
-  if(mobile)await revealPhoneSearch(page);
-  await page.locator('#search-toggle').click();
-  await page.locator('#search').fill(name);
-  await page.locator('#results button').first().click();
+  if(mobile)await selectPhoneProject(page,name);
+  else{await page.locator('#search-toggle').click();await page.locator('#search').fill(name);await page.locator('#results button').first().click();}
   {
     await expect(page.locator('.house-callout-card')).toBeVisible();
     await page.locator('.house-callout-card').click();
@@ -67,7 +65,7 @@ test('about, cached Instagram gallery, contact card and outbound links', async (
 });
 test('phone navigation, two-step project exploration and landscape layout', async ({ browser }) => {
   const context = await browser.newContext({ viewport:{width:390,height:844}, isMobile:true, hasTouch:true });
-  const page = await context.newPage();
+  const page = await context.newPage();await installPhoneMapProbe(page);
   await page.goto('http://127.0.0.1:4173/');
   await page.waitForFunction(() => document.body.classList.contains('touch-layout'));
   await page.locator('#menu-toggle').click();

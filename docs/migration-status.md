@@ -282,3 +282,16 @@ Increased only the phone/touch opening camera scale by 35%, keeping the same
 upper-left map alignment and text whitespace. Reload, reset and home navigation
 use this closer composition; desktop framing and the intro/search gesture
 thresholds remain unchanged.
+
+## Minimal phone exploration without recurring copy
+
+The smartphone introduction now stays dismissed for the rest of the page visit
+once exploration begins or a work choice is clicked. Zooming out/in, resetting,
+or returning from Bou does not automatically restore it; the small arrow can
+still restore it explicitly, and reloading starts a new visit. Clicking jou works
+fades the text immediately. Removed smartphone search and switched phone journey
+tests to real map taps and project browsing. Desktop search remains available.
+
+Phone copy now uses opacity-only transitions and aligned left margins. Initial
+work/service selections have no underline or selection arrow; those indicators
+appear only after clicking a choice. Keyboard focus indicators are retained.
