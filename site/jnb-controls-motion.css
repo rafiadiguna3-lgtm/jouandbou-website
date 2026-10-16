@@ -1,0 +1,35 @@
+/* Zoom / reset controls: same press feel as the search button.
+   Uses the existing tokens: #f3f3f1 circle, #e4e4e0 border, #777 icon, --jnb-ease. */
+.map-zoom button{
+ position:relative;overflow:visible;
+ transition:background-color .22s,color .22s,border-color .22s,box-shadow .3s,scale .3s var(--jnb-ease,cubic-bezier(.22,1,.36,1));
+ -webkit-tap-highlight-color:transparent;
+}
+.map-zoom button .jnb-icon{width:20px;height:20px;stroke-width:1.9;transition:transform .38s var(--jnb-ease,cubic-bezier(.22,1,.36,1))}
+.map-zoom button:active{scale:.92;background:#e8e8e4;color:#454545;border-color:#d9d9d3}
+.map-zoom button:active .jnb-icon{transform:scale(.86)}
+/* ring that expands from the button on every press (class added by jnb-controls-motion.mjs) */
+.map-zoom button::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1.5px solid #9a9a93;opacity:0;pointer-events:none}
+.map-zoom button.is-pressed::after{animation:jnb-press-ring .55s var(--jnb-ease,cubic-bezier(.22,1,.36,1))}
+@keyframes jnb-press-ring{from{opacity:.55;scale:1}to{opacity:0;scale:1.55}}
+/* the reset icon "breathes" once, the + turns a quarter, the − stretches */
+#map-reset.is-pressed .jnb-icon{animation:jnb-reset-pop .5s var(--jnb-ease,cubic-bezier(.22,1,.36,1))}
+@keyframes jnb-reset-pop{0%{transform:scale(.8)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+#map-zoom-in.is-pressed .jnb-icon{animation:jnb-plus-turn .45s var(--jnb-ease,cubic-bezier(.22,1,.36,1))}
+@keyframes jnb-plus-turn{from{transform:rotate(-90deg) scale(.8)}to{transform:rotate(0) scale(1)}}
+#map-zoom-out.is-pressed .jnb-icon{animation:jnb-minus-stretch .45s var(--jnb-ease,cubic-bezier(.22,1,.36,1))}
+@keyframes jnb-minus-stretch{from{transform:scaleX(.6)}to{transform:scaleX(1)}}
+/* desktop only: hover feedback. Phones have no hover, so they get the press only. */
+@media(hover:hover) and (pointer:fine){
+ .map-zoom button:hover{background:#ecece8;color:#555;border-color:#d9d9d3;box-shadow:0 4px 14px #0000000a}
+ #map-zoom-in:hover .jnb-icon{transform:rotate(90deg)}
+ #map-zoom-out:hover .jnb-icon{transform:scaleX(1.12)}
+ #map-reset:hover .jnb-icon{transform:scale(1.1)}
+}
+/* first-time "drag / swipe to rotate" cue in 3D */
+#rotate-tip .orbit-dot{fill:#f3f3f1;stroke:#50524a;stroke-width:1.6;vector-effect:non-scaling-stroke}
+#rotate-tip .orbit-dot-ring{fill:none;stroke:#50524a;stroke-width:1.4;vector-effect:non-scaling-stroke;opacity:0}
+@media(prefers-reduced-motion:reduce){
+ .map-zoom button,.map-zoom button .jnb-icon{transition:none!important}
+ .map-zoom button.is-pressed::after,.map-zoom .is-pressed .jnb-icon{animation:none!important}
+}
