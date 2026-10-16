@@ -217,3 +217,15 @@ network requests, reuse validated opaque model bounds, and cap desktop Retina/4K
 render density. See `docs/explore-performance.md` for the quality tradeoff,
 validation, measurements, and public-network limits. Geometry, materials,
 transparent sorting and camera paths retain their source behavior.
+
+## Stable tab title and search metadata
+
+The server-delivered HTML title and Open Graph title now match the runtime
+homepage name, `jou and bou`, removing the brief `studio` suffix during reload.
+Description metadata uses the studio description with the plain word `and`,
+without the old neighborhood text or an encoded brand separator. Added the
+canonical homepage URL and WebSite structured data using the existing apex
+Open Graph URL. No DNS, redirects, staging indexing policy or deployment
+configuration was changed. The supplied screenshots show an older Google
+snippet; Google may rewrite titles/descriptions and updates them after crawling
+the deployed page. Repository edits do not update the Google index directly.
