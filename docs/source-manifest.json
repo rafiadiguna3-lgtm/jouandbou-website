@@ -13345,8 +13345,8 @@
     },
     {
       "path": "interaction-comfort.mjs",
-      "bytes": 1837,
-      "sha256": "1877a4c56f7f23d4240f1bdcd4d9fc006ab84d24eb502a567efb7e24b7a76f3f",
+      "bytes": 4152,
+      "sha256": "4219daf31ed7348ef0e44b87a91aae678d45fd6a4bb97da47aaa75df4327db64",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/interaction-comfort.mjs"
       ],
@@ -13354,7 +13354,10 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/interaction-comfort.mjs"
       ],
       "native_sha256": "1877a4c56f7f23d4240f1bdcd4d9fc006ab84d24eb502a567efb7e24b7a76f3f",
-      "native_bytes": 1837
+      "native_bytes": 1837,
+      "published_sha256": "1877a4c56f7f23d4240f1bdcd4d9fc006ab84d24eb502a567efb7e24b7a76f3f",
+      "published_bytes": 1837,
+      "modified_locally": true
     },
     {
       "path": "jnb-interactions.css",
