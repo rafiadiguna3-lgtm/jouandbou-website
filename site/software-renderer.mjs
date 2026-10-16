@@ -7,7 +7,7 @@ import {project} from './models.mjs?v=114';
 export class SoftwareRenderer {
  constructor(canvas,world,onChange){
   this.ctx=canvas.getContext('2d');this.canvas=canvas;this.world=world;this.onChange=onChange;this.modelState='loading';
-  this.models=new Map();this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.load(id,mobileAsset(id))}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{demand:true,concurrency:1});this.firstReady=this.modelQueue.firstReady;this.ready=this.modelQueue.ready.then(()=>{this.modelState='ready';this.onChange()});
+  this.models=new Map();this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.load(id,mobileAsset(id))}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{concurrency:1});this.firstReady=this.modelQueue.firstReady;this.ready=this.modelQueue.ready.then(()=>{this.modelState='ready';this.onChange()});
  }
  hitsModel(id,x,y,view,w,h){
   const model=this.models.get(id);if(!model)return false;
