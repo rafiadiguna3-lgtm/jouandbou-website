@@ -31,9 +31,18 @@ const order=browseOrder;
 const baseScale=()=>compactLandscape()?Math.min(w/80,(h-70)/34):w<700?Math.min(w/48,(h-120)/48):Math.min(w/108,(h-250)/45);
 // Reference homepage: the whole neighborhood, slightly right and below center.
 let homeAnchor=null,phoneHome=null;
-function homeCamera(){
- const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0},points=world.faces.flatMap(face=>face.v.map(point=>project(point,pose,0,0)));
+function homeCamera(overview=false){
+ const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0};
+ const vertices=(overview?world.faces.filter(face=>face.id>=0):world.faces).flatMap(face=>face.v);
+ if(overview&&!desktopInput())for(const meta of engine.modelMetas.values())for(const x of [meta.bounds.min[0],meta.bounds.max[0]])for(const y of [meta.bounds.min[1],meta.bounds.max[1]])for(const z of [meta.bounds.min[2],meta.bounds.max[2]])vertices.push([x+meta.placement.x,y,z+meta.placement.z]);
+ const points=vertices.map(point=>project(point,pose,0,0));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
+ if(!desktopInput()&&overview){
+  const scale=Math.min(w*.88/(right-left),h*.62/(bottom-top));
+  const u=(left+right)/2,v=(top+bottom)/2+(h/2-h*.55)/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
+  const x=u*co+v/sp*si,z=-u*si+v/sp*co;
+  homeAnchor=[x,2,z];return {...pose,x,z,scale};
+ }
  if(!desktopInput()){
   const scale=1.35*Math.min(w*1.7/(right-left),h*.68/(bottom-top));
   const u=left+(w/2-w*(compactLandscape()?.42:.18))/scale,v=top+(h/2-h*.32)/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
@@ -300,10 +309,10 @@ function syncProjectRoute(){
 for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&location.hash===`#project/${panel.dataset.projectRoute}`)history.replaceState(null,'','#projects');});
 addEventListener('hashchange',syncProjectRoute);addEventListener('popstate',syncProjectRoute);
 $('more').onclick=openProjectDetails;
-function returnHome({fromSection=false}={}){
+function returnHome({fromSection=false,overview=false}={}){
  const focus=front||previewId>=0?modelCameraFocus():null;
  document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();
- goal=homeCamera();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
+ goal=homeCamera(overview);zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
 }
 $('projects').onclick=returnHome;
 
@@ -342,7 +351,7 @@ document.addEventListener('wheel',closeMenu,{capture:true,passive:true});
 document.addEventListener('touchmove',closeMenu,{capture:true,passive:true});
 document.addEventListener('scroll',closeMenu,{capture:true,passive:true});
 addEventListener('hashchange',closeMenu);
-$('map-reset').onclick=()=>returnHome();
+$('map-reset').onclick=()=>returnHome({overview:!desktopInput()});
 document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});

@@ -1,18 +1,20 @@
 // Camera-driven landing copy; desktop navigation keeps its existing behavior.
 export function createPhoneIntro(){
  const intro=document.getElementById('phone-intro'),guide=document.getElementById('phone-intro-guide'),toggle=document.getElementById('phone-intro-toggle');
- let manual=null,manualView=null,last=null,dismissed=false;
+ let manual=null,manualView=null,last=null,dismissed=false,farOpen=false;
  const movement=(a,b)=>Math.max(Math.abs(Math.log(a.scale/b.scale))/Math.log(2.4),Math.hypot(a.x-b.x,a.z-b.z)*Math.min(a.scale,b.scale)/110);
  function update(state){
   last=state;const {phone,front,view,home}=state;
   if(!phone||!home){document.body.classList.remove('phone-exploring','phone-intro-open');intro.inert=true;guide.inert=true;toggle.hidden=true;return;}
   const progress=movement(view,home);
-  if(movement(state.goal||view,home)>.05||front)dismissed=true;
+  if(!front&&view.scale<=home.scale*.82&&!farOpen){farOpen=true;dismissed=false;manual=null;manualView=null;}
+  if(front||view.scale>=home.scale*.95)farOpen=false;
+  if(!farOpen&&(movement(state.goal||view,home)>.05||front))dismissed=true;
   if(manualView&&movement(state.goal||view,manualView)>.05){manual=false;manualView=null;dismissed=true;}
-  let opacity=manual===true?1:manual===false||dismissed?0:Math.max(0,1-progress/.32);
+  let opacity=manual===true?1:manual===false||dismissed?0:farOpen?1:Math.max(0,1-progress/.32);
   const searching=document.body.classList.contains('search-open');
   if(front||searching)opacity=0;
-  const exploring=dismissed||manual!==null||front||searching;
+  const exploring=farOpen||dismissed||manual!==null||front||searching;
   document.body.classList.toggle('phone-exploring',exploring);
   document.body.classList.toggle('phone-intro-open',manual===true&&!front&&!searching);
   for(const element of [intro,guide]){
