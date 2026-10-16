@@ -32,7 +32,7 @@ const baseScale=()=>compactLandscape()?Math.min(w/80,(h-70)/34):w<700?Math.min(w
 // Reference homepage: the whole neighborhood, slightly right and below center.
 let homeAnchor=null;
 function homeCamera(){
- if(!desktopInput())return {x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};
+ if(!desktopInput()){homeAnchor=[25,2,15];return {x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:baseScale(),t:0};}
  const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0},points=world.faces.flatMap(face=>face.v.map(point=>project(point,pose,0,0)));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
  const scale=Math.min(w*.62/(right-left),h*.77/(bottom-top));
@@ -57,12 +57,11 @@ if(desktopInput())labels.forEach((b,i)=>{const hidden=front||!canExplore(i);if(b
 
 
 let lastFrame=0,cameraFlight=null;
-function flyCamera(quick=false,focusOverride=null){limit();const meta=engine.modelMetas.get(current),bounds=modelBounds(),place=meta?.placement,at=place?[place.x,place.z]:position(current),focus=focusOverride??[at[0]+(bounds.min[0]+bounds.max[0])/2,(bounds.min[1]+bounds.max[1])/2,at[1]+(bounds.min[2]+bounds.max[2])/2];cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now(),{viewportDiagonal:Math.hypot(w,h),focus,durationScale:quick?.6:1});}
-function flyHomeCamera(fromSection=false){
+function modelCameraFocus(){const meta=engine.modelMetas.get(current),bounds=modelBounds(),place=meta?.placement,at=place?[place.x,place.z]:position(current);return [at[0]+(bounds.min[0]+bounds.max[0])/2,(bounds.min[1]+bounds.max[1])/2,at[1]+(bounds.min[2]+bounds.max[2])/2];}
+function flyCamera(quick=false,focusOverride=null){limit();const focus=focusOverride??modelCameraFocus();cameraFlight=reduce?null:createCameraFlight(camera,goal,performance.now(),{viewportDiagonal:Math.hypot(w,h),focus,durationScale:quick?.6:1});}
+function flyHomeCamera(fromSection=false,focus=null){
  if(fromSection){cameraFlight=null;Object.assign(camera,goal);return;}
- if(!desktopInput()){flyCamera();return;}
- flyCamera(false,homeAnchor);
- if(cameraFlight)cameraFlight.duration=Math.min(650,cameraFlight.duration);
+ flyCamera(false,focus??homeAnchor);
 }
 function tick(now){raf=0;const dt=Math.min(32,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;if(cameraFlight){const sample=sampleCameraFlight(cameraFlight,now);Object.assign(camera,sample.state);if(sample.done){Object.assign(camera,goal);cameraFlight=null;}else active=true;}else for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&!cameraFlight&&camera.t>.995)centerUpdatedModel(camera);const desktop=desktopInput();for(let i=0;i<hoverLevels.length;i++){const target=canExplore(i)&&((desktop&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}render();raf=active?requestAnimationFrame(tick):0}
 function start(){limit();if(document.hidden||document.body.classList.contains('view-about')||document.body.classList.contains('view-contact')||document.querySelector('dialog.project-page[open],dialog#detail[open]'))return;if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}
@@ -294,7 +293,12 @@ function syncProjectRoute(){
 for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&location.hash===`#project/${panel.dataset.projectRoute}`)history.replaceState(null,'','#projects');});
 addEventListener('hashchange',syncProjectRoute);addEventListener('popstate',syncProjectRoute);
 $('more').onclick=openProjectDetails;
-$('projects').onclick=({fromSection=false}={})=>{document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();goal=homeCamera();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection);start()};
+function returnHome({fromSection=false}={}){
+ const focus=front||previewId>=0?modelCameraFocus():null;
+ document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();
+ goal=homeCamera();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
+}
+$('projects').onclick=returnHome;
 
 function info(title,text){$('infoTitle').textContent=title;$('infoText').textContent=text;$('info').showModal()}
 document.querySelectorAll('.close').forEach(b=>b.onclick=()=>b.closest('dialog').close());
@@ -331,7 +335,7 @@ document.addEventListener('wheel',closeMenu,{capture:true,passive:true});
 document.addEventListener('touchmove',closeMenu,{capture:true,passive:true});
 document.addEventListener('scroll',closeMenu,{capture:true,passive:true});
 addEventListener('hashchange',closeMenu);
-$('map-reset').onclick=()=>{if(front)return;clearPreview();current=0;goal=homeCamera();zoom=goal.scale/baseScale();cameraFlight=null;Object.assign(camera,goal);updateUI();start();};
+$('map-reset').onclick=()=>returnHome();
 document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});

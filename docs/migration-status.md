@@ -181,3 +181,16 @@ bottom safe-area spacing. Hidden in 3D, other sections and dialogs. No assets de
 or deployment configuration modified.
 
 PASS: build, assets 4/4, desktop/phone controls and framing browser tests 2/2. FAIL: none. BLOCKED: real iPhone/Safari and hosted browser checks remain unverified.
+
+## Animated return to the neighborhood
+
+The reset view button now uses the same camera flight as the projects/home
+navigation instead of snapping to the default pose. Returning from a selected
+house captures its model center before clearing the selection, so clicking the
+header logo or text uses the same projected anchor and duration calculation as
+entry into 3D. Returns from other sections keep their existing instant behavior,
+and reduced-motion preferences remain respected.
+
+The source manifest was refreshed for this intentional app change and for the
+existing migration-branch index.html, which previously differed from its recorded
+hash. Original capture hashes are retained; the index itself was not changed.

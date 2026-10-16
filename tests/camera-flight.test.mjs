@@ -40,3 +40,13 @@ test('swipe uses 60 percent of click duration with identical anchor and endpoint
  assert.equal(swipe.duration,click.duration*.6);
  for(const p of [0,.25,.5,.75,1])assert.deepEqual(sampleCameraFlight(swipe,swipe.duration*p),sampleCameraFlight(click,click.duration*p));
 });
+
+test('returning around the same house reverses the entry trajectory',()=>{
+ const to={...from,x:35,y:3,z:18,yaw:1.3,pitch:.1,scale:45,t:1},focus=[35,4,18];
+ const entry=cameraFlight(from,to,0,{focus}),exit=cameraFlight(to,from,0,{focus});
+ assert.equal(entry.duration,exit.duration);
+ for(const p of [0,.1,.25,.5,.75,.9,1]){
+  const a=sampleCameraFlight(entry,entry.duration*p).state,b=sampleCameraFlight(exit,exit.duration*(1-p)).state;
+  for(const key of Object.keys(a))assert.ok(Math.abs(a[key]-b[key])<1e-7,key);
+ }
+});
