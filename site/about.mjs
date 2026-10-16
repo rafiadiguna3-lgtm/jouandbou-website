@@ -13,7 +13,7 @@ bouClose.onclick=closeBou;
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('view-bou')){event.preventDefault();closeBou();}});
 let shownRoute;
 const bouScrollPositions=new Map();
-function updateTitle(){const page=location.hash==='#about'?'about us':location.hash==='#contact'?'contact us':location.hash.startsWith('#bou-works')?'bou works':document.querySelector('dialog.project-page[open],dialog#detail[open]')?'project details':'';document.title=page?`jou and bou - ${page}`:'jou and bou';}
+function updateTitle(){const page=location.hash==='#about'?'about us':location.hash==='#contact'?'contact us':location.hash.startsWith('#bou-works')?'bou works':document.querySelector('dialog.project-page[open],dialog#detail[open]')?'project details':'';document.title=page?`jou and bou - ${page}`:'jou and bou studio';}
 for(const panel of document.querySelectorAll('dialog.project-page,dialog#detail'))new MutationObserver(updateTitle).observe(panel,{attributes:true,attributeFilter:['open']});
 function showRoute(){
  if(/^#bou(?:\/|$)/.test(location.hash))history.replaceState(null,'',location.hash.replace(/^#bou/,'#bou-works'));

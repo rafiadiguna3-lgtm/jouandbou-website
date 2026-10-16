@@ -229,3 +229,14 @@ Open Graph URL. No DNS, redirects, staging indexing policy or deployment
 configuration was changed. The supplied screenshots show an older Google
 snippet; Google may rewrite titles/descriptions and updates them after crawling
 the deployed page. Repository edits do not update the Google index directly.
+
+## Final user-selected search presentation
+
+Site name: `jou and bou`; canonical URL: `https://jouandbou.com/`; homepage
+and preview title: `jou and bou studio`. The exact user-selected description is
+`architecture & interior design, elevates lives through efficiency, problem-solving design, and environmental consciousness. est 2020`.
+The ampersand is escaped once in HTML and reads as `&` in the DOM. The existing
+180px favicon artwork supplies the Open Graph, summary-card and structured-data
+image. The runtime homepage title matches the HTML title to avoid a refresh
+flash. This supersedes the previous choice of homepage title and description;
+Google's final presentation still depends on deployment and recrawling.

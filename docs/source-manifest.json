@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 7280,
-      "sha256": "565a88f57a6aab2bb7513b743c482e5fe0fe2f18ea187ab41c59465b4789f50c",
+      "bytes": 7287,
+      "sha256": "f6b73df001a0819bf7db07fb3eabcceae1f3b9f6bc1480121da2185e377e1a31",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -13299,8 +13299,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 106633,
-      "sha256": "d7c91d63901e6fbb2912fcfcb0e7b36db64157e39b349475e54e099f045beae0",
+      "bytes": 107185,
+      "sha256": "7b93aa4e11db0a1ba2829cc9903b691ffcb1c501a3b973a2e9e3876925aa3e50",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
