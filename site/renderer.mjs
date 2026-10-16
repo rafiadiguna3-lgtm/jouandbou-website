@@ -45,6 +45,11 @@ function tint(shade,ground){
  return [239,229,211];
 }
 
+// Bound Retina/4K fill cost while keeping standard-density screens and phone policy intact.
+export function renderPixelRatio(width,height,dpr=1,touch=false){
+ return Math.min(dpr||1,touch?1.2:2,touch?Infinity:Math.max(.75,Math.sqrt(4_000_000/Math.max(1,width*height))));
+}
+
 export class NeighborhoodRenderer{
  constructor(canvas,world,onChange){
   this.renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});
@@ -52,7 +57,7 @@ export class NeighborhoodRenderer{
   canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();this.contextLost=true;this.onChange?.();});
   canvas.addEventListener('webglcontextrestored',()=>{this.contextLost=false;this.onChange?.();});
   this.touchDevice=matchMedia("(any-pointer: coarse)").matches||navigator.maxTouchPoints>0;
-  this.pixelRatio=Math.min(devicePixelRatio||1,this.touchDevice?1.2:2);
+  this.pixelRatio=renderPixelRatio(innerWidth,innerHeight,devicePixelRatio||1,this.touchDevice);
   this.renderer.setPixelRatio(this.pixelRatio);
   this.camera=new THREE.OrthographicCamera(-1,1,1,-1,500,1500);
   this.scene=new THREE.Scene();this.scene.add(new THREE.HemisphereLight(0xffffff,0xb7b8b5,2.1));const sun=new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(-30,70,40);this.scene.add(sun);this.textureCache=new Map();this.groups=new Map();this.onChange=onChange;
@@ -81,7 +86,7 @@ export class NeighborhoodRenderer{
    if(!this.groups.has(b.id))this.groups.set(b.id,[]);this.groups.get(b.id).push(mesh);
   }
   this.modelMeshes=[];this.modelState='loading';
-  this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.loadHouse(id,mobileAsset(id))}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{concurrency:this.touchDevice?1:2});this.firstReady=this.modelQueue.firstReady;this.ready=this.modelQueue.ready.then(()=>{this.modelState='ready';this.onChange()});
+  this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.focusedModel=null;this.priorityModel=null;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async (id,{foreground}={})=>{try{await this.loadHouse(id,mobileAsset(id),foreground)}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{concurrency:this.touchDevice?1:2});this.firstReady=this.modelQueue.firstReady;this.ready=this.modelQueue.ready.then(()=>{this.modelState='ready';this.onChange()});
  }
  hitsModel(id,x,y){
   const rect=this.renderer.domElement.getBoundingClientRect();
@@ -90,15 +95,17 @@ export class NeighborhoodRenderer{
   ray.setFromCamera(new THREE.Vector2((x-rect.left)/rect.width*2-1,1-(y-rect.top)/rect.height*2),this.camera);
   return ray.intersectObjects(this.modelMeshes.filter(mesh=>mesh.visible&&mesh.userData.id===id),false).length>0;
  }
- setInteracting(value){this.interacting=value;this.modelQueue?.setPaused(value)}
+ setInteracting(value){this.interacting=value;this.modelQueue?.setPaused(value||this.focusedModel!==null)}
  scheduleNeighborhood(){}
- ensureModel(id){this.modelQueue?.prioritize(id)}
- async loadHouse(id,asset){
-  const {meta,buffer}=await readModelData(`gpu-${asset}`);
-  while(this.interacting)await new Promise(resolve=>setTimeout(resolve,120));
+ ensureModel(id){this.priorityModel=id;this.modelQueue?.prioritize(id)}
+ async loadHouse(id,asset,foreground=false){
+  const {meta,buffer}=await readModelData(`gpu-${asset}`,{priority:id===this.priorityModel?'high':'low'});
+  while((this.interacting||this.focusedModel!==null)&&id!==this.priorityModel&&!foreground)await new Promise(resolve=>setTimeout(resolve,120));
   const positions=new Float32Array(buffer,0,meta.vertexCount*3);
   const colors=new Uint8Array(buffer,meta.vertexCount*12,meta.vertexCount*4);
   const sharedPosition=new THREE.BufferAttribute(positions,3),sharedColor=new THREE.BufferAttribute(colors,4,true);
+  // Opaque ranges can reuse the authored whole-model bounds without scanning vertices.
+  const opaqueSphere=new THREE.Box3(new THREE.Vector3(...meta.bounds.min),new THREE.Vector3(...meta.bounds.max)).getBoundingSphere(new THREE.Sphere());
   for(const range of meta.ranges){
    const geometry=new THREE.BufferGeometry();
    geometry.setAttribute('position',meta.indexCount?sharedPosition:new THREE.BufferAttribute(positions.subarray(range.start*3,(range.start+range.count)*3),3));
@@ -108,7 +115,7 @@ export class NeighborhoodRenderer{
     const box=new THREE.Box3(),point=new THREE.Vector3(),indices=geometry.index.array;
     for(const i of indices)box.expandByPoint(point.fromArray(positions,i*3));
     geometry.boundingSphere=box.getBoundingSphere(new THREE.Sphere());
-   }else geometry.computeBoundingSphere();
+   }else if(meta.indexCount)geometry.boundingSphere=opaqueSphere;else geometry.computeBoundingSphere();
    const m=material(1,range.layer==='glass'?1:0);
    // Keep opaque architecture out of Three's camera-dependent alpha sorting.
    // Fixed depth priority resolves nearly coplanar material overlays from DAE.
@@ -124,8 +131,10 @@ export class NeighborhoodRenderer{
   for(const mesh of this.groups.get(id)||[])mesh.visible=mesh.userData.ground;
   this.onChange();
  }
- resize(width,height){this.renderer.setPixelRatio(this.pixelRatio);this.renderer.setSize(width,height,false)}
+ resize(width,height){this.pixelRatio=renderPixelRatio(width,height,devicePixelRatio||1,this.touchDevice);this.renderer.setPixelRatio(this.pixelRatio);this.renderer.setSize(width,height,false)}
  render(view,width,height,current,front,hoverLevels){
+  const focused=front?current:null;
+  if(this.focusedModel!==focused){this.focusedModel=focused;this.modelQueue.setPaused(this.interacting||focused!==null);}
   if(front){clearTimeout(this.neighborhoodTimer);this.neighborhoodTimer=0;this.neighborhoodView=null;this.ensureModel(current)}
   else{this.neighborhoodView={view:{...view},width,height};this.scheduleNeighborhood()}
   const c=this.camera,halfW=width/view.scale/2,halfH=height/view.scale/2;

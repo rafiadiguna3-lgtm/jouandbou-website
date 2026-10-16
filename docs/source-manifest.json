@@ -13411,8 +13411,8 @@
     },
     {
       "path": "model-data.mjs",
-      "bytes": 3523,
-      "sha256": "fe0b916764da440166c37641d9094a178e334214f67685e988ce68dfc8fcdce9",
+      "bytes": 3941,
+      "sha256": "95d9bcc057f6ffa44a63c5524e5fb2b495007ead561a0924b7fa9097df67277a",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/model-data.mjs"
       ],
@@ -13428,7 +13428,10 @@
         }
       ],
       "native_sha256": "fe0b916764da440166c37641d9094a178e334214f67685e988ce68dfc8fcdce9",
-      "native_bytes": 3523
+      "native_bytes": 3523,
+      "published_sha256": "fe0b916764da440166c37641d9094a178e334214f67685e988ce68dfc8fcdce9",
+      "published_bytes": 3523,
+      "modified_locally": true
     },
     {
       "path": "models.mjs",
@@ -13770,8 +13773,8 @@
     },
     {
       "path": "renderer.mjs",
-      "bytes": 10476,
-      "sha256": "6a14e4fabf4fd2016af873235db3c2a1aaba1596d4e262c1fff479206211b3f7",
+      "bytes": 11574,
+      "sha256": "61cb939cb66f243b1b85e33c9872b45632ff1d4007f3e5bafaf229cc866532c7",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/renderer.mjs"
       ],
@@ -13786,7 +13789,10 @@
         }
       ],
       "native_sha256": "6a14e4fabf4fd2016af873235db3c2a1aaba1596d4e262c1fff479206211b3f7",
-      "native_bytes": 10476
+      "native_bytes": 10476,
+      "published_sha256": "6a14e4fabf4fd2016af873235db3c2a1aaba1596d4e262c1fff479206211b3f7",
+      "published_bytes": 10476,
+      "modified_locally": true
     },
     {
       "path": "residential-projects.css",

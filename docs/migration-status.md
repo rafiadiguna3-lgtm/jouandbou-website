@@ -208,3 +208,12 @@ on all smartphone layouts. Source hashes record these intentional CSS changes.
 Browser regression coverage includes iPhone and Android Chromium emulation,
 portrait and landscape, plus stylesheet fault injection for missing `:has()` and
 `dvh` support. This is compatibility simulation, not a physical-device test.
+
+## Desktop 3D loading and rendering
+
+Intentional renderer/model-data changes reserve a selected-house loading lane,
+pause invisible background preparation during focused 3D, prioritize selected
+network requests, reuse validated opaque model bounds, and cap desktop Retina/4K
+render density. See `docs/explore-performance.md` for the quality tradeoff,
+validation, measurements, and public-network limits. Geometry, materials,
+transparent sorting and camera paths retain their source behavior.
