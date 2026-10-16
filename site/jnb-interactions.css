@@ -27,3 +27,12 @@ button .jnb-icon{margin:auto}
 #map-reset .jnb-icon{width:20px;height:20px;stroke-width:1.7}
 body:is(.view-about,.view-contact,.view-bou,.model-view) .map-zoom,body:has(dialog[open]) .map-zoom{display:none!important}
 @media(max-width:700px){.map-zoom{right:20px;bottom:calc(18px + env(safe-area-inset-bottom))}}
+
+/* Keep icon controls circular with native iOS and Android button styling removed. */
+@media(max-width:760px),(hover:none),(pointer:coarse){
+ #search-toggle,.map-zoom button{
+  -webkit-appearance:none;appearance:none;box-sizing:border-box;
+  width:46px;height:46px;min-width:46px;max-width:46px;min-height:46px;max-height:46px;
+  aspect-ratio:1;flex:0 0 46px;padding:0;border-radius:50%;
+ }
+}

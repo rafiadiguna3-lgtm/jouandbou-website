@@ -181,3 +181,11 @@ bottom safe-area spacing. Hidden in 3D, other sections and dialogs. No assets de
 or deployment configuration modified.
 
 PASS: build, assets 4/4, desktop/phone controls and framing browser tests 2/2. FAIL: none. BLOCKED: real iPhone/Safari and hosted browser checks remain unverified.
+
+## User-supplied index and mobile circular controls
+
+Replaced `site/index.html` with the user-supplied HTML. Mobile search and map
+zoom/reset buttons explicitly remove native button appearance and retain a
+46-by-46-pixel border box without flex shrinking or default padding, so their
+50% corner radius stays circular. This intentional CSS change diverges from
+the published capture; the source manifest retains its original provenance.
