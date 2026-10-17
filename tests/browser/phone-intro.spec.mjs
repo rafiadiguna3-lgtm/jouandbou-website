@@ -84,3 +84,21 @@ test('phone typography enters with a short fade and lift and replays only on rev
  await expect(links).toHaveCSS('transform','matrix(1, 0, 0, 1, 0, 0)');
  await context.close();
 });
+
+test('phone description stays below work links with stale CSS, larger type and viewport changes',async({browser})=>{
+ const context=await browser.newContext(devices['iPhone 13']),page=await context.newPage();
+ // Reproduce a cached pre-raise stylesheet alongside the current HTML.
+ await page.route('**/phone-intro.css*',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text()).replace('top:calc(var(--jb-header) + 28px + env(safe-area-inset-top))','top:clamp(136px,20vh,174px)')});});
+ await page.goto('/');await page.waitForFunction(()=>document.querySelector('header [aria-current]'));
+ const assertSeparated=async()=>{
+  await expect.poll(()=>page.evaluate(()=>{const work=document.querySelector('#phone-intro').getBoundingClientRect(),summary=document.querySelector('#home-summary').getBoundingClientRect();return summary.top-work.bottom;})).toBeGreaterThanOrEqual(23);
+ };
+ await expect.poll(()=>page.evaluate(()=>document.querySelector('#phone-intro').offsetTop-document.querySelector('header').offsetHeight)).toBeCloseTo(28,0);
+ await assertSeparated();
+ await page.addStyleTag({content:'.phone-work-links button{font-size:30px!important}.phone-services button{font-size:17px!important}'});
+ await assertSeparated();
+ for(const viewport of [{width:390,height:664},{width:844,height:390},{width:390,height:844}]){await page.setViewportSize(viewport);await assertSeparated();}
+ await page.locator('#map-zoom-in').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');
+ await page.locator('#map-reset').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','1');await assertSeparated();
+ await context.close();
+});

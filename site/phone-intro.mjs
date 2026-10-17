@@ -1,6 +1,15 @@
 // Camera-driven landing copy; desktop navigation keeps its existing behavior.
 export function createPhoneIntro(){
  const intro=document.getElementById('phone-intro'),guide=document.getElementById('phone-intro-guide'),summary=document.getElementById('home-summary');
+ // Keep separate desktop/phone copy elements aligned using actual text height.
+ function layoutCopy(){
+  if(!intro.getClientRects().length){summary.style.removeProperty('--phone-summary-top');return;}
+  summary.style.setProperty('--phone-summary-top',`${intro.offsetTop+intro.offsetHeight+24}px`);
+ }
+ new ResizeObserver(layoutCopy).observe(intro);
+ addEventListener('resize',layoutCopy);
+ window.visualViewport?.addEventListener('resize',layoutCopy);
+ layoutCopy();
  let last=null,dismissed=false,motionAnchor=null,revealOnZoomOut=false,zoomIntent=null,previousScale=null,restoredVisible=false;
  function update(state){
   last=state;const {phone,front,view,home}=state,intent=zoomIntent;zoomIntent=null;
