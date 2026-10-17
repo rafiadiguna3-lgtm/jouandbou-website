@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 7310,
-      "sha256": "6129a052dd45719ab5408f69f0bc638a72f6f5d13867b2b9f579bb449acc487f",
+      "bytes": 7326,
+      "sha256": "f842ac556b1a9b86bf1a14a34489cc8ea4bb40d17398dc383b40962f5463e62d",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 40822,
-      "sha256": "5b2b7a3b200b50b60162b2a2ad0661b654c61f1c387a5a11ce941944518a50ef",
+      "bytes": 40820,
+      "sha256": "cb008bc62caea25375d47b19e759d52399fdfccd6718b907f8e6a18e42aa0db8",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],

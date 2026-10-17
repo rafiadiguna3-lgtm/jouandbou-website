@@ -421,3 +421,7 @@ The screenshot is consistent with mixed layout rules: the work block remains at 
 ### Restore initial phone framing and copy with the square button (2026-10-17)
 
 User supersedes the near-minimum square overview: the phone square now restores exactly the entry camera and zoom with the opening text. Add an explicit intro-home reset independent of zoom direction, so resetting from a distant view still restores text even though the camera moves closer. Subsequent tiny pan/zoom-in dismisses initial-state text as before; explicit near-minimum zoom-out still restores its pan-persistent copy. Desktop square behavior is unchanged. Verify exact entry pose and visible text after reset from both close and minimum-zoom views.
+
+### Correct control target: brand returns home, square keeps overview (2026-10-17)
+
+User clarified the previous request referred to the top-left brand logo, not the square control. Restore the phone square to the centered near-minimum overview (minimum scale × 1.05) with visible text. Apply initial-frame/text reset intent to brand navigation instead, including return from sections. Preserve ordinary Projects navigation and desktop behavior. Regression checks now distinguish square overview from brand initial camera/text.

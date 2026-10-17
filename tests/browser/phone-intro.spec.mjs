@@ -17,7 +17,7 @@ for(const name of ['iPhone 13','Pixel 7'])test(`${name} intro returns at distant
  await expect(intro).toHaveCSS('opacity','1');await expect(search).toBeHidden();await expect(toggle).toHaveCount(0);
  await expect(toggle).toHaveCount(0);await page.locator('[data-work=bou]').click();
  await expect(page.locator('.bou-index')).toBeVisible();await expect(page).toHaveURL(/#bou-works$/);
- await page.locator('header .brand').click();await expect(intro).toHaveCSS('opacity','0');
+ await page.locator('header .brand').click();await expect(intro).toHaveCSS('opacity','1');
  await page.reload();await expect(intro).toHaveCSS('opacity','1');await expect(search).toBeHidden();await expect(toggle).toHaveCount(0);
  await page.locator('#map-zoom-in').click();await expect(intro).toHaveCSS('opacity','0');
  await context.close();
