@@ -5,7 +5,7 @@ export function createPhoneIntro(){
  function update(state){
   last=state;const {phone,front,view,home}=state,intent=zoomIntent;zoomIntent=null;
   if(!phone||!home){intro.inert=true;guide.inert=true;summary.style.removeProperty('--intro-opacity');summary.inert=false;summary.removeAttribute('aria-hidden');return;}
-  const target=state.goal||view,minScale=state.minScale??home.scale,atLimit=scale=>scale<=minScale*(1+1e-6);
+  const target=state.goal||view,minScale=state.minScale??home.scale,atLimit=scale=>scale<=minScale*1.05*(1+1e-6);
   if(!motionAnchor)motionAnchor={...target};
   const panPixels=Math.hypot(target.x-motionAnchor.x,target.z-motionAnchor.z)*Math.min(target.scale,motionAnchor.scale);
   const zoomDelta=Math.log(target.scale/motionAnchor.scale),zoomChanged=Math.abs(zoomDelta)>.0001;

@@ -379,3 +379,9 @@ Keep the approved phone typography, map framing, intro fade and desktop presenta
 Add an executable browser matrix for small phones, iPhone/Android emulation, phone landscape, tablet portrait/landscape, narrow/short desktop windows, laptop, Retina and 4K. Assert controls stay circular and in bounds, text fits, search/intro match input mode, zoom hides compact copy, and reset works without horizontal overflow. Save home screenshots in the Playwright report for visual cross-checking. These are Linux Chromium emulations, not certification on native Safari, macOS or Windows hardware.
 
 Landscape checks also found the inherited 56 px brand-image box extending 2 px above and below the 52 px header. Constrain that image height to 52 px in compact landscape, preserving its width and centered artwork.
+
+### Phone typography entrance and near-minimum reveal (2026-10-17)
+
+Add a 420 ms opacity/7 px upward entrance to phone work links, service links, studio summary and guidance, with a small 40–130 ms group stagger. CSS starts the entrance on initial paint and replays it on a hidden-to-visible change, without per-frame JavaScript or layout animation. Existing 100 ms dismissal and tiny pan/zoom-in sensitivity remain. Reduced-motion disables the entrance. Change explicit zoom-out restoration from the exact minimum to minimum scale × 1.05 (5% above the furthest zoom-out scale); automatic camera updates and zoom-in reversals cannot reveal it. Version the intro stylesheet for this change.
+
+Validation: build and all 5 asset/geometry tests pass; all 11 device-layout cases pass; all 6 phone-intro tests pass, covering 5% threshold boundaries, tiny-pan dismissal, zoom-in reversal, entrance replay and reduced motion.

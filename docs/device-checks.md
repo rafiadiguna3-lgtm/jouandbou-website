@@ -1,6 +1,6 @@
 # Cross-device checks
 
-The approved current presentation is the reference: small phone work links and guidance, the same cropped initial map, no phone search, quick intro fade, and copy restored only by explicitly reaching the furthest zoom-out stop. Desktop keeps its search and navigation. All devices retain distant house silhouettes and selected full-detail models.
+The approved current presentation is the reference: small phone work links and guidance, the same cropped initial map, no phone search, quick intro fade, and copy restored only by explicitly zooming out to within 5% of the furthest zoom-out scale. Desktop keeps its search and navigation. All devices retain distant house silhouettes and selected full-detail models.
 
 Run `npm run build && npm run test:devices`. The matrix covers 320×568, iPhone 13, Pixel 7, 844×390 landscape, 768×1024 and 1024×768 touch tablets, 820×900 and 1024×500 compact desktop windows, 1280×720 laptop, 1440×900 at DPR 2, and 3840×2160 desktop. Each case saves a home screenshot to the Playwright report; run `npx playwright show-report` locally to inspect attachments. These are review references, not pixel-difference golden snapshots.
 
@@ -8,7 +8,7 @@ Run `npm run test:browser` for navigation, map loading, touch gestures, 3D camer
 
 The cloud browser is Linux Chromium with software WebGL. iPhone/Android device profiles emulate viewport, density and input; they do not run Safari or native Android browsers. Native iOS Safari, Android Chrome, Windows Chrome/Edge and macOS Safari/Chrome still need a hardware check. Do not interpret cloud timings as real-device FPS or claim a CPU percentage saving from these tests.
 
-On hardware, check initial house visibility (including JH30 onward), drag before zooming, small-pan intro dismissal, explicit minimum-zoom restoration, reset overview, rotate phone/tablet, enter/orbit/exit 3D, and open/close project details and galleries. Compare the same route and zoom framing; confirm readable text, circular controls, no overlap or horizontal overflow, and no camera jump when detailed geometry arrives.
+On hardware, check initial house visibility (including JH30 onward), drag before zooming, small-pan intro dismissal, explicit near-minimum-zoom restoration, reset overview, rotate phone/tablet, enter/orbit/exit 3D, and open/close project details and galleries. Compare the same route and zoom framing; confirm readable text, circular controls, no overlap or horizontal overflow, and no camera jump when detailed geometry arrives.
 
 ## Validation record — 2026-10-17
 

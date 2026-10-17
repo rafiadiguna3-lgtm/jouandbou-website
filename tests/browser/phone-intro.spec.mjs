@@ -27,9 +27,9 @@ test('desktop retains search without a phone overlay',async({page})=>{
 test('phone fade respects reduced motion',async({browser})=>{
  const context=await browser.newContext({...devices['iPhone 13'],reducedMotion:'reduce'}),page=await context.newPage();
  await page.goto('/');await page.waitForFunction(()=>document.querySelector('header [aria-current]'));
- await expect(page.locator('#phone-intro')).toHaveCSS('transition-duration','0s');await page.locator('#phone-jou-works').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');await context.close();
+ await expect(page.locator('.phone-work-links')).toHaveCSS('animation-name','none');await expect(page.locator('#phone-intro')).toHaveCSS('transition-duration','0s');await page.locator('#phone-jou-works').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');await context.close();
 });
-test('phone copy hides after a tiny pan and returns only on an explicit zoom-out to the map minimum',async({browser})=>{
+test('phone copy hides after a tiny pan and returns only on explicit zoom-out within 5% of the minimum',async({browser})=>{
  const context=await browser.newContext({...devices['iPhone 13'],reducedMotion:'reduce'}),page=await context.newPage();
  await page.route('**/app.mjs*',async route=>route.fulfill({contentType:'text/javascript',body:await readFile('dist/app.mjs','utf8')+'\nwindow.createSensitivityQA=()=>{phoneIntro.update=()=>{};return createPhoneIntro();};'}));
  await page.goto('/');await page.waitForFunction(()=>window.createSensitivityQA);
@@ -44,14 +44,30 @@ test('phone copy hides after a tiny pan and returns only on an explicit zoom-out
  await apply(10,.31);await expect(intro).toHaveCSS('opacity','0');await expect(summary).toHaveCSS('opacity','0');
  await apply(10.1,.31);await expect(intro).toHaveCSS('opacity','0');
  await apply(10,.31);await expect(intro).toHaveCSS('opacity','0');
- await apply(5.1,.31);await expect(intro).toHaveCSS('opacity','0');
- await apply(5,.31);await expect(intro).toHaveCSS('opacity','1');
- await apply(5,.7);await expect(intro).toHaveCSS('opacity','0');
- await apply(5.2,.7);await expect(intro).toHaveCSS('opacity','0');
- await apply(5,.7,true,5.1);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5.3,.31);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5.25,.31);await expect(intro).toHaveCSS('opacity','1');
+ await apply(5.25,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5.4,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5,.7,true,5.4);await expect(intro).toHaveCSS('opacity','0');
  await apply(5.00000001,.7,true,5.05);await expect(intro).toHaveCSS('opacity','0');
  await apply(5.00000001,.7,false);await expect(intro).toHaveCSS('opacity','0');
  await apply(5,.7,false);await expect(intro).toHaveCSS('opacity','0');
  await page.evaluate(()=>window.introSensitivity.onZoom('out'));await apply(5,.7,false);await expect(intro).toHaveCSS('opacity','1');
+ await context.close();
+});
+
+test('phone typography enters with a short fade and lift and replays only on reveal',async({browser})=>{
+ const context=await browser.newContext(devices['Pixel 7']),page=await context.newPage();
+ await page.goto('/');await page.waitForFunction(()=>document.querySelector('header [aria-current]'));
+ const links=page.locator('.phone-work-links');
+ await expect(links).toHaveCSS('animation-name','phone-copy-enter');
+ await expect(links).toHaveCSS('animation-duration','0.42s');
+ await page.locator('#map-zoom-in').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');
+ await expect(links).toHaveCSS('animation-name','none');
+ await page.evaluate(()=>{for(let i=0;i<30;i++)document.querySelector('#map-zoom-out').click();});
+ await expect(page.locator('#phone-intro')).toHaveCSS('opacity','1');
+ await expect(links).toHaveCSS('animation-name','phone-copy-enter');
+ await expect.poll(()=>links.evaluate(el=>getComputedStyle(el).opacity)).toBe('1');
+ await expect(links).toHaveCSS('transform','matrix(1, 0, 0, 1, 0, 0)');
  await context.close();
 });
