@@ -21,8 +21,8 @@ const hoverLevels=new Float32Array(names.length);
 const camera={x:25,y:2,z:15,yaw:-.57,pitch:.61,scale:10,t:0};let goal={...camera};
 const bounds=mapBounds(world.faces);
 const modelStatus=document.createElement('p'); modelStatus.id='modelStatus';modelStatus.setAttribute('role','status');modelStatus.hidden=true;document.body.append(modelStatus);
-function updateModelStatus(){const id=front?current:hover,hidden=!engine.contextLost&&(!canExplore(id)||engine.modelMetas.has(id)),text=engine.contextLost?'Restoring 3D view…':engine.modelErrors?.has(id)?'The house could not load. Refresh to retry.':'Loading 3D model…';if(modelStatus.hidden!==hidden)modelStatus.hidden=hidden;if(modelStatus.textContent!==text)modelStatus.textContent=text}
-const onModelChange=()=>{if(front&&engine.modelMetas.get(current)&&engine.modelMetas.get(current)!==activeModelMeta){activeModelMeta=engine.modelMetas.get(current);setFront();flyCamera()} if(engine.modelMetas){ for(const [id,meta] of engine.modelMetas){world.anchors[id]=[meta.placement.x,meta.bounds.max[1]+.7,meta.placement.z];} } updateModelStatus();start(); };
+function updateModelStatus(){const id=front?current:hover,hidden=!engine.contextLost&&(!canExplore(id)||engine.modelMetas.has(id)||(!front&&engine.lodMetas?.has(id))),text=engine.contextLost?'Restoring 3D view…':engine.modelErrors?.has(id)?'The house could not load. Refresh to retry.':'Loading 3D model…';if(modelStatus.hidden!==hidden)modelStatus.hidden=hidden;if(modelStatus.textContent!==text)modelStatus.textContent=text}
+const onModelChange=()=>{if(front&&engine.modelMetas.get(current)&&engine.modelMetas.get(current)!==activeModelMeta){activeModelMeta=engine.modelMetas.get(current);setFront();flyCamera()} if(engine.modelMetas){ for(const [id,meta] of [...(engine.lodMetas||[]),...engine.modelMetas]){world.anchors[id]=[meta.placement.x,meta.bounds.max[1]+.7,meta.placement.z];} } updateModelStatus();start(); };
 let activeModelMeta;
 let engine;
 try{engine=new NeighborhoodRenderer(canvas,world,onModelChange)}catch{engine=new SoftwareRenderer(canvas,world,onModelChange)}
@@ -34,7 +34,7 @@ let homeAnchor=null,phoneHome=null;
 function homeCamera(overview=false){
  const pose={x:0,y:2,z:0,yaw:-.57,pitch:.61,scale:1,t:0};
  const vertices=(overview?world.faces.filter(face=>face.id>=0):world.faces).flatMap(face=>face.v);
- if(overview&&!desktopInput())for(const meta of engine.modelMetas.values())for(const x of [meta.bounds.min[0],meta.bounds.max[0]])for(const y of [meta.bounds.min[1],meta.bounds.max[1]])for(const z of [meta.bounds.min[2],meta.bounds.max[2]])vertices.push([x+meta.placement.x,y,z+meta.placement.z]);
+ if(overview&&!desktopInput())for(const meta of [...(engine.lodMetas?.values()||[]),...engine.modelMetas.values()])for(const x of [meta.bounds.min[0],meta.bounds.max[0]])for(const y of [meta.bounds.min[1],meta.bounds.max[1]])for(const z of [meta.bounds.min[2],meta.bounds.max[2]])vertices.push([x+meta.placement.x,y,z+meta.placement.z]);
  const points=vertices.map(point=>project(point,pose,0,0));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
  if(!desktopInput()&&overview){
@@ -60,7 +60,7 @@ const houseCallout=createHouseCallout(id=>openHouse(id),direction=>browseHouse(d
 const phoneIntro=createPhoneIntro();
 function resize(){const atPhoneHome=phoneHome&&!front&&Math.abs(camera.scale-phoneHome.scale)<.01&&Math.hypot(camera.x-phoneHome.x,camera.z-phoneHome.z)<.01;cameraFlight=null;w=innerWidth;h=innerHeight;document.body.classList.toggle('touch-layout',!desktopInput());document.body.classList.toggle('landscape-layout',compactLandscape());engine.resize(w,h);if(front){const yaw=goal.yaw,pitch=goal.pitch;setFront();goal.yaw=yaw;goal.pitch=pitch;centerUpdatedModel();}else{const nextHome=!desktopInput()?homeCamera():null;if(atPhoneHome&&nextHome){goal=nextHome;zoom=goal.scale/baseScale();}else goal.scale=baseScale()*zoom;}limit();Object.assign(camera,goal);updateBrowse();start()}
 function calloutHouseShape(id){
- const meta=engine.modelMetas.get(id);if(!meta)return null;
+ const meta=engine.modelMetas.get(id)||engine.lodMetas?.get(id);if(!meta)return null;
  const {min,max}=meta.bounds,points=[];
  for(const x of [min[0],max[0]])for(const y of [min[1],max[1]])for(const z of [min[2],max[2]])points.push(project([meta.placement.x+x,y,meta.placement.z+z],camera,w,h));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]);
@@ -235,13 +235,19 @@ $('focus').addEventListener('click',e=>{
  if(!front&&!e.target.closest('button,.project-story'))openHouse(current);
  cardPress=null;
 },{capture:true});
-function pick(x,y,padding=desktopInput()?6:16){let nearest=-1,dist=Infinity;for(let i=0;i<names.length;i++){
+let pickLayoutKey='',pickLayout=new Map();
+function pick(x,y,padding=desktopInput()?6:16){
+ const key=[w,h,camera.x,camera.y,camera.z,camera.yaw,camera.pitch,camera.scale,engine.modelMetas.size,engine.lodMetas?.size||0].join(':');
+ if(key!==pickLayoutKey){pickLayoutKey=key;pickLayout.clear();}
+ let nearest=-1,dist=Infinity;for(let i=0;i<names.length;i++){
  if(!canExplore(i))continue;
- const meta=engine.modelMetas.get(i);let left,right,top,bottom;
- if(meta){
+ const meta=engine.modelMetas.get(i)||engine.lodMetas?.get(i);let left,right,top,bottom;
+ if(pickLayout.has(i)){[left,right,top,bottom]=pickLayout.get(i);}
+ else {if(meta){
   const b=meta.bounds,pts=[];for(const xx of [b.min[0],b.max[0]])for(const yy of [b.min[1],b.max[1]])for(const zz of [b.min[2],b.max[2]])pts.push(project([meta.placement.x+xx,yy,meta.placement.z+zz],camera,w,h));
   left=Math.min(...pts.map(p=>p[0]));right=Math.max(...pts.map(p=>p[0]));top=Math.min(...pts.map(p=>p[1]));bottom=Math.max(...pts.map(p=>p[1]));
  }else{const p=project([position(i)[0],2,position(i)[1]],camera,w,h),rx=7*camera.scale,ry=5*camera.scale;left=p[0]-rx;right=p[0]+rx;top=p[1]-ry;bottom=p[1]+ry;}
+ pickLayout.set(i,[left,right,top,bottom]);}
  const px=Math.max(padding,(44-(right-left))/2),py=Math.max(padding,(44-(bottom-top))/2);
  if(x<left-px||x>right+px||y<top-py||y>bottom+py)continue;
  const edge=Math.hypot(Math.max(left-x,0,x-right),Math.max(top-y,0,y-bottom));

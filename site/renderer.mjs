@@ -60,7 +60,7 @@ export class NeighborhoodRenderer{
   this.pixelRatio=renderPixelRatio(innerWidth,innerHeight,devicePixelRatio||1,this.touchDevice);
   this.renderer.setPixelRatio(this.pixelRatio);
   this.camera=new THREE.OrthographicCamera(-1,1,1,-1,500,1500);
-  this.scene=new THREE.Scene();this.scene.add(new THREE.HemisphereLight(0xffffff,0xb7b8b5,2.1));const sun=new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(-30,70,40);this.scene.add(sun);this.textureCache=new Map();this.groups=new Map();this.onChange=onChange;
+  this.world=world;this.scene=new THREE.Scene();this.scene.add(new THREE.HemisphereLight(0xffffff,0xb7b8b5,2.1));const sun=new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(-30,70,40);this.scene.add(sun);this.textureCache=new Map();this.groups=new Map();this.onChange=onChange;
   // Keep the established massing and road geometry exactly as authored.
   const batches=new Map();
   for(const face of world.faces){
@@ -86,7 +86,11 @@ export class NeighborhoodRenderer{
    if(!this.groups.has(b.id))this.groups.set(b.id,[]);this.groups.get(b.id).push(mesh);
   }
   this.modelMeshes=[];this.modelState='loading';
-  this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.focusedModel=null;this.priorityModel=null;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async (id,{foreground}={})=>{try{await this.loadHouse(id,mobileAsset(id),foreground)}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{concurrency:this.touchDevice?1:2});this.firstReady=this.modelQueue.firstReady;this.ready=this.modelQueue.ready.then(()=>{this.modelState='ready';this.onChange()});
+  this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.focusedModel=null;this.priorityModel=null;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async (id,{foreground}={})=>{try{await this.loadHouse(id,mobileAsset(id),foreground)}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{concurrency:1,demand:true,initialCount:0});
+  this.lodMetas=new Map();this.lodErrors=new Map();
+  this.lodQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.loadHouse(id,mobileAsset(id),false,true)}catch(error){this.lodErrors.set(id,error);console.error('Map model unavailable',id,error)}},{concurrency:this.touchDevice?1:2,demand:true,initialCount:0});
+  this.firstReady=Promise.resolve();this.ready=this.lodQueue.ready;
+
  }
  hitsModel(id,x,y){
   const rect=this.renderer.domElement.getBoundingClientRect();
@@ -95,12 +99,23 @@ export class NeighborhoodRenderer{
   ray.setFromCamera(new THREE.Vector2((x-rect.left)/rect.width*2-1,1-(y-rect.top)/rect.height*2),this.camera);
   return ray.intersectObjects(this.modelMeshes.filter(mesh=>mesh.visible&&mesh.userData.id===id),false).length>0;
  }
- setInteracting(value){this.interacting=value;this.modelQueue?.setPaused(value||this.focusedModel!==null||this.suspended)}
- setVisible(value){this.suspended=!value;this.modelQueue.setPaused(this.suspended||this.interacting||this.focusedModel!==null);}
- scheduleNeighborhood(){}
+ setInteracting(value){this.interacting=value;this.modelQueue?.setPaused(value||this.focusedModel!==null||this.suspended);this.lodQueue?.setPaused(value||this.focusedModel!==null||this.suspended);if(!value)this.scheduleNeighborhood()}
+ setVisible(value){this.suspended=!value;this.modelQueue.setPaused(this.suspended||this.interacting||this.focusedModel!==null);this.lodQueue.setPaused(this.suspended||this.interacting||this.focusedModel!==null);if(!value)clearTimeout(this.neighborhoodTimer);}
+ scheduleNeighborhood(){
+  clearTimeout(this.neighborhoodTimer);
+  if(this.suspended||this.interacting||this.focusedModel!==null||document.hidden||!this.neighborhoodView)return;
+  this.neighborhoodTimer=setTimeout(()=>{
+   if(this.suspended||this.interacting||this.focusedModel!==null||document.hidden)return;
+   const point=new THREE.Vector3(),visible=[];
+   for(const id of [29,0,9,13,44,...glbIds]){point.fromArray(this.world.anchors[id]).project(this.camera);if(Math.abs(point.x)<1.35&&Math.abs(point.y)<1.35)visible.push({id,distance:point.x*point.x+point.y*point.y});}
+   visible.sort((a,b)=>a.distance-b.distance);
+   this.lodQueue.request(visible.map(item=>item.id));
+   if(this.neighborhoodView.view.scale>=6)this.modelQueue.request(visible.filter(item=>item.distance<1.5).map(item=>item.id));
+  },100);
+ }
  ensureModel(id){this.priorityModel=id;this.modelQueue?.prioritize(id)}
- async loadHouse(id,asset,foreground=false){
-  const {meta,buffer}=await readModelData(`gpu-${asset}`,{priority:id===this.priorityModel?'high':'low'});
+ async loadHouse(id,asset,foreground=false,lod=false){
+  const {meta,buffer}=await readModelData(`${lod?'map':'gpu'}-${asset}`,{priority:id===this.priorityModel?'high':'low'});
   while(this.suspended||document.hidden||((this.interacting||this.focusedModel!==null)&&id!==this.priorityModel&&!foreground))await new Promise(resolve=>setTimeout(resolve,120));
   const positions=new Float32Array(buffer,0,meta.vertexCount*3);
   const colors=new Uint8Array(buffer,meta.vertexCount*12,meta.vertexCount*4);
@@ -127,30 +142,33 @@ export class NeighborhoodRenderer{
    m.polygonOffsetUnits=-(range.material+1)*2;
    if(!range.transparent)m.fragmentShader=m.fragmentShader.replace('vColor.a*opacity','opacity');
    const mesh=new THREE.Mesh(geometry,m);mesh.position.set(meta.placement.x,0,meta.placement.z);
-   mesh.userData={id,sourceModel:true,layer:range.layer,sourceTransparent:!!range.transparent};mesh.renderOrder=range.transparent?100:10+range.material;
+   mesh.userData={id,lod,sourceModel:true,layer:range.layer,sourceTransparent:!!range.transparent};mesh.renderOrder=range.transparent?100:10+range.material;
    meshes.push(mesh);
   }
   for(const mesh of meshes){this.scene.add(mesh);this.modelMeshes.push(mesh);}
-  this.modelMetas.set(id,meta);if(id===29)this.modelMeta=meta;
+  (lod?this.lodMetas:this.modelMetas).set(id,meta);if(!lod&&id===29)this.modelMeta=meta;
   for(const mesh of this.groups.get(id)||[])mesh.visible=mesh.userData.ground;
   this.onChange();
  }
  resize(width,height){this.pixelRatio=renderPixelRatio(width,height,devicePixelRatio||1,this.touchDevice);this.renderer.setPixelRatio(this.pixelRatio);this.renderer.setSize(width,height,false)}
  render(view,width,height,current,front,hoverLevels){
   const focused=front?current:null;
-  if(this.focusedModel!==focused){this.focusedModel=focused;this.modelQueue.setPaused(this.suspended||this.interacting||focused!==null);}
+  if(this.focusedModel!==focused){this.focusedModel=focused;this.modelQueue.setPaused(this.suspended||this.interacting||focused!==null);this.lodQueue.setPaused(this.suspended||this.interacting||focused!==null);}
   if(front){clearTimeout(this.neighborhoodTimer);this.neighborhoodTimer=0;this.neighborhoodView=null;this.ensureModel(current)}
   else{this.neighborhoodView={view:{...view},width,height};this.scheduleNeighborhood()}
-  const c=this.camera,halfW=width/view.scale/2,halfH=height/view.scale/2;
+  const cameraKey=[width,height,view.x,view.y,view.z,view.yaw,view.pitch,view.scale].join(':');
+  if(cameraKey!==this.cameraKey){this.cameraKey=cameraKey;
+   const c=this.camera,halfW=width/view.scale/2,halfH=height/view.scale/2;
   c.left=-halfW;c.right=halfW;c.top=halfH;c.bottom=-halfH;c.updateProjectionMatrix();
   const direction=new THREE.Vector3(Math.sin(view.yaw)*Math.cos(view.pitch),Math.sin(view.pitch),Math.cos(view.yaw)*Math.cos(view.pitch));
   c.position.set(view.x,view.y,view.z).addScaledVector(direction,1000);
   c.up.set(-Math.sin(view.yaw)*Math.sin(view.pitch),Math.cos(view.pitch),-Math.cos(view.yaw)*Math.sin(view.pitch));
   c.lookAt(view.x,view.y,view.z);c.updateMatrixWorld();
+  }
   for(const [id,meshes] of this.groups){
    const opacity=id===current||!front?1:1-view.t;
    for(const mesh of meshes){
-    mesh.visible=opacity>.005&&!(this.modelMetas.has(id)&&(!mesh.userData.ground||(front&&id===current)));
+    mesh.visible=opacity>.005&&!((this.modelMetas.has(id)||this.lodMetas.has(id))&&(!mesh.userData.ground||(front&&id===current)));
     mesh.material.uniforms.opacity.value=opacity;
     const fading=opacity<.999;if(mesh.material.transparent!==fading){mesh.material.transparent=fading;mesh.material.needsUpdate=true;}
     mesh.material.uniforms.colorAmount.value=id>=0?Math.max(hoverLevels[id]||0,id===current?view.t:0):0;
@@ -160,7 +178,8 @@ export class NeighborhoodRenderer{
   for(const mesh of this.modelMeshes){
    const id=mesh.userData.id;
    if(mesh.userData.glb){const fade=current===id?1:1-view.t;mesh.visible=fade>.005;mesh.material.opacity=mesh.userData.baseOpacity*fade;mesh.material.userData.colorAmount.value=Math.max(hoverLevels[id]||0,front&&current===id?view.t:0);const transparent=mesh.userData.baseTransparent||fade<.999;if(mesh.material.transparent!==transparent){mesh.material.transparent=transparent;mesh.material.needsUpdate=true;}continue;}
-   mesh.visible=current===id||!front||view.t<.995;
+   const detail=this.modelMetas.has(id)&&(view.scale>=6||(front&&current===id)||!this.lodMetas.has(id));
+   mesh.visible=(mesh.userData.lod?!detail:detail)&&(current===id||!front||view.t<.995);
    mesh.material.uniforms.opacity.value=current===id||!front?1:1-view.t;
    mesh.material.uniforms.colorAmount.value=Math.max(hoverLevels[id]||0,front&&current===id?view.t:0);
    mesh.position.y=0;
@@ -174,6 +193,6 @@ export class NeighborhoodRenderer{
    const fading=mesh.userData.sourceTransparent||mesh.material.uniforms.opacity.value<.999;
    if(mesh.material.transparent!==fading){mesh.material.transparent=fading;mesh.material.needsUpdate=true;}
   }
-  this.renderer.render(this.scene,c);
+  this.renderer.render(this.scene,this.camera);
  }
 }

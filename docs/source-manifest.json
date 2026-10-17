@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 39680,
-      "sha256": "db965232a3865f50212095b4121699f21a3be03e44c6c0cec17debd32496d087",
+      "bytes": 40204,
+      "sha256": "5fb82c8d74cce6112682fc30a18bac52b9d7d181216e0e3627a51f22a3db13dc",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13301,8 +13301,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 108542,
-      "sha256": "7537f811748289fd955401816751e54f75b321bcaa4093d8bbed97c8f2c44e3f",
+      "bytes": 108748,
+      "sha256": "b52c81779caf87e13b908d0505e5df063a1d4135e1c12e8859e2696f5b0c1e24",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13413,8 +13413,8 @@
     },
     {
       "path": "model-data.mjs",
-      "bytes": 3941,
-      "sha256": "95d9bcc057f6ffa44a63c5524e5fb2b495007ead561a0924b7fa9097df67277a",
+      "bytes": 4201,
+      "sha256": "74599aa9f291155edde9b11ddf6f8c9af41e2c1cfb2a9f54ddd61df96e16fca7",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/model-data.mjs"
       ],
@@ -13775,8 +13775,8 @@
     },
     {
       "path": "renderer.mjs",
-      "bytes": 12142,
-      "sha256": "2e67f77bc8225b2dfd542be7e4bebefd9bb8106a18a5803b5c7d367758c92864",
+      "bytes": 13941,
+      "sha256": "3ee414a2e3dbd178e14b7e8654aa1822b2aa010e0f462f0e092f9732fb1a904d",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/renderer.mjs"
       ],
@@ -14169,6 +14169,531 @@
       "modified_locally": true,
       "published_sha256": "0f6bbad96abf44aa3893dc32365a81d9be9029a1137a6412d200d32ff0787da8",
       "published_bytes": 2274
+    },
+    {
+      "path": "assets/map-mobile-jh01.bin",
+      "bytes": 25312,
+      "sha256": "c26f3adcc487f19b81f242644365ad6bb48f9bb3e03b0add0f115c304e89a821",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh01.json",
+      "bytes": 982,
+      "sha256": "148de7ed167ffc90e8d5939154e5220a0d82c56df4bf858181d5da85cd7ad43f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "4e19208f285763aa905f4fd3e417672d67dfb03acf537247a4265660450cebd3",
+      "published_bytes": 1495,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh06.bin",
+      "bytes": 35286,
+      "sha256": "ccfd7a849f1404935d655a90984db396a852397ba61ac33d3bffb8205e3871ec",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh06.json",
+      "bytes": 1017,
+      "sha256": "ceb2e7ebaba142c289d5b69ddca4854f216486decadca756020330303f356362",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "d2bb38c9c27e10a2a91553033a8937eafc494939131825eb57afe86985f1959b",
+      "published_bytes": 3124,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh10.bin",
+      "bytes": 71749,
+      "sha256": "db9f3ffe07a2f883b26a3d221f61f93653f51952726713048426933e501bfcb9",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh10.json",
+      "bytes": 1244,
+      "sha256": "36e6b24ab5d84dcc203760063a3edc7a01514e9b33a3026f2842236f51d93ac3",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "d36f1d7a67f31188c56e36796ab40cac6a3630da260c7a45f1f4412144ac0ca3",
+      "published_bytes": 1768,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh12.bin",
+      "bytes": 24488,
+      "sha256": "707b0fb75a63be62043c9810c6083bed2349c5d6b72a6d652af59f1500b5f209",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh12.json",
+      "bytes": 992,
+      "sha256": "6d6d763b6ae0560cd045ee7dca1a1a6c263ba380d5222dc8d3acb314a148570e",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "9e247ee20ac11dbf556624d7a86e11a98474e6f7711921ce06bd3fca7e93cd38",
+      "published_bytes": 2625,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh13.bin",
+      "bytes": 34176,
+      "sha256": "24b5947ec407c716670a59dd85009a0cbae9bccd106b5cc0365a8e635cd33223",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh13.json",
+      "bytes": 1171,
+      "sha256": "b06910b3dbbcec91b52d6ca8d516a26ee6c1cf7728166b25f34351cb82b53cd6",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "6ccb96840522b2bfce25859c6c0716e0d502593badce2bb8305af0c8553cc1c4",
+      "published_bytes": 2289,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh14.bin",
+      "bytes": 24215,
+      "sha256": "2fbf4ffa063f837cac5ca6fde658f427419947ddb2c8a3c75e7a50686f846432",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh14.json",
+      "bytes": 1075,
+      "sha256": "c8f372e10421c10c7f5a9e4707ae2b797b25c7ee96c82eb2ab042aaa36338b69",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "2b4fcd4cfdd2465f0779c60955ecfb2942868aaed9a76b0acc168bf67e7312e5",
+      "published_bytes": 1297,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh19.bin",
+      "bytes": 65903,
+      "sha256": "0db1b8edf18a8d5df76ec61f89b1a325044f88a20275958dd572017ecaca8ee6",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh19.json",
+      "bytes": 1278,
+      "sha256": "2d833183dd7f53a93a06a6534dbf3b4fc7226a02e4d338e34b4cf3a549cdbfa4",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "ba22e0be34ccc1375cab65f3aeba5271621f157b136048890adae3ab75b61bcb",
+      "published_bytes": 2857,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh20.bin",
+      "bytes": 44736,
+      "sha256": "e5837039a3fb04e8dcd090e103e896a3f1f73d1de2852c216295d9a96b5586ce",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh20.json",
+      "bytes": 1325,
+      "sha256": "717c3f1c99296f2d454cd445fb0b2d7d4cb6d81aab90a75efe170ac7dbda371e",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "044dbd2a114ade178a1cc808aec8963fc2bd79b4594ceca767f00a268e3295c3",
+      "published_bytes": 2211,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh27.bin",
+      "bytes": 7052,
+      "sha256": "860e649b7709add841829a893e3de24c09300e617bdbb50563b5cedc22e87783",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh27.json",
+      "bytes": 852,
+      "sha256": "267c7febb4471bf903a5ece3a6b09c06c5ee47212b2ff197270bb1ebde34ba6d",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "7a223cfd00ca3839a296d26bab62ba773c55ed9ab6de5d7ecf93978609f2f807",
+      "published_bytes": 1219,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh30.bin",
+      "bytes": 40906,
+      "sha256": "ba79ef978b298baae13344ff4dc8721523eab816749fbf6d76354b761088fa84",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh30.json",
+      "bytes": 1171,
+      "sha256": "8b70bee96888c98c36fd7431bb5a3364a7f0228211cae060602bdb01f39525f7",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "96fe17a6887256c4d31303f99bde8bc13afbbebc80f7d7301ba129738b20fd9c",
+      "published_bytes": 1994,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh34.bin",
+      "bytes": 61484,
+      "sha256": "e55417ae02e4dba7e6fd19e04efdc4bebcc55cd2d4ec2f392f1ab1bd66a1fb6f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh34.json",
+      "bytes": 1270,
+      "sha256": "0f0ce7d99e11662ee68600fdec8cfdf94d713949a822f110a2c622ba948e148e",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "c5dd010ecc78daab758bf6fb34822f52445bf5412c1ef733a76f81ab5b56b42f",
+      "published_bytes": 2767,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh37.bin",
+      "bytes": 58177,
+      "sha256": "ec554c4f104069f06978ca375aaa86ae4738f1ad748dd2c510e5b636f03179ce",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh37.json",
+      "bytes": 1396,
+      "sha256": "ea0ea5e97b4663220ae92c775df0952b2e2f498575e3fd1c353f8e2163f98c16",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "a98b0198f2228ed59cb6251e2322f8f9dd1ad2940e837db467a76047d1fca7e5",
+      "published_bytes": 1994,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh39.bin",
+      "bytes": 27051,
+      "sha256": "ddb6cf5cac1095b8f47e20fc60772b54dfd44b6e9de35319f426baf720b94bc5",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh39.json",
+      "bytes": 1084,
+      "sha256": "8bf122c762dcb27c8c1ffe22ba5c2954c0342f1a627175b4998228ff5c6fa648",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "f9155b0766c9213764439ae16c2933a529e8099357f250ec1f154b79cee5663a",
+      "published_bytes": 2417,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh41.bin",
+      "bytes": 37871,
+      "sha256": "06f71ebfcdb900d41bc6012a06e756417a60852f6136eadd8e93b0f0f4e7b682",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh41.json",
+      "bytes": 1111,
+      "sha256": "2559a9f45b673851001c14725ddf66b46afe295136ca6d30f4a95fec75c48acf",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "d99e889d93464dca5aa5f265b5e1dc6fccae7eda0568fd065ac58687f52e117e",
+      "published_bytes": 1335,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh42.bin",
+      "bytes": 21101,
+      "sha256": "e9e1ded9a3a60ec234ddd3f82b0a6479e3e4a3d30b7337a004aa906b0e3da17d",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh42.json",
+      "bytes": 1049,
+      "sha256": "1acbd36d82e24b92b1201bd9606180e6ab97dbd78e2e24cff307a50ea729a84b",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "5342105f14318a554eb6e51df35e2b3e60747c180c0cdc2d2c9c55a00e810afc",
+      "published_bytes": 1050,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh43.bin",
+      "bytes": 19112,
+      "sha256": "7e7dfcad8ebad784c9ca21822bb030181825ebe8abb68438411112e88dc9c57f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh43.json",
+      "bytes": 986,
+      "sha256": "f193434da4a053d85a452dba0c1b6ccb009f7399e90b5f4ac9d6fb0440f1746f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "022ff500f6cd2addea97314165102579600f63a98c93b4d27f509b55a1df4400",
+      "published_bytes": 1427,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh44.bin",
+      "bytes": 43324,
+      "sha256": "e08d827b8168ecc4fe587e75faa1465c710eb46b21e5d051ec81bcf03ca52751",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh44.json",
+      "bytes": 1203,
+      "sha256": "1ddb281669d69119f5c130e57fc997b344f00007df387d944b27a1c25e87bb62",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "e903fa74385e232967cfe4fc1ff4cfff1cad89a3b0aa3e08176a448b6a183a7b",
+      "published_bytes": 2022,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh45.bin",
+      "bytes": 20542,
+      "sha256": "463a181c1792dc52f32e1015e9f14dbe0f5dfc38252b4b46afc2a0df2c249718",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh45.json",
+      "bytes": 463,
+      "sha256": "f068a865e3d1d5c52eac14f73eab3a485c5b4b4e975792e074a39d2dbc63729a",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "c2c3364485cc5cdcfec868e93b2ed4e5d1824e7560af8aa72cb8b59ce86580c4",
+      "published_bytes": 463,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh46.bin",
+      "bytes": 35419,
+      "sha256": "10190f905cd427568d46078c8c61089be9ad434dc3c0e62f38911a37ffb6b1c5",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh46.json",
+      "bytes": 1269,
+      "sha256": "b5c6fc4595f6a69fe6106bdbebb825f9400c4331612f4236e4b31d72ca70350e",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "4b417f42c8089b8a39388b7e6e693910c6f9eb016f0e16723dd3ebb60388fff5",
+      "published_bytes": 1420,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh49.bin",
+      "bytes": 21709,
+      "sha256": "111935eee6b83dc90d69aed50b20864d8a9196b03b66a870821a3e4ad522ee57",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh49.json",
+      "bytes": 1244,
+      "sha256": "5518c55647d531e4aa742bd89c1535e4430c81cb70270d10221e22f40fe59240",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "7e745d338b1bd0aaa3bd8e9b0f8940287114814b1240a696ced090be62f2f627",
+      "published_bytes": 1610,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh50.bin",
+      "bytes": 46688,
+      "sha256": "152f3f4ef65f9cf2e1a41ab236486145a44113d89f7068ffe783b428f782d043",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh50.json",
+      "bytes": 1395,
+      "sha256": "ea912b34db0b711e32ed5ec17e19bdda8ad520da31790277b68fd3a7e1c63009",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "20346d41d3eef869af8a53d713fcc6a7a3b29d46fdb32f2676035b5097af93b4",
+      "published_bytes": 2222,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh51.bin",
+      "bytes": 30091,
+      "sha256": "fc36efd883326bf42f185d9a7fedfdbc768b04b2db344fcb2d9a9c810c054a7b",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh51.json",
+      "bytes": 1222,
+      "sha256": "75dc59985d8aec1a636b60a595503994fe25f56d6336ce922b86c3270e63e5e5",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "85e1d4ac45308cdd680b78d66432d6a3298610fc5fd9f37397de94ad6cd88284",
+      "published_bytes": 2711,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh52.bin",
+      "bytes": 22796,
+      "sha256": "540a7ad32cdff24eed8540d7ed02335983aa15a2cc20867fbc654435d20b061c",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh52.json",
+      "bytes": 1353,
+      "sha256": "4e7b8eccbe94b6d79bbd21e25626344a800795bc164cf32a4c6bef07f8cbdbee",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "4d86b111f1cfeee2c2c00df70baa07e9cf75b81ee2bac536190915c780d57466",
+      "published_bytes": 2465,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh53.bin",
+      "bytes": 53055,
+      "sha256": "9df671456f0ce0ad33a33bcb80e01ed6587e83f04fe4816f25fc158515b0c974",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-jh53.json",
+      "bytes": 1291,
+      "sha256": "95c17e460987268cf18d8e1fcd358bac9595a01918bdc44a6af36cf9bfc2a4fd",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "e0988638528d234688b580bf07f6093467d9ce3a15b9e2e2075ce305d186b401",
+      "published_bytes": 2572,
+      "modified_locally": true
+    },
+    {
+      "path": "assets/map-mobile-pdg-mosque.bin",
+      "bytes": 17613,
+      "sha256": "baa9c1ede47a8ff273af1c118992e6dc4352a5c34263ab38099e3b0adb48228a",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/map-mobile-pdg-mosque.json",
+      "bytes": 1070,
+      "sha256": "77d6e0370ff357779f683cec3827622188c774905c83d50ee01213e4589570b9",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-map-lod.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "77d289b147537823ec59d762f201c8760c248582f411f84ea3a01deeff01cd63",
+      "published_bytes": 1366,
+      "modified_locally": true
     }
   ],
   "previous_sources": [

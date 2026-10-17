@@ -316,9 +316,21 @@ Smartphone search remains hidden. Introductory text returns when zooming out bel
 
 Removed the introduction toggle button and its manual visibility state entirely. Smartphone search remains hidden from first paint, with no replacement control above the work links. Intro typography, spacing, far-zoom restoration, fade behavior and centered map reset remain as established. Desktop search is unchanged.
 
+### Lightweight recognizable map geometry and visible-area streaming (2026-10-17)
+
+This supersedes the earlier all-detail-on-entry policy with actual house-derived map models, rather than generic placeholder houses. `scripts/build-map-lod.mjs` reproducibly clusters original GPU geometry within 0.22-unit cells (less than one CSS pixel at distant map scale), preserves source placements, bounds, per-vertex colors and material layers, removes collapsed/duplicate triangles, and batches distant glass by layer. All 25 map binaries total 889,856 bytes and 79,627 triangles versus 15,653,580 bytes and 856,430 triangles in full-detail binaries. No source detail assets are replaced.
+
+WebGL requests lightweight houses in the visible area plus a 35% normalized-device-coordinate margin, ordered from the screen center, with bounded concurrency. Offscreen houses stream as the camera moves. Full-detail geometry loads for nearby visible houses at map scale 6 or above, or immediately for an explicitly selected house through the reserved foreground lane. Far views use lightweight geometry even after detail was visited; selected 3D uses the original detail. Loading status still tracks detail availability. Hidden-scene suspension and cooperative geometry preparation remain.
+
+Render audit: the scene already renders on camera/hover/model changes, not continuously while idle; shadow maps are not enabled. Hover picking uses projected bounding boxes, not triangle raycasts. Bounding-box projections are now cached until camera/viewport/model availability changes, and camera projection/view matrices are reused during hover-only frames. Phone copy and menu remain static HTML, independent of model completion; Google Fonts no longer blocks initial text paint. No cover image was added.
+
+Local before/after sample is recorded in `docs/map-performance.json` (Linux Chromium/SwiftShader, one run per viewport). Initial desktop model transfer: 15,653,580 → 889,856 bytes; phone: 15,653,580 → 353,459 bytes for the first visible area. Draw calls: desktop 413 → 128, phone 152 → 51. Submitted triangles: desktop 873,686 → 96,883, phone 287,356 → 41,115. Main-thread long-task totals were essentially unchanged in this short sample (desktop 452 → 438 ms, phone 129 → 127 ms); this is not evidence of a native-device speedup or a new PageSpeed score. Distant-view screenshot comparison at pixelmatch threshold 0.1 differed by 7 of 1,296,000 pixels on desktop and 0 pixels on phone. Full-detail models and colors remain available for close/selected views. Phone overview fitting includes both lightweight and detailed bounds.
+
 ## SEO preview validation (2026-10-17, PR #4)
 
 Homepage metadata, crawler discovery files, and favicon priority are intentional changes. Preserve the homepage SEO title in about.mjs after initialization and section navigation. Update the manifest for index.html and about.mjs while retaining published provenance; build and asset tests validate all hashes without exceptions.
+
+Integrated remote SEO merge `5750813` before publishing this experiment. Its title, descriptions, favicon priority, robots.txt, sitemap.xml and runtime title preservation remain intact. Metadata browser assertions now match those reviewed SEO values; the performance change to the homepage head only makes the existing Google Fonts stylesheet nonblocking, with a noscript fallback.
 
 ## Homepage introduction and search snippets (2026-10-17)
 

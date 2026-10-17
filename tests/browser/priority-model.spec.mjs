@@ -2,8 +2,8 @@ import {test,expect} from '@playwright/test';
 import {readFile} from 'node:fs/promises';
 for(const switchEarly of [false,true])test(`selected desktop model renders with blocked backgrounds${switchEarly?' after a rapid selection change':''}`,async({page})=>{
  let release,releaseSelected,selectedStarted=false;const gate=new Promise(resolve=>release=resolve),selectedGate=new Promise(resolve=>releaseSelected=resolve),blocked=new Set();
- await page.route('**/assets/gpu-mobile-*.bin?*',async route=>{
-  if(/gpu-mobile-jh(?:30|01)\.bin/.test(route.request().url())){blocked.add(route.request().url());await gate;}
+ await page.route('**/assets/*mobile-*.bin?*',async route=>{
+  if(/map-mobile-jh(?:30|01)\.bin/.test(route.request().url())){blocked.add(route.request().url());await gate;}
   if(switchEarly&&/gpu-mobile-jh27\.bin/.test(route.request().url())){selectedStarted=true;await selectedGate;}
   await route.continue();
  });

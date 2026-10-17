@@ -1,0 +1,47 @@
+{
+  "method": "Local Chromium, Linux SwiftShader, fresh browser contexts; sampled four seconds after app initialization. One before/after run, not PageSpeed or native macOS/Windows performance. Model bytes exclude HTML, CSS, JavaScript, photos and fonts.",
+  "samples": [
+    {
+      "viewport": "desktop 1440x900",
+      "before": {
+        "modelsFull": 25,
+        "modelsLightweight": 0,
+        "geometryRequests": 25,
+        "geometryBytes": 15653580,
+        "drawCalls": 413,
+        "triangles": 873686,
+        "longTaskMilliseconds": 452
+      },
+      "after": {
+        "modelsFull": 0,
+        "modelsLightweight": 25,
+        "geometryRequests": 25,
+        "geometryBytes": 889856,
+        "drawCalls": 128,
+        "triangles": 96883,
+        "longTaskMilliseconds": 438
+      }
+    },
+    {
+      "viewport": "phone 390x844",
+      "before": {
+        "modelsFull": 25,
+        "modelsLightweight": 0,
+        "geometryRequests": 25,
+        "geometryBytes": 15653580,
+        "drawCalls": 152,
+        "triangles": 287356,
+        "longTaskMilliseconds": 129
+      },
+      "after": {
+        "modelsFull": 0,
+        "modelsLightweight": 10,
+        "geometryRequests": 10,
+        "geometryBytes": 353459,
+        "drawCalls": 51,
+        "triangles": 41115,
+        "longTaskMilliseconds": 127
+      }
+    }
+  ]
+}
