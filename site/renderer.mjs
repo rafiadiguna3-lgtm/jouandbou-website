@@ -85,7 +85,7 @@ export class NeighborhoodRenderer{
    mesh.userData={id:b.id,ground:b.ground};this.scene.add(mesh);
    if(!this.groups.has(b.id))this.groups.set(b.id,[]);this.groups.get(b.id).push(mesh);
   }
-  this.modelMeshes=[];this.modelState='loading';
+  this.detailModes=new Map();this.modelMeshes=[];this.modelState='loading';
   this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.focusedModel=null;this.priorityModel=null;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async (id,{foreground}={})=>{try{await this.loadHouse(id,mobileAsset(id),foreground)}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{concurrency:1,demand:true,initialCount:0});
   this.lodMetas=new Map();this.lodErrors=new Map();
   this.lodQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.loadHouse(id,mobileAsset(id),false,true)}catch(error){this.lodErrors.set(id,error);console.error('Map model unavailable',id,error)}},{concurrency:this.touchDevice?1:2,demand:true,initialCount:0});
@@ -99,13 +99,15 @@ export class NeighborhoodRenderer{
   ray.setFromCamera(new THREE.Vector2((x-rect.left)/rect.width*2-1,1-(y-rect.top)/rect.height*2),this.camera);
   return ray.intersectObjects(this.modelMeshes.filter(mesh=>mesh.visible&&mesh.userData.id===id),false).length>0;
  }
- setInteracting(value){this.interacting=value;this.modelQueue?.setPaused(value||this.focusedModel!==null||this.suspended);this.lodQueue?.setPaused(value||this.focusedModel!==null||this.suspended);if(!value)this.scheduleNeighborhood()}
- setVisible(value){this.suspended=!value;this.modelQueue.setPaused(this.suspended||this.interacting||this.focusedModel!==null);this.lodQueue.setPaused(this.suspended||this.interacting||this.focusedModel!==null);if(!value)clearTimeout(this.neighborhoodTimer);}
+ syncQueues(){const paused=this.suspended||this.interacting||this.animating||this.focusedModel!==null;this.modelQueue?.setPaused(paused);this.lodQueue?.setPaused(paused);}
+ setInteracting(value){const changed=this.interacting!==value;this.interacting=value;this.syncQueues();if(!value){this.scheduleNeighborhood();if(changed)this.onChange();}}
+ setAnimating(value){if(this.animating===value)return;this.animating=value;this.syncQueues();if(value)clearTimeout(this.neighborhoodTimer);else this.scheduleNeighborhood();}
+ setVisible(value){this.suspended=!value;if(!value)this.animating=false;this.syncQueues();if(!value)clearTimeout(this.neighborhoodTimer);}
  scheduleNeighborhood(){
   clearTimeout(this.neighborhoodTimer);
-  if(this.suspended||this.interacting||this.focusedModel!==null||document.hidden||!this.neighborhoodView)return;
+  if(this.suspended||this.interacting||this.animating||this.focusedModel!==null||document.hidden||!this.neighborhoodView)return;
   this.neighborhoodTimer=setTimeout(()=>{
-   if(this.suspended||this.interacting||this.focusedModel!==null||document.hidden)return;
+   if(this.suspended||this.interacting||this.animating||this.focusedModel!==null||document.hidden)return;
    const point=new THREE.Vector3(),visible=[];
    for(const id of [29,0,9,13,44,...glbIds]){point.fromArray(this.world.anchors[id]).project(this.camera);if(Math.abs(point.x)<1.35&&Math.abs(point.y)<1.35)visible.push({id,distance:point.x*point.x+point.y*point.y});}
    visible.sort((a,b)=>a.distance-b.distance);
@@ -116,7 +118,8 @@ export class NeighborhoodRenderer{
  ensureModel(id){this.priorityModel=id;this.modelQueue?.prioritize(id)}
  async loadHouse(id,asset,foreground=false,lod=false){
   const {meta,buffer}=await readModelData(`${lod?'map':'gpu'}-${asset}`,{priority:id===this.priorityModel?'high':'low'});
-  while(this.suspended||document.hidden||((this.interacting||this.focusedModel!==null)&&id!==this.priorityModel&&!foreground))await new Promise(resolve=>setTimeout(resolve,120));
+  const waitForIdle=async()=>{while(this.suspended||document.hidden||this.interacting||this.animating||(this.focusedModel!==null&&id!==this.priorityModel&&!foreground))await new Promise(resolve=>setTimeout(resolve,60));};
+  await waitForIdle();
   const positions=new Float32Array(buffer,0,meta.vertexCount*3);
   const colors=new Uint8Array(buffer,meta.vertexCount*12,meta.vertexCount*4);
   const sharedPosition=new THREE.BufferAttribute(positions,3),sharedColor=new THREE.BufferAttribute(colors,4,true);
@@ -124,14 +127,14 @@ export class NeighborhoodRenderer{
   const opaqueSphere=new THREE.Box3(new THREE.Vector3(...meta.bounds.min),new THREE.Vector3(...meta.bounds.max)).getBoundingSphere(new THREE.Sphere());
   const meshes=[];let budget=performance.now();
   for(const range of meta.ranges){
-   if(performance.now()-budget>6){await new Promise(resolve=>setTimeout(resolve,0));budget=performance.now();}
+   if(performance.now()-budget>6){await new Promise(resolve=>setTimeout(resolve,0));await waitForIdle();budget=performance.now();}
    const geometry=new THREE.BufferGeometry();
    geometry.setAttribute('position',meta.indexCount?sharedPosition:new THREE.BufferAttribute(positions.subarray(range.start*3,(range.start+range.count)*3),3));
    geometry.setAttribute('surfaceColor',meta.indexCount?sharedColor:new THREE.BufferAttribute(colors.subarray(range.start*4,(range.start+range.count)*4),4,true));
    if(meta.indexCount){const indices=new Uint32Array(buffer,meta.vertexCount*16,meta.indexCount);geometry.setIndex(new THREE.BufferAttribute(indices.subarray(range.start,range.start+range.count),1));}
    if(meta.indexCount&&range.transparent){
     const box=new THREE.Box3(),point=new THREE.Vector3(),indices=geometry.index.array;
-    for(let offset=0;offset<indices.length;offset++){box.expandByPoint(point.fromArray(positions,indices[offset]*3));if(offset%8192===0&&performance.now()-budget>6){await new Promise(resolve=>setTimeout(resolve,0));budget=performance.now();}}
+    for(let offset=0;offset<indices.length;offset++){box.expandByPoint(point.fromArray(positions,indices[offset]*3));if(offset%8192===0&&performance.now()-budget>6){await new Promise(resolve=>setTimeout(resolve,0));await waitForIdle();budget=performance.now();}}
     geometry.boundingSphere=box.getBoundingSphere(new THREE.Sphere());
    }else if(meta.indexCount)geometry.boundingSphere=opaqueSphere;else geometry.computeBoundingSphere();
    const m=material(1,range.layer==='glass'?1:0);
@@ -145,6 +148,7 @@ export class NeighborhoodRenderer{
    mesh.userData={id,lod,sourceModel:true,layer:range.layer,sourceTransparent:!!range.transparent};mesh.renderOrder=range.transparent?100:10+range.material;
    meshes.push(mesh);
   }
+  await waitForIdle();
   for(const mesh of meshes){this.scene.add(mesh);this.modelMeshes.push(mesh);}
   (lod?this.lodMetas:this.modelMetas).set(id,meta);if(!lod&&id===29)this.modelMeta=meta;
   for(const mesh of this.groups.get(id)||[])mesh.visible=mesh.userData.ground;
@@ -153,7 +157,7 @@ export class NeighborhoodRenderer{
  resize(width,height){this.pixelRatio=renderPixelRatio(width,height,devicePixelRatio||1,this.touchDevice);this.renderer.setPixelRatio(this.pixelRatio);this.renderer.setSize(width,height,false)}
  render(view,width,height,current,front,hoverLevels){
   const focused=front?current:null;
-  if(this.focusedModel!==focused){this.focusedModel=focused;this.modelQueue.setPaused(this.suspended||this.interacting||focused!==null);this.lodQueue.setPaused(this.suspended||this.interacting||focused!==null);}
+  if(this.focusedModel!==focused){this.focusedModel=focused;this.syncQueues();}
   if(front){clearTimeout(this.neighborhoodTimer);this.neighborhoodTimer=0;this.neighborhoodView=null;this.ensureModel(current)}
   else{this.neighborhoodView={view:{...view},width,height};this.scheduleNeighborhood()}
   const cameraKey=[width,height,view.x,view.y,view.z,view.yaw,view.pitch,view.scale].join(':');
@@ -178,7 +182,11 @@ export class NeighborhoodRenderer{
   for(const mesh of this.modelMeshes){
    const id=mesh.userData.id;
    if(mesh.userData.glb){const fade=current===id?1:1-view.t;mesh.visible=fade>.005;mesh.material.opacity=mesh.userData.baseOpacity*fade;mesh.material.userData.colorAmount.value=Math.max(hoverLevels[id]||0,front&&current===id?view.t:0);const transparent=mesh.userData.baseTransparent||fade<.999;if(mesh.material.transparent!==transparent){mesh.material.transparent=transparent;mesh.material.needsUpdate=true;}continue;}
-   const detail=this.modelMetas.has(id)&&(view.scale>=6||(front&&current===id)||!this.lodMetas.has(id));
+   let detail=this.detailModes.get(id)||false;
+   if(!this.animating&&!this.interacting||(front&&current===id)||!this.lodMetas.has(id)){
+    detail=this.modelMetas.has(id)&&((front&&current===id)||!this.lodMetas.has(id)||view.scale>=(detail?5.2:6.8));
+    this.detailModes.set(id,detail);
+   }
    mesh.visible=(mesh.userData.lod?!detail:detail)&&(current===id||!front||view.t<.995);
    mesh.material.uniforms.opacity.value=current===id||!front?1:1-view.t;
    mesh.material.uniforms.colorAmount.value=Math.max(hoverLevels[id]||0,front&&current===id?view.t:0);

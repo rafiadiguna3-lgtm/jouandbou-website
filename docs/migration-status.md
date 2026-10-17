@@ -339,3 +339,9 @@ Add a short visible homepage description matching the existing meta description.
 ## Prevent homepage description flashing at the header (2026-10-17)
 
 Ship the small homepage-summary layout inline in the document head, before its HTML, so the description cannot fall into normal document flow near the header while external CSS loads or a visitor reuses a pre-summary cached phone-intro.css. Version the phone intro stylesheet URL to refresh old cached CSS. Preserve the intended responsive placement and intro behavior.
+
+### Preserve smooth interaction during detail streaming (2026-10-17)
+
+Reproduced a regression with a delayed Marboy detail response: after the user completed an orbit/zoom, arrival of full geometry restarted the camera flight and reset the view. Model camera bounds and placement now use available lightweight metadata immediately; detail and lightweight geometry share the same authored frame. A detail arrival with that same frame no longer refits or restarts the camera. If no matching frame was available, the necessary refit retains the user's orbit and pan.
+
+Camera easing/flights explicitly pause model queues and geometry commits, including selected models, until motion settles. Direct pointer gestures also hold commits; work rechecks the gate after cooperative yields and immediately before publishing meshes. Neighborhood detail selection is held during motion, with 6.8/5.2 zoom hysteresis once idle, avoiding repeated hard swaps around scale 6. Existing source models, phone typography, layout and SEO remain unchanged.
