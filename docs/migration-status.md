@@ -319,3 +319,7 @@ Removed the introduction toggle button and its manual visibility state entirely.
 ## SEO preview validation (2026-10-17, PR #4)
 
 Homepage metadata, crawler discovery files, and favicon priority are intentional changes. Preserve the homepage SEO title in about.mjs after initialization and section navigation. Update the manifest for index.html and about.mjs while retaining published provenance; build and asset tests validate all hashes without exceptions.
+
+## Homepage introduction and search snippets (2026-10-17)
+
+Add a short visible homepage description matching the existing meta description. Desktop copy sits at the lower left; phone copy sits below work/service choices and follows the existing camera-driven intro fade. The copy is included in initial HTML, not injected or hidden solely for search engines. Contact details and the three section footers use data-nosnippet to exclude address, email and copyright from Google text snippets without removing content from visitors or indexing. Google still selects the final snippet and must recrawl to observe changes.

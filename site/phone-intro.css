@@ -24,3 +24,13 @@
 @media(prefers-reduced-motion:reduce){.phone-intro,.phone-intro-guide{transition:none}}
 
 .phone-intro[aria-hidden=true]{pointer-events:none}
+
+/* A short, readable homepage introduction; keep the neighborhood unobstructed. */
+.home-summary{position:fixed;z-index:4;left:32px;bottom:32px;width:290px;max-width:calc(100vw - 128px);color:#62645c;font:400 12px/1.7 var(--jb-copy,Arial,sans-serif)}
+.home-summary p{margin:0}
+body.model-view .home-summary,body.view-about .home-summary,body.view-contact .home-summary{display:none}
+@media(max-width:760px),(hover:none),(pointer:coarse){
+ .home-summary{top:calc(clamp(136px,20vh,174px) + 82px);bottom:auto;width:285px;font-size:11px;line-height:1.65;opacity:var(--intro-opacity,1);transition:opacity .16s ease-out;pointer-events:none}
+}
+@media(orientation:landscape) and (max-height:540px){.home-summary{left:24px;top:150px;width:245px;font-size:10px;line-height:1.5}}
+@media(prefers-reduced-motion:reduce){.home-summary{transition:none}}
