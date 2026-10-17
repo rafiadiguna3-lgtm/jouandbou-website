@@ -47,5 +47,5 @@ export function createPhoneIntro(){
  for(const button of intro.querySelectorAll('[data-service]'))button.onclick=()=>{
   for(const option of intro.querySelectorAll('[data-service]')){option.setAttribute('aria-pressed',String(option===button));option.dataset.chosen=String(option===button);}
  };
- return {update,onOverview(){zoomIntent='out';previousScale=null;motionAnchor=null;},onZoom(direction){zoomIntent=direction;if(direction==='in'){restoredVisible=false;dismissed=true;revealOnZoomOut=false;}}};
+ return {update,onHome(){dismissed=false;restoredVisible=false;revealOnZoomOut=false;zoomIntent=null;previousScale=null;motionAnchor=null;},onOverview(){zoomIntent='out';previousScale=null;motionAnchor=null;},onZoom(direction){zoomIntent=direction;if(direction==='in'){restoredVisible=false;dismissed=true;revealOnZoomOut=false;}}};
 }

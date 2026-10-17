@@ -417,3 +417,7 @@ Move compact portrait work links/services from the former 136–174 px entry off
 ### Prevent iPhone work-copy/description overlap (2026-10-17)
 
 The screenshot is consistent with mixed layout rules: the work block remains at its former viewport-relative offset while the inline description uses the raised offset. Put the authoritative work-block top in the same inline critical layout as the description, with landscape override and safe-area fallbacks. Position the separate description from the actual work/services bottom plus 24 px via ResizeObserver and viewport resize events, covering font changes, text sizing and Safari toolbar/orientation changes without adding layout reads to the render loop. Preserve desktop fixed summary, map framing and all motion/zoom behavior. Add a regression reproducing old stylesheet positioning alongside current HTML, enlarged text, portrait/landscape/toolbar-height changes and reset.
+
+### Restore initial phone framing and copy with the square button (2026-10-17)
+
+User supersedes the near-minimum square overview: the phone square now restores exactly the entry camera and zoom with the opening text. Add an explicit intro-home reset independent of zoom direction, so resetting from a distant view still restores text even though the camera moves closer. Subsequent tiny pan/zoom-in dismisses initial-state text as before; explicit near-minimum zoom-out still restores its pan-persistent copy. Desktop square behavior is unchanged. Verify exact entry pose and visible text after reset from both close and minimum-zoom views.

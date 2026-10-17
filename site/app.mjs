@@ -316,10 +316,10 @@ function syncProjectRoute(){
 for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&location.hash===`#project/${panel.dataset.projectRoute}`)history.replaceState(null,'','#projects');});
 addEventListener('hashchange',syncProjectRoute);addEventListener('popstate',syncProjectRoute);
 $('more').onclick=openProjectDetails;
-function returnHome({fromSection=false,overview=false}={}){
+function returnHome({fromSection=false,overview=false,resetIntro=false}={}){
  const focus=front||previewId>=0?modelCameraFocus():null;
  document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();
- goal=homeCamera(overview);if(overview&&!desktopInput())phoneIntro.onOverview();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
+ goal=homeCamera(overview);if(resetIntro&&!desktopInput())phoneIntro.onHome();if(overview&&!desktopInput())phoneIntro.onOverview();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
 }
 $('projects').onclick=returnHome;
 
@@ -358,7 +358,7 @@ document.addEventListener('wheel',closeMenu,{capture:true,passive:true});
 document.addEventListener('touchmove',closeMenu,{capture:true,passive:true});
 document.addEventListener('scroll',closeMenu,{capture:true,passive:true});
 addEventListener('hashchange',closeMenu);
-$('map-reset').onclick=()=>returnHome({overview:!desktopInput()});
+$('map-reset').onclick=()=>returnHome({resetIntro:!desktopInput()});
 document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
