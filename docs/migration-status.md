@@ -335,3 +335,7 @@ Integrated remote SEO merge `5750813` before publishing this experiment. Its tit
 ## Homepage introduction and search snippets (2026-10-17)
 
 Add a short visible homepage description matching the existing meta description. Desktop copy sits at the lower left; phone copy sits below work/service choices and follows the existing camera-driven intro fade. The copy is included in initial HTML, not injected or hidden solely for search engines. Contact details and the three section footers use data-nosnippet to exclude address, email and copyright from Google text snippets without removing content from visitors or indexing. Google still selects the final snippet and must recrawl to observe changes.
+
+## Prevent homepage description flashing at the header (2026-10-17)
+
+Ship the small homepage-summary layout inline in the document head, before its HTML, so the description cannot fall into normal document flow near the header while external CSS loads or a visitor reuses a pre-summary cached phone-intro.css. Version the phone intro stylesheet URL to refresh old cached CSS. Preserve the intended responsive placement and intro behavior.
