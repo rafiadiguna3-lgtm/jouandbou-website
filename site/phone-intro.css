@@ -7,8 +7,8 @@
  .phone-work-links [data-chosen=true][aria-current=page]{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
  .phone-services{display:flex;align-items:center;gap:14px;margin-top:8px}
  .phone-services button{position:relative;padding:2px 0 2px 12px;color:#6b6d62;font:300 11.5px/1.5 var(--jb-display,Lato,Arial,sans-serif);white-space:nowrap}
- .phone-services [aria-pressed=true][data-chosen=true]{color:#26291f;font-weight:400;text-decoration:underline;text-underline-offset:2px}
- .phone-services [aria-pressed=true][data-chosen=true]::before{content:'›';position:absolute;left:0;top:0;font-size:16px;line-height:20px;text-decoration:none}
+ .phone-services [aria-pressed=true]{color:#26291f;font-weight:400;text-decoration:underline;text-underline-offset:2px}
+ .phone-services [aria-pressed=true]::before{content:'›';position:absolute;left:0;top:0;font-size:16px;line-height:20px;text-decoration:none}
  .phone-intro-guide{display:block;position:fixed;z-index:4;left:32px;bottom:64px;max-width:calc(100vw - 120px);font:400 11px/1.7 var(--jb-copy,Arial,sans-serif);color:#272727;pointer-events:none}
  .phone-intro-guide p{margin:0 0 26px}.phone-intro-guide p:last-child{margin:0}
  .phone-intro,.phone-intro-guide{opacity:var(--intro-opacity,1);transition:opacity .1s ease-out;transform:none}

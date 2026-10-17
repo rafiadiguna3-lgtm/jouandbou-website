@@ -13302,7 +13302,7 @@
     {
       "path": "index.html",
       "bytes": 109689,
-      "sha256": "13395cf1a0a2977ab854a3264181b6e9144a62789e499187fe3f1b07f06c3c18",
+      "sha256": "67ca38e21eaf4f0654c50c13043b31a59a6325b0300e9d18067f3484913a7b35",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14151,8 +14151,8 @@
     },
     {
       "path": "phone-intro.css",
-      "bytes": 3356,
-      "sha256": "e0dd2f93abff15024cfefedac1a670e2831a17137f937f8044bea42951f2ccdd",
+      "bytes": 3320,
+      "sha256": "4bf99f2933a18e9f654002468fe937bd322fca279cd299d840490dfd9e862529",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.css"
       ],

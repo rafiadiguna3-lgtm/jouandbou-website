@@ -391,3 +391,7 @@ Validation: build and all 5 asset/geometry tests pass; all 11 device-layout case
 Once explicit zoom-out restores the phone intro within the 5% near-minimum band, panning no longer dismisses the text or cancels a pending reveal as camera easing finishes. Tiny zoom-in intent/direction still immediately clears the restored state and hides copy; panning cannot reveal it afterward. Initial landing copy retains its sensitive pan dismissal. Work navigation and entering 3D clear restored state. Extend the sensitivity regression to cover large/repeated pans, pans during pending reveal and microscopic zoom-in cancellation.
 
 Further zoom-out after restoration also retains visible copy, including repeated zoom-out at the clamp; only zoom-in dismisses it during map exploration. Add explicit regression assertions for continued zoom-out and the clamped stop.
+
+### Show the initial active service indicator (2026-10-17)
+
+Show the arrow and underline on the selected phone service from initial entry, including the default Full Package choice, matching the supplied reference. Style the existing aria-pressed state without requiring a prior click; selecting Interior Design still moves the indicator and does not create a new section. Work-link selection styling and intro show/hide behavior remain unchanged. Version the stylesheet URL.
