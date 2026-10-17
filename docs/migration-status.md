@@ -315,3 +315,7 @@ Smartphone search remains hidden. Introductory text returns when zooming out bel
 ### Remove the former phone search-area chevron (2026-10-17)
 
 Removed the introduction toggle button and its manual visibility state entirely. Smartphone search remains hidden from first paint, with no replacement control above the work links. Intro typography, spacing, far-zoom restoration, fade behavior and centered map reset remain as established. Desktop search is unchanged.
+
+## SEO preview validation (2026-10-17, PR #4)
+
+Homepage metadata, crawler discovery files, and favicon priority are intentional changes. Preserve the homepage SEO title in about.mjs after initialization and section navigation. Update the manifest for index.html and about.mjs while retaining published provenance; build and asset tests validate all hashes without exceptions.
