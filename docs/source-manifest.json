@@ -14160,8 +14160,8 @@
     },
     {
       "path": "phone-intro.mjs",
-      "bytes": 2196,
-      "sha256": "5860c8d13dab3f724fad0dda27bc74c01c944855d324ee12cb5499c3e6a296b4",
+      "bytes": 2416,
+      "sha256": "899238d97ae2550031fbdeb49ed0ad6ec872a9c35ea559990d361fe7eabb0f08",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.mjs"
       ],
