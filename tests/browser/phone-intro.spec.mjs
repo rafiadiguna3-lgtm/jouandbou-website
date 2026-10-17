@@ -43,6 +43,9 @@ test('phone copy hides after a tiny pan and returns only on an explicit zoom-out
  await apply(9.5,.7);await expect(intro).toHaveCSS('opacity','0');
  await apply(9.5,.7);await expect(intro).toHaveCSS('opacity','0');
  await apply(9.4,.7);await expect(intro).toHaveCSS('opacity','1');
- await apply(9.5,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(9.401,.7);await expect(intro).toHaveCSS('opacity','0');await expect(summary).toHaveCSS('opacity','0');
+ await apply(9.38,.7);await expect(intro).toHaveCSS('opacity','1');
+ await apply(9.38,.87);await expect(intro).toHaveCSS('opacity','0');
+ await apply(9.38,.87);await expect(intro).toHaveCSS('opacity','0');
  await context.close();
 });

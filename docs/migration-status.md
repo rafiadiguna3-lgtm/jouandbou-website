@@ -353,3 +353,7 @@ Home copy keeps its initial appearance and existing layout. A cumulative pan of 
 ### Phone copy return threshold adjustment (2026-10-17)
 
 The requested zoom-out return threshold is now 95% of the initial map scale, superseding 85%. Small-pan dismissal and the existing fade remain unchanged.
+
+### Minimal phone copy show/hide stages (2026-10-17)
+
+Phone home copy now dismisses on a zoom-in increase above 0.01% or a pan of approximately 1.5 screen pixels, including when it was just restored in a distant view. An explicit zoom-out of at least 0.2% can restore it at or below the existing 95% threshold. Visibility remains a binary shown/hidden state, with a short 100 ms opacity transition shared by work links, guidance and the studio summary; camera easing does not retrigger it. Typography and layout are unchanged.

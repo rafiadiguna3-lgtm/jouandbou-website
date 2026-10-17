@@ -8,9 +8,9 @@ export function createPhoneIntro(){
   const target=state.goal||view;
   if(!motionAnchor)motionAnchor={...target};
   const panPixels=Math.hypot(target.x-motionAnchor.x,target.z-motionAnchor.z)*Math.min(target.scale,motionAnchor.scale);
-  const zoomChanged=Math.abs(Math.log(target.scale/motionAnchor.scale))>.005;
-  if(panPixels>=3||zoomChanged){
-   revealOnZoomOut=zoomChanged&&target.scale<motionAnchor.scale&&target.scale<=home.scale*.95;
+  const zoomDelta=Math.log(target.scale/motionAnchor.scale),zoomingOut=zoomDelta<-.002,zoomChanged=zoomDelta>.0001||zoomingOut;
+  if(panPixels>=1.5||zoomChanged){
+   revealOnZoomOut=zoomingOut&&target.scale<=home.scale*.95;
    dismissed=true;motionAnchor={...target};
   }
   if(front){dismissed=true;revealOnZoomOut=false;}
