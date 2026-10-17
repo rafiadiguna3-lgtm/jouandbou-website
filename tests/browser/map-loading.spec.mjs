@@ -9,7 +9,7 @@ for(const phone of [false,true])test(`recognizable lightweight houses load in th
  const initialScale=await page.evaluate(()=>window.mapLoadingQA().scale);
  await page.waitForFunction(()=>{const s=window.mapLoadingQA();return s.loaded>0&&s.visible.every(id=>s.lods.includes(id));});
  expect(details.size).toBe(0);expect(lightweight.size).toBeGreaterThan(0);expect((await page.evaluate(()=>window.mapLoadingQA())).scale).toBe(initialScale);
- if(phone){expect(lightweight.size).toBeLessThan(25);await page.locator('#map-reset').click();await page.waitForFunction(()=>!window.mapLoadingQA().flight);await expect.poll(()=>page.evaluate(()=>window.mapLoadingQA().loaded)).toBe(25);}
+ if(phone){await expect.poll(()=>page.evaluate(()=>window.mapLoadingQA().loaded),{timeout:15000}).toBe(25);expect((await page.evaluate(()=>window.mapLoadingQA())).lods).toContain(29);expect(details.size).toBe(0);}
  else{expect((await page.evaluate(()=>window.mapLoadingQA())).loaded).toBe(25);await page.locator('#labels button').first().focus();await expect(page.locator('#modelStatus')).toBeHidden();expect(details.size).toBe(0);}
  await context.close();
 });
@@ -38,4 +38,18 @@ test('close map views stream detail and distant views return to lightweight rend
  await page.locator('#map-reset').click();await page.waitForFunction(()=>!window.lodSwitchQA().flight);
  await expect.poll(()=>page.evaluate(()=>window.lodSwitchQA().visibleDetails)).toBe(0);
  expect(await page.evaluate(()=>window.lodSwitchQA().visibleLightweight)).toBeGreaterThan(0);
+});
+test('phone pan alone fills JH30 and later houses while the finger is still moving, without detail downloads',async({browser})=>{
+ const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true});const page=await context.newPage(),requests=new Map();let details=0,release;const gate=new Promise(resolve=>release=resolve);
+ await page.route('**/assets/map-mobile-*.bin?*',async route=>{const path=new URL(route.request().url()).pathname;requests.set(path,(requests.get(path)||0)+1);await gate;await route.fulfill({path:'dist'+path,contentType:'application/octet-stream'});});
+ page.on('request',request=>{if(/\/gpu-mobile-.*\.bin\?/.test(request.url()))details++;});
+ await page.route('**/app.mjs*',async route=>route.fulfill({contentType:'text/javascript',body:await readFile('dist/app.mjs','utf8')+'\nwindow.panWarmQA=()=>({scale:camera.scale,goalScale:goal.scale,interacting:engine.interacting,warm:engine.mapWarmStarted,lods:[...engine.lodMetas.keys()]});'}));
+ const session=await context.newCDPSession(page);
+ try{
+  await page.goto('/');await page.waitForFunction(()=>window.panWarmQA);const initial=await page.evaluate(()=>window.panWarmQA());
+  await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:200,y:400}]});await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:155,y:420}]});
+  await expect.poll(()=>page.evaluate(()=>window.panWarmQA().warm)).toBe(true);release();
+  await page.waitForFunction(()=>window.panWarmQA().lods.length===25);
+  const warmed=await page.evaluate(()=>window.panWarmQA());expect(warmed.interacting).toBe(true);expect(warmed.goalScale).toBe(initial.goalScale);expect(warmed.lods).toEqual(expect.arrayContaining([29,33,38,50]));expect(details).toBe(0);expect([...requests.values()]).toEqual(Array(25).fill(1));
+ }finally{release();await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]}).catch(()=>{});await context.close();}
 });

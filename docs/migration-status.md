@@ -361,3 +361,13 @@ Phone home copy now dismisses on a zoom-in increase above 0.01% or a pan of appr
 ### Explicit zoom-out only at 100%, with reversal cancellation (2026-10-17)
 
 Copy restoration now requires an explicit map zoom-out input at or below 100% of initial scale; ordinary camera updates, navigation, panning or residual easing cannot restore it. The phone square overview button reports zoom-out intent when it actually reduces scale. Any zoom-in intent immediately clears pending restoration, even for changes too small to pass the former accumulated zoom threshold. Per-frame goal-direction tracking also cancels a queued reveal after reversal, preventing an unfinished zoom-out from showing copy during a subsequent zoom-in. Initial landing copy and the short fade remain unchanged.
+
+### Reading-time and first-motion map warmup (2026-10-17)
+
+Phone entry previously requested only the first visible lightweight models, ending around JH27; JH30 and later models were not requested until their area entered the viewport. The renderer now warms the remaining lightweight neighborhood after a 1.2-second reading interval or immediately on the first camera/pointer interaction, independent of distance. A bounded low-priority data queue shares decoded promises with geometry loading, avoiding duplicate requests. All 25 map binaries together remain about 0.89 MB; this does not prefetch the 15.65 MB detail collection.
+
+User clarified that the JH30 area is already visible but houses only appear after zooming. Drag/pan and camera movement now warm and admit all lightweight houses irrespective of distance. Lightweight meshes can prepare during map movement and publish at most one house per animation frame; full-detail work retains the gesture/animation idle gate. Hidden sections and focused 3D pause remaining map prefetch. Full detail keeps selected-house priority. This addresses both visitors who pause to read and repeat visitors who immediately move the map. Phone framing is unchanged.
+
+### Home copy returns only at the actual zoom-out limit (2026-10-17)
+
+User clarified that 100% meant the furthest zoom-out stop, not the initial camera scale. The intro controller now receives the same minimum scale used by map zoom clamping (`fitScale(bounds,w,h) * .9`). Only explicit zoom-out at that limit restores copy, with tiny floating-point tolerance; an overview reset above the limit does not restore it. Initial landing text, instant zoom-in cancellation and the existing fade are preserved.

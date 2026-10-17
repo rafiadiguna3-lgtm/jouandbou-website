@@ -87,7 +87,8 @@ export class NeighborhoodRenderer{
   }
   this.detailModes=new Map();this.modelMeshes=[];this.modelState='loading';
   this.modelMetas=new Map();this.modelErrors=new Map();this.pendingModels=new Map();this.loadingModels=new Set();this.interacting=false;this.focusedModel=null;this.priorityModel=null;this.neighborhoodTimer=0;this.neighborhoodView=null;this.modelQueue=createModelQueue([29,0,9,13,44,...glbIds],async (id,{foreground}={})=>{try{await this.loadHouse(id,mobileAsset(id),foreground)}catch(error){this.modelErrors.set(id,error);console.error('House model unavailable',id,error)}},{concurrency:1,demand:true,initialCount:0});
-  this.lodMetas=new Map();this.lodErrors=new Map();
+  this.lodMetas=new Map();this.lodErrors=new Map();this.mapData=new Map();this.mapWarmTimer=0;this.mapWarmStarted=false;
+  this.mapWarmQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.readMapData(id)}catch(error){this.lodErrors.set(id,error)}},{concurrency:this.touchDevice?1:2,demand:true,initialCount:0});
   this.lodQueue=createModelQueue([29,0,9,13,44,...glbIds],async id=>{try{await this.loadHouse(id,mobileAsset(id),false,true)}catch(error){this.lodErrors.set(id,error);console.error('Map model unavailable',id,error)}},{concurrency:this.touchDevice?1:2,demand:true,initialCount:0});
   this.firstReady=Promise.resolve();this.ready=this.lodQueue.ready;
 
@@ -99,10 +100,16 @@ export class NeighborhoodRenderer{
   ray.setFromCamera(new THREE.Vector2((x-rect.left)/rect.width*2-1,1-(y-rect.top)/rect.height*2),this.camera);
   return ray.intersectObjects(this.modelMeshes.filter(mesh=>mesh.visible&&mesh.userData.id===id),false).length>0;
  }
- syncQueues(){const paused=this.suspended||this.interacting||this.animating||this.focusedModel!==null;this.modelQueue?.setPaused(paused);this.lodQueue?.setPaused(paused);}
- setInteracting(value){const changed=this.interacting!==value;this.interacting=value;this.syncQueues();if(!value){this.scheduleNeighborhood();if(changed)this.onChange();}}
- setAnimating(value){if(this.animating===value)return;this.animating=value;this.syncQueues();if(value)clearTimeout(this.neighborhoodTimer);else this.scheduleNeighborhood();}
- setVisible(value){this.suspended=!value;if(!value)this.animating=false;this.syncQueues();if(!value)clearTimeout(this.neighborhoodTimer);}
+ syncQueues(){const paused=this.suspended||this.interacting||this.animating||this.focusedModel!==null;this.modelQueue?.setPaused(paused);this.lodQueue?.setPaused(this.suspended||this.focusedModel!==null);this.mapWarmQueue?.setPaused(this.suspended||this.focusedModel!==null);}
+ setInteracting(value){const changed=this.interacting!==value;this.interacting=value;this.syncQueues();if(value)this.warmMap();if(!value){this.scheduleNeighborhood();if(changed)this.onChange();}}
+ setAnimating(value){if(this.animating===value)return;this.animating=value;this.syncQueues();if(value)this.warmMap();if(value)clearTimeout(this.neighborhoodTimer);else this.scheduleNeighborhood();}
+ setVisible(value){this.suspended=!value;if(!value)this.animating=false;this.syncQueues();if(!value){clearTimeout(this.neighborhoodTimer);clearTimeout(this.mapWarmTimer);this.mapWarmTimer=0;}else if(!this.mapWarmStarted&&!this.mapWarmTimer)this.mapWarmTimer=setTimeout(()=>this.warmMap(),1200);}
+ readMapData(id){if(!this.mapData.has(id))this.mapData.set(id,readModelData(`map-${mobileAsset(id)}`,{priority:'low'}).catch(error=>{this.mapData.delete(id);throw error;}));return this.mapData.get(id);}
+ warmMap(){
+  if(this.mapWarmStarted||this.suspended||document.hidden||this.focusedModel!==null)return;
+  this.mapWarmStarted=true;clearTimeout(this.mapWarmTimer);this.mapWarmTimer=0;
+  const ids=[29,0,9,13,44,...glbIds];this.mapWarmQueue.request(ids);this.lodQueue.request(ids);
+ }
  scheduleNeighborhood(){
   clearTimeout(this.neighborhoodTimer);
   if(this.suspended||this.interacting||this.animating||this.focusedModel!==null||document.hidden||!this.neighborhoodView)return;
@@ -117,8 +124,8 @@ export class NeighborhoodRenderer{
  }
  ensureModel(id){this.priorityModel=id;this.modelQueue?.prioritize(id)}
  async loadHouse(id,asset,foreground=false,lod=false){
-  const {meta,buffer}=await readModelData(`${lod?'map':'gpu'}-${asset}`,{priority:id===this.priorityModel?'high':'low'});
-  const waitForIdle=async()=>{while(this.suspended||document.hidden||this.interacting||this.animating||(this.focusedModel!==null&&id!==this.priorityModel&&!foreground))await new Promise(resolve=>setTimeout(resolve,60));};
+  const {meta,buffer}=await (lod?this.readMapData(id):readModelData(`gpu-${asset}`,{priority:id===this.priorityModel?'high':'low'}));
+  const waitForIdle=async()=>{while(this.suspended||document.hidden||(lod?this.focusedModel!==null:this.interacting||this.animating||(this.focusedModel!==null&&id!==this.priorityModel&&!foreground)))await new Promise(resolve=>setTimeout(resolve,60));};
   await waitForIdle();
   const positions=new Float32Array(buffer,0,meta.vertexCount*3);
   const colors=new Uint8Array(buffer,meta.vertexCount*12,meta.vertexCount*4);
@@ -148,6 +155,7 @@ export class NeighborhoodRenderer{
    mesh.userData={id,lod,sourceModel:true,layer:range.layer,sourceTransparent:!!range.transparent};mesh.renderOrder=range.transparent?100:10+range.material;
    meshes.push(mesh);
   }
+  if(lod){this.mapCommit=(this.mapCommit||Promise.resolve()).then(()=>new Promise(resolve=>requestAnimationFrame(resolve)));await this.mapCommit;}
   await waitForIdle();
   for(const mesh of meshes){this.scene.add(mesh);this.modelMeshes.push(mesh);}
   (lod?this.lodMetas:this.modelMetas).set(id,meta);if(!lod&&id===29)this.modelMeta=meta;

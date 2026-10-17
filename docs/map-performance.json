@@ -43,5 +43,6 @@
         "longTaskMilliseconds": 127
       }
     }
-  ]
+  ],
+  "policyNote": "These samples record the earlier visible-area-only policy. The movement/reading warmup now prepares all 25 lightweight map binaries on phone as well, bounded by 889856 compressed asset bytes total; full-detail models remain separate. The earlier 353459-byte phone sample is not the current complete warmup transfer."
 }

@@ -5,7 +5,7 @@ export function createPhoneIntro(){
  function update(state){
   last=state;const {phone,front,view,home}=state,intent=zoomIntent;zoomIntent=null;
   if(!phone||!home){intro.inert=true;guide.inert=true;summary.style.removeProperty('--intro-opacity');summary.inert=false;summary.removeAttribute('aria-hidden');return;}
-  const target=state.goal||view;
+  const target=state.goal||view,minScale=state.minScale??home.scale,atLimit=scale=>scale<=minScale*(1+1e-6);
   if(!motionAnchor)motionAnchor={...target};
   const panPixels=Math.hypot(target.x-motionAnchor.x,target.z-motionAnchor.z)*Math.min(target.scale,motionAnchor.scale);
   const zoomDelta=Math.log(target.scale/motionAnchor.scale),zoomChanged=Math.abs(zoomDelta)>.0001;
@@ -13,10 +13,10 @@ export function createPhoneIntro(){
   previousScale=target.scale;
   if(intent==='in'||reversedToZoomIn){dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
   else if(intent==='out'){
-   dismissed=true;revealOnZoomOut=target.scale<=home.scale;motionAnchor={...target};
+   dismissed=true;revealOnZoomOut=atLimit(target.scale);motionAnchor={...target};
   }else if(panPixels>=1.5||zoomChanged){dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
   if(front){dismissed=true;revealOnZoomOut=false;}
-  else if(revealOnZoomOut&&view.scale<=home.scale&&target.scale<=home.scale){dismissed=false;revealOnZoomOut=false;}
+  else if(revealOnZoomOut&&atLimit(view.scale)&&atLimit(target.scale)){dismissed=false;revealOnZoomOut=false;}
   let opacity=dismissed?0:1;
   const searching=document.body.classList.contains('search-open');
   if(front||searching)opacity=0;

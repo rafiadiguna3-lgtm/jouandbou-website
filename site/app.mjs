@@ -66,7 +66,7 @@ function calloutHouseShape(id){
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]);
  return {roofTop:Math.min(...ys),span:Math.max(...xs)-Math.min(...xs),height:Math.max(...ys)-Math.min(...ys)};
 }
-function render(){phoneIntro.update({phone:!desktopInput(),front,view:camera,goal,home:phoneHome});houseCallout.update(previewId,previewId===29?'Marboy House':names[previewId],previewId>=0?title(previewId):'',previewId>=0?project(world.anchors[previewId],camera,w,h).slice(0,2):null,w,h,previewId>=0&&!front,camera.scale,previewId>=0?calloutHouseShape(previewId):null);updateModelStatus();engine.render(camera,w,h,current,front,hoverLevels);
+function render(){phoneIntro.update({phone:!desktopInput(),front,view:camera,goal,home:phoneHome,minScale:fitScale(bounds,w,h)*.9});houseCallout.update(previewId,previewId===29?'Marboy House':names[previewId],previewId>=0?title(previewId):'',previewId>=0?project(world.anchors[previewId],camera,w,h).slice(0,2):null,w,h,previewId>=0&&!front,camera.scale,previewId>=0?calloutHouseShape(previewId):null);updateModelStatus();engine.render(camera,w,h,current,front,hoverLevels);
 if(desktopInput())labels.forEach((b,i)=>{const hidden=front||!canExplore(i);if(b.hidden!==hidden)b.hidden=hidden;if(hidden)return;b.classList.toggle('shown',i===hover);const p=project(world.anchors[i],camera,w,h),left=`${Math.max(12,Math.min(w-160,p[0]))}px`,top=`${Math.max(210,Math.min(h-100,p[1]))}px`;if(b.style.left!==left)b.style.left=left;if(b.style.top!==top)b.style.top=top})
 }
 

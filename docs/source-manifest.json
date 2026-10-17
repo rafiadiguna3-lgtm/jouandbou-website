@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 40721,
-      "sha256": "27ba6ba259e479ba8a94389e8a6375de5775def2e240c9650f346b9f6e580058",
+      "bytes": 40754,
+      "sha256": "7a671bd20cc1aff788d8701c7d34673e10bf74bcc95241575f54a64b1d19a096",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13775,8 +13775,8 @@
     },
     {
       "path": "renderer.mjs",
-      "bytes": 14348,
-      "sha256": "b97490356f7daadeed8d127828ee3f39f610c2a20b4b7a9da36e02b37346f441",
+      "bytes": 15615,
+      "sha256": "da100b8b4ce069fb4e17aacd17461587426674adbb10278cb701687340679177",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/renderer.mjs"
       ],
@@ -14160,8 +14160,8 @@
     },
     {
       "path": "phone-intro.mjs",
-      "bytes": 2884,
-      "sha256": "063e76a19bea1db1fadccaf70af5e7423d4dc963ee7ffd6d988f2aec9ba9a15a",
+      "bytes": 2951,
+      "sha256": "b393db722646bf250798fee882a99a4185bdf15caae471e4c328e4c632221765",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.mjs"
       ],
