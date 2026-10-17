@@ -395,3 +395,7 @@ Further zoom-out after restoration also retains visible copy, including repeated
 ### Show the initial active service indicator (2026-10-17)
 
 Show the arrow and underline on the selected phone service from initial entry, including the default Full Package choice, matching the supplied reference. Style the existing aria-pressed state without requiring a prior click; selecting Interior Design still moves the indicator and does not create a new section. Work-link selection styling and intro show/hide behavior remain unchanged. Version the stylesheet URL.
+
+### Phone square reset returns to the text overview (2026-10-17)
+
+Set the phone square overview scale to the same near-minimum reveal boundary (map minimum × 1.05), retaining the neighborhood center and 55% vertical placement. Add an explicit overview intent to the intro controller so resetting from either a close view or the furthest zoom-out stop shows the text reliably; ordinary zoom-in remains sensitive and dismisses it. Desktop square reset and initial phone entry framing remain unchanged. Update home framing and phone intro regressions to check the reset scale, text visibility and reset from the minimum.

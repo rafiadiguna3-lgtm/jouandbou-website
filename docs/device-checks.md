@@ -8,7 +8,7 @@ Run `npm run test:browser` for navigation, map loading, touch gestures, 3D camer
 
 The cloud browser is Linux Chromium with software WebGL. iPhone/Android device profiles emulate viewport, density and input; they do not run Safari or native Android browsers. Native iOS Safari, Android Chrome, Windows Chrome/Edge and macOS Safari/Chrome still need a hardware check. Do not interpret cloud timings as real-device FPS or claim a CPU percentage saving from these tests.
 
-On hardware, check initial house visibility (including JH30 onward), drag before zooming, small-pan dismissal on initial entry, explicit near-minimum-zoom restoration with copy retained during panning and dismissed by tiny zoom-in, reset overview, rotate phone/tablet, enter/orbit/exit 3D, and open/close project details and galleries. Compare the same route and zoom framing; confirm readable text, circular controls, no overlap or horizontal overflow, and no camera jump when detailed geometry arrives.
+On hardware, check initial house visibility (including JH30 onward), drag before zooming, small-pan dismissal on initial entry, explicit near-minimum-zoom restoration with copy retained during panning and dismissed by tiny zoom-in, square reset to the centered text overview (including from the furthest zoom-out), rotate phone/tablet, enter/orbit/exit 3D, and open/close project details and galleries. Compare the same route and zoom framing; confirm readable text, circular controls, no overlap or horizontal overflow, and no camera jump when detailed geometry arrives.
 
 ## Validation record — 2026-10-17
 

@@ -10,7 +10,7 @@ for(const name of ['iPhone 13','Pixel 7'])test(`${name} intro returns at distant
  await expect.poll(()=>page.locator('[data-service=full-package]').evaluate(el=>getComputedStyle(el,'::before').content)).toBe('"›"');
  await page.locator('[data-service=interior-design]').click();await expect(page.locator('[data-service=interior-design]')).toHaveCSS('text-decoration-line','underline');await expect(page.locator('[data-service=full-package]')).toHaveCSS('text-decoration-line','none');
  await page.locator('#phone-jou-works').click();await expect(intro).toHaveCSS('opacity','0');await expect(page).toHaveURL(/#projects$/);await expect(toggle).toHaveCount(0);
- await page.locator('#map-reset').click();await expect(intro).toHaveCSS('opacity','0');await expect(search).toBeHidden();await expect(toggle).toHaveCount(0);
+ await page.locator('#map-reset').click();await expect(intro).toHaveCSS('opacity','1');await expect(search).toBeHidden();await expect(toggle).toHaveCount(0);
  for(let i=0;i<10;i++)await page.locator('#map-zoom-in').click();
  await expect(intro).toHaveCSS('opacity','0');await expect(search).toBeHidden();
  await page.evaluate(()=>{for(let i=0;i<30;i++)document.querySelector('#map-zoom-out').click();});

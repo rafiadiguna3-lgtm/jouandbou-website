@@ -38,7 +38,7 @@ function homeCamera(overview=false){
  const points=vertices.map(point=>project(point,pose,0,0));
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
  if(!desktopInput()&&overview){
-  const scale=Math.min(w*.88/(right-left),h*.62/(bottom-top));
+  const scale=fitScale(bounds,w,h)*.9*1.05;
   const u=(left+right)/2,v=(top+bottom)/2+(h/2-h*.55)/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
   const x=u*co+v/sp*si,z=-u*si+v/sp*co;
   homeAnchor=[x,2,z];return {...pose,x,z,scale};
@@ -319,7 +319,7 @@ $('more').onclick=openProjectDetails;
 function returnHome({fromSection=false,overview=false}={}){
  const focus=front||previewId>=0?modelCameraFocus():null;
  document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();
- goal=homeCamera(overview);if(overview&&!desktopInput()&&goal.scale<camera.scale)phoneIntro.onZoom('out');zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
+ goal=homeCamera(overview);if(overview&&!desktopInput())phoneIntro.onOverview();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
 }
 $('projects').onclick=returnHome;
 
