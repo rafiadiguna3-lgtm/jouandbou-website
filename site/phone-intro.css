@@ -1,4 +1,4 @@
-.phone-intro,.phone-intro-guide,#phone-intro-toggle{display:none}
+.phone-intro,.phone-intro-guide{display:none}
 @media(max-width:760px),(hover:none),(pointer:coarse){
  .phone-intro{display:block;position:fixed;z-index:5;left:32px;right:24px;top:clamp(136px,20vh,174px);font-family:var(--jb-display,Lato,Arial,sans-serif);color:#26291f}
  .phone-work-links{display:flex;align-items:baseline;justify-content:flex-start;width:auto;gap:24px;white-space:nowrap}
@@ -13,19 +13,14 @@
  .phone-intro-guide p{margin:0 0 26px}.phone-intro-guide p:last-child{margin:0}
  .phone-intro,.phone-intro-guide{opacity:var(--intro-opacity,1);transition:opacity .16s ease-out;transform:none}
  .search-wrap{display:none!important}
- #phone-intro-toggle:not([hidden]){display:grid;place-items:center;position:fixed;z-index:6;left:25px;top:calc(var(--jb-header) + 36px + env(safe-area-inset-top));width:44px;height:44px;padding:14px;color:#777;background:transparent;border:0}
- #phone-intro-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;transition:transform .25s ease}
- #phone-intro-toggle[aria-expanded=true] svg{transform:rotate(180deg)}
  body.model-view .phone-intro,body.model-view .phone-intro-guide,
  body.view-about .phone-intro,body.view-about .phone-intro-guide,
- body.view-contact .phone-intro,body.view-contact .phone-intro-guide,
- body.view-about #phone-intro-toggle,body.view-contact #phone-intro-toggle{display:none}
+ body.view-contact .phone-intro,body.view-contact .phone-intro-guide{display:none}
 }
 @media(orientation:landscape) and (max-height:540px){
  .phone-intro{top:78px;left:24px}.phone-work-links button,.phone-work-links a{font-size:20px}
  .phone-intro-guide{left:24px;bottom:24px;font-size:11px;line-height:1.5;max-width:230px}.phone-intro-guide p{margin-bottom:8px}
- #phone-intro-toggle:not([hidden]){left:auto;right:16px;top:62px}
 }
-@media(prefers-reduced-motion:reduce){.phone-intro,.phone-intro-guide,#phone-intro-toggle svg,.search-wrap,body:not(.phone-exploring) .search-wrap,body.phone-intro-open .search-wrap{transition:none}}
+@media(prefers-reduced-motion:reduce){.phone-intro,.phone-intro-guide{transition:none}}
 
 .phone-intro[aria-hidden=true]{pointer-events:none}

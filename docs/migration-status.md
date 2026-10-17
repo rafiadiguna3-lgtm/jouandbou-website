@@ -311,3 +311,7 @@ Restoring the complete map exposed slow camera settling at low frame rates: the 
 ### Phone overview reset and returning introductory copy (2026-10-16)
 
 Smartphone search remains hidden. Introductory text returns when zooming out below 82% of the initial scale, with a 95% exit threshold to avoid flickering near the boundary; it keeps the existing placement and opacity fade. The phone square reset now fits the complete house area (including loaded model bounds, excluding long approach roads) within 88% of screen width and 62% of height, centered horizontally and slightly below the screen center. It clears project selection and exits 3D through the existing camera transition. Initial landing composition, brand navigation and desktop reset keep their previous behavior.
+
+### Remove the former phone search-area chevron (2026-10-17)
+
+Removed the introduction toggle button and its manual visibility state entirely. Smartphone search remains hidden from first paint, with no replacement control above the work links. Intro typography, spacing, far-zoom restoration, fade behavior and centered map reset remain as established. Desktop search is unchanged.
