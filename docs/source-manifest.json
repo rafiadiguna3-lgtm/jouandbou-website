@@ -13301,8 +13301,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 109689,
-      "sha256": "67ca38e21eaf4f0654c50c13043b31a59a6325b0300e9d18067f3484913a7b35",
+      "bytes": 109916,
+      "sha256": "b17661831d7f4b3ea767f560952c32590f1d7d528740712cfb7a640c8bf4eca0",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14697,6 +14697,15 @@
       "published_sha256": "77d289b147537823ec59d762f201c8760c248582f411f84ea3a01deeff01cd63",
       "published_bytes": 1366,
       "modified_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-share-outline-v1.png",
+      "bytes": 871592,
+      "sha256": "b91beb4531aa9e0c09f1ca3522c3d538a559620478248dcc1d93d6321ae029c3",
+      "source_urls": [
+        "conversation-upload://jou-and-bou-outline-logo/share-image"
+      ],
+      "authored_locally": true
     }
   ],
   "previous_sources": [

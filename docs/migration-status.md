@@ -399,3 +399,9 @@ Show the arrow and underline on the selected phone service from initial entry, i
 ### Phone square reset returns to the text overview (2026-10-17)
 
 Set the phone square overview scale to the same near-minimum reveal boundary (map minimum × 1.05), retaining the neighborhood center and 55% vertical placement. Add an explicit overview intent to the intro controller so resetting from either a close view or the furthest zoom-out stop shows the text reliably; ordinary zoom-in remains sensitive and dismisses it. Desktop square reset and initial phone entry framing remain unchanged. Update home framing and phone intro regressions to check the reset scale, text visibility and reset from the minimum.
+
+### Dedicated outline-logo share image (2026-10-17)
+
+The white-filled small favicon used as og:image could look blank against a white WhatsApp thumbnail. Use a dedicated 1254×1254 black-outline logo image on white, prepared from the user-provided reference with the image editing tool and centered with generous whitespace for thumbnail legibility. Point Open Graph, Twitter and WebSite structured-data images to a new versioned PNG URL; declare image dimensions, PNG type and descriptive alt text. Keep tab/app icons unchanged. The generated share asset is a prepared rendition of the reference, not a byte-for-byte original upload. Existing WhatsApp previews may remain cached, and live crawler access cannot be verified in this environment.
+
+User requested a smaller logo after the first draft: use the revised composition with approximately 60% logo height and generous white margins, instead of the tightly enlarged draft.
