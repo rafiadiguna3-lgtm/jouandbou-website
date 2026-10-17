@@ -27,6 +27,7 @@ for(const [name,options,compact] of cases){
     expect(geometry.overflow,`${selector} content fits`).toBe(false);
     if(selector.startsWith('#map-')){expect(geometry.width).toBe(46);expect(geometry.height).toBe(46);}
    }
+   if(compact&&options.viewport.height>options.viewport.width){const gap=await page.evaluate(()=>document.querySelector('#phone-intro').getBoundingClientRect().top-document.querySelector('header').getBoundingClientRect().bottom);expect(gap).toBeCloseTo(28,0);}
    await page.screenshot({path:testInfo.outputPath(`${name}-home.png`)});
    await testInfo.attach('home baseline',{path:testInfo.outputPath(`${name}-home.png`),contentType:'image/png'});
    await page.locator('#map-zoom-in').click();

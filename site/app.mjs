@@ -45,7 +45,7 @@ function homeCamera(overview=false){
  }
  if(!desktopInput()){
   const scale=1.35*Math.min(w*1.7/(right-left),h*.68/(bottom-top));
-  const u=left+(w/2-w*(compactLandscape()?.42:.18))/scale,v=top+(h/2-h*.32)/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
+  const u=left+(w/2-w*(compactLandscape()?.42:w<700?.06:.18))/scale,v=top+(h/2-h*(w<700&&!compactLandscape()?.31:.32))/scale,co=Math.cos(pose.yaw),si=Math.sin(pose.yaw),sp=Math.sin(pose.pitch);
   const x=u*co+v/sp*si,z=-u*si+v/sp*co;homeAnchor=[x,2,z];phoneHome={...pose,x,z,scale};return {...phoneHome};
  }
  phoneHome=null;
