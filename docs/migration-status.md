@@ -385,3 +385,9 @@ Landscape checks also found the inherited 56 px brand-image box extending 2 px a
 Add a 420 ms opacity/7 px upward entrance to phone work links, service links, studio summary and guidance, with a small 40–130 ms group stagger. CSS starts the entrance on initial paint and replays it on a hidden-to-visible change, without per-frame JavaScript or layout animation. Existing 100 ms dismissal and tiny pan/zoom-in sensitivity remain. Reduced-motion disables the entrance. Change explicit zoom-out restoration from the exact minimum to minimum scale × 1.05 (5% above the furthest zoom-out scale); automatic camera updates and zoom-in reversals cannot reveal it. Version the intro stylesheet for this change.
 
 Validation: build and all 5 asset/geometry tests pass; all 11 device-layout cases pass; all 6 phone-intro tests pass, covering 5% threshold boundaries, tiny-pan dismissal, zoom-in reversal, entrance replay and reduced motion.
+
+### Preserve restored phone copy while panning the zoomed-out map (2026-10-17)
+
+Once explicit zoom-out restores the phone intro within the 5% near-minimum band, panning no longer dismisses the text or cancels a pending reveal as camera easing finishes. Tiny zoom-in intent/direction still immediately clears the restored state and hides copy; panning cannot reveal it afterward. Initial landing copy retains its sensitive pan dismissal. Work navigation and entering 3D clear restored state. Extend the sensitivity regression to cover large/repeated pans, pans during pending reveal and microscopic zoom-in cancellation.
+
+Further zoom-out after restoration also retains visible copy, including repeated zoom-out at the clamp; only zoom-in dismisses it during map exploration. Add explicit regression assertions for continued zoom-out and the clamped stop.

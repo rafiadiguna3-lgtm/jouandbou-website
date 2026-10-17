@@ -1,7 +1,7 @@
 // Camera-driven landing copy; desktop navigation keeps its existing behavior.
 export function createPhoneIntro(){
  const intro=document.getElementById('phone-intro'),guide=document.getElementById('phone-intro-guide'),summary=document.getElementById('home-summary');
- let last=null,dismissed=false,motionAnchor=null,revealOnZoomOut=false,zoomIntent=null,previousScale=null;
+ let last=null,dismissed=false,motionAnchor=null,revealOnZoomOut=false,zoomIntent=null,previousScale=null,restoredVisible=false;
  function update(state){
   last=state;const {phone,front,view,home}=state,intent=zoomIntent;zoomIntent=null;
   if(!phone||!home){intro.inert=true;guide.inert=true;summary.style.removeProperty('--intro-opacity');summary.inert=false;summary.removeAttribute('aria-hidden');return;}
@@ -11,12 +11,12 @@ export function createPhoneIntro(){
   const zoomDelta=Math.log(target.scale/motionAnchor.scale),zoomChanged=Math.abs(zoomDelta)>.0001;
   const reversedToZoomIn=previousScale!==null&&target.scale>previousScale*(1+1e-9);
   previousScale=target.scale;
-  if(intent==='in'||reversedToZoomIn){dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
+  if(intent==='in'||reversedToZoomIn){restoredVisible=false;dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
   else if(intent==='out'){
    dismissed=true;revealOnZoomOut=atLimit(target.scale);motionAnchor={...target};
-  }else if(panPixels>=1.5||zoomChanged){dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
-  if(front){dismissed=true;revealOnZoomOut=false;}
-  else if(revealOnZoomOut&&atLimit(view.scale)&&atLimit(target.scale)){dismissed=false;revealOnZoomOut=false;}
+  }else if((panPixels>=1.5||zoomChanged)&&!(atLimit(target.scale)&&(restoredVisible||revealOnZoomOut))){dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
+  if(front){restoredVisible=false;dismissed=true;revealOnZoomOut=false;}
+  else if(revealOnZoomOut&&atLimit(view.scale)&&atLimit(target.scale)){dismissed=false;restoredVisible=true;revealOnZoomOut=false;}
   let opacity=dismissed?0:1;
   const searching=document.body.classList.contains('search-open');
   if(front||searching)opacity=0;
@@ -31,12 +31,12 @@ export function createPhoneIntro(){
   for(const option of intro.querySelectorAll('[data-work]')){if(option.dataset.work===work)option.setAttribute('aria-current','page');else option.removeAttribute('aria-current');}
  };
  for(const button of intro.querySelectorAll('[data-work]'))button.onclick=()=>{
-  button.dataset.chosen='true';dismissed=true;revealOnZoomOut=false;update(last);
+  button.dataset.chosen='true';restoredVisible=false;dismissed=true;revealOnZoomOut=false;update(last);
   if(button.dataset.work==='bou')location.hash='bou-works';else document.getElementById('projects').click();
  };
  addEventListener('hashchange',syncWork);syncWork();
  for(const button of intro.querySelectorAll('[data-service]'))button.onclick=()=>{
   for(const option of intro.querySelectorAll('[data-service]')){option.setAttribute('aria-pressed',String(option===button));option.dataset.chosen=String(option===button);}
  };
- return {update,onZoom(direction){zoomIntent=direction;if(direction==='in'){dismissed=true;revealOnZoomOut=false;}}};
+ return {update,onZoom(direction){zoomIntent=direction;if(direction==='in'){restoredVisible=false;dismissed=true;revealOnZoomOut=false;}}};
 }

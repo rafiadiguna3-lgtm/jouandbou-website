@@ -46,13 +46,22 @@ test('phone copy hides after a tiny pan and returns only on explicit zoom-out wi
  await apply(10,.31);await expect(intro).toHaveCSS('opacity','0');
  await apply(5.3,.31);await expect(intro).toHaveCSS('opacity','0');
  await apply(5.25,.31);await expect(intro).toHaveCSS('opacity','1');
- await apply(5.25,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5.25,.7);await expect(intro).toHaveCSS('opacity','1');
+ await apply(5.25,-20);await expect(intro).toHaveCSS('opacity','1');await expect(summary).toHaveCSS('opacity','1');
+ await apply(5.1,-20);await expect(intro).toHaveCSS('opacity','1');
+ await apply(5,-20);await expect(intro).toHaveCSS('opacity','1');
+ await page.evaluate(()=>window.introSensitivity.onZoom('out'));await apply(5,-20);await expect(intro).toHaveCSS('opacity','1');
+ await apply(5.00000001,-20);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5.25,-20,false);await expect(intro).toHaveCSS('opacity','0');
  await apply(5.4,.7);await expect(intro).toHaveCSS('opacity','0');
  await apply(5,.7,true,5.4);await expect(intro).toHaveCSS('opacity','0');
  await apply(5.00000001,.7,true,5.05);await expect(intro).toHaveCSS('opacity','0');
  await apply(5.00000001,.7,false);await expect(intro).toHaveCSS('opacity','0');
  await apply(5,.7,false);await expect(intro).toHaveCSS('opacity','0');
- await page.evaluate(()=>window.introSensitivity.onZoom('out'));await apply(5,.7,false);await expect(intro).toHaveCSS('opacity','1');
+ await page.evaluate(()=>window.introSensitivity.onZoom('out'));await apply(5,.7,false,5.4);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5,10,false,5.3);await expect(intro).toHaveCSS('opacity','0');
+ await apply(5,20,false);await expect(intro).toHaveCSS('opacity','1');
+ await apply(5,-20,false);await expect(intro).toHaveCSS('opacity','1');
  await context.close();
 });
 
