@@ -26,3 +26,12 @@ test('readiness retains all initial critical houses and failures do not stall th
  const failed=createModelQueue([1,2],async()=>{throw new Error('unavailable');});await failed.ready;await failed.firstReady;
  assert.equal(started.length,4);
 });
+test('demand queues admit only requested models and selection retains the foreground lane',async()=>{
+ const started=[],finish=new Map();
+ const queue=createModelQueue([1,2,3],id=>{started.push(id);return new Promise(resolve=>finish.set(id,resolve));},{demand:true,initialCount:0,concurrency:1});
+ await queue.firstReady;await flush();assert.deepEqual(started,[]);
+ queue.request([2]);await flush();assert.deepEqual(started,[2]);
+ queue.setPaused(true);queue.prioritize(3);await flush();assert.deepEqual(started,[2,3]);
+ finish.get(2)();finish.get(3)();queue.request([1]);await flush();assert.ok(!started.includes(1));
+ queue.setPaused(false);await flush();finish.get(1)();await queue.ready;
+});

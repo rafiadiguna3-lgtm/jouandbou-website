@@ -1,0 +1,177 @@
+[
+  {
+    "id": 29,
+    "sourceBytes": 1142342,
+    "mapBytes": 40906,
+    "sourceTriangles": 60911,
+    "mapTriangles": 3399
+  },
+  {
+    "id": 0,
+    "sourceBytes": 284074,
+    "mapBytes": 25312,
+    "sourceTriangles": 15792,
+    "mapTriangles": 2081
+  },
+  {
+    "id": 9,
+    "sourceBytes": 847273,
+    "mapBytes": 71749,
+    "sourceTriangles": 46946,
+    "mapTriangles": 7074
+  },
+  {
+    "id": 13,
+    "sourceBytes": 486868,
+    "mapBytes": 24215,
+    "sourceTriangles": 19653,
+    "mapTriangles": 1802
+  },
+  {
+    "id": 44,
+    "sourceBytes": 94263,
+    "mapBytes": 20542,
+    "sourceTriangles": 7368,
+    "mapTriangles": 2126
+  },
+  {
+    "id": 5,
+    "sourceBytes": 737369,
+    "mapBytes": 35286,
+    "sourceTriangles": 58366,
+    "mapTriangles": 3624
+  },
+  {
+    "id": 11,
+    "sourceBytes": 363408,
+    "mapBytes": 24488,
+    "sourceTriangles": 26608,
+    "mapTriangles": 2336
+  },
+  {
+    "id": 12,
+    "sourceBytes": 300866,
+    "mapBytes": 34176,
+    "sourceTriangles": 17536,
+    "mapTriangles": 3400
+  },
+  {
+    "id": 18,
+    "sourceBytes": 649067,
+    "mapBytes": 65903,
+    "sourceTriangles": 39451,
+    "mapTriangles": 6512
+  },
+  {
+    "id": 19,
+    "sourceBytes": 889374,
+    "mapBytes": 44736,
+    "sourceTriangles": 46608,
+    "mapTriangles": 3025
+  },
+  {
+    "id": 26,
+    "sourceBytes": 105768,
+    "mapBytes": 7052,
+    "sourceTriangles": 9750,
+    "mapTriangles": 738
+  },
+  {
+    "id": 33,
+    "sourceBytes": 1851514,
+    "mapBytes": 61484,
+    "sourceTriangles": 64095,
+    "mapTriangles": 3407
+  },
+  {
+    "id": 36,
+    "sourceBytes": 1508477,
+    "mapBytes": 58177,
+    "sourceTriangles": 63594,
+    "mapTriangles": 3865
+  },
+  {
+    "id": 38,
+    "sourceBytes": 1150629,
+    "mapBytes": 27051,
+    "sourceTriangles": 46005,
+    "mapTriangles": 2286
+  },
+  {
+    "id": 40,
+    "sourceBytes": 886368,
+    "mapBytes": 37871,
+    "sourceTriangles": 53450,
+    "mapTriangles": 4142
+  },
+  {
+    "id": 41,
+    "sourceBytes": 549861,
+    "mapBytes": 21101,
+    "sourceTriangles": 28639,
+    "mapTriangles": 1847
+  },
+  {
+    "id": 42,
+    "sourceBytes": 94550,
+    "mapBytes": 19112,
+    "sourceTriangles": 6952,
+    "mapTriangles": 1876
+  },
+  {
+    "id": 43,
+    "sourceBytes": 842464,
+    "mapBytes": 43324,
+    "sourceTriangles": 44595,
+    "mapTriangles": 3986
+  },
+  {
+    "id": 45,
+    "sourceBytes": 170385,
+    "mapBytes": 21709,
+    "sourceTriangles": 13749,
+    "mapTriangles": 2050
+  },
+  {
+    "id": 46,
+    "sourceBytes": 535068,
+    "mapBytes": 46688,
+    "sourceTriangles": 34701,
+    "mapTriangles": 3704
+  },
+  {
+    "id": 47,
+    "sourceBytes": 294329,
+    "mapBytes": 35419,
+    "sourceTriangles": 30586,
+    "mapTriangles": 5257
+  },
+  {
+    "id": 48,
+    "sourceBytes": 498934,
+    "mapBytes": 30091,
+    "sourceTriangles": 45583,
+    "mapTriangles": 3127
+  },
+  {
+    "id": 49,
+    "sourceBytes": 96567,
+    "mapBytes": 22796,
+    "sourceTriangles": 7880,
+    "mapTriangles": 2029
+  },
+  {
+    "id": 50,
+    "sourceBytes": 1209948,
+    "mapBytes": 53055,
+    "sourceTriangles": 60797,
+    "mapTriangles": 4158
+  },
+  {
+    "id": 51,
+    "sourceBytes": 63814,
+    "mapBytes": 17613,
+    "sourceTriangles": 6815,
+    "mapTriangles": 1776
+  }
+]
