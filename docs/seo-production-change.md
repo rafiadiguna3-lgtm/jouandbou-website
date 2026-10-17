@@ -7,3 +7,5 @@ Changes: homepage title, description, social metadata, existing white PNG favico
 The original source-manifest records the historical migration snapshot. The build guard accepts only the exact reviewed SEO `site/index.html` Git blob `74f7f6ee055096ef9f912edb21af7f83040c331b`; all other captured files continue to be SHA-256 checked against the manifest. Any future homepage edit requires explicit review and updating this pinned blob.
 
 Validate Cloudflare preview and browser interactions before merging. Google may rewrite titles/snippets and controls search thumbnails and favicon updates on its own crawling schedule.
+
+The asset integrity test uses the same exact reviewed homepage blob as the build guard; any other homepage content must match the recorded manifest or fail validation.
