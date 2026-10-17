@@ -11,8 +11,8 @@
  .phone-services [aria-pressed=true]::before{content:'›';position:absolute;left:0;top:0;font-size:16px;line-height:20px;text-decoration:none}
  .phone-intro-guide{display:block;position:fixed;z-index:4;left:32px;bottom:64px;max-width:calc(100vw - 120px);font:400 11px/1.7 var(--jb-copy,Arial,sans-serif);color:#272727;pointer-events:none}
  .phone-intro-guide p{margin:0 0 26px}.phone-intro-guide p:last-child{margin:0}
- .phone-intro,.phone-intro-guide{opacity:var(--intro-opacity,1);transition:opacity .1s ease-out;transform:none}
- /* Animate text groups, leaving their layout and fast dismissal unchanged. */
+ .phone-intro,.phone-intro-guide{opacity:var(--intro-opacity,1);transition:opacity .42s cubic-bezier(.22,1,.36,1);transform:none}
+ /* Paired entrance/exit motion affects only opacity and transforms. */
  .phone-intro:not([aria-hidden=true]) .phone-work-links,
  .phone-intro:not([aria-hidden=true]) .phone-services,
  .phone-intro-guide:not([aria-hidden=true]) p,
@@ -21,6 +21,14 @@
  .home-summary:not([aria-hidden=true]) p{animation-delay:70ms}
  .phone-intro-guide:not([aria-hidden=true]) p{animation-delay:90ms}
  .phone-intro-guide:not([aria-hidden=true]) p+p{animation-delay:130ms}
+ .phone-intro[aria-hidden=true] .phone-work-links,
+ .phone-intro[aria-hidden=true] .phone-services,
+ .phone-intro-guide[aria-hidden=true] p,
+ .home-summary[aria-hidden=true] p{animation:phone-copy-exit .42s cubic-bezier(.22,1,.36,1) both}
+ .phone-intro[aria-hidden=true] .phone-services{animation-delay:40ms}
+ .home-summary[aria-hidden=true] p{animation-delay:70ms}
+ .phone-intro-guide[aria-hidden=true] p{animation-delay:90ms}
+ .phone-intro-guide[aria-hidden=true] p+p{animation-delay:130ms}
  .search-wrap{display:none!important}
  body.model-view .phone-intro,body.model-view .phone-intro-guide,
  body.view-about .phone-intro,body.view-about .phone-intro-guide,
@@ -35,6 +43,7 @@
 .phone-intro[aria-hidden=true]{pointer-events:none}
 
 @keyframes phone-copy-enter{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes phone-copy-exit{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-7px)}}
 @media(prefers-reduced-motion:reduce){
  .phone-intro .phone-work-links,.phone-intro .phone-services,.phone-intro-guide p,.home-summary p{animation:none!important}
 }

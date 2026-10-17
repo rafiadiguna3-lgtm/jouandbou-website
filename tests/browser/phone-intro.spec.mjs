@@ -73,7 +73,10 @@ test('phone typography enters with a short fade and lift and replays only on rev
  await expect(links).toHaveCSS('animation-name','phone-copy-enter');
  await expect(links).toHaveCSS('animation-duration','0.42s');
  await page.locator('#map-zoom-in').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');
- await expect(links).toHaveCSS('animation-name','none');
+ await expect(links).toHaveCSS('animation-name','phone-copy-exit');
+ await expect(links).toHaveCSS('animation-duration','0.42s');
+ await expect.poll(()=>links.evaluate(el=>getComputedStyle(el).opacity)).toBe('0');
+ await expect(links).toHaveCSS('transform','matrix(1, 0, 0, 1, 0, -7)');
  await page.evaluate(()=>{for(let i=0;i<30;i++)document.querySelector('#map-zoom-out').click();});
  await expect(page.locator('#phone-intro')).toHaveCSS('opacity','1');
  await expect(links).toHaveCSS('animation-name','phone-copy-enter');
