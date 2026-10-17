@@ -13301,8 +13301,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 109638,
-      "sha256": "4f6efad2b6497ef0b0dea0c42936d9d8bacaa6658f968af6e9c77e66b90702bd",
+      "bytes": 109689,
+      "sha256": "a9d91ecd487de21f95c915fca5a39a811dcde6c4699773828f78cb48df651fe7",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13486,8 +13486,8 @@
     },
     {
       "path": "phone-landscape.css",
-      "bytes": 2774,
-      "sha256": "5a09b5a6c6b82510d1a04416c12922d252493a0c276079e8a350aa1927b6cc9e",
+      "bytes": 2828,
+      "sha256": "d161fadff18db1fbbbca7248866a5ec6bebee0d39ab142d7145016eb444a65bb",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/phone-landscape.css"
       ],
@@ -13495,7 +13495,10 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/phone-landscape.css?v=124"
       ],
       "native_sha256": "5a09b5a6c6b82510d1a04416c12922d252493a0c276079e8a350aa1927b6cc9e",
-      "native_bytes": 2774
+      "native_bytes": 2774,
+      "published_sha256": "5a09b5a6c6b82510d1a04416c12922d252493a0c276079e8a350aa1927b6cc9e",
+      "published_bytes": 2774,
+      "modified_locally": true
     },
     {
       "path": "photo-album-cache.mjs",
@@ -14148,8 +14151,8 @@
     },
     {
       "path": "phone-intro.css",
-      "bytes": 2410,
-      "sha256": "368aa23b767d6fd09dce58ab2839b8fea82642ae9fa60a963ef5470c09841076",
+      "bytes": 2461,
+      "sha256": "e8622a0fd4130446d85364ca078619716ec950dd141e01b4da08b5ad5321ed6e",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.css"
       ],

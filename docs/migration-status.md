@@ -371,3 +371,11 @@ User clarified that the JH30 area is already visible but houses only appear afte
 ### Home copy returns only at the actual zoom-out limit (2026-10-17)
 
 User clarified that 100% meant the furthest zoom-out stop, not the initial camera scale. The intro controller now receives the same minimum scale used by map zoom clamping (`fitScale(bounds,w,h) * .9`). Only explicit zoom-out at that limit restores copy, with tiny floating-point tolerance; an overview reset above the limit does not restore it. Initial landing text, instant zoom-in cancellation and the existing fade are preserved.
+
+### Cross-device reference and responsive consistency (2026-10-17)
+
+Keep the approved phone typography, map framing, intro fade and desktop presentation as the reference. Cross-device inspection found that 761–899 px fine-pointer windows and short landscape desktop windows used compact camera/input behavior while their CSS still showed desktop search and omitted the intro. Align the intro and inline studio-summary media queries with the existing input policy (width below 900 px, touch/coarse pointers, or landscape height at most 540 px). This also prevents the landscape summary retaining both top and bottom constraints. Version the intro stylesheet URL for the changed responsive rules.
+
+Add an executable browser matrix for small phones, iPhone/Android emulation, phone landscape, tablet portrait/landscape, narrow/short desktop windows, laptop, Retina and 4K. Assert controls stay circular and in bounds, text fits, search/intro match input mode, zoom hides compact copy, and reset works without horizontal overflow. Save home screenshots in the Playwright report for visual cross-checking. These are Linux Chromium emulations, not certification on native Safari, macOS or Windows hardware.
+
+Landscape checks also found the inherited 56 px brand-image box extending 2 px above and below the 52 px header. Constrain that image height to 52 px in compact landscape, preserving its width and centered artwork.

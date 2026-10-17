@@ -18,7 +18,8 @@
     "build:vercel": "node scripts/vercel-build.mjs",
     "test:staging": "playwright test --config playwright.staging.config.mjs",
     "test:deployment-config": "node --test tests/deployment-config.test.mjs",
-    "build:map-lod": "node scripts/build-map-lod.mjs"
+    "build:map-lod": "node scripts/build-map-lod.mjs",
+    "test:devices": "playwright test tests/browser/device-matrix.spec.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

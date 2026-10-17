@@ -1,5 +1,5 @@
 .phone-intro,.phone-intro-guide{display:none}
-@media(max-width:760px),(hover:none),(pointer:coarse){
+@media(max-width:899px),(hover:none),(any-pointer:coarse),(orientation:landscape) and (max-height:540px){
  .phone-intro{display:block;position:fixed;z-index:5;left:32px;right:24px;top:clamp(136px,20vh,174px);font-family:var(--jb-display,Lato,Arial,sans-serif);color:#26291f}
  .phone-work-links{display:flex;align-items:baseline;justify-content:flex-start;width:auto;gap:24px;white-space:nowrap}
  .phone-work-links button,.phone-work-links a{padding:0;border:0;background:none;color:#6b6d62;font:400 clamp(19px,5.3vw,22px)/1.2 var(--jb-display,Lato,Arial,sans-serif);letter-spacing:-.4px;text-decoration:none}

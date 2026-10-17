@@ -2,6 +2,7 @@
 @media(orientation:landscape) and (max-height:540px){
  body.landscape-layout{--jb-header:52px}
  body.landscape-layout>header{height:52px!important;min-height:52px!important;padding-block:0!important;padding-left:max(12px,env(safe-area-inset-left))!important;padding-right:max(12px,env(safe-area-inset-right))!important}
+ body.landscape-layout>header .brand img{height:52px}
  body.landscape-layout.model-view #focus{left:50%!important;right:auto!important;top:auto!important;bottom:max(12px,env(safe-area-inset-bottom))!important;transform:translate(-50%,var(--sheet-drag,0px))!important;width:336px!important;min-width:0!important;max-width:calc(100vw - 32px)!important;min-height:100px!important;max-height:112px!important;padding:14px 18px!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:0 12px!important;overflow:hidden!important;background:#f2f2f2!important;border:1px solid #d1d2c8!important;border-radius:0!important}
  body.landscape-layout.model-view #focus[data-sheet=hidden]{opacity:0;pointer-events:none;transform:translate(-50%,calc(100% + 40px))!important}
  body.landscape-layout.model-view #focus #number{grid-column:1;grid-row:1;font-size:12px;line-height:1.3;margin:0 0 4px}
