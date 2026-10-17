@@ -1,11 +1,11 @@
 // Camera-driven landing copy; desktop navigation keeps its existing behavior.
 export function createPhoneIntro(){
- const intro=document.getElementById('phone-intro'),guide=document.getElementById('phone-intro-guide');
+ const intro=document.getElementById('phone-intro'),guide=document.getElementById('phone-intro-guide'),summary=document.getElementById('home-summary');
  let last=null,dismissed=false,farOpen=false;
  const movement=(a,b)=>Math.max(Math.abs(Math.log(a.scale/b.scale))/Math.log(2.4),Math.hypot(a.x-b.x,a.z-b.z)*Math.min(a.scale,b.scale)/110);
  function update(state){
   last=state;const {phone,front,view,home}=state;
-  if(!phone||!home){intro.inert=true;guide.inert=true;return;}
+  if(!phone||!home){intro.inert=true;guide.inert=true;summary.style.removeProperty('--intro-opacity');summary.inert=false;summary.removeAttribute('aria-hidden');return;}
   const progress=movement(view,home);
   if(!front&&view.scale<=home.scale*.82&&!farOpen){farOpen=true;dismissed=false;}
   if(front||view.scale>=home.scale*.95)farOpen=false;
@@ -13,7 +13,7 @@ export function createPhoneIntro(){
   let opacity=dismissed?0:farOpen?1:Math.max(0,1-progress/.32);
   const searching=document.body.classList.contains('search-open');
   if(front||searching)opacity=0;
-  for(const element of [intro,guide]){
+  for(const element of [intro,guide,summary]){
    element.style.setProperty('--intro-opacity',opacity.toFixed(3));
    element.inert=opacity<.15||front;
    element.setAttribute('aria-hidden',String(opacity<.15||front));
