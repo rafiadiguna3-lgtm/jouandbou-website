@@ -10,11 +10,11 @@ export function createPhoneIntro(){
   const panPixels=Math.hypot(target.x-motionAnchor.x,target.z-motionAnchor.z)*Math.min(target.scale,motionAnchor.scale);
   const zoomChanged=Math.abs(Math.log(target.scale/motionAnchor.scale))>.005;
   if(panPixels>=3||zoomChanged){
-   revealOnZoomOut=zoomChanged&&target.scale<motionAnchor.scale&&target.scale<=home.scale*.85;
+   revealOnZoomOut=zoomChanged&&target.scale<motionAnchor.scale&&target.scale<=home.scale*.95;
    dismissed=true;motionAnchor={...target};
   }
   if(front){dismissed=true;revealOnZoomOut=false;}
-  else if(revealOnZoomOut&&view.scale<=home.scale*.85){dismissed=false;revealOnZoomOut=false;}
+  else if(revealOnZoomOut&&view.scale<=home.scale*.95){dismissed=false;revealOnZoomOut=false;}
   let opacity=dismissed?0:1;
   const searching=document.body.classList.contains('search-open');
   if(front||searching)opacity=0;

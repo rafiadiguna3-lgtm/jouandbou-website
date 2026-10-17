@@ -349,3 +349,7 @@ Camera easing/flights explicitly pause model queues and geometry commits, includ
 ### Sensitive phone introduction dismissal and 85% return (2026-10-17)
 
 Home copy keeps its initial appearance and existing layout. A cumulative pan of approximately 3 screen pixels or a small zoom change dismisses work links, guidance and studio summary together using their existing fade. After dismissal, copy returns only when an explicit zoom-out targets at most 85% of the initial map scale and the displayed camera reaches that threshold. Panning even at a distant scale hides copy again, without reopening on the next idle frame. Camera easing alone does not count as a new gesture; search stays hidden and desktop behavior is unchanged.
+
+### Phone copy return threshold adjustment (2026-10-17)
+
+The requested zoom-out return threshold is now 95% of the initial map scale, superseding 85%. Small-pan dismissal and the existing fade remain unchanged.
