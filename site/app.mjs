@@ -224,7 +224,7 @@ function back(){
  start();
 }
 function select(i){if(!canExplore(i))return;const next=Math.max(0,Math.min(names.length-1,i));if(front)openHouse(next);else previewHouse(next,{center:true});}
-function zoomBy(amount){cameraFlight=null;if(front){const next=Math.max(.6,Math.min(3,modelZoom*amount));goal.scale*=next/modelZoom;modelZoom=next;centerUpdatedModel();start();return;}const minZoom=fitScale(bounds,w,h)*.9/baseScale();zoom=Math.max(minZoom,Math.min(1.5,zoom*amount));goal.scale=baseScale()*zoom;start()}
+function zoomBy(amount){cameraFlight=null;if(front){const next=Math.max(.6,Math.min(3,modelZoom*amount));goal.scale*=next/modelZoom;modelZoom=next;centerUpdatedModel();start();return;}const minZoom=fitScale(bounds,w,h)*.9/baseScale();zoom=Math.max(minZoom,Math.min(1.5,zoom*amount));goal.scale=baseScale()*zoom;phoneIntro.onZoom(amount<1?'out':'in');start()}
 $('back').onclick=back;
 // A card revealed on pointerup must not consume the same Safari compatibility click.
 let cardPress=null;
@@ -319,7 +319,7 @@ $('more').onclick=openProjectDetails;
 function returnHome({fromSection=false,overview=false}={}){
  const focus=front||previewId>=0?modelCameraFocus():null;
  document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();
- goal=homeCamera(overview);zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
+ goal=homeCamera(overview);if(overview&&!desktopInput()&&goal.scale<camera.scale)phoneIntro.onZoom('out');zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
 }
 $('projects').onclick=returnHome;
 

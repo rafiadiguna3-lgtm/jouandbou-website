@@ -29,23 +29,29 @@ test('phone fade respects reduced motion',async({browser})=>{
  await page.goto('/');await page.waitForFunction(()=>document.querySelector('header [aria-current]'));
  await expect(page.locator('#phone-intro')).toHaveCSS('transition-duration','0s');await page.locator('#phone-jou-works').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');await context.close();
 });
-test('phone copy hides after a tiny pan and returns only on an explicit zoom-out to 95 percent',async({browser})=>{
+test('phone copy hides after a tiny pan and returns only on an explicit zoom-out to 100 percent',async({browser})=>{
  const context=await browser.newContext({...devices['iPhone 13'],reducedMotion:'reduce'}),page=await context.newPage();
  await page.route('**/app.mjs*',async route=>route.fulfill({contentType:'text/javascript',body:await readFile('dist/app.mjs','utf8')+'\nwindow.createSensitivityQA=()=>{phoneIntro.update=()=>{};return createPhoneIntro();};'}));
  await page.goto('/');await page.waitForFunction(()=>window.createSensitivityQA);
  await page.evaluate(()=>{window.introSensitivity=window.createSensitivityQA();});
- const apply=async(scale,x=0)=>page.evaluate(({scale,x})=>{const view={scale,x,y:2,z:0},home={scale:10,x:0,y:2,z:0};window.introSensitivity.update({phone:true,front:false,view,goal:view,home});},{scale,x});
+ let previousScale=null;
+ const apply=async(scale,x=0,gesture=true,displayScale=scale)=>{
+  const intent=gesture&&previousScale!==null&&scale!==previousScale?(scale<previousScale?'out':'in'):null;previousScale=scale;
+  await page.evaluate(({scale,x,intent,displayScale})=>{const goal={scale,x,y:2,z:0},view={...goal,scale:displayScale},home={scale:10,x:0,y:2,z:0};if(intent)window.introSensitivity.onZoom(intent);window.introSensitivity.update({phone:true,front:false,view,goal,home});},{scale,x,intent,displayScale});
+ };
  const intro=page.locator('#phone-intro'),summary=page.locator('#home-summary');
  await apply(10);await expect(intro).toHaveCSS('opacity','1');
  await apply(10,.31);await expect(intro).toHaveCSS('opacity','0');await expect(summary).toHaveCSS('opacity','0');
- await apply(9.6,.31);await expect(intro).toHaveCSS('opacity','0');
- await apply(9.5,.31);await expect(intro).toHaveCSS('opacity','1');
- await apply(9.5,.7);await expect(intro).toHaveCSS('opacity','0');
- await apply(9.5,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(10.1,.31);await expect(intro).toHaveCSS('opacity','0');
+ await apply(10,.31);await expect(intro).toHaveCSS('opacity','1');
+ await apply(10,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(9.9,.7);await expect(intro).toHaveCSS('opacity','1');
+ await apply(9.90000001,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(10.5,.7);await expect(intro).toHaveCSS('opacity','0');
+ await apply(9.9,.7,true,10.2);await expect(intro).toHaveCSS('opacity','0');
+ await apply(9.90000001,.7,true,9.95);await expect(intro).toHaveCSS('opacity','0');
+ await apply(9.90000001,.7,false);await expect(intro).toHaveCSS('opacity','0');
+ await apply(9.5,.7,false);await expect(intro).toHaveCSS('opacity','0');
  await apply(9.4,.7);await expect(intro).toHaveCSS('opacity','1');
- await apply(9.401,.7);await expect(intro).toHaveCSS('opacity','0');await expect(summary).toHaveCSS('opacity','0');
- await apply(9.38,.7);await expect(intro).toHaveCSS('opacity','1');
- await apply(9.38,.87);await expect(intro).toHaveCSS('opacity','0');
- await apply(9.38,.87);await expect(intro).toHaveCSS('opacity','0');
  await context.close();
 });

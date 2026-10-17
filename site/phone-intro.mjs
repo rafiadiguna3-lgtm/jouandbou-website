@@ -1,20 +1,22 @@
 // Camera-driven landing copy; desktop navigation keeps its existing behavior.
 export function createPhoneIntro(){
  const intro=document.getElementById('phone-intro'),guide=document.getElementById('phone-intro-guide'),summary=document.getElementById('home-summary');
- let last=null,dismissed=false,motionAnchor=null,revealOnZoomOut=false;
+ let last=null,dismissed=false,motionAnchor=null,revealOnZoomOut=false,zoomIntent=null,previousScale=null;
  function update(state){
-  last=state;const {phone,front,view,home}=state;
+  last=state;const {phone,front,view,home}=state,intent=zoomIntent;zoomIntent=null;
   if(!phone||!home){intro.inert=true;guide.inert=true;summary.style.removeProperty('--intro-opacity');summary.inert=false;summary.removeAttribute('aria-hidden');return;}
   const target=state.goal||view;
   if(!motionAnchor)motionAnchor={...target};
   const panPixels=Math.hypot(target.x-motionAnchor.x,target.z-motionAnchor.z)*Math.min(target.scale,motionAnchor.scale);
-  const zoomDelta=Math.log(target.scale/motionAnchor.scale),zoomingOut=zoomDelta<-.002,zoomChanged=zoomDelta>.0001||zoomingOut;
-  if(panPixels>=1.5||zoomChanged){
-   revealOnZoomOut=zoomingOut&&target.scale<=home.scale*.95;
-   dismissed=true;motionAnchor={...target};
-  }
+  const zoomDelta=Math.log(target.scale/motionAnchor.scale),zoomChanged=Math.abs(zoomDelta)>.0001;
+  const reversedToZoomIn=previousScale!==null&&target.scale>previousScale*(1+1e-9);
+  previousScale=target.scale;
+  if(intent==='in'||reversedToZoomIn){dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
+  else if(intent==='out'){
+   dismissed=true;revealOnZoomOut=target.scale<=home.scale;motionAnchor={...target};
+  }else if(panPixels>=1.5||zoomChanged){dismissed=true;revealOnZoomOut=false;motionAnchor={...target};}
   if(front){dismissed=true;revealOnZoomOut=false;}
-  else if(revealOnZoomOut&&view.scale<=home.scale*.95){dismissed=false;revealOnZoomOut=false;}
+  else if(revealOnZoomOut&&view.scale<=home.scale&&target.scale<=home.scale){dismissed=false;revealOnZoomOut=false;}
   let opacity=dismissed?0:1;
   const searching=document.body.classList.contains('search-open');
   if(front||searching)opacity=0;
@@ -36,5 +38,5 @@ export function createPhoneIntro(){
  for(const button of intro.querySelectorAll('[data-service]'))button.onclick=()=>{
   for(const option of intro.querySelectorAll('[data-service]')){option.setAttribute('aria-pressed',String(option===button));option.dataset.chosen=String(option===button);}
  };
- return {update};
+ return {update,onZoom(direction){zoomIntent=direction;if(direction==='in'){dismissed=true;revealOnZoomOut=false;}}};
 }

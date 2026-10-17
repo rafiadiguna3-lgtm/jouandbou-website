@@ -357,3 +357,7 @@ The requested zoom-out return threshold is now 95% of the initial map scale, sup
 ### Minimal phone copy show/hide stages (2026-10-17)
 
 Phone home copy now dismisses on a zoom-in increase above 0.01% or a pan of approximately 1.5 screen pixels, including when it was just restored in a distant view. An explicit zoom-out of at least 0.2% can restore it at or below the existing 95% threshold. Visibility remains a binary shown/hidden state, with a short 100 ms opacity transition shared by work links, guidance and the studio summary; camera easing does not retrigger it. Typography and layout are unchanged.
+
+### Explicit zoom-out only at 100%, with reversal cancellation (2026-10-17)
+
+Copy restoration now requires an explicit map zoom-out input at or below 100% of initial scale; ordinary camera updates, navigation, panning or residual easing cannot restore it. The phone square overview button reports zoom-out intent when it actually reduces scale. Any zoom-in intent immediately clears pending restoration, even for changes too small to pass the former accumulated zoom threshold. Per-frame goal-direction tracking also cancels a queued reveal after reversal, preventing an unfinished zoom-out from showing copy during a subsequent zoom-in. Initial landing copy and the short fade remain unchanged.

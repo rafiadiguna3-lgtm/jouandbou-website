@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 40603,
-      "sha256": "eb5a980a4f3a6d7e59d372d12bc2e82e246d168d3ecfa469ecd673effa0a88ae",
+      "bytes": 40721,
+      "sha256": "27ba6ba259e479ba8a94389e8a6375de5775def2e240c9650f346b9f6e580058",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -14160,8 +14160,8 @@
     },
     {
       "path": "phone-intro.mjs",
-      "bytes": 2434,
-      "sha256": "102c2ce18ed744901241239d110c676df276f3f6dd17ea0cfc2cf54645c24c79",
+      "bytes": 2884,
+      "sha256": "063e76a19bea1db1fadccaf70af5e7423d4dc963ee7ffd6d988f2aec9ba9a15a",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.mjs"
       ],
