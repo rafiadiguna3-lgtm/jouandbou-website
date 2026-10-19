@@ -14718,12 +14718,15 @@
     },
     {
       "path": "_redirects",
-      "bytes": 61,
-      "sha256": "947e9d2640b0847f79a9d8ed142405546214b91aa9afaaf3158dd7455f69ea79",
+      "bytes": 148,
+      "sha256": "e1975ce53b9019662962115fdc1ec0210b0e1378816f2aae68407c7ca9567f67",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/_redirects"
       ],
-      "authored_locally": true
+      "authored_locally": true,
+      "published_sha256": "947e9d2640b0847f79a9d8ed142405546214b91aa9afaaf3158dd7455f69ea79",
+      "published_bytes": 61,
+      "modified_locally": true
     },
     {
       "path": "assets/brand/jou-and-bou-solid-64-v2.png",

@@ -519,3 +519,5 @@ Tap icon refinement: white fill with the existing neutral gray outline, retainin
 Phone menu Projects now selects and centers Rumah Anas in the neighborhood (the normal first-click view), rather than entering Explore 3D. Service-label copy remains unchanged pending discussion.
 
 Removed the “view project index” link from About’s Our works section. Existing Jou/Bou work links and map house navigation remain available; published project URLs are retained for search and sharing.
+
+Legacy Google About URL: added permanent redirects for /about-us and /about-us/ to the existing homepage About section. Other historic project URLs require exact source paths before adding redirects; no blanket redirect of unknown 404s.
