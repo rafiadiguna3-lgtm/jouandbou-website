@@ -463,3 +463,7 @@ Bou Works opened from the smartphone homepage returns to the initial homepage ca
 ### Searchable work collections
 
 Added static /jou-works/ and /bou-works/ collection pages with canonical URLs, descriptions, share metadata, CollectionPage/ItemList schema and crawlable project links. Both hydrate the existing map or Bou index. Listed in the project directory and sitemap.
+
+### Project inquiry links
+
+Added a discreet WhatsApp inquiry link at the end of all 15 published Jou and Bou project stories, including the no-JavaScript static pages. Uses the existing contact telephone +62 811-8111-439 with a prefilled Indonesian message naming the project and its canonical share URL. No messages are sent automatically.

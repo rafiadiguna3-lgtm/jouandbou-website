@@ -1,3 +1,4 @@
+import {inquiryHTML} from '../site/project-inquiry.mjs';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {projects} from '../site/project-catalog.mjs';
 import {metadata,structuredData,origin,collections} from '../site/project-seo.mjs';
@@ -13,7 +14,7 @@ export async function buildProjectPages(directory){
   for(const [key,value] of Object.entries(fields)){const separator=key.indexOf(':'),attr=key.slice(0,separator),name=key.slice(separator+1);const pattern=new RegExp(`<meta\\b(?=[^>]*${attr}="${name}")[^>]*>`);if(!pattern.test(html))throw Error('Missing metadata '+key);html=html.replace(pattern,`<meta ${attr}="${name}" content="${escape(value)}"/>`);}
   html=html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/,`<script type="application/ld+json">${JSON.stringify(structuredData(p)).replace(/</g,'\\u003c')}</script>`);
   const photos=[...new Set([p.image,...p.photos])].slice(0,6);
-  const content=`<main id="project-static-content"><nav aria-label="Breadcrumb"><a href="/">jou and bou</a><a href="/projects/">projects</a></nav><h1>${escape(p.name)}</h1><p>${escape(p.category)}</p><p>${escape(p.description)}</p>${photos.map((src,i)=>`<img src="/${escape(src)}" alt="${escape(p.name)} — ${i===0?'project view':'architecture and interior view '+(i+1)}" loading="${i===0?'eager':'lazy'}" decoding="async"/>`).join('')}${p.kind==='collection'?'<nav aria-label="Projects">'+p.projects.map(item=>`<a href="${item.path}">${escape(item.name)}</a>`).join('')+'</nav>':''}${p.paragraphs.map(text=>`<p>${escape(text)}</p>`).join('')}<nav><a href="/">explore the neighborhood</a><a href="/projects/">all projects</a></nav></main>`;
+  const content=`<main id="project-static-content"><nav aria-label="Breadcrumb"><a href="/">jou and bou</a><a href="/projects/">projects</a></nav><h1>${escape(p.name)}</h1><p>${escape(p.category)}</p><p>${escape(p.description)}</p>${photos.map((src,i)=>`<img src="/${escape(src)}" alt="${escape(p.name)} — ${i===0?'project view':'architecture and interior view '+(i+1)}" loading="${i===0?'eager':'lazy'}" decoding="async"/>`).join('')}${p.kind==='collection'?'<nav aria-label="Projects">'+p.projects.map(item=>`<a href="${item.path}">${escape(item.name)}</a>`).join('')+'</nav>':''}${p.paragraphs.map(text=>`<p>${escape(text)}</p>`).join('')}${p.kind==='collection'?'':inquiryHTML(p)}<nav><a href="/">explore the neighborhood</a><a href="/projects/">all projects</a></nav></main>`;
   html=html.replace('</head>',`<style>${style}</style></head>`).replace('<body>','<body>'+content);
   const target=new URL(p.path.slice(1),directory);await mkdir(target,{recursive:true});await writeFile(new URL('index.html',target),html);
  }
