@@ -1,6 +1,6 @@
 export const inquiryPhone='628118111439';
 export function inquiryMessage(project){
- return `Halo Jou and Bou, saya tertarik dengan proyek ${project.name} dan ingin konsultasi\n\nhttps://jouandbou.com${project.path}`;
+ return `Halo Jou and Bou, saya tertarik dengan proyek ${project.name}. Boleh ngobrol lebih lanjut?\n\nhttps://jouandbou.com${project.path}`;
 }
 export function inquiryURL(project){return `https://wa.me/${inquiryPhone}?text=${encodeURIComponent(inquiryMessage(project))}`;}
 export function inquiryHTML(project){

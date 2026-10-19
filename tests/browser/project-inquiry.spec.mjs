@@ -10,7 +10,7 @@ for(const phone of [false,true])test(`project inquiries preserve the project and
   const url=new URL(await link.getAttribute('href'));
   expect(url.origin+url.pathname).toBe('https://wa.me/628118111439');
   await expect(link).toHaveText('lets talk~');
-  expect(url.searchParams.get('text')).toBe(`Halo Jou and Bou, saya tertarik dengan proyek ${project.name} dan ingin konsultasi\n\nhttps://jouandbou.com${project.path}`);
+  expect(url.searchParams.get('text')).toBe(`Halo Jou and Bou, saya tertarik dengan proyek ${project.name}. Boleh ngobrol lebih lanjut?\n\nhttps://jouandbou.com${project.path}`);
   expect(url.searchParams.get('text')).toContain('https://jouandbou.com'+project.path);
   await expect(link).toHaveAttribute('target','_blank');
   const before=await link.boundingBox();

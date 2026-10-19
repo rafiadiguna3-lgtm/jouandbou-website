@@ -481,3 +481,7 @@ Versioned the inquiry stylesheet, initializer and shared message module after re
 ### WhatsApp icon refinement
 
 Replaced the improvised stroked inquiry icon with a standard filled WhatsApp silhouette and handset, keeping its 22px size and grey pill styling. Refreshed the inquiry module version.
+
+### Warmer inquiry message
+
+Updated the prefilled WhatsApp closing to “Boleh ngobrol lebih lanjut?” after the project name, preserving the canonical project URL and lets talk~ button.
