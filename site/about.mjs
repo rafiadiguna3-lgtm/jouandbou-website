@@ -20,7 +20,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.bo
 let shownRoute;
 const bouScrollPositions=new Map();
 const homeTitle = 'Jou and Bou | Architecture & Interior Design Studio';
-function updateTitle(){const project=routeProject();if(project){document.title=`${project.name} | Jou and Bou`;return;}const page=routeHash()==='#about'?'about us':routeHash()==='#contact'?'contact us':routeHash().startsWith('#bou-works')?'bou works':document.querySelector('dialog.project-page[open],dialog#detail[open]')?'project details':'';document.title=page?`jou and bou - ${page}`:homeTitle;}
+function updateTitle(){const project=routeProject();if(project){document.title=`${project.name} | Jou and Bou`;return;}const page=routeHash()==='#about'?'about us':routeHash()==='#contact'?'contact us':routeHash().startsWith('#bou-works')?'Bou Works':document.querySelector('dialog.project-page[open],dialog#detail[open]')?'project details':'';document.title=page==='Bou Works'?'Bou Works | Jou and Bou':page?`jou and bou - ${page}`:location.pathname==='/jou-works/'?'Jou Works | Jou and Bou':homeTitle;}
 for(const panel of document.querySelectorAll('dialog.project-page,dialog#detail'))new MutationObserver(updateTitle).observe(panel,{attributes:true,attributeFilter:['open']});
 function showRoute(){
  if(/^#bou(?:\/|$)/.test(routeHash()))history.replaceState(null,'',routeHash().replace(/^#bou/,'#bou-works'));

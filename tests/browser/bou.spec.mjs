@@ -52,3 +52,21 @@ for (const mobile of [false, true]) {
     await context.close();
   });
 }
+
+test('work collections expose crawlable pages and hydrate their existing views',async({browser})=>{
+ const staticContext=await browser.newContext({javaScriptEnabled:false});
+ const staticPage=await staticContext.newPage();
+ for(const kind of ['jou','bou']){
+  await staticPage.goto(`/${kind}-works/`);
+  await expect(staticPage.locator('h1').first()).toHaveText(kind==='jou'?'Jou Works':'Bou Works');
+  await expect(staticPage.locator('link[rel=canonical]')).toHaveAttribute('href',`https://jouandbou.com/${kind}-works/`);
+  expect(await staticPage.locator('#project-static-content nav[aria-label=Projects] a').count()).toBe(kind==='jou'?8:7);
+ }
+ await staticContext.close();
+ const context=await browser.newContext(),page=await context.newPage();
+ await page.goto('/bou-works/');await expect(page.locator('.bou-index')).toBeVisible();await expect(page.locator('#project-static-content')).toHaveCount(0);await expect(page).toHaveTitle('Bou Works | Jou and Bou');
+ await page.locator('#bou-page a[href="/projects/bou/temu/"]').click();await expect(page).toHaveURL(/\/projects\/bou\/temu\/$/);
+ await page.goto('/jou-works/');await expect(page.locator('#map')).toBeVisible();await expect(page.locator('#project-static-content')).toHaveCount(0);await expect(page).toHaveTitle('Jou Works | Jou and Bou');
+ await page.locator('header .brand').click();await expect(page).toHaveURL(/#projects$/);
+ await context.close();
+});

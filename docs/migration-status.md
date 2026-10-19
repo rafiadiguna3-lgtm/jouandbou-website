@@ -459,3 +459,7 @@ Root and nested documents now share an explicit root base URL so in-app history 
 ### Bou Works return origin
 
 Bou Works opened from the smartphone homepage returns to the initial homepage camera and introductory copy when closed. Entry from About Us still returns to About Us. Project close first returns to the Bou index; Escape follows the same origin rules.
+
+### Searchable work collections
+
+Added static /jou-works/ and /bou-works/ collection pages with canonical URLs, descriptions, share metadata, CollectionPage/ItemList schema and crawlable project links. Both hydrate the existing map or Bou index. Listed in the project directory and sitemap.

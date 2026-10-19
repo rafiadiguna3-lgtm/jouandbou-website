@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 7737,
-      "sha256": "7755ae0b6b498b82da9b7ceabd14aaf82d32a2919cf791ab63275326d36c5763",
+      "bytes": 7842,
+      "sha256": "ffb95acb6e4743d2d03f3ca0932d1d654adca251efa196e52be13f366d759751",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -14916,17 +14916,20 @@
     },
     {
       "path": "project-seo.mjs",
-      "bytes": 1842,
-      "sha256": "28b1f2140207b863ce12960b1d30b88e58928cd1ee4ed0010e9360cf10baa90c",
+      "bytes": 3265,
+      "sha256": "0355c0c0f469451383210ce8212f52cb8992ca225a81071ffd4a9d699eb08336",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/project-seo.mjs"
       ],
-      "authored_locally": true
+      "authored_locally": true,
+      "published_sha256": "28b1f2140207b863ce12960b1d30b88e58928cd1ee4ed0010e9360cf10baa90c",
+      "published_bytes": 1842,
+      "modified_locally": true
     },
     {
       "path": "project-routing.mjs",
-      "bytes": 3836,
-      "sha256": "f45636039f83ccb693f51644b514c18fced7b8067bf131f841ed20ec7225e9f2",
+      "bytes": 4189,
+      "sha256": "6bb7afacb67d7b02cc37824fd2fa94cd40aa9fa865cc4f60e34624ac11ffabf6",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/project-routing.mjs"
       ],
@@ -15081,8 +15084,8 @@
     },
     {
       "path": "sitemap.xml",
-      "bytes": 1223,
-      "sha256": "d9167a937a1a2dfb2b0381d0c5a084efea09a112964ef3ce5c0775a3d2a0ca93",
+      "bytes": 1337,
+      "sha256": "42749fc2b6a1be50f5b1378800ea2a20b090fefc9443fd562226493060ac4383",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/sitemap.xml"
       ],
