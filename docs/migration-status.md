@@ -513,3 +513,5 @@ Simplified map guidance: one static hand outline above two unboxed lines. Phone 
 Matched phone open-search border (#d9d9d3, 1px), white fill and subtle shadow to the desktop open-search styling.
 
 Filled the static tap-hand symbol. Removed obsolete lower-left gesture copy from source HTML and kept empty hidden hook elements for existing camera code, preventing the old text flashing during reload before responsive CSS/layout initialization.
+
+Tap icon refinement: white fill with the existing neutral gray outline, retaining static motion and sizing.
