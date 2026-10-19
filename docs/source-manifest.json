@@ -13310,8 +13310,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 110477,
-      "sha256": "f19bfb486775b19b54c73baa04bbd31d10716316bdd8b0432b5956265b432ebb",
+      "bytes": 110366,
+      "sha256": "c49406b98eb30ef2342ba323e3356ad58138db8292ee3a431b84e0aec417d754",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],

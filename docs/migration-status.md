@@ -439,3 +439,7 @@ Replace the old site-vector-derived v2 assets with v3 assets derived from a prep
 ### Restore white transparent browser-tab icon for dark themes (2026-10-19)
 
 User clarified the browser-tab mark must retain its prior white transparent treatment. Add the existing original 16/32/48 px white transparent PNG icons as the preferred dark-color-scheme favicon links, with a fresh query version. Keep the latest user-image solid black/white share preview and default light/search favicon declarations. This removes the white square/black mark from dark-themed browser tabs while retaining the requested readable search/share artwork. No logo drawing, header or map change. Verify dark/light media matching, unchanged social metadata and original PNG transparency. Search engines independently select and recrawl favicon candidates.
+
+### Restore white tab PNG independently of system color scheme (2026-10-19)
+
+User still sees the wrong browser-tab icon. The prior restore only matched prefers-color-scheme:dark, which need not match a custom dark browser theme. Make the original transparent white 16/32/48 px PNG overrides unconditional, after the solid default links, and bump their query versions. Preserve share artwork and existing solid fallback assets; search engines independently choose favicon candidates and cannot be guaranteed to use a different icon from browsers. Verify original white icon declarations are active in both light and dark system schemes and that share metadata remains unchanged.
