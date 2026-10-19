@@ -22,7 +22,7 @@ export function writeRoute(hash,{replace=false}={}){
 function normalizeRoute(){
  const hash=routeHash().replace(/^#bou\//,'#bou-works/');
  if(byHash.has(hash))writeRoute(hash,{replace:true});
- else{if(location.pathname!=='/'&&location.hash)history.replaceState(null,'','/'+location.search+location.hash);refreshMetadata();}
+ else{if(collectionByPath.has(location.pathname.replace(/\/?$/,'/')))history.replaceState(null,'','/'+location.search+hash);if(location.pathname!=='/'&&location.hash)history.replaceState(null,'','/'+location.search+location.hash);refreshMetadata();}
  releaseStaticContent();
 }
 let observer;

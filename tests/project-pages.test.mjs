@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
+import {readFile,access} from 'node:fs/promises';
 import {projects} from '../site/project-catalog.mjs';
 
 test('published projects have unique real URLs, real artwork and no unfinished placeholders',async()=>{
@@ -14,4 +14,11 @@ test('published projects have unique real URLs, real artwork and no unfinished p
   assert.ok(!p.paragraphs.some(text=>/^Under construction$/i.test(text)));
  }
  const notFound=await readFile('site/404.html','utf8');assert.ok(notFound.includes('noindex,follow'));
+});
+
+test('collection entry points redirect to existing sections without generated index pages',async()=>{
+ const rules=await readFile('dist/_redirects','utf8');
+ for(const [path,hash] of [['/projects/','#projects'],['/jou-works/','#projects'],['/bou-works/','#bou-works'],['/about-us','#about']])assert.ok(rules.includes(`${path} https://jouandbou.com/${hash} 301`));
+ for(const path of ['projects','jou-works','bou-works'])await assert.rejects(access(`dist/${path}/index.html`));
+ const sitemap=await readFile('dist/sitemap.xml','utf8');for(const path of ['projects','jou-works','bou-works'])assert.ok(!sitemap.includes(`https://jouandbou.com/${path}/</loc>`));
 });

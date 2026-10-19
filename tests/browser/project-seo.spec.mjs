@@ -18,7 +18,7 @@ test('every public project returns its own metadata and readable content without
   const image=await page.request.get('/'+p.shareImage);expect(image.ok()).toBe(true);expect(image.headers()['content-type']).toContain('image/jpeg');
   expect(await page.locator('script[type="application/ld+json"]').evaluate(el=>JSON.parse(el.textContent)['@graph'][0].name)).toBe(p.name);
  }
- await page.goto('/projects/');await expect(page.locator('.projects a')).toHaveCount(projects.length);
+
  await context.close();
 });
 
@@ -61,4 +61,10 @@ test('Bou project and back links keep SPA navigation without losing the root ass
  await expect(page.locator('base')).toHaveAttribute('href','/');
  await page.locator('.bou-back').click();await expect(page).toHaveURL(/\/#bou-works$/);await expect(page.locator('.bou-project-picker')).toBeVisible();expect(navigations).toEqual([]);
  await page.goBack();await expect(page).toHaveURL(/\/projects\/bou\/temu\/$/);await expect(page.locator('.bou-project')).toBeVisible();
+});
+
+test('work collections use the existing homepage sections',async({page})=>{
+ await page.goto('/#projects');await expect(page.locator('#map')).toBeVisible();await expect(page.locator('body')).not.toHaveClass(/model-view/);
+ await page.goto('/#bou-works');await expect(page.locator('.bou-project-picker')).toBeVisible();await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href','https://jouandbou.com/');
+ await page.goto('/#about');await expect(page.locator('#about-page')).toBeVisible();await expect(page.getByText('view project index')).toHaveCount(0);
 });
