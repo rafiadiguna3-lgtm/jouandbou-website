@@ -521,3 +521,5 @@ Phone menu Projects now selects and centers Rumah Anas in the neighborhood (the 
 Removed the “view project index” link from About’s Our works section. Existing Jou/Bou work links and map house navigation remain available; published project URLs are retained for search and sharing.
 
 Legacy Google About URL: added permanent redirects for /about-us and /about-us/ to the existing homepage About section. Other historic project URLs require exact source paths before adding redirects; no blanket redirect of unknown 404s.
+
+Project-directory entry: /projects and /projects/ now permanently redirect to /#projects, matching the requested map destination. The 404 recovery link targets the map directly. Removed the redirected directory URL from sitemap generation; individual project detail URLs remain unchanged. This fixes directory recovery navigation, not unconfirmed legacy project paths.

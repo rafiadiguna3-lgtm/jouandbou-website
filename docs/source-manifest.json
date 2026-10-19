@@ -14718,8 +14718,8 @@
     },
     {
       "path": "_redirects",
-      "bytes": 148,
-      "sha256": "e1975ce53b9019662962115fdc1ec0210b0e1378816f2aae68407c7ca9567f67",
+      "bytes": 241,
+      "sha256": "56ffec1382d4112190a67c6d78ea12d83f495112092aa71224766f2a6e0a87c7",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/_redirects"
       ],
@@ -14944,11 +14944,14 @@
     {
       "path": "404.html",
       "bytes": 504,
-      "sha256": "f1469fcd21b73a062c2034bddc93bf3f66fedd06c173bb9f9e135ae3b97d59fe",
+      "sha256": "db43460226f7a075e92b0ba576cdd926067186f07229be92e74d5bc3d2a87ede",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/404.html"
       ],
-      "authored_locally": true
+      "authored_locally": true,
+      "published_sha256": "f1469fcd21b73a062c2034bddc93bf3f66fedd06c173bb9f9e135ae3b97d59fe",
+      "published_bytes": 504,
+      "modified_locally": true
     },
     {
       "path": "assets/share/projects/rr-house.jpg",
@@ -15087,8 +15090,8 @@
     },
     {
       "path": "sitemap.xml",
-      "bytes": 1337,
-      "sha256": "42749fc2b6a1be50f5b1378800ea2a20b090fefc9443fd562226493060ac4383",
+      "bytes": 1281,
+      "sha256": "c4bdec93bab25fb9ff8dcdac17d234016e298549ee6c74d3837ceedae75b745d",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/sitemap.xml"
       ],

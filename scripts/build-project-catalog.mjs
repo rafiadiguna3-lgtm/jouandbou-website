@@ -25,4 +25,4 @@ for(const p of JSON.parse(await readFile('site/bou-projects.json','utf8'))){
 await writeFile('site/project-catalog.mjs','// Published projects only; generated from the existing project content.\nexport const projects='+JSON.stringify(projects,null,2)+';\n');
 console.log(`Catalogued ${projects.length} published projects.`);
 
-await writeFile('site/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+['/','/projects/','/jou-works/','/bou-works/',...projects.map(p=>p.path)].map(path=>`  <url><loc>https://jouandbou.com${path}</loc></url>`).join('\n')+'\n</urlset>\n');
+await writeFile('site/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+['/','/jou-works/','/bou-works/',...projects.map(p=>p.path)].map(path=>`  <url><loc>https://jouandbou.com${path}</loc></url>`).join('\n')+'\n</urlset>\n');
