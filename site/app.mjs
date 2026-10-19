@@ -321,7 +321,7 @@ $('more').onclick=openProjectDetails;
 function returnHome({fromSection=false,overview=false,resetIntro=false,firstProject=false}={}){
  const focus=front||previewId>=0?modelCameraFocus():null;
  document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();
- if(firstProject&&!desktopInput()){openHouse(0);return;}
+ if(firstProject&&!desktopInput()){previewHouse(0,{center:true});return;}
  goal=homeCamera(overview);if(resetIntro&&!desktopInput())phoneIntro.onHome();if(overview&&!desktopInput())phoneIntro.onOverview();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
 }
 $('projects').onclick=returnHome;

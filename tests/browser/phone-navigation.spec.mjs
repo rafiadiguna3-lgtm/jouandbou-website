@@ -1,5 +1,5 @@
 import {test,expect,devices} from '@playwright/test';
-for(const name of ['iPhone 13','Pixel 7'])test(`${name}: first-use icons, menu search and direct Anas 3D`,async({browser})=>{
+for(const name of ['iPhone 13','Pixel 7'])test(`${name}: first-use icons, menu search and Anas map selection`,async({browser})=>{
  const context=await browser.newContext(devices[name]),page=await context.newPage();
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/');await expect(page.locator('#phone-intro-guide')).toBeEmpty();await expect(page.locator('#hint')).toBeEmpty();await expect(page.locator('#phone-map-guide')).toBeVisible();await expect(page.locator('#phone-intro-guide')).toBeHidden();
@@ -14,7 +14,7 @@ for(const name of ['iPhone 13','Pixel 7'])test(`${name}: first-use icons, menu s
  await page.locator('#phone-search-action').click();
  await expect(page.locator('#search')).toBeVisible();await expect(page.locator('#search')).toBeFocused();await expect(page.locator('#menu-toggle')).toHaveAttribute('aria-expanded','false');
  await page.locator('#search').fill('RR House');await page.locator('#results button').first().click();await expect(page.locator('.house-callout-card')).toBeVisible();await expect(page.locator('#search')).toBeHidden();
- await page.locator('#menu-toggle').click();await page.locator('#projects').click();await expect(page.locator('body')).toHaveClass(/model-view/);await expect(page.locator('#name')).toHaveText('Rumah Anas');
+ await page.locator('#menu-toggle').click();await page.locator('#projects').click();await expect(page.locator('body')).not.toHaveClass(/model-view/);await expect(page.locator('.house-callout-card')).toBeVisible();await expect(page.locator('#name')).toHaveText('Rumah Anas');
  await page.locator('#menu-toggle').click();await page.locator('#phone-search-action').click();await expect(page.locator('body')).not.toHaveClass(/model-view/);await expect(page.locator('#search')).toBeVisible();
  await page.locator('#phone-search-close').click();await expect(page.locator('#search')).toBeHidden();
  await page.reload();await expect(page.locator('#menu-toggle')).toBeVisible();await expect(page.locator('#phone-map-guide')).toBeVisible();

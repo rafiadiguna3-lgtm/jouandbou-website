@@ -515,3 +515,5 @@ Matched phone open-search border (#d9d9d3, 1px), white fill and subtle shadow to
 Filled the static tap-hand symbol. Removed obsolete lower-left gesture copy from source HTML and kept empty hidden hook elements for existing camera code, preventing the old text flashing during reload before responsive CSS/layout initialization.
 
 Tap icon refinement: white fill with the existing neutral gray outline, retaining static motion and sizing.
+
+Phone menu Projects now selects and centers Rumah Anas in the neighborhood (the normal first-click view), rather than entering Explore 3D. Service-label copy remains unchanged pending discussion.
