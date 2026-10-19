@@ -16,6 +16,7 @@ test('initial HTML contains the final brand and plain-text search metadata witho
  const image=await page.request.get('/assets/brand/jou-and-bou-share-solid-v3.png');expect(image.ok()).toBe(true);expect(image.headers()['content-type']).toContain('image/png');const bytes=await image.body();expect(bytes.readUInt32BE(16)).toBe(1200);expect(bytes.readUInt32BE(20)).toBe(1200);
  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content','1200');
  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content','1200');
+ await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
  const favicon=await page.locator('link[rel="icon"]').first().getAttribute('href');expect(favicon).toBe('/assets/brand/jou-and-bou-solid-48-v3.png');
  const icon=await page.request.get(favicon);expect(icon.ok()).toBe(true);const iconBytes=await icon.body();expect(iconBytes.readUInt32BE(16)).toBe(48);
  await context.close();
@@ -34,13 +35,25 @@ test('refresh keeps the homepage title while application JavaScript is delayed',
  await page.locator('header .brand').click();await expect(page).toHaveTitle('Jou and Bou | Architecture & Interior Design Studio');
 });
 
-test('browser tabs retain the original transparent white icon in both system themes',async({browser})=>{
+test('runtime tab module uses white PNG in both themes without competing favicon links',async({browser})=>{
  for(const colorScheme of ['dark','light']){
-  const context=await browser.newContext({colorScheme,javaScriptEnabled:false}),page=await context.newPage();await page.goto('/');
-  const white=page.locator('link[rel="icon"][sizes="48x48"]').last();
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=tab-white-2');
+  const context=await browser.newContext({colorScheme}),page=await context.newPage();await page.goto('/');
+  const white=page.locator('#site-favicon');
+  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
+  await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
   expect(await white.evaluate(el=>el.media)).toBe('');
   await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content','https://jouandbou.com/assets/brand/jou-and-bou-share-solid-v3.png');
   await context.close();
  }
+});
+
+test('tab icon updates independently while the 3D application is still blocked',async({page})=>{
+ let release;const gate=new Promise(resolve=>release=resolve);
+ await page.route('**/app.mjs?*',async route=>{await gate;await route.continue();});
+ try{
+  await page.goto('/',{waitUntil:'commit'});
+  await expect(page.locator('#site-favicon')).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
+  await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content','https://jouandbou.com/assets/brand/jou-and-bou-share-solid-v3.png');
+ }finally{release();}
 });

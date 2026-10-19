@@ -13310,8 +13310,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 110366,
-      "sha256": "c49406b98eb30ef2342ba323e3356ad58138db8292ee3a431b84e0aec417d754",
+      "bytes": 109709,
+      "sha256": "c600fe3b47163b4e0a78f76c0bb1584b237fa05045a6e2d536d5d1e48d6cff88",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14893,6 +14893,15 @@
       "sha256": "1c08b5941eed991658112b1dbdc4cdb5f170a6a46625b269ffe6014e02ca450a",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "browser-tab-icon.mjs",
+      "bytes": 295,
+      "sha256": "30a05fa9a0cf5203f41f36e7bac88f621da1102c1779ce0913fc339ce68cc518",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/browser-tab-icon.mjs"
       ],
       "authored_locally": true
     }
