@@ -467,3 +467,9 @@ Added static /jou-works/ and /bou-works/ collection pages with canonical URLs, d
 ### Project inquiry links
 
 Added a discreet WhatsApp inquiry link at the end of all 15 published Jou and Bou project stories, including the no-JavaScript static pages. Uses the existing contact telephone +62 811-8111-439 with a prefilled Indonesian message naming the project and its canonical share URL. No messages are sent automatically.
+
+### Persistent project inquiry
+
+Replaced the end-of-story text link with a restrained grey WhatsApp pill fixed to the lower right of each published project view. Jou buttons sit directly in their dialogs to avoid transformed scrolling content; Bou remains scoped to its detail article. Safe-area spacing and bottom content padding preserve mobile access.
+
+Inquiry pill copy: “lets talk~”. Prefilled messages end at “dan ingin konsultasi”, followed by the project URL; removed “untuk proyek saya”.

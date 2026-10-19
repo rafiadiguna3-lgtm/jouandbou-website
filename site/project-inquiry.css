@@ -1,6 +1,9 @@
-.project-inquiry{margin:clamp(32px,6vw,72px) 0;padding:0;font:inherit;line-height:1.6}
-.project-inquiry a{display:inline-block;padding:10px 0;color:inherit;font-size:14px;font-weight:400;text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
-.project-inquiry a span{display:inline-block;margin-left:6px;transition:transform .2s ease}
-.project-inquiry a:hover span{transform:translate(2px,-2px)}
-.project-inquiry a:focus-visible{outline:2px solid currentColor;outline-offset:5px}
-@media(prefers-reduced-motion:reduce){.project-inquiry a span{transition:none}}
+.project-inquiry{position:fixed;right:max(24px,env(safe-area-inset-right));bottom:calc(24px + env(safe-area-inset-bottom));z-index:20;margin:0!important;padding:0!important;max-width:calc(100vw - 32px);font:inherit;line-height:1.4}
+.project-inquiry a{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:10px;max-width:100%;min-height:44px;padding:10px 18px;border:1px solid #dededb;border-radius:999px;background:#f4f4f2;color:#787976;font-size:14px;font-weight:400;text-decoration:none;box-shadow:0 2px 8px #00000008}
+.project-inquiry a svg{flex:none;width:22px;height:22px}
+.project-inquiry a:hover{background:#eaeae7;color:#51534f}
+.project-inquiry a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.project-scroll:has(.project-inquiry){padding-bottom:110px!important}
+.project-fullpage:has(>.project-inquiry) .project-scroll{padding-bottom:110px!important}
+.bou-project:has(.project-inquiry){padding-bottom:90px}
+@media(max-width:600px){.project-inquiry{right:16px;bottom:calc(16px + env(safe-area-inset-bottom))}.project-inquiry a{gap:8px;padding:9px 14px;font-size:13px}}

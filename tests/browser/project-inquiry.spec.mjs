@@ -9,9 +9,14 @@ for(const phone of [false,true])test(`project inquiries preserve the project and
   const link=panel.locator('.project-inquiry a');await expect(link).toHaveCount(1);await link.scrollIntoViewIfNeeded();await expect(link).toBeVisible();
   const url=new URL(await link.getAttribute('href'));
   expect(url.origin+url.pathname).toBe('https://wa.me/628118111439');
-  expect(url.searchParams.get('text')).toContain(project.name);
+  await expect(link).toHaveText('lets talk~');
+  expect(url.searchParams.get('text')).toBe(`Halo Jou and Bou, saya tertarik dengan proyek ${project.name} dan ingin konsultasi\n\nhttps://jouandbou.com${project.path}`);
   expect(url.searchParams.get('text')).toContain('https://jouandbou.com'+project.path);
   await expect(link).toHaveAttribute('target','_blank');
+  const before=await link.boundingBox();
+  await page.locator(project.kind==='jou'?`#${project.panel} .project-scroll`:'#bou-page').evaluate(el=>{el.scrollTop=el.scrollHeight;});
+  const after=await link.boundingBox();expect(Math.abs(after.y-before.y)).toBeLessThan(2);
+  expect(after.y+after.height).toBeLessThanOrEqual((await page.viewportSize()).height);
   const rect=await link.boundingBox();expect(rect.width).toBeGreaterThan(100);expect(rect.x).toBeGreaterThanOrEqual(0);expect(rect.x+rect.width).toBeLessThanOrEqual((await page.viewportSize()).width);
  }
  await context.close();
