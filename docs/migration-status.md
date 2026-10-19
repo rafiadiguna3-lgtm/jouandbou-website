@@ -499,3 +499,5 @@ Phone guidance refinement: removed the old long bottom-left gesture copy on phon
 ### Refresh-scoped guidance across devices
 
 Extended the map gesture guide to desktop. Removed persistent dismissal so every fresh page load shows it again, while route changes within a visit do not repeat it after dismissal. Simplified the tap/drag artwork into a small neutral circular hint. Pointer interaction, scrolling, Enter or Escape dismisses the hint and light map blur.
+
+Map guide copy: added visible short instructions alongside the gesture icon, using Tap/pinch on touch devices and Click/scroll on desktop. Refresh and dismissal behavior is unchanged.

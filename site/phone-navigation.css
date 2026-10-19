@@ -42,3 +42,9 @@ body.phone-map-guided #viewport{filter:blur(1.3px)}
 .phone-map-guidance{padding:20px;background:#fafafabf;border:1px solid #e2e4de80;border-radius:50%;width:88px;height:88px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .phone-map-guidance>svg{width:38px;height:38px;flex-shrink:0;color:#73766c}
 .phone-map-guidance>svg.phone-drag-hint{width:30px;height:14px;margin-top:3px}
+
+/* Keep short instructions readable alongside the gesture icon. */
+.phone-map-guidance{width:auto;height:auto;max-width:300px;padding:22px 26px;border-radius:20px}
+.phone-map-guidance strong{font-size:15px;line-height:1.5;font-weight:400;margin:12px 0 5px;white-space:nowrap}
+.phone-map-guidance p{font-size:11px;line-height:1.6;white-space:nowrap}
+.phone-map-guidance>svg.phone-drag-hint{margin-top:12px}

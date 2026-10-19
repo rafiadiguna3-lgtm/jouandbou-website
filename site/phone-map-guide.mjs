@@ -3,9 +3,11 @@ export function createPhoneMapGuide(){
  let dismissed=false,visible=false;
  const phone=matchMedia('(max-width:899px),(hover:none),(any-pointer:coarse)');
  const guide=document.createElement('section');guide.id='phone-map-guide';guide.hidden=true;guide.setAttribute('role','status');guide.setAttribute('aria-label','Map instructions');
- guide.innerHTML='<div class="phone-map-guidance"><svg aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 26V13a3 3 0 0 1 6 0v10l3-1 8 4v8c0 6-4 10-10 10h-2c-4 0-6-2-8-5l-6-9a3 3 0 0 1 4-4l5 4"/><path d="M13 13a10 10 0 0 1 20 0" opacity=".45"/></svg><strong class="sr-only">Select a house to explore</strong><p class="sr-only">Drag to move. Scroll or pinch to zoom.</p><svg class="phone-drag-hint" aria-hidden="true" viewBox="0 0 48 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h34M12 7l-5 5 5 5M36 7l5 5-5 5"/></svg></div>';
+ guide.innerHTML='<div class="phone-map-guidance"><svg aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 26V13a3 3 0 0 1 6 0v10l3-1 8 4v8c0 6-4 10-10 10h-2c-4 0-6-2-8-5l-6-9a3 3 0 0 1 4-4l5 4"/><path d="M13 13a10 10 0 0 1 20 0" opacity=".45"/></svg><strong></strong><p></p><svg class="phone-drag-hint" aria-hidden="true" viewBox="0 0 48 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12h34M12 7l-5 5 5 5M36 7l5 5-5 5"/></svg></div>';
  document.body.append(guide);
  const update=()=>{
+  guide.querySelector('strong').textContent=phone.matches?'Tap a house to explore':'Click a house to explore';
+  guide.querySelector('p').textContent=phone.matches?'Drag to move · Pinch to zoom':'Drag to move · Scroll to zoom';
   const home=!routeHash()||routeHash()==='#projects';
   visible=!dismissed&&home&&!document.body.matches('.model-view,.has-selection,.view-about,.view-bou,.view-contact')&&!document.querySelector('dialog[open]');
   guide.hidden=!visible;document.body.classList.toggle('phone-map-guided',visible);
