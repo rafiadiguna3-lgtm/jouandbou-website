@@ -1,0 +1,1 @@
+export const projectSocialHTML=()=>` <span class="project-social">Follow the ongoing story on <a href="https://www.instagram.com/jouandbou/" target="_blank" rel="noopener noreferrer">Instagram <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 19 19 5M5 5h14v14"/></svg></a>.</span>`;

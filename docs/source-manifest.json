@@ -13004,8 +13004,8 @@
     },
     {
       "path": "bou.mjs",
-      "bytes": 4834,
-      "sha256": "06e76a793eb925e6074dfb282b53bc0b7b29a9c9379f81357c1e7ccf7765f79a",
+      "bytes": 5116,
+      "sha256": "9d7482bc382e8efee00c88f12cfec866dbbc869db68ccb099479c557b3b4bf13",
       "native_sha256": "3f863d3f4caf37f10df844904a4feca0baf867970aa240522e98c8f2dcb2f4eb",
       "native_bytes": 4391,
       "source_urls": [
@@ -13311,7 +13311,7 @@
     {
       "path": "index.html",
       "bytes": 109900,
-      "sha256": "1eba688bcfd0f2ff1fe9976bf6fec491c44377293e202fc4cd1689e34c731887",
+      "sha256": "b9120414eba322e95d77bff281930f4d681d4ddebf562bc3ea8478f5561c4c8f",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],

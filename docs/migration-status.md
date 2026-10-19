@@ -485,3 +485,7 @@ Replaced the improvised stroked inquiry icon with a standard filled WhatsApp sil
 ### Warmer inquiry message
 
 Updated the prefilled WhatsApp closing to “Boleh ngobrol lebih lanjut?” after the project name, preserving the canonical project URL and lets talk~ button.
+
+### Instagram in project narration
+
+Added “Follow the ongoing story on Instagram” as an inline closing sentence within the final narrative paragraph of published Jou/Bou details and their static SEO pages. Links use the existing @jouandbou studio account, open in a new tab, inherit paragraph typography, and add no floating control.
