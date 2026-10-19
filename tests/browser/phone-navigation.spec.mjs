@@ -5,6 +5,9 @@ for(const name of ['iPhone 13','Pixel 7'])test(`${name}: first-use icons, menu s
  await page.goto('/');await expect(page.locator('#phone-map-guide')).toBeVisible();await expect(page.locator('#phone-intro-guide')).toBeHidden();
  await expect(page.locator('body')).toHaveClass(/phone-map-guided/);
  await page.locator('#menu-toggle').click();await expect(page.locator('#phone-map-guide')).toHaveCount(0);
+ await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');await expect(page.locator('#home-summary')).toHaveCSS('opacity','0');
+ await expect(page.locator('#projects svg')).toHaveCount(0);await expect(page.locator('#main-nav > :last-child')).toHaveAttribute('id','phone-search-action');
+ await page.locator('#menu-toggle').click();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','1');await page.locator('#menu-toggle').click();
  await page.locator('#phone-search-action').click();
  await expect(page.locator('#search')).toBeVisible();await expect(page.locator('#search')).toBeFocused();await expect(page.locator('#menu-toggle')).toHaveAttribute('aria-expanded','false');
  await page.locator('#search').fill('RR House');await page.locator('#results button').first().click();await expect(page.locator('.house-callout-card')).toBeVisible();await expect(page.locator('#search')).toBeHidden();

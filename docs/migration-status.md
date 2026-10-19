@@ -501,3 +501,7 @@ Phone guidance refinement: removed the old long bottom-left gesture copy on phon
 Extended the map gesture guide to desktop. Removed persistent dismissal so every fresh page load shows it again, while route changes within a visit do not repeat it after dismissal. Simplified the tap/drag artwork into a small neutral circular hint. Pointer interaction, scrolling, Enter or Escape dismisses the hint and light map blur.
 
 Map guide copy: added visible short instructions alongside the gesture icon, using Tap/pinch on touch devices and Click/scroll on desktop. Refresh and dismissal behavior is unchanged.
+
+Phone menu refinement: removed the Projects house icon and placed Search last after Contact us. Restored the compact standalone rounded search field, removing the extra surrounding panel and adding a brief expanding reveal with eased input motion; reduced-motion is respected.
+
+Opening the hamburger menu fades out homepage work links and studio copy, suppressing their pointer events; closing it restores the current intro visibility without resetting map zoom state.
