@@ -505,3 +505,5 @@ Map guide copy: added visible short instructions alongside the gesture icon, usi
 Phone menu refinement: removed the Projects house icon and placed Search last after Contact us. Restored the compact standalone rounded search field, removing the extra surrounding panel and adding a brief expanding reveal with eased input motion; reduced-motion is respected.
 
 Opening the hamburger menu fades out homepage work links and studio copy, suppressing their pointer events; closing it restores the current intro visibility without resetting map zoom state.
+
+Hamburger visibility follow-up: explicitly conceal homepage copy via visibility while either menu-open or the toggle expanded state is active, including entrance animation frames. Bumped navigation stylesheet URL to invalidate stale cached CSS.

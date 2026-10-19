@@ -63,3 +63,7 @@ body.phone-map-guided #viewport{filter:blur(1.3px)}
 @media(prefers-reduced-motion:reduce){body.touch-layout.search-open .search-wrap,body.touch-layout.search-open #search,body.touch-layout.search-open #results{animation:none}}
 
 body:has(#main-nav.menu-open) .phone-intro,body:has(#main-nav.menu-open) .home-summary,body:has(#main-nav.menu-open) .phone-intro-guide{opacity:0!important;pointer-events:none!important;transition:opacity .2s ease-out}
+
+/* Menu must fully conceal homepage copy, including during entrance animations. */
+body:has(#menu-toggle[aria-expanded="true"]) :is(#phone-intro,#home-summary,#phone-intro-guide),
+body:has(#main-nav.menu-open) :is(#phone-intro,#home-summary,#phone-intro-guide){visibility:hidden!important;opacity:0!important;pointer-events:none!important}
