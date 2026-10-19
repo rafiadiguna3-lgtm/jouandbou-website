@@ -477,3 +477,7 @@ Inquiry pill copy: “lets talk~”. Prefilled messages end at “dan ingin kons
 ### Inquiry refresh on existing browser sessions
 
 Versioned the inquiry stylesheet, initializer and shared message module after replacing the original story-end link with the fixed pill. This avoids reusing earlier inquiry assets under the same URLs. Added coverage for map → house → project details with earlier version assets intercepted as stale.
+
+### WhatsApp icon refinement
+
+Replaced the improvised stroked inquiry icon with a standard filled WhatsApp silhouette and handset, keeping its 22px size and grey pill styling. Refreshed the inquiry module version.
