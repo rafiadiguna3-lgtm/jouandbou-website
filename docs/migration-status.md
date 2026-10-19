@@ -455,3 +455,7 @@ Publish 8 documented Jou projects and 7 Bou concepts under /projects/, with a cr
 Project share photos are exported as 1200×630 JPEGs from the existing photographs/illustrations, retaining the full subject with neutral margins. Regeneration scripts are build-project-catalog.mjs and build-project-previews.mjs; deployment builds use the committed catalog and images, without needing Chromium. Search indexing, WhatsApp refresh and production domain/redirect behavior still depend on deployment and external crawlers and are not guaranteed by local validation.
 
 Root and nested documents now share an explicit root base URL so in-app history changes do not retarget relative fetches/images. Internal project anchors expose real public URLs while normal clicks keep SPA navigation; modified clicks can open the static page in a new tab. Development serving now builds and serves dist so public URLs work locally; rebuild after source edits. A custom 404 prevents production unknown paths from falling through to a duplicate homepage. Source sitemap is now included in the integrity manifest.
+
+### Bou Works return origin
+
+Bou Works opened from the smartphone homepage returns to the initial homepage camera and introductory copy when closed. Entry from About Us still returns to About Us. Project close first returns to the Bou index; Escape follows the same origin rules.

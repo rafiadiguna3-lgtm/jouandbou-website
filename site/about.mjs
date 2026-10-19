@@ -9,7 +9,12 @@ const bou=document.getElementById('bou-page');
 const bouClose=document.createElement('button');
 bouClose.id='bou-close';bouClose.type='button';bouClose.hidden=true;bouClose.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
 brand.closest('header').append(bouClose);
-function closeBou(){location.hash=routeHash().startsWith('#bou-works/')?'bou-works':'about';}
+let bouOrigin='about';
+function closeBou(){
+ if(routeHash().startsWith('#bou-works/'))location.hash='bou-works';
+ else if(bouOrigin==='projects')brand.click();
+ else location.hash='about';
+}
 bouClose.onclick=closeBou;
 document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('view-bou')){event.preventDefault();closeBou();}});
 let shownRoute;
@@ -21,6 +26,7 @@ function showRoute(){
  if(/^#bou(?:\/|$)/.test(routeHash()))history.replaceState(null,'',routeHash().replace(/^#bou/,'#bou-works'));
  if(shownRoute?.startsWith('#bou-works')&&shownRoute!==routeHash()&&!bou.hidden)bouScrollPositions.set(shownRoute,bou.scrollTop);
  const active=routeHash()==='#about',contactActive=routeHash()==='#contact',bouActive=/^#bou-works(?:\/|$)/.test(routeHash()),page=active||contactActive||bouActive;
+ if(bouActive&&!shownRoute?.startsWith('#bou-works')&&shownRoute)bouOrigin=shownRoute==='projects'?'projects':'about';
  const panel=active?about:contactActive?contact:bou;
  about.hidden=!active;contact.hidden=!contactActive;bou.hidden=!bouActive;
  document.body.classList.toggle('view-about',active||bouActive);document.body.classList.toggle('view-bou',bouActive);document.body.classList.toggle('view-contact',contactActive);
@@ -28,7 +34,7 @@ function showRoute(){
  for(const el of [studio,projects,contactLink])el.removeAttribute('aria-current');(active||bouActive?studio:contactActive?contactLink:projects).setAttribute('aria-current','page');
  const route=bouActive?routeHash():active?'about':contactActive?'contact':'projects';
  bouClose.hidden=!bouActive;
- bouClose.setAttribute('aria-label',routeHash().startsWith('#bou-works/')?'Back to Bou Works':'Back to About Us');
+ bouClose.setAttribute('aria-label',routeHash().startsWith('#bou-works/')?'Back to Bou Works':bouOrigin==='projects'?'Back to Home':'Back to About Us');
  if(bouActive){document.getElementById('main-nav').classList.remove('menu-open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');const destination=routeHash();const restoreTop=bouScrollPositions.get(destination)||0;
  renderBou(destination.slice(11)).then(()=>{if(routeHash()===destination&&!bou.hidden){bou.scrollTo({top:restoreTop,left:0,behavior:'instant'});document.documentElement.removeAttribute('data-route-pending');}});}
  if(page&&!bouActive&&shownRoute!==route)panel.scrollTo({top:0,left:0,behavior:'instant'});
