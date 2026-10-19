@@ -425,3 +425,9 @@ User supersedes the near-minimum square overview: the phone square now restores 
 ### Correct control target: brand returns home, square keeps overview (2026-10-17)
 
 User clarified the previous request referred to the top-left brand logo, not the square control. Restore the phone square to the centered near-minimum overview (minimum scale × 1.05) with visible text. Apply initial-frame/text reset intent to brand navigation instead, including return from sections. Preserve ordinary Projects navigation and desktop behavior. Regression checks now distinguish square overview from brand initial camera/text.
+
+### Solid logo previews, favicon and www canonicalization (2026-10-19)
+
+Use the site's existing solid black brand-vector paths to render the supplied solid-logo treatment without redrawing it. Add a 1200×1200 white-background share PNG with approximately 60% logo height, plus versioned solid PNG icons (16/32/48/64/180/192/512), SVG and root ICO/PNG/SVG fallbacks. Point Open Graph/Twitter/WebSite image metadata and favicon/apple-touch links to the new solid assets; preserve page text and website header branding. Retain old versioned assets for cached pages. Reproduce assets with `node scripts/build-brand-assets.mjs`.
+
+Add a Cloudflare Pages `_redirects` host rule for `https://www.jouandbou.com/*` → `https://jouandbou.com/:splat` (301). Canonical, social URL and sitemap already use the apex. This rule becomes effective only when www requests reach the Pages deployment containing it. No Cloudflare credentials are available to inspect or modify custom-domain/DNS associations. Both live-domain requests are blocked here by the environment proxy's CONNECT 403, so the existing discrepancy and live redirect cannot be diagnosed/verified. Existing WhatsApp/Google caches can also differ by hostname.

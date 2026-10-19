@@ -13189,28 +13189,34 @@
     },
     {
       "path": "favicon.ico",
-      "bytes": 30950,
-      "sha256": "964c7be15588e0ea2e6fe0024b92f2dd1c1ad1eaee28e1a75b90c7520e02673f",
+      "bytes": 4206,
+      "sha256": "bfa137d8b931bd2bf54772a0d186b75773e74d3ea298f71644606bfe95c8ab7b",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.ico"
       ],
       "native_sha256": "964c7be15588e0ea2e6fe0024b92f2dd1c1ad1eaee28e1a75b90c7520e02673f",
-      "native_bytes": 30950
+      "native_bytes": 30950,
+      "published_sha256": "964c7be15588e0ea2e6fe0024b92f2dd1c1ad1eaee28e1a75b90c7520e02673f",
+      "published_bytes": 30950,
+      "modified_locally": true
     },
     {
       "path": "favicon.png",
-      "bytes": 805,
-      "sha256": "6e9d2ac38faae2ca92bda7f9a1286bc9b03ed7e701cfee2dac172a8f14fdf6da",
+      "bytes": 14250,
+      "sha256": "18fcc21920f86f46311da7df34cad74201bfa1be038590530d16083698955c9f",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.png"
       ],
       "native_sha256": "6e9d2ac38faae2ca92bda7f9a1286bc9b03ed7e701cfee2dac172a8f14fdf6da",
-      "native_bytes": 805
+      "native_bytes": 805,
+      "published_sha256": "6e9d2ac38faae2ca92bda7f9a1286bc9b03ed7e701cfee2dac172a8f14fdf6da",
+      "published_bytes": 805,
+      "modified_locally": true
     },
     {
       "path": "favicon.svg",
-      "bytes": 1699,
-      "sha256": "c282891b0423fa0a517e46514d6a252253aa06cdcdd9510625e34fa82a4abd14",
+      "bytes": 1706,
+      "sha256": "915b95b489046d58cd69ca6ffac7c1167272ff52674b94c5aa549907c125ced1",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.svg"
       ],
@@ -13225,7 +13231,10 @@
         }
       ],
       "native_sha256": "c282891b0423fa0a517e46514d6a252253aa06cdcdd9510625e34fa82a4abd14",
-      "native_bytes": 1699
+      "native_bytes": 1699,
+      "published_sha256": "c282891b0423fa0a517e46514d6a252253aa06cdcdd9510625e34fa82a4abd14",
+      "published_bytes": 1699,
+      "modified_locally": true
     },
     {
       "path": "gallery-arrows.mjs",
@@ -13301,8 +13310,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 110121,
-      "sha256": "f69053202f326a920f21e9778c5addc93c89089cb614f01cb44a5574aaf544a9",
+      "bytes": 110112,
+      "sha256": "207685d87df60a1ab1f1e309cdaa8cf991cb765893e51ccabad7e74e0df5ff25",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14704,6 +14713,96 @@
       "sha256": "b91beb4531aa9e0c09f1ca3522c3d538a559620478248dcc1d93d6321ae029c3",
       "source_urls": [
         "conversation-upload://jou-and-bou-outline-logo/share-image"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "_redirects",
+      "bytes": 61,
+      "sha256": "947e9d2640b0847f79a9d8ed142405546214b91aa9afaaf3158dd7455f69ea79",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/_redirects"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-64-v2.png",
+      "bytes": 1645,
+      "sha256": "b2c53271e61eb8553dbbc11951133e38e1654ab6304cc11a7dcb0b330bb92d0f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-32-v2.png",
+      "bytes": 846,
+      "sha256": "1983880b883e2a74b028401e79b3167e02e59cc91df530e0c6e1228fcae171d1",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-16-v2.png",
+      "bytes": 418,
+      "sha256": "adb3dcfd9ff0a1561ab01618ae5362ad5a0ff59438fb8ebc013a498930c799e0",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-192-v2.png",
+      "bytes": 4882,
+      "sha256": "91ab973b29f605b38d47ba79eb470434beea0635393c623c36353ee4e088b3ca",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-180-v2.png",
+      "bytes": 4521,
+      "sha256": "02b64f069c451f2ba2dcb5f85d89ce75aa06806169a63e76f78cb3d223ced772",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-512-v2.png",
+      "bytes": 14250,
+      "sha256": "18fcc21920f86f46311da7df34cad74201bfa1be038590530d16083698955c9f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-48-v2.png",
+      "bytes": 1227,
+      "sha256": "8c90aa7b0a9f642c07a4094ebbb544aecd96ed59dd0bb27020a089055ddec139",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-share-solid-v2.png",
+      "bytes": 27533,
+      "sha256": "fe4a89c6f31e01b0e8bef6300c59439cab205f5c67e35f19a33ec25de6975ddd",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-v2.svg",
+      "bytes": 1706,
+      "sha256": "915b95b489046d58cd69ca6ffac7c1167272ff52674b94c5aa549907c125ced1",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
       ],
       "authored_locally": true
     }

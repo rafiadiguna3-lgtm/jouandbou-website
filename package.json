@@ -11,7 +11,7 @@
     "dev": "http-server site -p 5173 -a 0.0.0.0 -c-1",
     "build": "node scripts/build.mjs",
     "preview": "http-server dist -p 4173 -a 0.0.0.0 -c-1",
-    "test": "node --test tests/assets.test.mjs tests/map-lod.test.mjs",
+    "test": "node --test tests/assets.test.mjs tests/map-lod.test.mjs tests/brand-routing.test.mjs",
     "test:browser": "playwright test",
     "test:reference": "node scripts/compare-live.mjs",
     "manifest:update": "node scripts/update-manifest.mjs",
