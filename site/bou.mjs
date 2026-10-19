@@ -1,5 +1,5 @@
 import {projects} from './project-catalog.mjs';
-import {inquiryHTML} from './project-inquiry.mjs';
+import {inquiryHTML} from './project-inquiry.mjs?v=2';
 import {routeHash,projectURL} from './project-routing.mjs';
 import {galleryArrows} from './gallery-arrows.mjs';
 const content=document.getElementById('bou-content');

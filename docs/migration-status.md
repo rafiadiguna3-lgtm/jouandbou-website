@@ -473,3 +473,7 @@ Added a discreet WhatsApp inquiry link at the end of all 15 published Jou and Bo
 Replaced the end-of-story text link with a restrained grey WhatsApp pill fixed to the lower right of each published project view. Jou buttons sit directly in their dialogs to avoid transformed scrolling content; Bou remains scoped to its detail article. Safe-area spacing and bottom content padding preserve mobile access.
 
 Inquiry pill copy: “lets talk~”. Prefilled messages end at “dan ingin konsultasi”, followed by the project URL; removed “untuk proyek saya”.
+
+### Inquiry refresh on existing browser sessions
+
+Versioned the inquiry stylesheet, initializer and shared message module after replacing the original story-end link with the fixed pill. This avoids reusing earlier inquiry assets under the same URLs. Added coverage for map → house → project details with earlier version assets intercepted as stale.

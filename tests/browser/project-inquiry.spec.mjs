@@ -26,3 +26,15 @@ test('inquiries remain usable without application JavaScript',async({browser})=>
  for(const project of projects){await page.goto(project.path);await expect(page.locator('#project-static-content .project-inquiry a')).toHaveAttribute('href',new RegExp('^https://wa.me/628118111439\\?text='));}
  await context.close();
 });
+
+test('inquiry appears when entering details from the map even with old inquiry assets cached',async({page})=>{
+ await page.route('**/project-inquiry-init.mjs?v=1',route=>route.fulfill({contentType:'text/javascript',body:''}));
+ await page.route('**/project-inquiry.css?v=1',route=>route.fulfill({contentType:'text/css',body:'.project-inquiry{display:none}'}));
+ await page.goto('/#projects');
+ await page.locator('#search-toggle').click();await page.locator('#search').fill('Rumah Anas');
+ await page.locator('#results button').first().click();await page.locator('.house-callout-card').click();await page.locator('#more').click();
+ await expect(page.locator('#rumah-anas')).toBeVisible();
+ const link=page.locator('#rumah-anas .project-inquiry a');await expect(link).toBeVisible();await expect(link).toHaveText('lets talk~');
+ await expect(page.locator('#rumah-anas .project-inquiry')).toHaveCSS('position','fixed');
+ await page.locator('#rumah-anas .close').click();await expect(link).toBeHidden();
+});
