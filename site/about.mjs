@@ -1,4 +1,4 @@
-import {routeHash,routeProject} from './project-routing.mjs';
+import {routeHash,routeProject,writeRoute} from './project-routing.mjs';
 import {renderBou} from './bou.mjs?v=147';
 import './contact-map.mjs?v=141';
 import {journalPosts} from './about-journal.mjs';
@@ -46,7 +46,7 @@ function showRoute(){
 
 studio.onclick=()=>{if(routeHash()!=='#about')location.hash='about';else about.scrollTo({top:0,behavior:'smooth'});};
 const fromOtherSection=()=>document.body.matches('.view-about,.view-contact');
-projects.onclick=()=>{const fromSection=fromOtherSection();location.hash='projects';showRoute();originalProjects?.({fromSection});};
+projects.onclick=()=>{const fromSection=fromOtherSection(),firstProject=document.body.classList.contains('touch-layout')&&document.getElementById('main-nav').classList.contains('menu-open');location.hash='projects';showRoute();originalProjects?.({fromSection,firstProject});};
 document.querySelector('.about-work[href="#projects"]').onclick=e=>{e.preventDefault();projects.click();};
 brand.onclick=e=>{e.preventDefault();const fromSection=fromOtherSection();closeSearch();location.hash='projects';showRoute();originalProjects?.({fromSection,resetIntro:true});};
 contactLink.onclick=()=>{if(routeHash()==='#contact')contact.scrollTo({top:0,behavior:'smooth'});};
@@ -56,10 +56,12 @@ for(const post of journalPosts){const a=document.createElement('a');a.href=post.
 const prev=document.getElementById('feed-prev'),next=document.getElementById('feed-next');const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;function move(d){track.scrollBy({left:track.clientWidth*d,behavior:reduced?'instant':'smooth'});}prev.onclick=()=>move(-1);next.onclick=()=>move(1);function controls(){prev.disabled=track.scrollLeft<2;next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-2;}track.addEventListener('scroll',controls,{passive:true});addEventListener('resize',controls);new ResizeObserver(controls).observe(track);controls();
 
 const searchToggle=document.getElementById('search-toggle'),searchWrap=document.querySelector('.search-wrap'),searchInput=document.getElementById('search');
-function closeSearch(){searchInput.value='';document.getElementById('search-clear').hidden=true;document.getElementById('results').replaceChildren();document.body.classList.remove('search-open');searchToggle.setAttribute('aria-expanded','false');searchInput.inert=true;searchInput.tabIndex=-1;document.getElementById('results').hidden=true;searchInput.setAttribute('aria-expanded','false');}
+function closeSearch(){const phone=document.body.classList.contains('touch-layout');searchToggle.tabIndex=phone?-1:0;searchToggle.setAttribute('aria-hidden',String(phone));document.getElementById('phone-search-action').setAttribute('aria-expanded','false');searchInput.value='';document.getElementById('search-clear').hidden=true;document.getElementById('results').replaceChildren();document.body.classList.remove('search-open');searchToggle.setAttribute('aria-expanded','false');searchInput.inert=true;searchInput.tabIndex=-1;document.getElementById('results').hidden=true;searchInput.setAttribute('aria-expanded','false');}
 searchToggle.onclick=()=>{if(routeHash()==='#about'||routeHash()==='#contact'||routeHash().startsWith('#bou-works')){history.pushState(null,'','#projects');showRoute();}const open=!document.body.classList.contains('search-open');document.body.classList.toggle('search-open',open);searchToggle.setAttribute('aria-expanded',String(open));if(open){searchInput.value='';document.getElementById('search-clear').hidden=true;document.getElementById('results').replaceChildren();document.getElementById('results').hidden=true;searchInput.inert=false;searchInput.tabIndex=0;searchInput.focus();}else closeSearch();};
+document.getElementById('phone-search-action').onclick=()=>{const fromSection=fromOtherSection();writeRoute('#projects');showRoute();originalProjects?.({fromSection});searchWrap.hidden=false;document.getElementById('main-nav').classList.remove('menu-open');document.getElementById('menu-toggle').setAttribute('aria-expanded','false');if(!document.body.classList.contains('search-open'))searchToggle.onclick();document.getElementById('phone-search-action').setAttribute('aria-expanded','true');};
+document.getElementById('phone-search-close').onclick=()=>{closeSearch();document.getElementById('menu-toggle').focus();};
 document.addEventListener('pointerdown',e=>{if(!e.target.closest('.search-wrap,#search-toggle'))closeSearch();});
-searchWrap.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();searchToggle.focus();}});
+searchWrap.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();(document.body.classList.contains('touch-layout')?document.getElementById('menu-toggle'):searchToggle).focus();}});
 document.getElementById('results').addEventListener('click',e=>{if(e.target.closest('button'))closeSearch();});
 addEventListener('hashchange',closeSearch);addEventListener('popstate',showRoute);
 

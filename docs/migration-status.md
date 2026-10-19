@@ -489,3 +489,9 @@ Updated the prefilled WhatsApp closing to “Boleh ngobrol lebih lanjut?” afte
 ### Instagram in project narration
 
 Added “Follow the ongoing story on Instagram” as an inline closing sentence within the final narrative paragraph of published Jou/Bou details and their static SEO pages. Links use the existing @jouandbou studio account, open in a new tab, inherit paragraph typography, and add no floating control.
+
+### First-time smartphone navigation
+
+Added an icon-labelled Search projects action inside the phone menu, with a dismissible search panel. The menu Projects action opens Explore 3D Rumah Anas; programmatic homepage work links and desktop navigation retain their existing map behavior. First-time phone visitors see a light map blur and tap/drag/pinch guide that dismisses on first interaction and is remembered locally. WhatsApp remains scoped to project details.
+
+Phone guidance refinement: removed the old long bottom-left gesture copy on phones. The first-visit guidance uses touch/drag symbols, with equivalent instructions retained for assistive technology.

@@ -1,3 +1,4 @@
+import {createPhoneMapGuide} from './phone-map-guide.mjs';
 import {routeHash,writeRoute} from './project-routing.mjs';
 import {createPhoneIntro} from './phone-intro.mjs';
 import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-flight.mjs?v=143';
@@ -317,9 +318,10 @@ function syncProjectRoute(){
 for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&routeHash()===`#project/${panel.dataset.projectRoute}`)writeRoute('#projects',{replace:true});});
 addEventListener('hashchange',syncProjectRoute);addEventListener('popstate',syncProjectRoute);
 $('more').onclick=openProjectDetails;
-function returnHome({fromSection=false,overview=false,resetIntro=false}={}){
+function returnHome({fromSection=false,overview=false,resetIntro=false,firstProject=false}={}){
  const focus=front||previewId>=0?modelCameraFocus():null;
  document.querySelectorAll('dialog').forEach(d=>d.close());if(front)back();clearPreview();
+ if(firstProject&&!desktopInput()){openHouse(0);return;}
  goal=homeCamera(overview);if(resetIntro&&!desktopInput())phoneIntro.onHome();if(overview&&!desktopInput())phoneIntro.onOverview();zoom=goal.scale/baseScale();current=0;updateUI();flyHomeCamera(fromSection,focus);start();
 }
 $('projects').onclick=returnHome;
@@ -364,8 +366,8 @@ document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
 
-await import("./about.mjs?v=147");
-syncProjectRoute();
+await import("./about.mjs?v=149");
+syncProjectRoute();createPhoneMapGuide();
 
 // Wait for the imported models and a painted scene, rather than a fake progress percentage.
 Promise.resolve(engine.firstReady||engine.ready).then(()=>requestAnimationFrame(()=>{if(mapVisible())render();requestAnimationFrame(()=>document.dispatchEvent(new Event('jou:scene-ready')));})).catch(()=>document.dispatchEvent(new Event('jou:scene-ready')));
