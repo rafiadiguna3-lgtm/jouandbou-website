@@ -67,3 +67,13 @@ body:has(#main-nav.menu-open) .phone-intro,body:has(#main-nav.menu-open) .home-s
 /* Menu must fully conceal homepage copy, including during entrance animations. */
 body:has(#menu-toggle[aria-expanded="true"]) :is(#phone-intro,#home-summary,#phone-intro-guide),
 body:has(#main-nav.menu-open) :is(#phone-intro,#home-summary,#phone-intro-guide){visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+
+/* Unboxed static gesture guidance, scaled to the homepage description. */
+.phone-map-guidance{padding:0;border:0;border-radius:0;background:transparent;backdrop-filter:none;box-shadow:none;max-width:calc(100vw - 48px)}
+.phone-map-guidance>svg{width:30px;height:30px;margin:0 auto 14px;animation:none;transform:none;color:#62645c}
+.phone-map-guidance strong{font-family:var(--jb-copy,Arial,sans-serif);font-size:calc(var(--guide-copy-size,12px) + 4px);font-weight:400;line-height:1.65;margin:0 0 3px;color:#62645c}
+.phone-map-guidance p{font-family:var(--jb-copy,Arial,sans-serif);font-size:var(--guide-copy-size,12px);font-weight:400;line-height:1.65;margin:0;color:#62645c}
+
+@media(max-width:899px),(hover:none),(any-pointer:coarse){
+ body.touch-layout.search-open .search-box{border:1px solid #d9d9d3;background:#fff;box-shadow:0 4px 16px #00000005}
+}

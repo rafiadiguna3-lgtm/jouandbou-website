@@ -4,6 +4,9 @@ for(const name of ['iPhone 13','Pixel 7'])test(`${name}: first-use icons, menu s
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/');await expect(page.locator('#phone-map-guide')).toBeVisible();await expect(page.locator('#phone-intro-guide')).toBeHidden();
  await expect(page.locator('body')).toHaveClass(/phone-map-guided/);
+ await expect(page.locator('.phone-map-guidance strong')).toHaveText('Move the screen');await expect(page.locator('.phone-map-guidance p')).toHaveText('Tap a house');
+ const sizes=await page.evaluate(()=>{const style=s=>getComputedStyle(document.querySelector(s));return{top:parseFloat(style('.phone-map-guidance strong').fontSize),bottom:parseFloat(style('.phone-map-guidance p').fontSize),description:parseFloat(style('#home-summary').fontSize),animation:style('.phone-map-guidance>svg').animationName,background:style('.phone-map-guidance').backgroundColor};});
+ expect(sizes.top).toBe(sizes.description+4);expect(sizes.bottom).toBe(sizes.description);expect(sizes.animation).toBe('none');expect(sizes.background).toBe('rgba(0, 0, 0, 0)');
  await page.locator('#menu-toggle').click();await expect(page.locator('#phone-map-guide')).toHaveCount(0);
  await expect(page.locator('#phone-intro')).toBeHidden();await expect(page.locator('#home-summary')).toBeHidden();await expect(page.locator('#phone-intro')).toHaveCSS('opacity','0');await expect(page.locator('#home-summary')).toHaveCSS('opacity','0');
  await expect(page.locator('#projects svg')).toHaveCount(0);await expect(page.locator('#main-nav > :last-child')).toHaveAttribute('id','phone-search-action');

@@ -1,4 +1,4 @@
-import {createPhoneMapGuide} from './phone-map-guide.mjs?v=3';
+import {createPhoneMapGuide} from './phone-map-guide.mjs?v=4';
 import {routeHash,writeRoute} from './project-routing.mjs';
 import {createPhoneIntro} from './phone-intro.mjs';
 import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-flight.mjs?v=143';
