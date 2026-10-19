@@ -3,7 +3,7 @@ export function createPhoneMapGuide(){
  let dismissed=false,visible=false;
  const phone=matchMedia('(max-width:899px),(hover:none),(any-pointer:coarse)');
  const guide=document.createElement('section');guide.id='phone-map-guide';guide.hidden=true;guide.setAttribute('role','status');guide.setAttribute('aria-label','Map instructions');
- guide.innerHTML='<div class="phone-map-guidance"><svg aria-hidden="true" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 26V13a3 3 0 0 1 6 0v10l3-1 8 4v8c0 6-4 10-10 10h-2c-4 0-6-2-8-5l-6-9a3 3 0 0 1 4-4l5 4"/></svg><strong></strong><p></p></div>';
+ guide.innerHTML='<div class="phone-map-guidance"><svg aria-hidden="true" viewBox="0 0 48 48" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 26V13a3 3 0 0 1 6 0v10l3-1 8 4v8c0 6-4 10-10 10h-2c-4 0-6-2-8-5l-6-9a3 3 0 0 1 4-4l5 4"/></svg><strong></strong><p></p></div>';
  document.body.append(guide);
  const update=()=>{
   guide.querySelector('strong').textContent=phone.matches?'Move the screen':'Drag the screen';

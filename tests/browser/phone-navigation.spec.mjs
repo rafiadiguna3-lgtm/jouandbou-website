@@ -2,7 +2,7 @@ import {test,expect,devices} from '@playwright/test';
 for(const name of ['iPhone 13','Pixel 7'])test(`${name}: first-use icons, menu search and direct Anas 3D`,async({browser})=>{
  const context=await browser.newContext(devices[name]),page=await context.newPage();
  const errors=[];page.on('pageerror',error=>errors.push(error.message));
- await page.goto('/');await expect(page.locator('#phone-map-guide')).toBeVisible();await expect(page.locator('#phone-intro-guide')).toBeHidden();
+ await page.goto('/');await expect(page.locator('#phone-intro-guide')).toBeEmpty();await expect(page.locator('#hint')).toBeEmpty();await expect(page.locator('#phone-map-guide')).toBeVisible();await expect(page.locator('#phone-intro-guide')).toBeHidden();
  await expect(page.locator('body')).toHaveClass(/phone-map-guided/);
  await expect(page.locator('.phone-map-guidance strong')).toHaveText('Move the screen');await expect(page.locator('.phone-map-guidance p')).toHaveText('Tap a house');
  const sizes=await page.evaluate(()=>{const style=s=>getComputedStyle(document.querySelector(s));return{top:parseFloat(style('.phone-map-guidance strong').fontSize),bottom:parseFloat(style('.phone-map-guidance p').fontSize),description:parseFloat(style('#home-summary').fontSize),animation:style('.phone-map-guidance>svg').animationName,background:style('.phone-map-guidance').backgroundColor};});
@@ -24,7 +24,7 @@ for(const name of ['iPhone 13','Pixel 7'])test(`${name}: first-use icons, menu s
 });
 
 test('desktop: guide returns on refresh and dismisses on map interaction',async({page})=>{
- await page.goto('/');await expect(page.locator('#phone-map-guide')).toBeVisible();
+ await page.goto('/');await expect(page.locator('#phone-intro-guide')).toBeEmpty();await expect(page.locator('#hint')).toBeEmpty();await expect(page.locator('#phone-map-guide')).toBeVisible();
  await page.mouse.wheel(0,80);await expect(page.locator('#phone-map-guide')).toHaveCount(0);
  await expect(page.locator('body')).not.toHaveClass(/phone-map-guided/);
  await page.reload();await expect(page.locator('#phone-map-guide')).toBeVisible();

@@ -511,3 +511,5 @@ Hamburger visibility follow-up: explicitly conceal homepage copy via visibility 
 Simplified map guidance: one static hand outline above two unboxed lines. Phone says “Move the screen / Tap a house”; desktop says “Drag the screen / Click a house”. Lower line inherits the computed homepage description size and upper line adds exactly 4px. Removed the extra drag arrow and all icon animation.
 
 Matched phone open-search border (#d9d9d3, 1px), white fill and subtle shadow to the desktop open-search styling.
+
+Filled the static tap-hand symbol. Removed obsolete lower-left gesture copy from source HTML and kept empty hidden hook elements for existing camera code, preventing the old text flashing during reload before responsive CSS/layout initialization.
