@@ -33,3 +33,14 @@ test('refresh keeps the homepage title while application JavaScript is delayed',
  await page.locator('#studio').click();await expect(page).toHaveTitle('jou and bou - about us');
  await page.locator('header .brand').click();await expect(page).toHaveTitle('Jou and Bou | Architecture & Interior Design Studio');
 });
+
+test('dark browser tabs use the original transparent white icon without changing share metadata',async({browser})=>{
+ for(const colorScheme of ['dark','light']){
+  const context=await browser.newContext({colorScheme,javaScriptEnabled:false}),page=await context.newPage();await page.goto('/');
+  const white=page.locator('link[rel="icon"][sizes="48x48"][media]');
+  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=tab-white-1');
+  expect(await white.evaluate(el=>matchMedia(el.media).matches)).toBe(colorScheme==='dark');
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content','https://jouandbou.com/assets/brand/jou-and-bou-share-solid-v3.png');
+  await context.close();
+ }
+});

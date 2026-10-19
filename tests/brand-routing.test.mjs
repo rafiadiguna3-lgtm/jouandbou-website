@@ -17,3 +17,10 @@ test('Cloudflare redirects only www to the canonical apex and preserves paths',a
  const html=await readFile('site/index.html','utf8');assert.match(html,/<link rel="canonical" href="https:\/\/jouandbou.com\/"/);
  assert.ok(!rules.some(line=>line.startsWith('https://jouandbou.com/ ')),'canonical domain must not redirect to itself');
 });
+
+test('the restored white tab PNG retains transparent surroundings',async()=>{
+ const image=PNG.sync.read(await readFile('site/assets/brand/jou-and-bou-white-48-v143.png'));
+ let transparent=0,white=0;
+ for(let i=0;i<image.data.length;i+=4){if(image.data[i+3]===0)transparent++;if(image.data[i+3]===255&&image.data[i]>240&&image.data[i+1]>240&&image.data[i+2]>240)white++;}
+ assert.ok(transparent>image.width*image.height*.3);assert.ok(white>image.width*image.height*.1);
+});
