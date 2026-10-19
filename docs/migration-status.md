@@ -495,3 +495,7 @@ Added “Follow the ongoing story on Instagram” as an inline closing sentence 
 Added an icon-labelled Search projects action inside the phone menu, with a dismissible search panel. The menu Projects action opens Explore 3D Rumah Anas; programmatic homepage work links and desktop navigation retain their existing map behavior. First-time phone visitors see a light map blur and tap/drag/pinch guide that dismisses on first interaction and is remembered locally. WhatsApp remains scoped to project details.
 
 Phone guidance refinement: removed the old long bottom-left gesture copy on phones. The first-visit guidance uses touch/drag symbols, with equivalent instructions retained for assistive technology.
+
+### Refresh-scoped guidance across devices
+
+Extended the map gesture guide to desktop. Removed persistent dismissal so every fresh page load shows it again, while route changes within a visit do not repeat it after dismissal. Simplified the tap/drag artwork into a small neutral circular hint. Pointer interaction, scrolling, Enter or Escape dismisses the hint and light map blur.

@@ -36,3 +36,9 @@
  body.touch-layout.search-open #search-clear{display:none!important}
  body.touch-layout.search-open .search-box{padding-right:44px}
 }
+
+/* Refresh-scoped guidance on mouse and touch devices. */
+body.phone-map-guided #viewport{filter:blur(1.3px)}
+.phone-map-guidance{padding:20px;background:#fafafabf;border:1px solid #e2e4de80;border-radius:50%;width:88px;height:88px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.phone-map-guidance>svg{width:38px;height:38px;flex-shrink:0;color:#73766c}
+.phone-map-guidance>svg.phone-drag-hint{width:30px;height:14px;margin-top:3px}
