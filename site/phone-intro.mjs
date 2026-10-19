@@ -1,3 +1,4 @@
+import {routeHash} from './project-routing.mjs';
 // Camera-driven landing copy; desktop navigation keeps its existing behavior.
 export function createPhoneIntro(){
  const intro=document.getElementById('phone-intro'),guide=document.getElementById('phone-intro-guide'),summary=document.getElementById('home-summary');
@@ -36,7 +37,7 @@ export function createPhoneIntro(){
   }
  }
  const syncWork=()=>{
-  const work=location.hash.startsWith('#bou-works')?'bou':'jou';
+  const work=routeHash().startsWith('#bou-works')?'bou':'jou';
   for(const option of intro.querySelectorAll('[data-work]')){if(option.dataset.work===work)option.setAttribute('aria-current','page');else option.removeAttribute('aria-current');}
  };
  for(const button of intro.querySelectorAll('[data-work]'))button.onclick=()=>{

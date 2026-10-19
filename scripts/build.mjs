@@ -1,5 +1,6 @@
 import { cp, rm, readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import {buildProjectPages} from './build-project-pages.mjs';
 const root = new URL('../', import.meta.url);
 const manifest = JSON.parse(await readFile(new URL('docs/source-manifest.json', root)));
 for (const file of manifest.files) {
@@ -10,4 +11,5 @@ for (const file of manifest.files) {
 }
 await rm(new URL('dist/', root), { recursive: true, force: true });
 await cp(new URL('site/', root), new URL('dist/', root), { recursive: true });
-console.log(`Built ${manifest.files.length} source and asset files into dist/. No frontend rewriting or bundling.`);
+await buildProjectPages(new URL('dist/',root));
+console.log(`Copied ${manifest.files.length} verified source/assets to dist/ and generated project pages.`);

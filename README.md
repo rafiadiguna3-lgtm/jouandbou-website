@@ -20,9 +20,11 @@ npm run build
 npm run preview
 ```
 
-`dev` serves `site/` on port 5173. `preview` serves `dist/` on port 4173.
-The build verifies the source manifest and copies the static frontend verbatim
-into `dist/`; it does not bundle modules, change URLs, or strip version queries.
+`dev` builds and serves `dist/` on port 5173; rebuild/restart after source edits.
+`preview` serves the existing `dist/` on port 4173. The build verifies the source
+manifest, copies the source/assets, and generates 15 public project pages plus
+`/projects/`. It does not bundle modules or strip version queries. See
+[project SEO and share pages](docs/project-seo.md) for routes and content updates.
 There is no backend and no application secret is required by the retrieved code.
 All Node dependencies are development and validation tools, pinned in the lockfile.
 
@@ -36,9 +38,9 @@ node scripts/compare-live.mjs
 
 The asset suite checks source hashes, all 25 interactive houses in both GPU and
 software-fallback formats, video fragments, and responsive photographs.
-**The photograph completeness test currently fails because 15 published image
-files are empty.** See [migration status](docs/migration-status.md) for exact paths.
-Do not treat a successful build as proof those photographs work.
+The asset suite currently passes, including responsive photograph completeness.
+Run `npm run test:projects` to build and check the published project pages,
+per-project metadata and legacy-link compatibility.
 
 Browser tests exercise search, 3D entry, project detail routes, video playback,
 photograph viewing, about/contact navigation, and phone portrait/landscape behavior.

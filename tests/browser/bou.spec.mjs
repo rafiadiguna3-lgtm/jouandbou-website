@@ -15,14 +15,14 @@ for (const mobile of [false, true]) {
     expect(await panel.locator('.about-footer').innerHTML()).toBe(footer);
     await expect(panel.locator('.bou-project-picker nav a')).toHaveCount(7);
     for (const slug of ['diantara','temu','koru','selebu','sabang','ikat','raindeer']) {
-      const icon=panel.locator(`a[href="#bou-works/${slug}"]`);
+      const icon=panel.locator(`a[href="/projects/bou/${slug}/"]`);
       await expect(icon.locator('img')).toHaveAttribute('src',`assets/bou/${slug}-icon.svg`);
       await icon.scrollIntoViewIfNeeded();
       await expect.poll(()=>icon.locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
       const previousTop=await panel.evaluate(el=>el.scrollTop);
       expect(previousTop).toBeGreaterThan(0);
       await icon.click();
-      await expect(page).toHaveURL(new RegExp(`#bou-works/${slug}$`));
+      await expect(page).toHaveURL(new RegExp(`/projects/bou/${slug}/$`));
       await expect(panel.locator('article.bou-project')).toBeVisible();
       await expect.poll(()=>panel.locator('.bou-lead img').first().evaluate(img=>img.naturalWidth)).toBeGreaterThan(0);
       await panel.evaluate(el=>el.scrollTop=250);
@@ -42,7 +42,7 @@ for (const mobile of [false, true]) {
     await expect(page.locator('#about-page')).toBeVisible();
     await expect.poll(()=>page.locator('#about-page').evaluate(el=>el.scrollTop)).toBe(0);
     await page.goto('/#bou/temu');
-    await expect(page).toHaveURL(/#bou-works\/temu$/);
+    await expect(page).toHaveURL(/\/projects\/bou\/temu\/$/);
     await expect(panel.locator('article.bou-project')).toBeVisible();
     await page.locator('header .brand').click();
     await expect(panel).toBeHidden();

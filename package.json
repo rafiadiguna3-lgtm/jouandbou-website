@@ -8,7 +8,7 @@
     "node": "24.x"
   },
   "scripts": {
-    "dev": "http-server site -p 5173 -a 0.0.0.0 -c-1",
+    "dev": "npm run build && http-server dist -p 5173 -a 0.0.0.0 -c-1",
     "build": "node scripts/build.mjs",
     "preview": "http-server dist -p 4173 -a 0.0.0.0 -c-1",
     "test": "node --test tests/assets.test.mjs tests/map-lod.test.mjs tests/brand-routing.test.mjs",
@@ -19,7 +19,10 @@
     "test:staging": "playwright test --config playwright.staging.config.mjs",
     "test:deployment-config": "node --test tests/deployment-config.test.mjs",
     "build:map-lod": "node scripts/build-map-lod.mjs",
-    "test:devices": "playwright test tests/browser/device-matrix.spec.mjs"
+    "test:devices": "playwright test tests/browser/device-matrix.spec.mjs",
+    "build:project-catalog": "node scripts/build-project-catalog.mjs",
+    "build:project-previews": "node scripts/build-project-previews.mjs",
+    "test:projects": "npm run build && node --test tests/project-pages.test.mjs && playwright test tests/browser/project-seo.spec.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

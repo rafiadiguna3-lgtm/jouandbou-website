@@ -14,7 +14,7 @@ for(const hash of ['#projects','#about','#contact','#bou-works','#bou-works/temu
    for(const selector of ['#about-page','#contact-page','#bou-page'])if(selector!==expected)await expect(page.locator(selector)).toBeHidden();
   }finally{unblock();}
   await expect(page.locator(expected)).toBeVisible();
-  await expect(page).toHaveURL(new RegExp(hash.replace('/','\\/')+'$'));
+  await expect(page).toHaveURL(new RegExp((hash==='#bou-works/temu'?'/projects/bou/temu/':hash).replace('/','\\/')+'$'));
   if(hash==='#bou-works/temu')await expect(page.locator('.bou-project')).toBeVisible();
  });
 }

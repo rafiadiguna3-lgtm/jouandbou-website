@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 7326,
-      "sha256": "f842ac556b1a9b86bf1a14a34489cc8ea4bb40d17398dc383b40962f5463e62d",
+      "bytes": 7483,
+      "sha256": "b70a7b25880ced984598e898fc6b2dc6278c8e8295672d078e9b6d5006da878e",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 40820,
-      "sha256": "cb008bc62caea25375d47b19e759d52399fdfccd6718b907f8e6a18e42aa0db8",
+      "bytes": 40848,
+      "sha256": "30680e10619864aee82d46e427056ec52f605cbf349d4a5cdaf37c6009ce780d",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13004,8 +13004,8 @@
     },
     {
       "path": "bou.mjs",
-      "bytes": 4579,
-      "sha256": "d016688a8d2e12ebc806bb5ee474abb6ebbfd517e7ffa83908734b6a107cbfac",
+      "bytes": 4650,
+      "sha256": "74c92dc6cc01383cda654fa4e1eba410440167de053465bd664844bcb6dd9e3c",
       "native_sha256": "3f863d3f4caf37f10df844904a4feca0baf867970aa240522e98c8f2dcb2f4eb",
       "native_bytes": 4391,
       "source_urls": [
@@ -13310,8 +13310,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 109709,
-      "sha256": "c600fe3b47163b4e0a78f76c0bb1584b237fa05045a6e2d536d5d1e48d6cff88",
+      "bytes": 109779,
+      "sha256": "d99d515851c82461e5ce640cd0c4f43a19cef7ca5cce9b9e9d4d80551320b838",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14172,8 +14172,8 @@
     },
     {
       "path": "phone-intro.mjs",
-      "bytes": 3812,
-      "sha256": "605d8fd8bee1db602e32d0965a493ff9f53a85a60616c0f5a851d953e6a75e0a",
+      "bytes": 3859,
+      "sha256": "4b29f92748f95f19ebd46e2e22b742f287b87d5633107c26bb785764de6f72e1",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/phone-intro.mjs"
       ],
@@ -14904,6 +14904,191 @@
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/browser-tab-icon.mjs"
       ],
       "authored_locally": true
+    },
+    {
+      "path": "project-catalog.mjs",
+      "bytes": 25033,
+      "sha256": "491540c52b2fe1e831ba6ff8f184c1be2d59baceac12987724574604dbe7831f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/project-catalog.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "project-seo.mjs",
+      "bytes": 1842,
+      "sha256": "28b1f2140207b863ce12960b1d30b88e58928cd1ee4ed0010e9360cf10baa90c",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/project-seo.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "project-routing.mjs",
+      "bytes": 3836,
+      "sha256": "f45636039f83ccb693f51644b514c18fced7b8067bf131f841ed20ec7225e9f2",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/project-routing.mjs"
+      ],
+      "authored_locally": true,
+      "published_sha256": "93a4e3f9f6fee710f199a56c8aa0a5f46d78cd4be6f9e3d7781960794d2f6572",
+      "published_bytes": 2882,
+      "modified_locally": true
+    },
+    {
+      "path": "404.html",
+      "bytes": 504,
+      "sha256": "f1469fcd21b73a062c2034bddc93bf3f66fedd06c173bb9f9e135ae3b97d59fe",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/404.html"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/rr-house.jpg",
+      "bytes": 54108,
+      "sha256": "9651d6dd61d66e6507092b4e2352a771ebd191b0ef9b1f59258e9daede537323",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/bou-koru.jpg",
+      "bytes": 68368,
+      "sha256": "99449c1696bc547f4465068b8197e30557569a4db644ff20634f051fdfae3374",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/bou-ikat.jpg",
+      "bytes": 80771,
+      "sha256": "67513c49e8b161a9da9a28374883acccb3c8815018cd50c1363e46221b8bb288",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/marboy-house.jpg",
+      "bytes": 79143,
+      "sha256": "1e202f31d1b6a91528a135db11e60d06aa3bec26eb3b09a50a8689a347bac8f1",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/bou-diantara.jpg",
+      "bytes": 28746,
+      "sha256": "5926f472a46bd3fc3eba019a2ba24c2dc336abf2cafc1b1c15629a0ef3c5108b",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/bou-raindeer.jpg",
+      "bytes": 113125,
+      "sha256": "554a84dc01ff13f4d29e08cbaadb32e9a588ffefde0a80f281569fb6c5795ef6",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/rempoa-padel.jpg",
+      "bytes": 190077,
+      "sha256": "d2ca23a0b8df51e26f3d7c5a7c10ff63da9b9b4eb2ccc0ade4c5e17f790801c4",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/rumah-zubair.jpg",
+      "bytes": 88674,
+      "sha256": "6f16bc7a56a6ddd5600ea3e6f33cf20c3362aa9ecd5dd221513233794710e9f2",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/bou-selebu.jpg",
+      "bytes": 80677,
+      "sha256": "a511929eca08b876039ba9ecba528159b28270e4b798b19b4f7b02aadc50919b",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/rumah-anas.jpg",
+      "bytes": 23097,
+      "sha256": "c3f952cab856b12b202543e759d759b2e7be2a4bb4d9210c0f4caac71db81486",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/jangkrik-house.jpg",
+      "bytes": 80466,
+      "sha256": "cff1be715db60efa0ee3bd216a7263231b9213a31091ec63964a02e693478838",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/flute-house.jpg",
+      "bytes": 86853,
+      "sha256": "9cee47e9fbce8fb3091c56709cd0254ebb1846eacb7247a10b07b5584a9d3811",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/rumasoka.jpg",
+      "bytes": 185448,
+      "sha256": "484c5ff254ddb05263005b4c3ff9459e28f474f2ea3c2910e5b885370ecd2b45",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/bou-temu.jpg",
+      "bytes": 46496,
+      "sha256": "780c8fa8af3a18753143db9d23fb0d415d6c09c25d00899339bc835217992d7b",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/share/projects/bou-sabang.jpg",
+      "bytes": 87519,
+      "sha256": "2e1152b884bc91c52ae44bae8b7746ec5a38eec3962358a24c935d60a75c38e9",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-project-previews.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "sitemap.xml",
+      "bytes": 1223,
+      "sha256": "d9167a937a1a2dfb2b0381d0c5a084efea09a112964ef3ce5c0775a3d2a0ca93",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/site/sitemap.xml"
+      ],
+      "published_bytes": 157,
+      "published_sha256": "f16fc6557d932a838f71040b51b6ea945aa3624205d32e680c3cd01ac4c2557b",
+      "modified_locally": true
     }
   ],
   "previous_sources": [

@@ -16,7 +16,7 @@ test('keyboard, next-house browsing and exit reach the original prescribed dista
   expect(await page.evaluate(()=>window.cameraQA().current)).not.toBe(previousHouse);
   await page.keyboard.press('ArrowLeft');await settled();expect(await page.evaluate(()=>window.cameraQA().current)).toBe(previousHouse);
   await page.locator('#house-next').click();const after=await settled();const baseScale=await page.evaluate(()=>Math.min(innerWidth/108,(innerHeight-250)/45));expect(after.scale).toBeCloseTo(baseScale*1.25,5);
-  await page.locator('.house-callout-card').click();await expect(page.locator('body')).toHaveClass(/model-view/);await expect(page).not.toHaveURL(/#project\//);
+  await page.locator('.house-callout-card').click();await expect(page.locator('body')).toHaveClass(/model-view/);await expect(page).not.toHaveURL(/\/projects\/|#project\//);
   await expect(page.locator('#modelStatus')).toBeHidden({timeout:30000});sample=await settled();
   await page.locator('#back').click();sample=await settled();expect(sample.scale).toBeCloseTo(baseScale*1.15,5);
  }

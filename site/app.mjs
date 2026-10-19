@@ -1,3 +1,4 @@
+import {routeHash,writeRoute} from './project-routing.mjs';
 import {createPhoneIntro} from './phone-intro.mjs';
 import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-flight.mjs?v=143';
 import {createTouchOrbit} from './touch-orbit.mjs?v=129';
@@ -301,19 +302,19 @@ function openProjectDetailsContent(){if(front&&[36,38,40,41,42,43,45,46,47].incl
 const projectSlugs=new Map([...new Set([29,0,9,13,44,...glbIds])].map(id=>[id,({29:'marboy',18:'jangkrik',26:'flute'})[id]||names[id].toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')]));
 const projectPanels=[...document.querySelectorAll('dialog.project-page,dialog#detail')];
 function markProjectPanel(slug){const panel=projectPanels.find(panel=>panel.open);if(panel)panel.dataset.projectRoute=slug;}
-function openProjectDetails(){const wasFront=front;openProjectDetailsContent();if(!wasFront||!front)return;const slug=projectSlugs.get(current);if(!slug)return;markProjectPanel(slug);if(location.hash!==`#project/${slug}`)history.pushState(null,'',`#project/${slug}`);}
+function openProjectDetails(){const wasFront=front;openProjectDetailsContent();if(!wasFront||!front)return;const slug=projectSlugs.get(current);if(!slug)return;markProjectPanel(slug);if(routeHash()!==`#project/${slug}`)writeRoute(`#project/${slug}`);}
 function syncProjectRoute(){
  document.querySelectorAll('dialog.photo-viewer[open]').forEach(panel=>panel.close());
- if(!location.hash.startsWith('#project/')){for(const panel of projectPanels)if(panel.open)panel.close();return;}
- let slug;try{slug=decodeURIComponent(location.hash.slice(9)).toLowerCase().replace(/\s+/g,'-');}catch{slug='';}
+ if(!routeHash().startsWith('#project/')){for(const panel of projectPanels)if(panel.open)panel.close();return;}
+ let slug;try{slug=decodeURIComponent(routeHash().slice(9)).toLowerCase().replace(/\s+/g,'-');}catch{slug='';}
  const entry=[...projectSlugs].find(([,value])=>value===slug);
- if(!entry){for(const panel of projectPanels)if(panel.open)panel.close();history.replaceState(null,'','#projects');document.documentElement.removeAttribute('data-route-pending');return;}
+ if(!entry){for(const panel of projectPanels)if(panel.open)panel.close();writeRoute('#projects',{replace:true});document.documentElement.removeAttribute('data-route-pending');return;}
  if(!projectPanels.some(panel=>panel.open&&panel.dataset.projectRoute===slug)){
   for(const panel of projectPanels)if(panel.open)panel.close();openHouse(entry[0]);openProjectDetailsContent();markProjectPanel(slug);
  }
- history.replaceState(null,'',`#project/${slug}`);document.documentElement.removeAttribute('data-route-pending');
+ writeRoute(`#project/${slug}`,{replace:true});document.documentElement.removeAttribute('data-route-pending');
 }
-for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&location.hash===`#project/${panel.dataset.projectRoute}`)history.replaceState(null,'','#projects');});
+for(const panel of projectPanels)panel.addEventListener('close',()=>{if(!panel.open&&routeHash()===`#project/${panel.dataset.projectRoute}`)writeRoute('#projects',{replace:true});});
 addEventListener('hashchange',syncProjectRoute);addEventListener('popstate',syncProjectRoute);
 $('more').onclick=openProjectDetails;
 function returnHome({fromSection=false,overview=false,resetIntro=false}={}){

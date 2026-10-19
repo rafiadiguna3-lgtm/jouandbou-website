@@ -1,17 +1,18 @@
+import {routeHash,projectURL} from './project-routing.mjs';
 import {galleryArrows} from './gallery-arrows.mjs';
 const content=document.getElementById('bou-content');
 const names=['diantara','temu','koru','selebu','sabang','ikat','raindeer'];
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let dataPromise,route='',generation=0,removeGalleryArrows;
 const image=(src,alt,eager=false)=>`<img src="${escape(src)}" alt="${escape(alt)}" loading="${eager?'eager':'lazy'}" decoding="async" draggable="false"/>`;
-const icon=(name)=>`<a href="#bou-works/${name}" aria-label="${name} — view concept project">${image(`assets/bou/${name}-icon.svg`,name,true)}</a>`;
+const icon=(name)=>`<a href="${projectURL('#bou-works/'+name)}" aria-label="${name} — view concept project">${image(`assets/bou/${name}-icon.svg`,name,true)}</a>`;
 function index(){
  content.innerHTML=`<div class="bou-index"><h1>bou works</h1><p class="bou-intro">Bou is our code to specify our concept project. In Bou posts you will see concept design only, such as diagram, working drawing, some 3D visualization and animation</p><div class="bou-concepts">${[1,2,3,4].map((n)=>image(`assets/bou/concept-${n}.webp`,'Bou architectural concept study',true)).join('')}</div><div class="bou-project-picker"><h2>bou works</h2><p>click the icons below to see our latest project</p><nav aria-label="Bou concept projects">${names.map(icon).join('')}</nav></div></div>`;
 }
 export async function renderBou(slug){
- if(route===location.hash&&content.childElementCount)return;
+ if(route===routeHash()&&content.childElementCount)return;
  removeGalleryArrows?.();removeGalleryArrows=null;
- route=location.hash;const token=++generation;
+ route=routeHash();const token=++generation;
  if(!slug){index();return;}
  if(!names.includes(slug)){index();return;}
  dataPromise??=fetch('bou-projects.json?v=145').then(r=>{if(!r.ok)throw Error('Project data unavailable');return r.json();}).catch(error=>{dataPromise=null;throw error;});
