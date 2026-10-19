@@ -517,3 +517,5 @@ Filled the static tap-hand symbol. Removed obsolete lower-left gesture copy from
 Tap icon refinement: white fill with the existing neutral gray outline, retaining static motion and sizing.
 
 Phone menu Projects now selects and centers Rumah Anas in the neighborhood (the normal first-click view), rather than entering Explore 3D. Service-label copy remains unchanged pending discussion.
+
+Removed the “view project index” link from About’s Our works section. Existing Jou/Bou work links and map house navigation remain available; published project URLs are retained for search and sharing.
