@@ -48,6 +48,8 @@ export function createHouseCallout(onActivate,onBrowse){
    if(previous>=0&&!reduced.matches){const direction=id>previous?1:-1;const options={duration:180,easing:'ease-out'};textAnimations=[old.animate?.([{opacity:1},{opacity:0}],options),name.animate?.([{opacity:0},{opacity:1}],options),leader.animate?.([{opacity:0,offset:0},{opacity:0,offset:.35},{opacity:1,offset:1}],{...options,duration:320})];}
   }
   const g=calloutLayout(anchor,width,height,textWidth,scale,shape);
+  const headerBottom=document.querySelector('body>header')?.getBoundingClientRect().bottom||56;
+  g.top=Math.max(headerBottom+12,Math.min(height-48*scale-16,g.top));
   g.left=opensLeft?g.ax-textWidth*scale:g.ax;
   target={...g,cw:textWidth,scale};
   if(!display){display={...target};paint();node.classList.add('is-visible');}

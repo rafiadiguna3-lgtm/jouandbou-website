@@ -1,5 +1,5 @@
 import {routeHash} from './project-routing.mjs';
-export function createPhoneMapGuide({onChange=()=>{},order=[0]}={}){
+export function createPhoneMapGuide({onChange=()=>{},order=[0],ready=Promise.resolve()}={}){
  let dismissed=false,visible=false,frame=0,started=0,press=null;
  const phone=matchMedia('(max-width:899px),(hover:none),(any-pointer:coarse)'),reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
  const guide=document.createElement('section');guide.id='phone-map-guide';guide.hidden=true;guide.setAttribute('role','status');guide.setAttribute('aria-label','Map instructions');
@@ -14,6 +14,7 @@ export function createPhoneMapGuide({onChange=()=>{},order=[0]}={}){
   guide.querySelector('.world-info').style.opacity=String(smooth((t-2.35)/.42));
   guide.style.setProperty('--world-blur',`${(phone.matches?2:3)*smooth((t-1.05)/.2)}px`);
   document.body.style.setProperty('--world-blur',guide.style.getPropertyValue('--world-blur'));
+  const reveal=reduce?1:1-Math.pow(1-clamp(t/.85),3);document.body.style.setProperty('--world-reveal',String(reveal*(1-.066*smooth((t-1.05)/.2))));
   const elapsed=Math.max(0,t-2.6),local=elapsed%1.35;
   guide.dataset.house=String(order[Math.floor(elapsed/1.35)%order.length]);
   guide.dataset.level=String(t<2.6?0:smooth(local/.28)*(1-smooth((local-1.07)/.28)));
@@ -25,13 +26,13 @@ export function createPhoneMapGuide({onChange=()=>{},order=[0]}={}){
   const eligible=home&&!document.body.matches('.model-view,.has-selection,.view-about,.view-bou,.view-contact,.search-open')&&!document.querySelector('dialog[open]')&&document.getElementById('menu-toggle')?.getAttribute('aria-expanded')!=='true';
   if(!eligible&&visible){dismiss({immediate:true});return;}
   const spans=guide.querySelectorAll('.world-how span');spans[0].textContent=phone.matches?'Move the screen.':'Drag to move.';spans[1].textContent=phone.matches?'Tap a house.':'Click a house.';
-  if(eligible&&!visible){visible=true;guide.hidden=false;document.body.classList.add('phone-map-guided');document.documentElement.classList.remove('world-intro-pending');document.fonts.load('400 29px JouWorld').catch(()=>{}).then(()=>{if(visible&&!dismissed)frame=requestAnimationFrame(animate);});}
+  if(eligible&&!visible){visible=true;guide.hidden=false;document.body.classList.add('phone-map-guided');document.documentElement.classList.remove('world-intro-pending');Promise.all([document.fonts.load('400 29px JouWorld').catch(()=>{}),Promise.resolve(ready).catch(()=>{})]).then(()=>{if(visible&&!dismissed)frame=requestAnimationFrame(animate);});}
  }
  const abort=new AbortController(),listen=(target,type,fn)=>target.addEventListener(type,fn,{capture:true,passive:true,signal:abort.signal});
  function dismiss({immediate=false}={}){
   if(dismissed)return;dismissed=true;visible=false;cancelAnimationFrame(frame);observer.disconnect();abort.abort();
   const viewport=document.getElementById('viewport'),blur=getComputedStyle(viewport).filter;
-  document.body.classList.remove('phone-map-guided');document.documentElement.classList.remove('world-intro-pending');document.body.style.removeProperty('--world-blur');
+  document.body.classList.remove('phone-map-guided');document.documentElement.classList.remove('world-intro-pending');document.body.style.removeProperty('--world-blur');document.body.style.removeProperty('--world-reveal');
   guide.querySelector('h1 i').style.visibility='hidden';onChange();
   const cleanup=()=>{guide.remove();document.body.classList.remove('world-guide-leaving');};
   if(reduce||immediate){cleanup();return;}

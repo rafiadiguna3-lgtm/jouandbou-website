@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 41214,
-      "sha256": "73cb6485caf21bb7bcef8d0653cced60e69c7a9a4a84623ac902170e7fceffd8",
+      "bytes": 41252,
+      "sha256": "6f605798843e708efa0628e15dea9a95a1bc4a2505ddb2ad97f8c1db411e0c9a",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13286,8 +13286,8 @@
     },
     {
       "path": "house-callout.mjs",
-      "bytes": 4944,
-      "sha256": "02a035e21ff7d14d5186275b5b1477d0bdf1dab16d30ceaf3e90365d0c772404",
+      "bytes": 5110,
+      "sha256": "b2d13015577219d9cd5b894a92780696f1a393735d319f0f909412fc634d80a2",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/house-callout.mjs"
       ],
@@ -13311,7 +13311,7 @@
     {
       "path": "index.html",
       "bytes": 110580,
-      "sha256": "dffe33f242d60dbdf79064840291e77e615c7d8f6b8f8f2f150924a79988e56b",
+      "sha256": "b222d2655246b36ab6c365b6085df9b575cdacd843c90b9af188b0f82133f5c9",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -13511,8 +13511,8 @@
     },
     {
       "path": "photo-album-cache.mjs",
-      "bytes": 1497,
-      "sha256": "35101b8abf7aed38a5ade33fcb3cbbfde791ea77ddb4368dfbd6d7504f7e3cde",
+      "bytes": 1500,
+      "sha256": "a66e166110f45f967111905e32c2e42a522c51c6d8598f19ed344ef9b1c96b0f",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/photo-album-cache.mjs"
       ],
@@ -13520,7 +13520,10 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/photo-album-cache.mjs?v=129"
       ],
       "native_sha256": "35101b8abf7aed38a5ade33fcb3cbbfde791ea77ddb4368dfbd6d7504f7e3cde",
-      "native_bytes": 1497
+      "native_bytes": 1497,
+      "published_sha256": "35101b8abf7aed38a5ade33fcb3cbbfde791ea77ddb4368dfbd6d7504f7e3cde",
+      "published_bytes": 1497,
+      "modified_locally": true
     },
     {
       "path": "photo-offline-sw.js",
@@ -13662,7 +13665,7 @@
     {
       "path": "project-image-memory.mjs",
       "bytes": 3457,
-      "sha256": "46206eee1da79fc788d43d482e062c9dd8781049ccc4eb561bed268dd849829d",
+      "sha256": "1c8003492661a2cbca1a7cc4d7eec9726d58a6688ae9195b1747e596610dc50d",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/project-image-memory.mjs"
       ],
@@ -13670,7 +13673,10 @@
         "https://jouandbou.rafiadiguna3.chatgpt.site/project-image-memory.mjs?v=129"
       ],
       "native_sha256": "46206eee1da79fc788d43d482e062c9dd8781049ccc4eb561bed268dd849829d",
-      "native_bytes": 3457
+      "native_bytes": 3457,
+      "published_sha256": "46206eee1da79fc788d43d482e062c9dd8781049ccc4eb561bed268dd849829d",
+      "published_bytes": 3457,
+      "modified_locally": true
     },
     {
       "path": "project-media.css",

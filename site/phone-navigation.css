@@ -77,3 +77,13 @@ body:has(#main-nav.menu-open) :is(#phone-intro,#home-summary,#phone-intro-guide)
 @media(max-width:899px),(hover:none),(any-pointer:coarse){
  body.touch-layout.search-open .search-box{border:1px solid #d9d9d3;background:#fff;box-shadow:0 4px 16px #00000005}
 }
+
+/* Keep controls aligned with the app's compact layout on narrow/short mouse screens. */
+@media(min-width:761px) and (hover:hover) and (pointer:fine){
+ body.touch-layout #menu-toggle{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:44px;height:44px;margin-left:auto;padding:10px}
+ body.touch-layout header #main-nav{display:none;position:absolute;top:var(--jb-header,56px);right:16px;left:auto;width:180px;max-width:calc(100vw - 32px);padding:12px;background:#fafafa;border:1px solid #e5e5e1;border-radius:8px;box-shadow:0 12px 36px #0001;flex-direction:column;align-items:stretch;gap:0}
+ body.touch-layout header #main-nav.menu-open{display:flex}
+ body.touch-layout header #main-nav>button,body.touch-layout header #main-nav>a{text-align:left;min-height:44px;padding:10px 14px;font-size:16px}
+ body.touch-layout #main-nav #phone-search-action{display:flex}
+ body.touch-layout:not(.search-open) .search-wrap{display:none!important}
+}

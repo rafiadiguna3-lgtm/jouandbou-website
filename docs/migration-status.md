@@ -533,3 +533,11 @@ Public deployment safety: build now rejects environment files, repository intern
 - Uses the existing renderer and real house hover colors, starting at Rumah Anas and cycling through all available project models; the entire map remains blurred.
 - The first map drag, tap, wheel, navigation or keyboard action removes the guide, caret, blur and temporary color state. Refresh starts it again. No callout/leader line is created by the introduction.
 - Prevented pre-initialization homepage/guide copy flashes, including the frame before animation starts, and wait for the intro font before typing. On drag, the heading rises and fades with easing while map blur clears over 560ms; the caret hides immediately and all guide nodes are removed after the transition. Navigation/reduced-motion exits remain immediate.
+
+### Responsive review and motion reveal
+- Matched the approved motion opening: wait for the first rendered scene and Poppins, reveal the map with cubic easing over 850ms, then introduce the title and light blur. Temporary opacity is removed on dismissal.
+- Device review found that the house annotation could settle under the header in a short landscape viewport. Clamp its vertical position below the live header so the real house remains selectable.
+- Added a current responsive audit covering 11 viewport/input combinations, menu/search, map selection, 3D, project details, WhatsApp, About and Contact.
+- The review also found photo prefetch requests resolving relative to a project's URL after client-side navigation, yielding 404s despite the real images existing. Resolve against the document base URL instead, matching regular image loads.
+- Aligned compact navigation with the app input mode on narrow/short mouse screens; previously the menu could remain hidden while the compact search was also hidden, leaving no search entry point.
+- Final validation: all 11 responsive scenarios passed (320px phone through 4K; touch portrait/landscape plus narrow/short mouse layouts), 29 browser checks across two final runs, and 9 source/map/routing/deployment checks. Review screenshots saved outside the repository. Chromium emulation only; public live access is blocked by the environment proxy (CONNECT 403), so real Safari devices and live external map tiles remain unverified.

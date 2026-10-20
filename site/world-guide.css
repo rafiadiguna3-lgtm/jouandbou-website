@@ -15,3 +15,6 @@ body.phone-map-guided :is(#phone-intro,#home-summary,#phone-intro-guide,#labels,
 html.world-intro-pending :is(#phone-intro,#home-summary,#phone-intro-guide,#labels,.house-callout),body.world-guide-leaving :is(#phone-intro,#home-summary,#phone-intro-guide,#labels,.house-callout){visibility:hidden!important;opacity:0!important;pointer-events:none!important}
 .world-guidance h1,.world-info{opacity:0}
 body.world-guide-leaving #phone-map-guide{display:flex}
+
+html.world-intro-pending #viewport{opacity:0}
+body.phone-map-guided #viewport{opacity:var(--world-reveal,0)}

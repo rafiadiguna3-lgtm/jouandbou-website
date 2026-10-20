@@ -1,4 +1,4 @@
-import {prepareAlbum} from './photo-album-cache.mjs?v=129';
+import {prepareAlbum} from './photo-album-cache.mjs?v=130';
 import {photoVariants} from './photo-variants.mjs?v=126';
 const warmed=new Map();
 const phonePhoto=matchMedia('(any-pointer: coarse)').matches&&Math.min(innerWidth,innerHeight)<700;

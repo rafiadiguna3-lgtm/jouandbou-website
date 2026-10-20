@@ -14,7 +14,7 @@ async function pump(){
   const cache=await caches.open(CACHE);
   while(queue.length){
    while(document.hidden||window.jouPhotoBusy?.())await delay(180);
-   const src=queue.shift();queued.delete(src);const url=new URL(src,location.href).href;
+   const src=queue.shift();queued.delete(src);const url=new URL(src,document.baseURI).href;
    try{if(!await cache.match(url)){const response=await fetch(url,{priority:'low'});if(response.ok)await cache.put(url,response);else continue;}done.add(src);}catch{}
    await delay(60);
   }

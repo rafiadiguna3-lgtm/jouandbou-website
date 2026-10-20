@@ -1,11 +1,11 @@
-import {createPhoneMapGuide} from './phone-map-guide.mjs?v=8';
+import {createPhoneMapGuide} from './phone-map-guide.mjs?v=9';
 import {routeHash,writeRoute} from './project-routing.mjs';
 import {createPhoneIntro} from './phone-intro.mjs';
 import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-flight.mjs?v=143';
 import {createTouchOrbit} from './touch-orbit.mjs?v=129';
 import './photo-offline.mjs?v=128';
 import {landscapeModelScale} from './landscape-model.mjs?v=124';
-import {createHouseCallout} from './house-callout.mjs?v=123';
+import {createHouseCallout} from './house-callout.mjs?v=124';
 import {centerOrbitCamera} from './orbit-camera.mjs';
 import {wheelIntent,panDelta} from './wheel-input.mjs';
 import {glbIds} from './glb-assets.mjs?v=114';
@@ -367,7 +367,7 @@ document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
 
 await import("./about.mjs?v=149");
-syncProjectRoute();mapGuide=createPhoneMapGuide({onChange:()=>{if(mapGuide&&!mapGuide.visible)hoverLevels.fill(0);start()},order:[...new Set([0,9,13,29,...glbIds,44,51])]});
+syncProjectRoute();mapGuide=createPhoneMapGuide({ready:engine.firstReady||engine.ready,onChange:()=>{if(mapGuide&&!mapGuide.visible)hoverLevels.fill(0);start()},order:[...new Set([0,9,13,29,...glbIds,44,51])]});
 
 // Wait for the imported models and a painted scene, rather than a fake progress percentage.
 Promise.resolve(engine.firstReady||engine.ready).then(()=>requestAnimationFrame(()=>{if(mapVisible())render();requestAnimationFrame(()=>document.dispatchEvent(new Event('jou:scene-ready')));})).catch(()=>document.dispatchEvent(new Event('jou:scene-ready')));
@@ -378,7 +378,7 @@ import "./construction-progress.mjs?v=90";
 
 import "./project-ribbon.mjs?v=105";
 import "./project-photo-viewer.mjs?v=128";
-import "./project-image-memory.mjs?v=129";
+import "./project-image-memory.mjs?v=130";
 
 // Project pages use the existing canvas bitmap; no 3D work runs behind a gallery.
 for(const panel of document.querySelectorAll('dialog.project-page,dialog#detail')){
