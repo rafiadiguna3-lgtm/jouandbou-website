@@ -532,3 +532,4 @@ Public deployment safety: build now rejects environment files, repository intern
 - Replaced the static hand hint with the approved centered Poppins typewriter introduction and short mouse/touch instructions.
 - Uses the existing renderer and real house hover colors, starting at Rumah Anas and cycling through all available project models; the entire map remains blurred.
 - The first map drag, tap, wheel, navigation or keyboard action removes the guide, caret, blur and temporary color state. Refresh starts it again. No callout/leader line is created by the introduction.
+- Prevented pre-initialization homepage/guide copy flashes, including the frame before animation starts, and wait for the intro font before typing. On drag, the heading rises and fades with easing while map blur clears over 560ms; the caret hides immediately and all guide nodes are removed after the transition. Navigation/reduced-motion exits remain immediate.

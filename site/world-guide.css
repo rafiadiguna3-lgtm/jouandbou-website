@@ -10,3 +10,8 @@ body.phone-map-guided :is(#phone-intro,#home-summary,#phone-intro-guide,#labels,
 @keyframes world-caret{50%{opacity:0}}
 @media(max-width:899px),(hover:none),(any-pointer:coarse){.world-guidance h1{font-size:29px;min-height:51px}.world-guidance h1 i{height:27px}.world-info{font-size:13px}.world-info .world-how{font-size:14px}}
 @media(prefers-reduced-motion:reduce){.world-guidance h1 i{animation:none}}
+
+/* Prevent homepage copy and instruction text flashing before the first animation frame. */
+html.world-intro-pending :is(#phone-intro,#home-summary,#phone-intro-guide,#labels,.house-callout),body.world-guide-leaving :is(#phone-intro,#home-summary,#phone-intro-guide,#labels,.house-callout){visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+.world-guidance h1,.world-info{opacity:0}
+body.world-guide-leaving #phone-map-guide{display:flex}

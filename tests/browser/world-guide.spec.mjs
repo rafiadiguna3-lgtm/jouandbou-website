@@ -12,3 +12,17 @@ for(const device of ['desktop','iPhone 13'])test(`${device}: jou world guide cle
  await expect(page.locator('.house-callout')).toHaveAttribute('aria-hidden','true');await expect.poll(()=>page.evaluate(()=>window.guideQA().levels.every(v=>v===0))).toBe(true);
  await page.reload();await expect(guide).toBeVisible();await page.locator('#menu-toggle').dispatchEvent('pointerdown');await expect(guide).toHaveCount(0);expect(errors).toEqual([]);await context.close();
 });
+test('homepage copy stays hidden while the app loads; exit animates and removes the caret',async({page})=>{
+ let release;const gate=new Promise(resolve=>release=resolve);
+ await page.route('**/app.mjs*',async route=>{await gate;await route.continue();});
+ await page.goto('/',{waitUntil:'commit'});
+ await page.locator('#home-summary').waitFor({state:'attached'});
+ await expect(page.locator('html')).toHaveClass(/world-intro-pending/);
+ await expect(page.locator('#home-summary')).toBeHidden();release();
+ const guide=page.locator('#phone-map-guide');await expect(guide).toBeVisible();
+ await expect(guide.locator('h1 span')).toHaveText('jou world');
+ await page.mouse.wheel(0,80);
+ await expect(guide.locator('h1 i')).toBeHidden();
+ await expect(guide).toHaveCount(0);await expect(page.locator('body')).not.toHaveClass(/world-guide-leaving/);
+ await expect(page.locator('#viewport')).toHaveCSS('filter','none');
+});
