@@ -527,3 +527,8 @@ Project-directory entry: /projects and /projects/ now permanently redirect to /#
 Unified work entry points with existing website sections: Jou Works and Projects redirect to /#projects (home map), Bou Works to /#bou-works, and legacy About remains /#about. Removed generated collection/directory pages rather than maintaining extra showcase screens. Sitemap now lists homepage and individual published projects only; project fallback links and schema breadcrumbs target the map. Preserved all 15 individual project routes, metadata, photographs, inquiry URLs and native detail UI. Legacy collection paths normalize to section hashes in the client as well.
 
 Public deployment safety: build now rejects environment files, repository internals, private-key files, database/backup dumps and symbolic links in both source public files and final output. Added safe response headers without a restrictive CSP, preserving Three.js, fonts and share crawlers. No sensitive public paths were found in the current source tree. Cloudflare edge blocking remains an account setting, not applied by repository changes.
+
+### Homepage jou world introduction
+- Replaced the static hand hint with the approved centered Poppins typewriter introduction and short mouse/touch instructions.
+- Uses the existing renderer and real house hover colors, starting at Rumah Anas and cycling through all available project models; the entire map remains blurred.
+- The first map drag, tap, wheel, navigation or keyboard action removes the guide, caret, blur and temporary color state. Refresh starts it again. No callout/leader line is created by the introduction.
