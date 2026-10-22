@@ -56,7 +56,7 @@ test('project content remains readable while application scripts are blocked',as
 test('Bou project and back links keep SPA navigation without losing the root asset base',async({page})=>{
  await page.goto('/#bou-works');await expect(page.locator('.bou-project-picker')).toBeVisible();
  const navigations=[];page.on('request',request=>{if(request.isNavigationRequest()&&request.frame()===page.mainFrame())navigations.push(request.url());});
- const link=page.locator('a[href="/projects/bou/temu/"]');await link.click();
+ const link=page.locator('#bou-page a[href="/projects/bou/temu/"]');await link.click();
  await expect(page).toHaveURL(/\/projects\/bou\/temu\/$/);await expect(page.locator('.bou-project')).toBeVisible();
  await expect(page.locator('base')).toHaveAttribute('href','/');
  await page.locator('.bou-back').click();await expect(page).toHaveURL(/\/#bou-works$/);await expect(page.locator('.bou-project-picker')).toBeVisible();expect(navigations).toEqual([]);

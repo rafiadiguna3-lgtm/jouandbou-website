@@ -14,6 +14,7 @@ for(const phone of [false,true])test(`project inquiries preserve the project and
   expect(url.searchParams.get('text')).toContain('https://jouandbou.com'+project.path);
   await expect(link).toHaveAttribute('target','_blank');
   const before=await link.boundingBox();
+  const share=panel.locator('button[data-share-url]');await expect(share).toBeVisible();await expect(share).toHaveAttribute('data-share-url','https://jouandbou.com'+project.path);const shareRect=await share.boundingBox();expect(shareRect.x).toBeGreaterThanOrEqual(0);expect(shareRect.x+shareRect.width).toBeLessThan(before.x);expect(shareRect.y+shareRect.height).toBeLessThanOrEqual(page.viewportSize().height);
   await page.locator(project.kind==='jou'?`#${project.panel} .project-scroll`:'#bou-page').evaluate(el=>{el.scrollTop=el.scrollHeight;});
   const after=await link.boundingBox();expect(Math.abs(after.y-before.y)).toBeLessThan(2);
   expect(after.y+after.height).toBeLessThanOrEqual((await page.viewportSize()).height);

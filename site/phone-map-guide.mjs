@@ -49,7 +49,7 @@ export function createPhoneMapGuide({onChange=()=>{},order=[0],ready=Promise.res
  listen(document,'pointermove',e=>{if(press&&Math.hypot(e.clientX-press.x,e.clientY-press.y)>5)dismiss();});
  listen(document,'pointerup',()=>{if(press)dismiss();press=null;});
  listen(document,'wheel',dismiss);listen(document,'keydown',e=>{if(['Enter','Escape',' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','='].includes(e.key))dismiss();});
- listen(window,'hashchange',update);listen(window,'popstate',update);phone.addEventListener('change',update,{signal:abort.signal});
+ listen(document,'jou:fallback',()=>dismiss({immediate:true}));listen(window,'hashchange',update);listen(window,'popstate',update);phone.addEventListener('change',update,{signal:abort.signal});
  const observer=new MutationObserver(update);observer.observe(document.body,{attributes:true,attributeFilter:['class']});observer.observe(document.getElementById('menu-toggle'),{attributes:true,attributeFilter:['aria-expanded']});
  update();document.documentElement.classList.remove('world-intro-pending');return {get visible(){return visible},level(id){return visible&&Number(guide.dataset.house)===id?Number(guide.dataset.level||0):0},dismiss};
 }

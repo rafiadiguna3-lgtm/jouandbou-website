@@ -1,5 +1,5 @@
 import {routeHash,routeProject,writeRoute} from './project-routing.mjs';
-import {renderBou} from './bou.mjs?v=147';
+import {renderBou} from './bou.mjs?v=148';
 import './contact-map.mjs?v=141';
 import {journalPosts} from './about-journal.mjs';
 const about=document.getElementById('about-page'),studio=document.getElementById('studio'),projects=document.getElementById('projects'),brand=document.querySelector('.brand');

@@ -2,6 +2,7 @@ import { cp, rm, readFile } from 'node:fs/promises';
 import {fileURLToPath} from 'node:url';
 import {assertPublicFiles} from './public-files.mjs';
 import { createHash } from 'node:crypto';
+import {buildSiteFallback} from './build-site-fallback.mjs';
 import {buildProjectPages} from './build-project-pages.mjs';
 const root = new URL('../', import.meta.url);
 await assertPublicFiles(fileURLToPath(new URL('site/',root)));
@@ -14,6 +15,7 @@ for (const file of manifest.files) {
 }
 await rm(new URL('dist/', root), { recursive: true, force: true });
 await cp(new URL('site/', root), new URL('dist/', root), { recursive: true });
+await buildSiteFallback(new URL('dist/',root));
 await buildProjectPages(new URL('dist/',root));
 await assertPublicFiles(fileURLToPath(new URL('dist/',root)));
 console.log(`Copied ${manifest.files.length} verified source/assets to dist/ and generated project pages.`);
