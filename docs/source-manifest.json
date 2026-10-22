@@ -45,7 +45,7 @@
     {
       "path": "about.mjs",
       "bytes": 8940,
-      "sha256": "bd3bdb3e379b615be585b3000a0cc950598ec096e16167d235ef8f1990a3b0a9",
+      "sha256": "6e75ee7e7bf660584bc13461cc95f0aef949c3dec53da844e1e4d0833c107e6a",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -93,8 +93,8 @@
     },
     {
       "path": "app.mjs",
-      "bytes": 42133,
-      "sha256": "532fc3e8c6e173d269b3c58ef3fff4fb069de54ecab616a2d879f8fed4a33e9e",
+      "bytes": 41988,
+      "sha256": "535d1294d0ff6496bdefd78f64c1b79013aaf5118c795ecc18ea21126a6429e8",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13005,7 +13005,7 @@
     {
       "path": "bou.mjs",
       "bytes": 5116,
-      "sha256": "fe0a170828b111bc1a7ad9228c3c4a27b9dd6ef0e9081f342ad2281accb0f1fa",
+      "sha256": "9d7482bc382e8efee00c88f12cfec866dbbc869db68ccb099479c557b3b4bf13",
       "native_sha256": "3f863d3f4caf37f10df844904a4feca0baf867970aa240522e98c8f2dcb2f4eb",
       "native_bytes": 4391,
       "source_urls": [
@@ -13273,8 +13273,8 @@
     },
     {
       "path": "house-callout.css",
-      "bytes": 2788,
-      "sha256": "6564d3c29c61e6f586054cd2498d25d3c0f2410e7ea0128a125dd530239def5e",
+      "bytes": 2436,
+      "sha256": "f84935925729f3b03a04db0e06c486b053f73d75b38eababb14559b8bd43dd3d",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/house-callout.css"
       ],
@@ -13289,8 +13289,8 @@
     },
     {
       "path": "house-callout.mjs",
-      "bytes": 5362,
-      "sha256": "bbcc87372e51111220f7cba16113163eb18cfabbbd0c6002dae2290210f41b1c",
+      "bytes": 5110,
+      "sha256": "b2d13015577219d9cd5b894a92780696f1a393735d319f0f909412fc634d80a2",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/house-callout.mjs"
       ],
@@ -13313,8 +13313,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 110771,
-      "sha256": "91ff7c623c89cc3bdd7e64c0e7f107736c8128a8a554c8a14305f1b5accb9ce7",
+      "bytes": 110707,
+      "sha256": "5f92492481259a79fd7ba671e99a556e9fc50dfb91e6834e73e5fd90c0728c39",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],

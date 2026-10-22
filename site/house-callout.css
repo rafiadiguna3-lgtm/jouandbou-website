@@ -23,5 +23,3 @@ body.view-about .house-callout,body.view-contact .house-callout,body:has(dialog[
 .house-callout-old{position:absolute;left:12px;top:5px;font-size:18px;line-height:24px;white-space:nowrap;opacity:0;z-index:1;pointer-events:none}
 .house-callout-card.opens-left .house-callout-old{left:auto;right:12px}
 .house-callout-name{will-change:opacity,transform}
-
-.house-callout-status{display:none}.house-callout-card.has-project-status{padding-top:2px}.has-project-status .house-callout-name{display:block;width:max-content;font-size:16px;line-height:18px}.has-project-status .house-callout-status{position:relative;z-index:1;display:inline-block;font-size:11px;line-height:13px;color:#696b62;white-space:nowrap}

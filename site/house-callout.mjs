@@ -10,7 +10,7 @@ export function calloutLayout(anchor,width,height,cardWidth,scale=1,shape=null){
 }
 export function createHouseCallout(onActivate,onBrowse){
  const node=document.createElement('div');node.className='house-callout';node.setAttribute('aria-hidden','true');
- node.innerHTML='<svg class="house-callout-leader" aria-hidden="true"><path/></svg><button class="house-callout-card" type="button" tabindex="-1"><svg class="house-callout-frame" viewBox="0 0 180 48" preserveAspectRatio="none" aria-hidden="true"><path d="M.5 .5H179.5V34.5H13L.5 47Z"/></svg><span class="house-callout-old" aria-hidden="true"></span><span class="house-callout-name"></span><small class="house-callout-status"></small></button>';
+ node.innerHTML='<svg class="house-callout-leader" aria-hidden="true"><path/></svg><button class="house-callout-card" type="button" tabindex="-1"><svg class="house-callout-frame" viewBox="0 0 180 48" preserveAspectRatio="none" aria-hidden="true"><path d="M.5 .5H179.5V34.5H13L.5 47Z"/></svg><span class="house-callout-old" aria-hidden="true"></span><span class="house-callout-name"></span></button>';
  document.body.append(node);
  const card=node.querySelector('button'),leader=node.querySelector('.house-callout-leader path'),name=node.querySelector('.house-callout-name'),old=node.querySelector('.house-callout-old'),frame=node.querySelector('.house-callout-frame'),framePath=frame.querySelector('path');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
@@ -37,12 +37,12 @@ export function createHouseCallout(onActivate,onBrowse){
   paint();if(active)raf=requestAnimationFrame(tick);else lastTime=0;
  }
  function hide(){selected=-1;target=null;display=null;textWidth=0;cancelAnimationFrame(raf);raf=0;lastTime=0;stopText();node.classList.remove('is-visible');node.setAttribute('aria-hidden','true');card.tabIndex=-1;}
- function update(id,label,code,anchor,width,height,visible,mapScale=14,shape=null,status=''){
+ function update(id,label,code,anchor,width,height,visible,mapScale=14,shape=null){
   if(!visible||!anchor||!anchor.every(Number.isFinite)){hide();return;}
-  const scale=Math.max(status?1:.08,mapScale/14),changed=selected!==id;
+  const scale=Math.max(.08,mapScale/14),changed=selected!==id;
   if(changed){
-   const previous=selected;stopText();old.textContent=name.textContent;name.textContent=label;selected=id;const state=card.querySelector('.house-callout-status');state.textContent=status;card.classList.toggle('has-project-status',!!status);textWidth=Math.ceil(Math.max(name.offsetWidth,state.offsetWidth))+24;
-   card.setAttribute('aria-label',`Explore ${label} in 3D${status?' — '+status:''}`);
+   const previous=selected;stopText();old.textContent=name.textContent;name.textContent=label;selected=id;textWidth=Math.ceil(name.offsetWidth)+24;
+   card.setAttribute('aria-label',`Explore ${label} in 3D`);
    // A stable tail side avoids flipping during the camera's centering animation.
    opensLeft=width/2+textWidth*scale>width-12;card.classList.toggle('opens-left',opensLeft);
    if(previous>=0&&!reduced.matches){const direction=id>previous?1:-1;const options={duration:180,easing:'ease-out'};textAnimations=[old.animate?.([{opacity:1},{opacity:0}],options),name.animate?.([{opacity:0},{opacity:1}],options),leader.animate?.([{opacity:0,offset:0},{opacity:0,offset:.35},{opacity:1,offset:1}],{...options,duration:320})];}

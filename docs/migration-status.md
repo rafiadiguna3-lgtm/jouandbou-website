@@ -549,3 +549,8 @@ Public deployment safety: build now rejects environment files, repository intern
 - Added an in-place fallback within the existing homepage for disabled/failed application JavaScript or prolonged startup, generated from the same published project catalog. It links to existing readable project pages plus WhatsApp/email/Instagram. It is hidden during the normal map experience and does not create a separate index URL.
 - Kept the map badge short and readable (“3D preview” / “Under construction”); full availability text remains in search and the existing 3D information area. Published project labels retain their existing sizing.
 - Validation: 7 targeted discovery/share/status/failure tests, 26 regression browser tests (including 11 responsive layouts and all public project inquiries/SEO), and 9 source/asset/routing checks passed. Native share and clipboard paths were exercised with controlled browser API responses; real-device share sheets and the production deployment remain unverified.
+
+### Scope correction: only items 1 and 4
+- Per the user's correction, removed the added share controls and all new preview/construction status labels, restoring the previous project detail buttons, categories and house label sizing.
+- Retained only unified Jou/Bou search (including typo suggestions) and the in-place startup/no-JavaScript fallback. Existing project URLs, WhatsApp and SEO remain unchanged.
+- Scope-corrected validation: 19 browser checks and 6 source/project checks passed; three follow-up checks also confirmed fallback visibility from failed hash routes and absence of the removed controls.

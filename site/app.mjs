@@ -1,5 +1,4 @@
-import {searchProjects} from './project-search.mjs';
-import {projectStatus,projectBadge,detailLabel} from './project-status.mjs';
+import {searchProjects} from './project-search.mjs?v=2';
 import {createPhoneMapGuide} from './phone-map-guide.mjs?v=10';
 import {routeHash,writeRoute} from './project-routing.mjs';
 import {createPhoneIntro} from './phone-intro.mjs';
@@ -7,7 +6,7 @@ import {cameraFlight as createCameraFlight,sampleCameraFlight} from './camera-fl
 import {createTouchOrbit} from './touch-orbit.mjs?v=129';
 import './photo-offline.mjs?v=128';
 import {landscapeModelScale} from './landscape-model.mjs?v=124';
-import {createHouseCallout} from './house-callout.mjs?v=125';
+import {createHouseCallout} from './house-callout.mjs?v=126';
 import {centerOrbitCamera} from './orbit-camera.mjs';
 import {wheelIntent,panDelta} from './wheel-input.mjs';
 import {glbIds} from './glb-assets.mjs?v=114';
@@ -70,7 +69,7 @@ function calloutHouseShape(id){
  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]);
  return {roofTop:Math.min(...ys),span:Math.max(...xs)-Math.min(...xs),height:Math.max(...ys)-Math.min(...ys)};
 }
-function render(){phoneIntro.update({phone:!desktopInput(),front,view:camera,goal,home:phoneHome,minScale:fitScale(bounds,w,h)*.9});houseCallout.update(previewId,previewId===29?'Marboy House':names[previewId],previewId>=0?title(previewId):'',previewId>=0?project(world.anchors[previewId],camera,w,h).slice(0,2):null,w,h,previewId>=0&&!front,camera.scale,previewId>=0?calloutHouseShape(previewId):null,previewId>=0?projectBadge(previewId):'');updateModelStatus();engine.render(camera,w,h,current,front,hoverLevels);
+function render(){phoneIntro.update({phone:!desktopInput(),front,view:camera,goal,home:phoneHome,minScale:fitScale(bounds,w,h)*.9});houseCallout.update(previewId,previewId===29?'Marboy House':names[previewId],previewId>=0?title(previewId):'',previewId>=0?project(world.anchors[previewId],camera,w,h).slice(0,2):null,w,h,previewId>=0&&!front,camera.scale,previewId>=0?calloutHouseShape(previewId):null);updateModelStatus();engine.render(camera,w,h,current,front,hoverLevels);
 if(desktopInput())labels.forEach((b,i)=>{const hidden=front||!canExplore(i);if(b.hidden!==hidden)b.hidden=hidden;if(hidden)return;b.classList.toggle('shown',i===hover);const p=project(world.anchors[i],camera,w,h),left=`${Math.max(12,Math.min(w-160,p[0]))}px`,top=`${Math.max(210,Math.min(h-100,p[1]))}px`;if(b.style.left!==left)b.style.left=left;if(b.style.top!==top)b.style.top=top})
 }
 
@@ -86,7 +85,7 @@ function flyHomeCamera(fromSection=false,focus=null){
 function tick(now){raf=0;const dt=Math.min(100,lastFrame?now-lastFrame:16.7);lastFrame=now;const cameraEase=1-Math.exp(-dt/(drag||touchOrbit.active?18:110)),hoverEase=1-Math.exp(-dt/65);let active=false;if(cameraFlight){const sample=sampleCameraFlight(cameraFlight,now);Object.assign(camera,sample.state);if(sample.done){Object.assign(camera,goal);cameraFlight=null;}else active=true;}else for(const key of Object.keys(camera)){const d=goal[key]-camera[key];if(Math.abs(d)>.0005){camera[key]+=d*(reduce?1:cameraEase);active=true}else camera[key]=goal[key]}if(front&&!cameraFlight&&camera.t>.995)centerUpdatedModel(camera);const desktop=desktopInput();for(let i=0;i<hoverLevels.length;i++){const target=mapGuide?.visible?mapGuide.level(i):canExplore(i)&&((desktop&&i===hover)||i===previewId)&&!front?1:0,d=target-hoverLevels[i];if(Math.abs(d)>.004){hoverLevels[i]+=d*(reduce?1:hoverEase);active=true}else hoverLevels[i]=target}engine.setAnimating?.(active);render();raf=active?requestAnimationFrame(tick):0}
 function mapVisible(){return !document.hidden&&!document.body.matches('.view-about,.view-contact')&&!document.querySelector('dialog.project-page[open],dialog#detail[open]');}
 function start(){limit();const visible=mapVisible();engine.setVisible?.(visible);if(!visible){cancelAnimationFrame(raf);raf=0;lastFrame=0;return;}if(!raf){lastFrame=0;raf=requestAnimationFrame(tick)}}
-function updateUI(){updateBrowse();$('number').textContent=current===51?'':current===44?'jou.commercial 01':`jou.house ${String(houseNumber(current)).padStart(2,'0')}`;$('name').textContent=current===29?'Marboy House':names[current];$('projectStoryTitle').textContent='About the project';$('projectStory').textContent=description(current);$('projectStory').hidden=!description(current);$('area').textContent=current===38?'Area · 120–180 / 128 sqm':'';$('area').hidden=current!==38;$('more').firstChild.textContent=front?detailLabel(current)+' ':'Explore 3D ';$('more').querySelector('span').innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';$('category').textContent=projectStatus(current)||(current===51?'':current===44?'Commercial Project':'Rsdtl Project');$('focus').setAttribute('aria-label',`${names[current]} project information`);$('restore-project').textContent=current===29?'Marboy House':names[current];$('announce').textContent=`${names[current]}, ${front?'front view':'neighborhood view'}`}
+function updateUI(){updateBrowse();$('number').textContent=current===51?'':current===44?'jou.commercial 01':`jou.house ${String(houseNumber(current)).padStart(2,'0')}`;$('name').textContent=current===29?'Marboy House':names[current];$('projectStoryTitle').textContent='About the project';$('projectStory').textContent=description(current);$('projectStory').hidden=!description(current);$('area').textContent=current===38?'Area · 120–180 / 128 sqm':'';$('area').hidden=current!==38;$('more').firstChild.textContent=front?'Project details ':'Explore 3D ';$('more').querySelector('span').innerHTML='<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="M3 10h13m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';$('category').textContent=current===51?'':current===44?'Commercial Project':'Rsdtl Project';$('focus').setAttribute('aria-label',`${names[current]} project information`);$('restore-project').textContent=current===29?'Marboy House':names[current];$('announce').textContent=`${names[current]}, ${front?'front view':'neighborhood view'}`}
 let sheetState='peek',sheetDrag=null,sheetSwipe=null;
 function setSheet(state){
  if(!front&&state!=='hidden')state='compact';
@@ -379,7 +378,7 @@ document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
 
-await import("./about.mjs?v=150");
+await import("./about.mjs?v=149");
 syncProjectRoute();mapGuide=createPhoneMapGuide({ready:engine.firstReady||engine.ready,onChange:()=>{if(mapGuide&&!mapGuide.visible)hoverLevels.fill(0);start()},order:[...new Set([0,9,13,29,...glbIds,44,51])]});
 
 document.dispatchEvent(new Event('jou:app-ready'));

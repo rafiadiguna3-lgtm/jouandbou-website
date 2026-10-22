@@ -1,6 +1,6 @@
 import {projectSocialHTML} from './project-social.mjs';
 import {projects} from './project-catalog.mjs';
-import {inquiryHTML} from './project-inquiry.mjs?v=5';
+import {inquiryHTML} from './project-inquiry.mjs?v=4';
 import {routeHash,projectURL} from './project-routing.mjs';
 import {galleryArrows} from './gallery-arrows.mjs';
 const content=document.getElementById('bou-content');
