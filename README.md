@@ -1,82 +1,91 @@
 # Jou and Bou
 
-Interactive architecture and interior design portfolio for **Jou and Bou**, a Jakarta-based studio.
+Website portofolio arsitektur dan desain interior Jou and Bou, studio yang berbasis di Jakarta.
 
-**Website:** [jouandbou.com](https://jouandbou.com/)
+**Buka website: [jouandbou.com](https://jouandbou.com/)**
 
-Explore the studio’s work through a 3D neighborhood: select a house, explore its model, view project photographs and details, or start a conversation through WhatsApp.
+Pengunjung bisa memilih rumah di peta 3D, melihat model dan foto proyek, lalu menghubungi studio lewat WhatsApp.
 
-## Website features
+## Yang ada di website
 
-- Interactive neighborhood with 25 selectable project models, selection colors, and camera transitions.
-- Search across Jou projects and the seven published Bou projects, including typo suggestions.
-- Project details, photographs, and a project-specific WhatsApp inquiry.
-- About, Bou Works, and Contact within the existing website experience.
-- Responsive navigation and a refresh-scoped “jou world” introduction that dismisses on interaction.
-- Fifteen published project URLs with static content, SEO metadata, and project-specific share images.
-- An in-place homepage fallback when JavaScript is unavailable or application startup fails.
+- Peta dengan 25 model proyek yang bisa dipilih.
+- Pencarian proyek Jou dan Bou, termasuk saran saat nama salah diketik.
+- Foto, keterangan proyek, dan tombol WhatsApp di detail proyek.
+- Halaman tentang studio, Bou Works, dan kontak.
+- Tampilan untuk komputer dan HP.
+- Link khusus untuk 15 proyek, lengkap dengan judul, deskripsi, dan gambar pratinjau saat dibagikan.
+- Tampilan cadangan berisi link proyek dan kontak jika aplikasi gagal dimuat.
 
-## Links and SEO
+## Link penting
 
-| Destination | URL |
+| Tujuan | Link |
 | --- | --- |
-| Homepage / Jou Works | [jouandbou.com/#projects](https://jouandbou.com/#projects) |
-| About | [jouandbou.com/#about](https://jouandbou.com/#about) |
-| Bou Works | [jouandbou.com/#bou-works](https://jouandbou.com/#bou-works) |
-| Example project | [jouandbou.com/projects/rumah-anas/](https://jouandbou.com/projects/rumah-anas/) |
+| Peta proyek / Jou Works | [Lihat proyek](https://jouandbou.com/#projects) |
+| Tentang studio | [About](https://jouandbou.com/#about) |
+| Desain interior | [Bou Works](https://jouandbou.com/#bou-works) |
+| Contoh detail proyek | [Rumah Anas](https://jouandbou.com/projects/rumah-anas/) |
 
-Individual published projects have their own HTML pages, canonical URLs, descriptions, structured data, and Open Graph/Twitter image metadata. These URLs support direct visits, search discovery, and link sharing while opening the existing project interface when JavaScript loads.
+Link proyek bisa dibuka langsung atau dibagikan. Isinya tetap tersedia jika JavaScript, kode yang menjalankan tampilan interaktif, tidak aktif.
 
-There is no separate project index screen. `/projects/` and `/jou-works/` redirect to `/#projects`; `/about-us/` redirects to `/#about`; `/bou-works/` redirects to `/#bou-works`. The `www` hostname redirects to the apex domain while preserving paths. Projects without a published story retain their existing map/hash behavior and are excluded from the sitemap.
+Tidak ada halaman daftar proyek terpisah. Link `/projects/` dan `/jou-works/` mengarah ke peta. Link lama `/about-us/` mengarah ke About, sedangkan `/bou-works/` mengarah ke Bou Works.
 
-Google indexing and social preview refreshes depend on the external platforms’ crawlers and caches. See [project SEO](docs/project-seo.md), [domain routing](docs/www-domain.md), and [favicon behavior](docs/favicon-behavior.md).
+Google dan WhatsApp memperbarui hasil pencarian atau pratinjau sesuai jadwal mereka sendiri. Perubahan di website tidak selalu langsung terlihat di sana.
 
-## Local development
+## Pilih versi kode
 
-Use **Node.js 24** and npm.
+Versi kode di GitHub dipisahkan lewat **branch**, seperti folder kerja yang punya riwayat sendiri.
+
+- `migration/jou-and-bou`: berisi pengembangan website terbaru dan petunjuk di README ini.
+- `main`: masih berisi versi kode yang lebih lama. Mengubah README tidak memindahkan kode website antarbranch.
+
+## Menjalankan di komputer sendiri
+
+Bagian ini untuk orang yang akan mengerjakan kodenya. Pasang **Node.js versi 24**, lalu buka terminal di folder proyek dan jalankan:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:5173`. The development command builds and serves `dist/`; rebuild and restart after source edits. There is no hot reload.
+Buka **http://localhost:5173** di browser. Alamat ini hanya untuk melihat website di komputer sendiri.
+
+Setelah mengubah kode, hentikan server dengan `Ctrl+C`, lalu jalankan lagi `npm run dev`. Website belum memakai pembaruan otomatis saat kode diedit.
+
+Untuk menyiapkan dan melihat hasil yang akan diunggah:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-The preview server uses `http://localhost:4173`. The build verifies asset hashes, copies `site/`, generates the published project pages and homepage fallback, and checks for files that must not be publicly deployed. No application backend or secret is required.
+Buka **http://localhost:4173**. Hasil build, yaitu file website yang siap dipasang, ada di folder `dist/`.
 
-## Repository structure
+## Isi folder
 
-| Path | Purpose |
+| Folder | Isinya |
 | --- | --- |
-| `site/` | Website HTML, styles, JavaScript modules, photographs, models, and vendored libraries |
-| `scripts/` | Build, project catalog, share preview, asset validation, and reference comparison tools |
-| `tests/` | Source/asset checks and Playwright browser tests |
-| `docs/` | Implementation notes, routing, SEO, validation history, and source provenance |
-| `dist/` | Generated deployment output; rebuilt by `npm run build` |
+| `site/` | Kode website, foto, dan model 3D |
+| `scripts/` | Alat untuk menyiapkan website dan memeriksa file |
+| `tests/` | Pemeriksaan fungsi website |
+| `docs/` | Catatan perubahan dan panduan teknis |
+| `dist/` | Hasil website yang siap diunggah; dibuat ulang saat build |
 
-The frontend uses browser JavaScript modules and a custom 3D renderer with GPU and software fallback paths. Node dependencies are development and validation tools. Fonts and external map providers still require access to their respective services. The photo service worker caches photographs; it does not provide full offline operation.
+Edit file sumber di `site/`, bukan di `dist/`. Isi `dist/` akan ditimpa saat build berikutnya.
 
-## Content and asset updates
+## Setelah mengubah isi website
 
-Edit the existing project stories or Bou content in `site/`. For published project catalog changes, update `scripts/build-project-catalog.mjs` and run:
+Catat perubahan di [catatan pengembangan](docs/migration-status.md), lalu jalankan:
 
 ```sh
-npm run build:project-catalog
-npm run build:project-previews
 npm run manifest:update
 npm run build
 ```
 
-Share preview generation requires Chromium. Deployment builds use the committed catalog and preview images and do not launch Chromium.
+Perintah pertama memperbarui daftar pemeriksaan file. Perintah kedua memeriksa file dan membuat hasil website terbaru.
 
-For other intentional changes to files in `site/`, document the change in [migration status](docs/migration-status.md), run `npm run manifest:update`, then rebuild. The manifest preserves original capture hashes alongside current file hashes.
+Jika mengubah daftar proyek atau gambar pratinjau link, ikuti [panduan proyek dan pratinjau](docs/project-seo.md).
 
-## Validation
+## Memeriksa hasil perubahan
 
 ```sh
 npm test
@@ -85,20 +94,28 @@ npm run test:projects
 npm run test:deployment-config
 ```
 
-Browser tests use Chromium through Playwright. Set `CHROMIUM_PATH` if needed, or install the browser with `npx playwright install chromium`. The browser suite covers map navigation, search, project details, galleries, inquiry links, routing, and responsive behavior. Chromium emulation does not replace testing on physical devices or Safari.
+Pemeriksaan mencakup file, pencarian, navigasi, detail proyek, foto, dan tampilan beberapa ukuran layar. Tes browser memerlukan Chromium. Jika belum tersedia, jalankan `npx playwright install chromium`.
 
-Validation results are recorded with their implementation changes in [migration status](docs/migration-status.md); historical pass counts do not imply every test matches the current UI. Some older routing/guide assertions still need alignment with the current section redirects and introduction.
+Sebagian tes lama masih perlu disesuaikan dengan tampilan dan arah link terbaru. Hasil pemeriksaan sebelumnya ada di [catatan pengembangan](docs/migration-status.md). Tes di komputer juga belum menggantikan pengecekan langsung di HP dan Safari.
 
-The optional `npm run test:reference` compares against the original captured site and requires external network access. See [device checks](docs/device-checks.md) for the responsive review process.
+## Memasang website
 
-## Deployment
+Untuk Cloudflare Pages:
 
-Run `npm ci` and `npm run build`, then publish **the contents of `dist/`** to a static HTTPS host. For Cloudflare Pages, use `npm run build` as the build command and `dist` as the output directory. Keep `_redirects` and `_headers` in the deployed output.
+| Pengaturan | Isi |
+| --- | --- |
+| Perintah build | `npm run build` |
+| Folder hasil | `dist` |
+| Versi Node.js | `24` |
 
-Serve `.mjs` as JavaScript, `.json` as JSON, and `.bin` as binary. Preserve asset paths and filename case. Missing assets must return a real 404 rather than the homepage. Confirm both hostnames reach the same deployment and the `www` redirect preserves individual project URLs.
+Pilih branch yang memang ingin dipasang. Pastikan file `_redirects` dan `_headers` ikut terunggah agar pengalihan link dan pengaturan respons tetap bekerja. Jangan ubah nama atau letak file foto dan model.
 
-Public-file checks and response headers are part of the repository; Cloudflare edge rules are separate account settings. See [Cloudflare security](docs/cloudflare-security.md).
+File yang tidak ditemukan harus menampilkan status 404, bukan dialihkan ke halaman depan. Domain `www.jouandbou.com` diarahkan ke `jouandbou.com` dengan tetap mempertahankan alamat proyeknya.
 
-## Source provenance
+## Catatan teknis
 
-The initial frontend and assets were captured from `jouandbou.rafiadiguna3.chatgpt.site`, then intentionally updated in this repository. This is not an export of the original editor project or its unpublished assets. [The source manifest](docs/source-manifest.json) records source URLs and hashes; [migration status](docs/migration-status.md) records subsequent implementation changes.
+Website ini tidak membutuhkan server aplikasi atau database. Font dan layanan peta luar tetap membutuhkan koneksi internet. Penyimpanan foto di browser membantu pemuatan ulang, tetapi website tidak sepenuhnya bisa dipakai tanpa internet.
+
+Kode awal diambil dari website Jou and Bou yang dipublikasikan melalui ChatGPT Sites, lalu dikembangkan di repositori ini. Riwayat sumber file ada di [daftar sumber](docs/source-manifest.json).
+
+Panduan lanjutan: [domain](docs/www-domain.md), [ikon tab browser](docs/favicon-behavior.md), dan [pengaturan keamanan Cloudflare](docs/cloudflare-security.md).
