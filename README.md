@@ -1,85 +1,86 @@
-# Jou and Bou website
+# Jou and Bou
 
-An independently deployable static copy of the frontend published at
-https://jouandbou.rafiadiguna3.chatgpt.site/.
+Interactive architecture and interior design portfolio for **Jou and Bou**, a Jakarta-based studio.
 
-The HTML, CSS, JavaScript, vendored libraries, photography, video fragments, and
-3D geometry in `site/` were retrieved from that live website without rewriting
-or redesign. This is **not an export of the ChatGPT Sites editor project**, its
-history, or unpublished source assets. `docs/source-manifest.json` records the
-source URLs, byte sizes, and SHA-256 hashes of every retrieved file.
+**Website:** [jouandbou.com](https://jouandbou.com/)
 
-## Develop and build
+Explore the studio’s work through a 3D neighborhood: select a house, explore its model, view project photographs and details, or start a conversation through WhatsApp.
 
-Use Node.js 24 (validated with Node.js 24.19.0).
+## Branches
+
+| Branch | Contents |
+| --- | --- |
+| `main` | Earlier frontend snapshot; local commands below describe this branch |
+| [`migration/jou-and-bou`](https://github.com/rafiadiguna3-lgtm/jouandbou-website/tree/migration/jou-and-bou) | Current development work, including unified project search, public project pages, SEO/share previews, responsive navigation, and startup fallback |
+
+The newer implementation has not been merged into `main`. For current development instructions and project routing, use the [development branch README](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/README.md).
+
+## Website links
+
+- [Jou Works / neighborhood](https://jouandbou.com/#projects)
+- [About](https://jouandbou.com/#about)
+- [Bou Works](https://jouandbou.com/#bou-works)
+- [Rumah Anas](https://jouandbou.com/projects/rumah-anas/)
+
+These are public website destinations, not a claim that this earlier branch contains every current routing feature.
+
+## Local development
+
+Use **Node.js 24** and npm.
 
 ```sh
 npm ci
 npm run dev
+```
+
+On `main`, development serves `site/` at `http://localhost:5173`. Reload after editing source files; there is no hot reload.
+
+```sh
 npm run build
 npm run preview
 ```
 
-`dev` serves `site/` on port 5173. `preview` serves `dist/` on port 4173.
-The build verifies the source manifest and copies the static frontend verbatim
-into `dist/`; it does not bundle modules, change URLs, or strip version queries.
-There is no backend and no application secret is required by the retrieved code.
-All Node dependencies are development and validation tools, pinned in the lockfile.
+The build verifies source hashes and copies the frontend into `dist/`. Preview serves that output at `http://localhost:4173`. There is no application backend or required application secret. Node dependencies are development and validation tools.
 
-## Validate
+## Repository structure
+
+| Path | Purpose |
+| --- | --- |
+| `site/` | Website HTML, styles, JavaScript modules, photographs, models, and vendored libraries |
+| `scripts/` | Build, asset validation, and reference comparison tools |
+| `tests/` | Asset checks and Playwright browser tests |
+| `docs/` | Implementation notes, validation history, and source provenance |
+| `dist/` | Generated deployment output |
+
+The neighborhood contains 25 interactive house models, with GPU and software fallback paths. External fonts and map providers require their respective services. The photo service worker caches photographs; it does not provide full offline operation.
+
+## Validation and source updates
 
 ```sh
 npm test
 npm run test:browser
-node scripts/compare-live.mjs
+npm run test:deployment-config
 ```
 
-The asset suite checks source hashes, all 25 interactive houses in both GPU and
-software-fallback formats, video fragments, and responsive photographs.
-**The photograph completeness test currently fails because 15 published image
-files are empty.** See [migration status](docs/migration-status.md) for exact paths.
-Do not treat a successful build as proof those photographs work.
+Browser tests use Playwright Chromium. Set `CHROMIUM_PATH` if needed, or install it with `npx playwright install chromium`. Browser emulation does not replace testing on physical devices or Safari.
 
-Browser tests exercise search, 3D entry, project detail routes, video playback,
-photograph viewing, about/contact navigation, and phone portrait/landscape behavior.
-Use `CHROMIUM_PATH` to point at a Chromium executable. If `/usr/bin/chromium` exists
-it is used; otherwise install Playwright Chromium with `npx playwright install chromium`.
+Validation history is recorded in [migration status](docs/migration-status.md). Do not infer current test results from historical pass counts. The optional `npm run test:reference` compares against the original captured site and requires external network access.
 
-The optional reference audit uses HTTPS requests via `curl` with certificate
-verification enabled, executes the live and local frontend in Chromium, and
-writes paired screenshots, pixel differences, and results under
-`test-results/reference/`. It needs live-site access and `curl`. It does not edit
-the original site. Comparisons have limits when external fonts or map services
-are blocked; these are recorded rather than replaced.
+After intentional edits to files in `site/`, document the change in migration status, then run:
 
-## Deploy independently
+```sh
+npm run manifest:update
+npm run build
+```
 
-Run `npm ci` and `npm run build`, then upload **the contents of `dist/`** to a
-static HTTPS host. Serve `.mjs` as JavaScript, `.json` as JSON, and `.bin` as binary.
-Do not redirect missing assets to `index.html`; a genuine missing asset must
-return 404. Retain every path and case, including `vendor/` and `assets/`.
-HTTPS enables the original photo service worker; it caches photographs only,
-not HTML, code, models, or films. It does not provide full offline operation.
+The source manifest retains original capture provenance while tracking intentional changes.
 
-A `netlify.toml` is included with build command `npm run build` and publish folder
-`dist`. Other static hosts can use the same settings; no Netlify account or
-custom domain is required to build this project. Choose a new deployment target
-separate from the existing Sites and Squarespace projects. No deployment,
-existing website modification, DNS change, or domain connection is part of this
-migration PR.
+## Deployment
 
-Preserved external integrations include Google Fonts, OpenFreeMap, the existing
-OpenStreetMap map fallback, social/contact links, and a Bou Works link to the
-existing `jouandbou.com` website. These still require their original external
-services and are not owned by this static deployment.
+The public website uses the Jou and Bou custom domain. For a static Cloudflare Pages deployment, use `npm run build` and publish `dist/`. Use the intended deployment branch; a README update does not merge newer website code into `main`.
 
-For intentional source edits, run `npm run manifest:update` to update the corresponding entries in
-`docs/source-manifest.json` while retaining the original hashes, and document that the files have diverged from the
-published capture; preserve the original capture provenance.
+Publish the contents of `dist/`, preserving all asset paths and filename case. Serve `.mjs` as JavaScript, `.json` as JSON, and `.bin` as binary. Missing assets must return a real 404 rather than the homepage. Keep any redirect/header files generated by the selected branch.
 
-## Vercel staging
+## Source provenance
 
-See [the step-by-step staging guide](docs/vercel-staging.md). Vercel Preview builds
-use `npm run build:vercel` and publish `dist/`. Production builds are blocked,
-automatic Git deployments are disabled, and responses are marked `noindex`.
-This is staging preparation, not a hosted deployment verification.
+The initial frontend and assets were captured from `jouandbou.rafiadiguna3.chatgpt.site`, then intentionally updated in this repository. This is not an export of the original editor project or its unpublished assets. [The source manifest](docs/source-manifest.json) records source URLs and hashes; [migration status](docs/migration-status.md) records implementation changes.
