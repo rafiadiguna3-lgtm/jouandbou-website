@@ -97,8 +97,6 @@ Run `npm ci` and `npm run build`, then publish **the contents of `dist/`** to a 
 
 Serve `.mjs` as JavaScript, `.json` as JSON, and `.bin` as binary. Preserve asset paths and filename case. Missing assets must return a real 404 rather than the homepage. Confirm both hostnames reach the same deployment and the `www` redirect preserves individual project URLs.
 
-A Netlify configuration is included. The committed **Vercel configuration is for preview staging only**: production builds are blocked, automatic Git deployments are disabled, and responses carry `noindex, nofollow`. See [Vercel staging](docs/vercel-staging.md) before using that target.
-
 Public-file checks and response headers are part of the repository; Cloudflare edge rules are separate account settings. See [Cloudflare security](docs/cloudflare-security.md).
 
 ## Source provenance
