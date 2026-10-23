@@ -1,60 +1,79 @@
 # Jou and Bou
 
-Interactive architecture and interior design portfolio for **Jou and Bou**, a Jakarta-based studio.
+Website portofolio arsitektur dan desain interior Jou and Bou, studio yang berbasis di Jakarta.
 
-**Website:** [jouandbou.com](https://jouandbou.com/)
+**Buka website: [jouandbou.com](https://jouandbou.com/)**
 
-Explore the studio’s work through a 3D neighborhood: select a house, explore its model, view project photographs and details, or start a conversation through WhatsApp.
+Pengunjung bisa memilih rumah di peta 3D, melihat model dan foto proyek, lalu menghubungi studio lewat WhatsApp.
 
-## Branches
+## Link penting
 
-| Branch | Contents |
-| --- | --- |
-| `main` | Earlier frontend snapshot; local commands below describe this branch |
-| [`migration/jou-and-bou`](https://github.com/rafiadiguna3-lgtm/jouandbou-website/tree/migration/jou-and-bou) | Current development work, including unified project search, public project pages, SEO/share previews, responsive navigation, and startup fallback |
-
-The newer implementation has not been merged into `main`. For current development instructions and project routing, use the [development branch README](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/README.md).
-
-## Website links
-
-- [Jou Works / neighborhood](https://jouandbou.com/#projects)
-- [About](https://jouandbou.com/#about)
+- [Peta proyek / Jou Works](https://jouandbou.com/#projects)
+- [Tentang studio](https://jouandbou.com/#about)
 - [Bou Works](https://jouandbou.com/#bou-works)
-- [Rumah Anas](https://jouandbou.com/projects/rumah-anas/)
+- [Detail Rumah Anas](https://jouandbou.com/projects/rumah-anas/)
 
-These are public website destinations, not a claim that this earlier branch contains every current routing feature.
+Link di atas membuka website publik. Kode pada branch ini belum mencakup semua pembaruan website tersebut.
 
-## Local development
+## Versi kode yang dipakai
 
-Use **Node.js 24** and npm.
+Versi kode di GitHub dipisahkan lewat **branch**, seperti folder kerja yang punya riwayat sendiri.
+
+| Branch | Isinya |
+| --- | --- |
+| `main` | Versi kode yang lebih lama |
+| [`migration/jou-and-bou`](https://github.com/rafiadiguna3-lgtm/jouandbou-website/tree/migration/jou-and-bou) | Pengembangan terbaru, termasuk pencarian Jou dan Bou, link proyek, pratinjau saat dibagikan, dan tampilan cadangan |
+
+**Untuk mengerjakan website terbaru, buka [README branch pengembangan](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/README.md).**
+
+Mengubah README di `main` tidak memindahkan kode terbaru ke sini. Petunjuk di bawah khusus untuk kode yang saat ini ada di `main`.
+
+## Menjalankan di komputer sendiri
+
+Pasang **Node.js versi 24**, lalu buka terminal di folder proyek dan jalankan:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-On `main`, development serves `site/` at `http://localhost:5173`. Reload after editing source files; there is no hot reload.
+Buka **http://localhost:5173** di browser. Alamat ini hanya untuk melihat website di komputer sendiri. Perintah tersebut menampilkan isi folder `site/`.
+
+Setelah mengedit kode, muat ulang browser. Website belum memakai pembaruan otomatis saat kode diedit.
+
+Untuk menyiapkan dan melihat hasil yang akan diunggah:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-The build verifies source hashes and copies the frontend into `dist/`. Preview serves that output at `http://localhost:4173`. There is no application backend or required application secret. Node dependencies are development and validation tools.
+Buka **http://localhost:4173**. Hasil build, yaitu file website yang siap dipasang, ada di folder `dist/`.
 
-## Repository structure
+## Isi folder
 
-| Path | Purpose |
+| Folder | Isinya |
 | --- | --- |
-| `site/` | Website HTML, styles, JavaScript modules, photographs, models, and vendored libraries |
-| `scripts/` | Build, asset validation, and reference comparison tools |
-| `tests/` | Asset checks and Playwright browser tests |
-| `docs/` | Implementation notes, validation history, and source provenance |
-| `dist/` | Generated deployment output |
+| `site/` | Kode website, foto, dan model 3D |
+| `scripts/` | Alat untuk menyiapkan website dan memeriksa file |
+| `tests/` | Pemeriksaan fungsi website |
+| `docs/` | Catatan perubahan dan panduan teknis |
+| `dist/` | Hasil website yang siap diunggah; dibuat ulang saat build |
 
-The neighborhood contains 25 interactive house models, with GPU and software fallback paths. External fonts and map providers require their respective services. The photo service worker caches photographs; it does not provide full offline operation.
+Edit file sumber di `site/`, bukan di `dist/`. Isi `dist/` akan ditimpa saat build berikutnya.
 
-## Validation and source updates
+## Setelah mengubah file website
+
+Catat perubahan di [catatan pengembangan](docs/migration-status.md), lalu jalankan:
+
+```sh
+npm run manifest:update
+npm run build
+```
+
+Perintah pertama memperbarui daftar pemeriksaan file. Perintah kedua memeriksa file dan membuat hasil website terbaru.
+
+## Memeriksa hasil perubahan
 
 ```sh
 npm test
@@ -62,25 +81,18 @@ npm run test:browser
 npm run test:deployment-config
 ```
 
-Browser tests use Playwright Chromium. Set `CHROMIUM_PATH` if needed, or install it with `npx playwright install chromium`. Browser emulation does not replace testing on physical devices or Safari.
+Tes browser memerlukan Chromium. Jika belum tersedia, jalankan `npx playwright install chromium`.
 
-Validation history is recorded in [migration status](docs/migration-status.md). Do not infer current test results from historical pass counts. The optional `npm run test:reference` compares against the original captured site and requires external network access.
+Hasil pemeriksaan sebelumnya ada di [catatan pengembangan](docs/migration-status.md). Hasil lama belum membuktikan kondisi kode saat ini. Tes di komputer juga belum menggantikan pengecekan langsung di HP dan Safari.
 
-After intentional edits to files in `site/`, document the change in migration status, then run:
+## Memasang website
 
-```sh
-npm run manifest:update
-npm run build
-```
+Untuk Cloudflare Pages, gunakan `npm run build` sebagai perintah build, `dist` sebagai folder hasil, dan Node.js versi `24`.
 
-The source manifest retains original capture provenance while tracking intentional changes.
+Pilih branch yang memang ingin dipasang. Pembaruan kode di branch pengembangan tidak otomatis masuk ke `main`.
 
-## Deployment
+Unggah isi `dist/` tanpa mengubah nama atau letak file. Sertakan file pengalihan link dan pengaturan respons jika tersedia di hasil build. File yang tidak ditemukan harus menampilkan status 404, bukan dialihkan ke halaman depan.
 
-The public website uses the Jou and Bou custom domain. For a static Cloudflare Pages deployment, use `npm run build` and publish `dist/`. Use the intended deployment branch; a README update does not merge newer website code into `main`.
+## Asal kode
 
-Publish the contents of `dist/`, preserving all asset paths and filename case. Serve `.mjs` as JavaScript, `.json` as JSON, and `.bin` as binary. Missing assets must return a real 404 rather than the homepage. Keep any redirect/header files generated by the selected branch.
-
-## Source provenance
-
-The initial frontend and assets were captured from `jouandbou.rafiadiguna3.chatgpt.site`, then intentionally updated in this repository. This is not an export of the original editor project or its unpublished assets. [The source manifest](docs/source-manifest.json) records source URLs and hashes; [migration status](docs/migration-status.md) records implementation changes.
+Kode awal diambil dari website Jou and Bou yang dipublikasikan melalui ChatGPT Sites, lalu dikembangkan di repositori ini. Riwayat sumber file ada di [daftar sumber](docs/source-manifest.json).
