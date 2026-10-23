@@ -1,87 +1,106 @@
-# Jou and Bou website
+# Jou and Bou
 
-An independently deployable static copy of the frontend published at
-https://jouandbou.rafiadiguna3.chatgpt.site/.
+Interactive architecture and interior design portfolio for **Jou and Bou**, a Jakarta-based studio.
 
-The HTML, CSS, JavaScript, vendored libraries, photography, video fragments, and
-3D geometry in `site/` were retrieved from that live website without rewriting
-or redesign. This is **not an export of the ChatGPT Sites editor project**, its
-history, or unpublished source assets. `docs/source-manifest.json` records the
-source URLs, byte sizes, and SHA-256 hashes of every retrieved file.
+**Website:** [jouandbou.com](https://jouandbou.com/)
 
-## Develop and build
+Explore the studio’s work through a 3D neighborhood: select a house, explore its model, view project photographs and details, or start a conversation through WhatsApp.
 
-Use Node.js 24 (validated with Node.js 24.19.0).
+## Website features
+
+- Interactive neighborhood with 25 selectable project models, selection colors, and camera transitions.
+- Search across Jou projects and the seven published Bou projects, including typo suggestions.
+- Project details, photographs, and a project-specific WhatsApp inquiry.
+- About, Bou Works, and Contact within the existing website experience.
+- Responsive navigation and a refresh-scoped “jou world” introduction that dismisses on interaction.
+- Fifteen published project URLs with static content, SEO metadata, and project-specific share images.
+- An in-place homepage fallback when JavaScript is unavailable or application startup fails.
+
+## Links and SEO
+
+| Destination | URL |
+| --- | --- |
+| Homepage / Jou Works | [jouandbou.com/#projects](https://jouandbou.com/#projects) |
+| About | [jouandbou.com/#about](https://jouandbou.com/#about) |
+| Bou Works | [jouandbou.com/#bou-works](https://jouandbou.com/#bou-works) |
+| Example project | [jouandbou.com/projects/rumah-anas/](https://jouandbou.com/projects/rumah-anas/) |
+
+Individual published projects have their own HTML pages, canonical URLs, descriptions, structured data, and Open Graph/Twitter image metadata. These URLs support direct visits, search discovery, and link sharing while opening the existing project interface when JavaScript loads.
+
+There is no separate project index screen. `/projects/` and `/jou-works/` redirect to `/#projects`; `/about-us/` redirects to `/#about`; `/bou-works/` redirects to `/#bou-works`. The `www` hostname redirects to the apex domain while preserving paths. Projects without a published story retain their existing map/hash behavior and are excluded from the sitemap.
+
+Google indexing and social preview refreshes depend on the external platforms’ crawlers and caches. See [project SEO](docs/project-seo.md), [domain routing](docs/www-domain.md), and [favicon behavior](docs/favicon-behavior.md).
+
+## Local development
+
+Use **Node.js 24** and npm.
 
 ```sh
 npm ci
 npm run dev
+```
+
+Open `http://localhost:5173`. The development command builds and serves `dist/`; rebuild and restart after source edits. There is no hot reload.
+
+```sh
 npm run build
 npm run preview
 ```
 
-`dev` builds and serves `dist/` on port 5173; rebuild/restart after source edits.
-`preview` serves the existing `dist/` on port 4173. The build verifies the source
-manifest, copies the source/assets, and generates 15 public project pages plus
-`/projects/`. It does not bundle modules or strip version queries. See
-[project SEO and share pages](docs/project-seo.md) for routes and content updates.
-There is no backend and no application secret is required by the retrieved code.
-All Node dependencies are development and validation tools, pinned in the lockfile.
+The preview server uses `http://localhost:4173`. The build verifies asset hashes, copies `site/`, generates the published project pages and homepage fallback, and checks for files that must not be publicly deployed. No application backend or secret is required.
 
-## Validate
+## Repository structure
+
+| Path | Purpose |
+| --- | --- |
+| `site/` | Website HTML, styles, JavaScript modules, photographs, models, and vendored libraries |
+| `scripts/` | Build, project catalog, share preview, asset validation, and reference comparison tools |
+| `tests/` | Source/asset checks and Playwright browser tests |
+| `docs/` | Implementation notes, routing, SEO, validation history, and source provenance |
+| `dist/` | Generated deployment output; rebuilt by `npm run build` |
+
+The frontend uses browser JavaScript modules and a custom 3D renderer with GPU and software fallback paths. Node dependencies are development and validation tools. Fonts and external map providers still require access to their respective services. The photo service worker caches photographs; it does not provide full offline operation.
+
+## Content and asset updates
+
+Edit the existing project stories or Bou content in `site/`. For published project catalog changes, update `scripts/build-project-catalog.mjs` and run:
+
+```sh
+npm run build:project-catalog
+npm run build:project-previews
+npm run manifest:update
+npm run build
+```
+
+Share preview generation requires Chromium. Deployment builds use the committed catalog and preview images and do not launch Chromium.
+
+For other intentional changes to files in `site/`, document the change in [migration status](docs/migration-status.md), run `npm run manifest:update`, then rebuild. The manifest preserves original capture hashes alongside current file hashes.
+
+## Validation
 
 ```sh
 npm test
 npm run test:browser
-node scripts/compare-live.mjs
+npm run test:projects
+npm run test:deployment-config
 ```
 
-The asset suite checks source hashes, all 25 interactive houses in both GPU and
-software-fallback formats, video fragments, and responsive photographs.
-The asset suite currently passes, including responsive photograph completeness.
-Run `npm run test:projects` to build and check the published project pages,
-per-project metadata and legacy-link compatibility.
+Browser tests use Chromium through Playwright. Set `CHROMIUM_PATH` if needed, or install the browser with `npx playwright install chromium`. The browser suite covers map navigation, search, project details, galleries, inquiry links, routing, and responsive behavior. Chromium emulation does not replace testing on physical devices or Safari.
 
-Browser tests exercise search, 3D entry, project detail routes, video playback,
-photograph viewing, about/contact navigation, and phone portrait/landscape behavior.
-Use `CHROMIUM_PATH` to point at a Chromium executable. If `/usr/bin/chromium` exists
-it is used; otherwise install Playwright Chromium with `npx playwright install chromium`.
+Validation results are recorded with their implementation changes in [migration status](docs/migration-status.md); historical pass counts do not imply every test matches the current UI. Some older routing/guide assertions still need alignment with the current section redirects and introduction.
 
-The optional reference audit uses HTTPS requests via `curl` with certificate
-verification enabled, executes the live and local frontend in Chromium, and
-writes paired screenshots, pixel differences, and results under
-`test-results/reference/`. It needs live-site access and `curl`. It does not edit
-the original site. Comparisons have limits when external fonts or map services
-are blocked; these are recorded rather than replaced.
+The optional `npm run test:reference` compares against the original captured site and requires external network access. See [device checks](docs/device-checks.md) for the responsive review process.
 
-## Deploy independently
+## Deployment
 
-Run `npm ci` and `npm run build`, then upload **the contents of `dist/`** to a
-static HTTPS host. Serve `.mjs` as JavaScript, `.json` as JSON, and `.bin` as binary.
-Do not redirect missing assets to `index.html`; a genuine missing asset must
-return 404. Retain every path and case, including `vendor/` and `assets/`.
-HTTPS enables the original photo service worker; it caches photographs only,
-not HTML, code, models, or films. It does not provide full offline operation.
+Run `npm ci` and `npm run build`, then publish **the contents of `dist/`** to a static HTTPS host. For Cloudflare Pages, use `npm run build` as the build command and `dist` as the output directory. Keep `_redirects` and `_headers` in the deployed output.
 
-A `netlify.toml` is included with build command `npm run build` and publish folder
-`dist`. Other static hosts can use the same settings; no Netlify account or
-custom domain is required to build this project. Choose a new deployment target
-separate from the existing Sites and Squarespace projects. No deployment,
-existing website modification, DNS change, or domain connection is part of this
-migration PR.
+Serve `.mjs` as JavaScript, `.json` as JSON, and `.bin` as binary. Preserve asset paths and filename case. Missing assets must return a real 404 rather than the homepage. Confirm both hostnames reach the same deployment and the `www` redirect preserves individual project URLs.
 
-Preserved external integrations include Google Fonts, OpenFreeMap, the existing
-OpenStreetMap map fallback, social/contact links, and a Bou Works link to the
-existing `jouandbou.com` website. These still require their original external
-services and are not owned by this static deployment.
+A Netlify configuration is included. The committed **Vercel configuration is for preview staging only**: production builds are blocked, automatic Git deployments are disabled, and responses carry `noindex, nofollow`. See [Vercel staging](docs/vercel-staging.md) before using that target.
 
-For intentional source edits, run `npm run manifest:update` to update the corresponding entries in
-`docs/source-manifest.json` while retaining the original hashes, and document that the files have diverged from the
-published capture; preserve the original capture provenance.
+Public-file checks and response headers are part of the repository; Cloudflare edge rules are separate account settings. See [Cloudflare security](docs/cloudflare-security.md).
 
-## Vercel staging
+## Source provenance
 
-See [the step-by-step staging guide](docs/vercel-staging.md). Vercel Preview builds
-use `npm run build:vercel` and publish `dist/`. Production builds are blocked,
-automatic Git deployments are disabled, and responses are marked `noindex`.
-This is staging preparation, not a hosted deployment verification.
+The initial frontend and assets were captured from `jouandbou.rafiadiguna3.chatgpt.site`, then intentionally updated in this repository. This is not an export of the original editor project or its unpublished assets. [The source manifest](docs/source-manifest.json) records source URLs and hashes; [migration status](docs/migration-status.md) records subsequent implementation changes.
