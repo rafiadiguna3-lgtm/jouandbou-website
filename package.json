@@ -22,7 +22,9 @@
     "test:devices": "playwright test tests/browser/device-matrix.spec.mjs",
     "build:project-catalog": "node scripts/build-project-catalog.mjs",
     "build:project-previews": "node scripts/build-project-previews.mjs",
-    "test:projects": "npm run build && node --test tests/project-pages.test.mjs && playwright test tests/browser/project-seo.spec.mjs"
+    "test:projects": "npm run build && node --test tests/project-pages.test.mjs && playwright test tests/browser/project-seo.spec.mjs",
+    "ci:source": "npm run build && node --test tests/*.test.mjs",
+    "ci:browser": "playwright test tests/browser/metadata.spec.mjs tests/browser/project-seo.spec.mjs tests/browser/project-tools.spec.mjs tests/browser/project-inquiry.spec.mjs tests/browser/responsive-audit.spec.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.0",

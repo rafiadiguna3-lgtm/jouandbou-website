@@ -14,6 +14,7 @@ Website ini memperkenalkan karya dan pendekatan desain studio melalui peta 3D, f
 | Perilaku fitur dan arah visual | [Panduan Fitur dan Desain](docs/perilaku-desain.md) |
 | Update, rilis, pemulihan, dan serah terima | [Panduan Pengelolaan](docs/operasional-handover.md) |
 | Link proyek, SEO, dan gambar preview | [Panduan SEO](docs/project-seo.md) |
+| Pemeriksaan otomatis di GitHub | [Website Checks](docs/workflows.md) |
 
 Panduan ini menjadi acuan kerja saat ini. `docs/migration-status.md` menyimpan riwayat perubahan, termasuk keputusan lama yang sudah diganti.
 

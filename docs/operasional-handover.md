@@ -105,6 +105,8 @@ Pertahankan URL yang sudah dibagikan. Jika alamat berubah, buat redirect ke kary
 
 ## Pemeriksaan sebelum rilis
 
+GitHub menjalankan **Website Checks** untuk perubahan kode pada branch pengembangan dan pull request terkait. Lihat [panduan workflow](workflows.md) untuk membaca hasil, laporan, dan menjalankan pemeriksaan manual. Status tes belum otomatis menahan deployment Cloudflare.
+
 ```sh
 npm run build
 npm test

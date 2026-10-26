@@ -605,3 +605,11 @@ Public deployment safety: build now rejects environment files, repository intern
 - Revisi README kedua branch dan panduan aktif menjadi bahasa Indonesia yang sopan, ringkas, dan natural untuk presentasi agency.
 - Hapus sapaan/pronomina informal dan judul percakapan; pertahankan tujuan, status, tanggung jawab, langkah kerja, serta batas verifikasi.
 - Perubahan hanya dokumentasi, tanpa perubahan perilaku website atau deployment.
+
+### GitHub Actions: Website Checks
+- Tambahkan workflow pemeriksaan untuk push/PR branch pengembangan dan pemicu manual dengan pilihan revisi. Salinan workflow pada default branch mendukung menu manual tanpa menggabungkan kode website lama.
+- `ci:source` menjalankan build dan semua tes sumber; `ci:browser` menjalankan metadata, SEO, pencarian/fallback, inquiry, dan audit 11 ukuran/input layar.
+- CI memakai Node24, browser Chromium yang dikelola Playwright, dan pemeriksaan agar `.only` tidak melewati tes lain. Screenshot/trace kegagalan dan laporan disimpan tujuh hari.
+- Workflow hanya baca kode, tanpa secret Cloudflare, penerbitan npm, atau deployment tambahan. Tidak menambahkan gerbang deployment; Cloudflare Git integration tetap terpisah.
+- Perubahan Markdown saja diabaikan pada push/PR; manifest JSON tetap memicu pemeriksaan. Pemeriksaan lama dibatalkan saat revisi baru masuk pada branch yang sama.
+- Validasi: `ci:source` berhasil dengan 33 tes; `CI=1 CHROMIUM_PATH=/usr/bin/chromium npm run ci:browser` lulus 32 tes, termasuk 11 skenario responsif. YAML, pemicu, hak baca, perintah npm, dan tautan dokumentasi diperiksa; SHA ketiga action dicocokkan dengan tag upstream. Ini hasil lokal, bukan klaim run GitHub sudah selesai.
