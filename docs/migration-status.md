@@ -588,3 +588,10 @@ Public deployment safety: build now rejects environment files, repository intern
 - Pengguna melaporkan error pada endpoint aktif. Dari lingkungan ini endpoint domain/Worker tetap diblokir proxy, sehingga error produksinya belum teridentifikasi. Kedua aset PNG di project Pages berhasil diambil langsung dengan HTTP 200.
 - Siapkan revisi Worker dengan PNG tertanam langsung: hilangkan semua fetch upstream untuk favicon, sehingga tidak bergantung pada respons Pages, redirect, atau subrequest.
 - Tiga tes lokal lulus, termasuk kecocokan byte gambar hitam/putih, tanpa fetch upstream, HEAD, verified-bot, cache, dan ICO cadangan. Pengguna tetap perlu mengganti kode pada editor Worker; commit ini tidak otomatis memperbarui Worker Cloudflare.
+
+### Panduan tujuan dan handover
+- Susun tiga pegangan aktif berbahasa Indonesia: PRD, perilaku/desain, serta operasional/handover. README menjadi pintu masuk ringkas.
+- Catat tujuan showcase/kontak, sasaran yang dapat diuji tanpa mengarang angka bisnis, batas fitur, dan perbedaan implementasi dengan konsep yang ditunda.
+- Sertakan daftar akses/penanggung jawab yang belum diisi, pemisahan deploy Pages/Worker, sumber file, prosedur update, verifikasi rilis, rollback, dan latihan penerima handover.
+- Status produksi yang belum diverifikasi ditandai jelas. Dokumen device/SEO historis diberi penunjuk ke panduan aktif agar keputusan lama tidak dianggap aturan terkini.
+- Perubahan hanya dokumentasi; tidak mengubah website, deployment, atau pengaturan akun.

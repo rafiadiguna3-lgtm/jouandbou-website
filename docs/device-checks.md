@@ -1,3 +1,5 @@
+> Catatan historis: beberapa aturan intro dan search di bawah sudah diganti. Untuk perilaku aktif gunakan [panduan perilaku](perilaku-desain.md) dan checklist di [panduan operasional](operasional-handover.md). Ukuran perangkat dan batas pengujian tetap berguna sebagai referensi.
+
 # Cross-device checks
 
 The approved current presentation is the reference: small phone work links and guidance, the same cropped initial map, no phone search, quick intro fade, and copy restored only by explicitly zooming out to within 5% of the furthest zoom-out scale. Desktop keeps its search and navigation. All devices retain distant house silhouettes and selected full-detail models.

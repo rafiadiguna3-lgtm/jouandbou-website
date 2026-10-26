@@ -1,121 +1,63 @@
 # Jou and Bou
 
-Website portofolio arsitektur dan desain interior Jou and Bou, studio yang berbasis di Jakarta.
+Website portofolio arsitektur dan desain interior Jou and Bou, studio di Jakarta.
 
-**Buka website: [jouandbou.com](https://jouandbou.com/)**
+**Website: [jouandbou.com](https://jouandbou.com/)**
 
-Pengunjung bisa memilih rumah di peta 3D, melihat model dan foto proyek, lalu menghubungi studio lewat WhatsApp.
+Tujuannya: membantu orang mengenal studio, melihat karya, lalu menghubungi tim. Pengunjung bisa memilih rumah di peta 3D, membaca cerita proyek, dan melihat foto sebelum membuka WhatsApp.
 
-## Yang ada di website
+## Mulai dari sini
 
-- Peta dengan 25 model proyek yang bisa dipilih.
-- Pencarian proyek Jou dan Bou, termasuk saran saat nama salah diketik.
-- Foto, keterangan proyek, dan tombol WhatsApp di detail proyek.
-- Halaman tentang studio, Bou Works, dan kontak.
-- Tampilan untuk komputer dan HP.
-- Link khusus untuk 15 proyek, lengkap dengan judul, deskripsi, dan gambar pratinjau saat dibagikan.
-- Tampilan cadangan berisi link proyek dan kontak jika aplikasi gagal dimuat.
-
-## Link penting
-
-| Tujuan | Link |
+| Kalau ingin tahu… | Baca |
 | --- | --- |
-| Peta proyek / Jou Works | [Lihat proyek](https://jouandbou.com/#projects) |
-| Tentang studio | [About](https://jouandbou.com/#about) |
-| Desain interior | [Bou Works](https://jouandbou.com/#bou-works) |
-| Contoh detail proyek | [Rumah Anas](https://jouandbou.com/projects/rumah-anas/) |
+| Tujuan website, ukuran keberhasilan, dan prioritas | [Kebutuhan website / PRD](docs/prd.md) |
+| Cara fitur dan desain seharusnya bekerja | [Panduan perilaku dan desain](docs/perilaku-desain.md) |
+| Cara update, rilis, memeriksa masalah, dan serah terima | [Panduan operasional dan handover](docs/operasional-handover.md) |
 
-Link proyek bisa dibuka langsung atau dibagikan. Isinya tetap tersedia jika JavaScript, kode yang menjalankan tampilan interaktif, tidak aktif.
+Tiga panduan ini adalah pegangan kerja saat ini. `docs/migration-status.md` menyimpan riwayat perubahan, termasuk keputusan lama yang sudah diganti. Jangan mengambil aturan produk dari satu catatan lama tanpa memeriksa panduan terbaru dan kodenya.
 
-Tidak ada halaman daftar proyek terpisah. Link `/projects/` dan `/jou-works/` mengarah ke peta. Link lama `/about-us/` mengarah ke About, sedangkan `/bou-works/` mengarah ke Bou Works.
+## Versi kode
 
-Google dan WhatsApp memperbarui hasil pencarian atau pratinjau sesuai jadwal mereka sendiri. Perubahan di website tidak selalu langsung terlihat di sana.
+- **`migration/jou-and-bou`**: berisi pengembangan website saat ini dan panduan ini.
+- **`main`**: masih versi kode lama. README yang baru tidak berarti kode website di kedua branch sudah sama.
 
-## Pilih versi kode
+Branch adalah versi kerja kode di GitHub. Sebelum rilis, cocokkan branch dan nomor commit dengan deployment Cloudflare yang akan digunakan.
 
-Versi kode di GitHub dipisahkan lewat **branch**, seperti folder kerja yang punya riwayat sendiri.
+## Link website
 
-- `migration/jou-and-bou`: berisi pengembangan website terbaru dan petunjuk di README ini.
-- `main`: masih berisi versi kode yang lebih lama. Mengubah README tidak memindahkan kode website antarbranch.
+[Peta proyek](https://jouandbou.com/#projects) · [About](https://jouandbou.com/#about) · [Bou Works](https://jouandbou.com/#bou-works) · [Contoh proyek](https://jouandbou.com/projects/rumah-anas/)
 
 ## Menjalankan di komputer sendiri
 
-Bagian ini untuk orang yang akan mengerjakan kodenya. Pasang **Node.js versi 24**, lalu buka terminal di folder proyek dan jalankan:
+Pasang **Node.js 24**, buka terminal di folder proyek, lalu:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Buka **http://localhost:5173** di browser. Alamat ini hanya untuk melihat website di komputer sendiri.
+Buka `http://localhost:5173`. Setelah mengedit kode, hentikan dengan `Ctrl+C` lalu jalankan lagi `npm run dev`. Belum ada pembaruan otomatis saat kode diedit.
 
-Setelah mengubah kode, hentikan server dengan `Ctrl+C`, lalu jalankan lagi `npm run dev`. Website belum memakai pembaruan otomatis saat kode diedit.
-
-Untuk menyiapkan dan melihat hasil yang akan diunggah:
+Untuk melihat hasil yang siap dipasang:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-Buka **http://localhost:4173**. Hasil build, yaitu file website yang siap dipasang, ada di folder `dist/`.
+Buka `http://localhost:4173`. Hasil build ada di `dist/`. Edit kode di `site/`, bukan di `dist/`, karena folder hasil itu dibuat ulang saat build.
 
-## Isi folder
+## Isi repositori
 
-| Folder | Isinya |
+| Folder | Isi |
 | --- | --- |
 | `site/` | Kode website, foto, dan model 3D |
-| `scripts/` | Alat untuk menyiapkan website dan memeriksa file |
-| `tests/` | Pemeriksaan fungsi website |
-| `docs/` | Catatan perubahan dan panduan teknis |
-| `dist/` | Hasil website yang siap diunggah; dibuat ulang saat build |
+| `cloudflare/` | Salinan kode Worker favicon; dipasang terpisah dari website |
+| `scripts/` | Alat build dan pengolahan konten |
+| `tests/` | Pemeriksaan otomatis |
+| `docs/` | Panduan kerja dan riwayat perubahan |
+| `dist/` | Hasil build untuk diunggah |
 
-Edit file sumber di `site/`, bukan di `dist/`. Isi `dist/` akan ditimpa saat build berikutnya.
+Website tidak membutuhkan database atau server aplikasi. Cloudflare Pages melayani file website; Worker menangani pilihan favicon. Detail update dan pemeriksaan ada di [panduan operasional](docs/operasional-handover.md).
 
-## Setelah mengubah isi website
-
-Catat perubahan di [catatan pengembangan](docs/migration-status.md), lalu jalankan:
-
-```sh
-npm run manifest:update
-npm run build
-```
-
-Perintah pertama memperbarui daftar pemeriksaan file. Perintah kedua memeriksa file dan membuat hasil website terbaru.
-
-Jika mengubah daftar proyek atau gambar pratinjau link, ikuti [panduan proyek dan pratinjau](docs/project-seo.md).
-
-## Memeriksa hasil perubahan
-
-```sh
-npm test
-npm run test:browser
-npm run test:projects
-npm run test:deployment-config
-```
-
-Pemeriksaan mencakup file, pencarian, navigasi, detail proyek, foto, dan tampilan beberapa ukuran layar. Tes browser memerlukan Chromium. Jika belum tersedia, jalankan `npx playwright install chromium`.
-
-Sebagian tes lama masih perlu disesuaikan dengan tampilan dan arah link terbaru. Hasil pemeriksaan sebelumnya ada di [catatan pengembangan](docs/migration-status.md). Tes di komputer juga belum menggantikan pengecekan langsung di HP dan Safari.
-
-## Memasang website
-
-Untuk Cloudflare Pages:
-
-| Pengaturan | Isi |
-| --- | --- |
-| Perintah build | `npm run build` |
-| Folder hasil | `dist` |
-| Versi Node.js | `24` |
-
-Pilih branch yang memang ingin dipasang. Pastikan file `_redirects` dan `_headers` ikut terunggah agar pengalihan link dan pengaturan respons tetap bekerja. Jangan ubah nama atau letak file foto dan model.
-
-File yang tidak ditemukan harus menampilkan status 404, bukan dialihkan ke halaman depan. Domain `www.jouandbou.com` diarahkan ke `jouandbou.com` dengan tetap mempertahankan alamat proyeknya.
-
-## Catatan teknis
-
-Website ini tidak membutuhkan server aplikasi atau database. Font dan layanan peta luar tetap membutuhkan koneksi internet. Penyimpanan foto di browser membantu pemuatan ulang, tetapi website tidak sepenuhnya bisa dipakai tanpa internet.
-
-Kode awal diambil dari website Jou and Bou yang dipublikasikan melalui ChatGPT Sites, lalu dikembangkan di repositori ini. Riwayat sumber file ada di [daftar sumber](docs/source-manifest.json).
-
-Panduan lanjutan: [domain](docs/www-domain.md), [ikon tab browser](docs/favicon-behavior.md), dan [pengaturan keamanan Cloudflare](docs/cloudflare-security.md).
+Kode awal berasal dari website studio yang dipublikasikan melalui ChatGPT Sites, lalu dikembangkan di sini. Asal file dicatat dalam [manifest sumber](docs/source-manifest.json).

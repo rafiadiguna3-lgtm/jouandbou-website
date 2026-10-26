@@ -1,3 +1,5 @@
+> Panduan teknis dengan catatan implementasi historis. Tidak ada lagi halaman index `/projects/`; URL itu diarahkan ke peta. Untuk keputusan produk dan proses rilis terbaru, mulai dari [PRD](prd.md) dan [panduan operasional](operasional-handover.md).
+
 # Public project pages and share previews
 
 The 8 documented Jou projects and 7 Bou concepts in `site/project-catalog.mjs` have public `/projects/.../` URLs. Models with no finished project story and under-construction projects keep their existing hash routes and are excluded from the sitemap/public directory.
