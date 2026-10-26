@@ -583,3 +583,8 @@ Public deployment safety: build now rejects environment files, repository intern
 - Root ICO menjadi cadangan putih untuk Fail open; gambar hitam untuk Worker tetap pada aset v5 dengan skala identik. Gambar share, apple-touch, metadata proyek, dan nama studio tetap.
 - Akses langsung produksi masih diblokir proxy. Pernyataan pemilik memastikan penambahan route, bukan bukti kode Worker/headers/aset sudah terverifikasi lewat jaringan.
 - Validasi akhir: build berhasil; 10 tes aset/brand/map, 4 tes Worker/fallback, dan 10 tes browser metadata/SEO/routing lulus. Tidak menganggap hasil mock/local sebagai verifikasi deployment Worker.
+
+### Worker favicon mandiri setelah laporan error
+- Pengguna melaporkan error pada endpoint aktif. Dari lingkungan ini endpoint domain/Worker tetap diblokir proxy, sehingga error produksinya belum teridentifikasi. Kedua aset PNG di project Pages berhasil diambil langsung dengan HTTP 200.
+- Siapkan revisi Worker dengan PNG tertanam langsung: hilangkan semua fetch upstream untuk favicon, sehingga tidak bergantung pada respons Pages, redirect, atau subrequest.
+- Tiga tes lokal lulus, termasuk kecocokan byte gambar hitam/putih, tanpa fetch upstream, HEAD, verified-bot, cache, dan ICO cadangan. Pengguna tetap perlu mengganti kode pada editor Worker; commit ini tidak otomatis memperbarui Worker Cloudflare.

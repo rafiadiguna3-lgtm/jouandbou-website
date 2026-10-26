@@ -21,7 +21,7 @@ jouandbou.com/favicon.ico
 www.jouandbou.com/favicon.ico
 ```
 
-Worker mengambil gambar dari `https://jouandbou-test.pages.dev` agar permintaan aset tidak berulang ke route favicon. Nama project Pages ini harus tetap sesuai deployment yang melayani aset tersebut. Jangan aktifkan Cloudflare Access pada favicon atau asetnya.
+Worker menyimpan kedua PNG langsung di dalam kode. Tidak ada fetch ke Pages, binding, atau secret yang diperlukan untuk melayani favicon. Jangan aktifkan Cloudflare Access pada route favicon.
 
 Respons favicon memakai `no-store` untuk browser dan CDN. Jangan tambahkan aturan Cache Everything yang menimpa pengaturan ini. Identifikasi User-Agent hanya memilih gambar publik, bukan pemeriksaan keamanan. Sinyal verified bot dipakai jika tersedia, dengan pencocokan nama crawler sebagai cadangan.
 
@@ -44,4 +44,4 @@ node --test tests/favicon-worker.test.mjs
 npx playwright test tests/browser/metadata.spec.mjs tests/browser/project-seo.spec.mjs
 ```
 
-Tes lokal memeriksa pilihan respons Worker dengan upstream tiruan, metadata HTML, dan navigasi. Server preview lokal tidak menjalankan Cloudflare Worker; `/favicon.ico` di sana adalah ICO cadangan putih. Pengujian lokal bukan bukti route/code Worker production sudah benar.
+Tes lokal memeriksa byte PNG kedua respons Worker tanpa mengizinkan fetch upstream, metadata HTML, dan navigasi. Server preview lokal tidak menjalankan Cloudflare Worker; `/favicon.ico` di sana adalah ICO cadangan putih. Pengujian lokal bukan bukti route/code Worker production sudah benar.
