@@ -77,6 +77,12 @@ Judul proyek tetap memakai nama karya. Deskripsi menjelaskan isi/layanan, dan ga
 
 Worker menyajikan putih untuk browser dan hitam berlatar putih untuk crawler yang dikenali, dengan ukuran mark yang sama. Tampilan Google tetap bergantung pada pemilihan dan cache Google. Lihat [panduan favicon](favicon-behavior.md).
 
+## Footer
+
+Footer tipis tampil di bagian bawah homepage, About, Contact, Bou, Explore 3D, dan detail proyek. Copyright berada di kiri, dengan **“Elevating everyday life through design.”** di kanan. Kalimat ini diringkas dari narasi About tentang meningkatkan kualitas hidup melalui desain.
+
+Di HP, teks menyesuaikan ruang tanpa menutup WhatsApp atau kontrol. Copyright lama pada footer sosial dihapus agar tidak berulang; tautan sosial tetap tersedia.
+
 ## Gangguan dan pemeriksaan visual
 
 Jika aplikasi gagal dimuat, link proyek dan kontak tetap tersedia melalui tampilan cadangan. Teks/foto proyek publik juga dapat dibaca tanpa JavaScript.
