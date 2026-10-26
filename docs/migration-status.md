@@ -571,3 +571,7 @@ Public deployment safety: build now rejects environment files, repository intern
 - Service worker hanya menyimpan foto proyek, tidak menyimpan HTML, kode, atau favicon. Aset logo arsip tidak menjadi kandidat hanya karena filenya ada.
 - Target production branch dan status deploy Cloudflare tidak tersedia dari Git. Pembacaan deployment via GitHub API diblokir jaringan; jangan menyimpulkan deployment aktif dari nama branch/default GitHub.
 - Daftarkan aset favicon v4/v5 ke manifest agar pemeriksaan build juga memverifikasi file baru tersebut. Validasi: 10 tes aset/brand/map dan 4 tes browser metadata lulus; ukuran dan posisi mark hitam/putih sama persis pada ukuran 48px.
+
+### Prioritas ikon tab: langsung putih
+- Pemilik menegaskan ikon tab hanya putih. Hapus mekanisme menunggu interaksi; modul kecil langsung memasang PNG putih tanpa bergantung pada aplikasi 3D atau tema.
+- HTML awal tetap mencantumkan favicon hitam v5 dengan skala sama. Namun crawler yang merender JavaScript dapat melihat putih juga. Keterbatasan ini dijelaskan kepada pemilik; jangan menjanjikan pemisahan Google/browser yang mutlak.

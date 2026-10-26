@@ -35,34 +35,27 @@ test('refresh keeps the homepage title while application JavaScript is delayed',
  await page.locator('header .brand').click();await expect(page).toHaveTitle('jou and bou studio');
 });
 
-test('tab icon stays black until real interaction, then becomes white in both themes',async({browser})=>{
+test('tab uses only the white PNG immediately in both themes',async({browser})=>{
  for(const colorScheme of ['dark','light']){
-  const context=await browser.newContext({colorScheme}),page=await context.newPage();await page.goto('/');
-  const white=page.locator('#site-favicon');
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
-  await page.evaluate(()=>dispatchEvent(new PointerEvent('pointerdown')));
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
-  await page.waitForTimeout(500);
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
-  await page.mouse.click(710,1200);
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
+  const context=await browser.newContext({colorScheme}),page=await context.newPage();
+  await page.goto('/');
+  const icon=page.locator('#site-favicon');
+  await expect(icon).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
+  await expect(icon).toHaveAttribute('sizes','48x48');
   await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
-  expect(await white.evaluate(el=>el.media)).toBe('');
-  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content','https://jouandbou.com/assets/brand/jou-and-bou-share-solid-v3.png');
+  await page.mouse.click(710,1200);
+  await expect(icon).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
   await context.close();
  }
 });
 
-test('interaction updates tab icon even while the 3D application is blocked',async({page})=>{
+test('white tab loads without interaction while the 3D application is blocked',async({page})=>{
  let release;const gate=new Promise(resolve=>release=resolve);
  await page.route('**/app.mjs?*',async route=>{await gate;await route.continue();});
  try{
   await page.goto('/',{waitUntil:'commit'});
-  await expect(page.locator('#site-favicon')).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
-  await expect(page.locator('#site-favicon')).toHaveAttribute('data-tab-preference','interaction');
-  await page.keyboard.press('Tab');
   await expect(page.locator('#site-favicon')).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
   await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
-  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content','https://jouandbou.com/assets/brand/jou-and-bou-share-solid-v3.png');
+  await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content','jou and bou studio');
  }finally{release();}
 });

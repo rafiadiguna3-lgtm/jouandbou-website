@@ -13314,7 +13314,7 @@
     {
       "path": "index.html",
       "bytes": 110610,
-      "sha256": "578054898301bdc40aec954f1e154edfaabaaf110481d38ced3044c387fbf1f3",
+      "sha256": "e90e09a3443afea750445cac4a273a9c27ae5fc7630685545d3f82c3730e7688",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14910,8 +14910,8 @@
     },
     {
       "path": "browser-tab-icon.mjs",
-      "bytes": 695,
-      "sha256": "a4774c7428656328b8464a0e68767302d8f2e441a284714db837c269d935ef11",
+      "bytes": 311,
+      "sha256": "09e408b08de9337483a3799cffc27ad627474bf8346c858b2f0cd6dd9d00d599",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/browser-tab-icon.mjs"
       ],
