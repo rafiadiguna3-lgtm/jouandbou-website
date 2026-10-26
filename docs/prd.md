@@ -1,88 +1,86 @@
-# Website ini mau dibawa ke mana?
+# Tujuan dan Prioritas Website
 
-PRD Jou and Bou · update 26 Oktober 2026 · branch `migration/jou-and-bou`.
+PRD Jou and Bou · 26 Oktober 2026 · branch `migration/jou-and-bou`.
 
-PRD itu pegangan soal tujuan website. Jadi kalau nanti bukan gue yang pegang, orang berikutnya tetap ngerti mau dibawa ke mana.
+Dokumen ini merangkum tujuan, ruang lingkup, dan prioritas website agar tim berikutnya memiliki arah kerja yang sama.
 
-## Tujuannya simpel
+## Tujuan
 
-**Orang kenal Jou and Bou, bisa menikmati karyanya, terus gampang ngajak ngobrol.**
+**Memperkenalkan Jou and Bou, menampilkan kualitas karya, dan memudahkan percakapan dengan calon klien.**
 
-Website ini buat showcase. Peta 3D bikin orang bisa eksplor, foto sama cerita bantu jelasin desainnya, dan WhatsApp jadi jalan buat mulai percakapan. Orang ngeklik WhatsApp belum tentu udah kirim pesan atau jadi calon klien.
+Peta 3D mengajak pengunjung menjelajahi karya. Foto dan cerita menjelaskan pendekatan desain. WhatsApp menjadi jalur kontak; klik tombolnya belum berarti pesan terkirim atau inquiry diterima.
 
-## Siapa yang perlu dimudahin?
+## Pengguna
 
-- Yang datang dari Instagram atau link teman dan pengen langsung lihat karya.
-- Yang nemu studio atau proyek lewat Google.
-- Orang yang nggak biasa pakai website 3D, termasuk yang lebih tua.
-- Tim yang nanti update portofolio tanpa bikin link atau fitur lama rusak.
+- Calon klien dari Instagram atau link yang dibagikan.
+- Pengunjung yang menemukan studio dan proyek melalui Google.
+- Pengunjung awam, termasuk pengguna yang belum terbiasa dengan website 3D.
+- Tim studio yang memperbarui portofolio dan menjaga fungsi website.
 
-## Dibilang berhasil kalau gimana?
+## Indikator keberhasilan
 
-| Yang gue pengen | Cara ngeceknya |
+| Sasaran | Cara memeriksa |
 | --- | --- |
-| Karya gampang dicari | Cari nama proyek di HP dan desktop, terus buka hasil yang sesuai |
-| Link nggak bikin nyasar | Buka link langsung, reload, dan coba link lama; harus masuk ke karya yang benar |
-| Gampang ngajak ngobrol | Tekan `lets talk~`; WhatsApp buka pesan dengan nama dan link proyek yang sesuai |
-| Orang awam ngerti petanya | Minta orang baru coba sendiri; lihat apakah bisa pilih rumah dan nemu detail tanpa dituntun |
-| Nama dan logo konsisten | Cek metadata, favicon, preview link, lalu pantau hasil Google setelah dibaca ulang |
-| Enak dipakai di HP | Coba HP asli dan koneksi seluler; jangan ada menu, foto, atau tombol yang ketutup |
+| Proyek mudah ditemukan | Pencarian di HP dan desktop membuka karya yang sesuai |
+| Link dapat diandalkan | Link langsung, reload, dan URL lama menuju proyek yang benar |
+| Kontak mudah diakses | `lets talk~` membuka WhatsApp dengan nama dan link proyek yang sesuai |
+| Peta mudah dipahami | Pengguna baru dapat memilih rumah dan menemukan detail tanpa arahan |
+| Identitas konsisten | Judul, nama situs, favicon, dan preview sesuai panduan; hasil Google dipantau setelah crawl ulang |
+| Nyaman di HP | Menu, foto, peta, dan kontak dapat digunakan tanpa elemen yang tertutup |
 
-Ini patokan yang mau dicapai, bukan klaim kalau semuanya udah diukur. Target angka traffic, inquiry, dan loading belum ditentuin. Ukur kondisi awal dulu sebelum ngomong naik berapa persen.
+Target angka traffic, inquiry, dan kecepatan loading belum ditetapkan. Ukur kondisi awal sebelum menentukan target peningkatan. Tabel ini adalah kriteria pemeriksaan, bukan laporan hasil pengukuran.
 
-## Yang udah ada
+## Fitur saat ini
 
-| Bagian | Kondisinya |
+| Bagian | Status di kode |
 | --- | --- |
-| Peta 3D | 25 model yang bisa dipilih |
-| Search | Proyek Jou + tujuh Bou, termasuk saran salah ketik |
-| Link proyek publik | 15 URL, lengkap dengan teks, metadata, dan gambar preview |
-| Foto dan cerita | Ada buat proyek yang kontennya udah siap; jumlah model bukan jumlah cerita lengkap |
-| WhatsApp | Ada di detail proyek; pesan bawa nama dan link karya |
-| About, Bou Works, Contact | Pakai section/panel yang udah ada |
-| Intro peta | Muncul lagi pas refresh, hilang setelah interaksi |
-| Kalau aplikasi gagal loading | Ada tampilan cadangan berisi link proyek dan kontak |
-| Link lama | Yang udah dikenal diarahkan ke tujuan yang sesuai lewat aturan redirect |
-| Nama situs dan judul homepage | `jou and bou studio` |
-| Favicon | Satu `/favicon.ico`; Worker kasih hitam ke crawler yang dikenali dan putih ke browser |
+| Peta 3D | 25 model yang dapat dipilih |
+| Pencarian | Jou dan tujuh proyek Bou, dengan saran salah ketik |
+| Halaman proyek publik | 15 URL dengan teks, metadata, dan gambar preview |
+| Foto dan cerita | Tersedia pada proyek dengan materi yang sudah siap |
+| WhatsApp | Tombol di detail proyek; pesan menyertakan nama dan link karya |
+| About, Bou Works, Contact | Menggunakan section/panel yang sudah ada |
+| Intro peta | Muncul pada refresh dan hilang setelah interaksi |
+| Tampilan cadangan | Link proyek dan kontak tersedia jika aplikasi gagal dimuat |
+| URL lama | Alamat yang dikenal diarahkan ke tujuan yang sesuai |
+| Identitas situs | Judul homepage dan nama situs: `jou and bou studio` |
+| Favicon | Satu `/favicon.ico`; Worker memilih hitam untuk crawler yang dikenali dan putih untuk browser |
 
-Udah ada di kode bukan berarti udah dicek di website aktif. Bukti dan yang belum dicek dicatat di [panduan kerja](operasional-handover.md).
+Jumlah model tidak sama dengan jumlah cerita proyek lengkap. Status implementasi juga perlu dibedakan dari verifikasi website aktif; catatannya ada di [Panduan Pengelolaan](operasional-handover.md).
 
-## Yang masih ditahan
+## Rencana yang ditunda
 
-| Ide | Sampai mana? |
+| Rencana | Syarat melanjutkan |
 | --- | --- |
-| Interior berlapis | Masih konsep. Butuh GLB interior dan interaksi yang udah disepakati |
-| Dashboard, database, CRM | Hold dulu; fungsi showcase belum perlu itu |
-| Analitik tambahan | Pakai Cloudflare dan Search Console dulu |
-| Motion sosmed | Materi terpisah; video disetujui bukan berarti website ikut diubah |
-| Ganti tulisan `full package` | Belum ada pilihan final, jadi jangan diganti dulu |
+| Pengalaman interior berlapis | Model GLB interior dan rancangan interaksi disetujui; berbeda dari Bou Works yang aktif |
+| Dashboard, database, dan CRM | Ada kebutuhan kerja yang jelas di luar fungsi showcase |
+| Analitik tambahan | Evaluasi data Cloudflare dan Search Console terlebih dahulu |
+| Motion sosial media | Dikelola sebagai materi terpisah, bukan perubahan otomatis pada website |
+| Pengganti label `full package` | Menunggu pilihan copy final |
 
-Bou Works yang sekarang jangan dianggap sama dengan konsep interior berlapis.
+## Prinsip pengembangan
 
-## Yang perlu dijaga
+- Pertahankan peta dan Bou Works sebagai pintu masuk karya, tanpa halaman index proyek tambahan.
+- Gunakan model, foto, dan logo asli studio.
+- Jaga visual minimalis; fitur baru harus memudahkan pengguna.
+- Pertahankan URL proyek yang dapat dibuka langsung, dibagikan, dan dibaca sebelum aplikasi 3D siap.
+- Tombol share, badge status, dan dashboard dari eksperimen lama tidak termasuk fitur yang disetujui.
+- Ranking Google, waktu indexing, dan pembaruan preview WhatsApp tidak dapat dijanjikan.
 
-- Masuk ke karya lewat peta dan Bou Works yang udah ada. Nggak perlu bikin index proyek baru.
-- Jangan munculin lagi tombol share, badge status, atau dashboard cuma karena pernah ada di eksperimen.
-- Pakai model, foto, dan logo asli studio. Jangan ganti modelnya jadi dummy atau gambar generatif.
-- Tetap minimalis. Fitur baru harus bikin orang lebih gampang, bukan sekadar ngisi ruang kosong.
-- Link proyek tetap bisa dibuka langsung dan dibagikan. Teks/foto harus kebaca walau aplikasi 3D belum jalan.
-- Jangan janji ranking Google atau kapan preview WhatsApp berubah. Itu bukan sepenuhnya kita yang ngatur.
+## Prioritas berikutnya
 
-## Lanjut dari mana?
+1. Lengkapi pemegang akses, deployment aktif, dan bukti favicon versi Google.
+2. Uji alur utama pada HP nyata dan pengguna baru; perbaiki hambatan yang ditemukan.
+3. Lengkapi foto dan cerita proyek yang siap dipublikasikan.
+4. Evaluasi Search Console dan Cloudflare setiap bulan.
+5. Lanjutkan konsep interior setelah aset dan ruang lingkup disepakati.
 
-1. Catat akses, penanggung jawab, deployment aktif, dan hasil cek favicon versi Google.
-2. Coba alur utama di HP asli, terus minta orang awam nyobain tanpa dituntun. Benerin hambatan yang kelihatan dulu.
-3. Lengkapi foto dan cerita proyek yang siap dipublikasi.
-4. Sebulan sekali lihat Search Console dan Cloudflare, baru tentuin perbaikan berikutnya.
-5. Interior berlapis lanjut kalau aset sama arahnya udah disepakati.
+Urutan ini merupakan rekomendasi kerja, belum menjadi jadwal rilis.
 
-Ini urutan yang disaranin, belum jadi janji tanggal rilis.
+## Persetujuan dan penyelesaian
 
-## Kalau mau nambah atau ngubah sesuatu
+Setiap usulan mencakup masalah, pengguna yang terdampak, hasil yang diharapkan, dan cara memeriksanya. Pemilik studio menyetujui arah visual, copy utama, fitur baru, dan publikasi karya. Pelaksana mencatat hasil tes dan rilis.
 
-Jelasin singkat: masalahnya apa, siapa yang kena, mau diubah jadi apa, dan cara tahu hasilnya bener. Arah visual, copy utama, fitur baru, dan publikasi karya dikonfirmasi ke pemilik studio. Yang ngerjain catat hasil tes dan deploy-nya.
+Pekerjaan selesai setelah dibuat, diperiksa, dan dicatat. Untuk pekerjaan yang dirilis, deployment aktif juga harus sesuai. Push ke GitHub belum menjadi bukti perubahan sudah tayang.
 
-Kerjaan selesai kalau udah dibuat, dicek, dicatat, dan—kalau memang mau dirilis—udah terpasang di deployment yang benar. Push GitHub aja belum cukup.
-
-Lanjut ke [fitur dan desain](perilaku-desain.md) atau [kerja dan handover](operasional-handover.md).
+Lanjut: [Fitur dan Desain](perilaku-desain.md) · [Pengelolaan dan Serah Terima](operasional-handover.md).

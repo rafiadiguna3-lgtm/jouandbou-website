@@ -1,44 +1,42 @@
-# Biar proyek gampang ditemukan dan dibagikan
+# SEO dan Link Proyek
 
-Update 26 Oktober 2026. Ini panduan SEO proyek yang dipakai sekarang. Catatan tes lama tetap ada di [riwayat pekerjaan](migration-status.md).
+26 Oktober 2026 · panduan untuk versi website saat ini.
 
-## Gampangnya, SEO di sini ngurus apa?
+Tujuannya agar pengunjung dari Google atau link yang dibagikan tiba di karya yang tepat, dengan judul, deskripsi, dan gambar preview yang sesuai.
 
-Supaya orang yang nemu karya lewat Google atau nerima link bisa masuk ke proyek yang benar. Judul, penjelasan singkat, dan gambar preview-nya juga harus sesuai karya itu.
+## Cakupan
 
-Sekarang ada **8 proyek Jou dan 7 konsep Bou** yang punya link publik. Daftarnya ada di `site/project-catalog.mjs`.
+Ada **8 proyek Jou dan 7 konsep Bou** dengan URL publik, tercatat di `site/project-catalog.mjs`. Model dengan cerita yang belum siap tetap dapat diakses sesuai perilaku peta, tetapi tidak otomatis masuk katalog publik atau sitemap—daftar alamat untuk mesin pencari.
 
-Model yang ceritanya belum siap tetap bisa punya akses dari peta, tapi belum otomatis masuk daftar link publik dan sitemap. Sitemap itu daftar alamat yang kita kasih ke mesin pencari.
-
-## Linknya jangan dobel-dobel
+## Struktur URL
 
 - Homepage/peta: `https://jouandbou.com/#projects`.
-- Proyek Jou: `/projects/nama-proyek/`.
-- Proyek Bou: `/projects/bou/nama-proyek/`.
-- `/projects/` dan `/jou-works/` balik ke peta, bukan halaman index tambahan.
-- Link lama yang dikenal diarahkan ke karya yang sesuai. Aturannya ada di `site/_redirects`.
+- Jou: `/projects/nama-proyek/`.
+- Bou: `/projects/bou/nama-proyek/`.
+- `/projects/` dan `/jou-works/` diarahkan ke peta, bukan halaman index tambahan.
+- URL lama yang dikenal diarahkan ke karya yang sesuai melalui `site/_redirects`.
 
-Kalau nama atau judul karya berubah, jangan langsung ganti URL yang udah dibagikan. Pertahanin linknya, atau pasang pengalihan ke alamat baru yang benar.
+Pertahankan URL yang sudah dibagikan saat judul karya berubah. Jika alamat harus diganti, tambahkan pengalihan ke tujuan yang benar.
 
-## Yang harus ada di tiap proyek
+## Isi setiap halaman proyek
 
-| Bagian | Gunanya |
+| Bagian | Fungsi |
 | --- | --- |
-| Judul dan deskripsi | Ngasih tahu proyek ini apa |
-| Alamat utama / canonical | Nandain URL yang dipakai sebagai rujukan |
-| Open Graph dan Twitter image | Gambar dan teks preview pas link dibagikan |
-| Data terstruktur | Bantu mesin pencari ngerti nama karya, studio, dan susunan halaman |
-| Teks dan foto di HTML | Isi tetap kebaca walau JavaScript belum jalan |
+| Judul dan deskripsi | Menjelaskan karya |
+| Canonical | Menandai alamat utama halaman |
+| Open Graph dan Twitter image | Menentukan teks dan gambar preview link |
+| Data terstruktur | Membantu mesin pencari memahami karya, studio, dan susunan halaman |
+| Teks dan foto di HTML | Menjaga konten terbaca tanpa JavaScript |
 
-Build bikin HTML untuk tiap proyek publik. Pas aplikasi udah siap, pengunjung masuk ke tampilan detail yang sama kayak dari peta; konten cadangannya disembunyiin supaya nggak numpuk.
+Build menghasilkan HTML setiap proyek publik. Setelah aplikasi siap, pengunjung memakai detail yang sama seperti dari peta; konten cadangan disembunyikan agar tidak muncul ganda.
 
-Judul homepage dan nama situs sekarang **`jou and bou studio`**. Judul proyek tetap pakai nama karya, misalnya `Rumah Anas | Jou and Bou`. Favicon diurus terpisah lewat [Worker](favicon-behavior.md), bukan ditumpuk pengaturan SEO lagi.
+Nama situs dan judul homepage: **`jou and bou studio`**. Judul proyek tetap spesifik, misalnya `Rumah Anas | Jou and Bou`. Favicon diatur melalui [Worker](favicon-behavior.md), tanpa menambahkan pengganti metadata di sana.
 
-## Kalau mau update proyek
+## Memperbarui proyek
 
-1. Edit sumber cerita/fotonya. Cerita Jou ada di panel HTML, materi Bou di `site/bou-projects.json`.
-2. Kalau daftar/nama/deskripsi proyek publik berubah, sesuaikan `scripts/build-project-catalog.mjs`.
-3. Jalanin:
+1. Edit sumber cerita dan foto. Cerita Jou berada di panel HTML, materi Bou di `site/bou-projects.json`.
+2. Jika daftar, nama, atau deskripsi publik berubah, perbarui `scripts/build-project-catalog.mjs`.
+3. Jalankan:
 
 ```sh
 npm run build:project-catalog
@@ -47,32 +45,30 @@ npm run manifest:update
 npm run build
 ```
 
-Gambar preview dibuat dari aset proyek yang udah ada, ukuran 1200 × 630 JPEG. Perintah preview butuh Chromium. Deploy biasa pakai hasil yang udah disimpan di repo, jadi nggak perlu bikin gambarnya lagi.
+Preview menggunakan aset proyek yang tersedia, dalam JPEG 1200 × 630. Pembuatannya memerlukan Chromium. Deployment biasa memakai hasil yang sudah disimpan di repo.
 
-Kalau nambah aset baru, daftarin juga di manifest sumber. Cara lengkapnya ada di [panduan kerja](operasional-handover.md).
+Daftarkan aset baru dalam manifest sumber. Detailnya ada di [Panduan Pengelolaan](operasional-handover.md).
 
-## Sebelum bilang beres, coba ini
+## Pemeriksaan sebelum rilis
 
-- Buka link proyek langsung, terus reload. Harus masuk ke karya yang sama.
-- Coba Back/Forward, foto, dan tombol tutup. Jangan sampai asetnya dicari dari folder URL yang salah.
-- Cek judul, deskripsi, canonical, dan gambar preview di respons HTML, bukan cuma tampilan setelah aplikasi kebuka.
-- Coba tanpa JavaScript: teks dan foto proyek tetap ada.
-- Pastikan gambar preview bisa diakses dan tipenya `image/jpeg`.
-- Di website aktif, proyek harus balas 200, alamat yang nggak ada tetap 404, dan `www` mengarah ke domain utama tanpa kehilangan path proyek.
-- Cek `sitemap.xml`: isinya homepage dan proyek publik, bukan halaman index yang udah dialihkan.
-
-Buat tes lokal:
+- Buka URL proyek langsung dan reload; pastikan karya tetap sesuai.
+- Periksa Back/Forward, foto, dan tombol tutup, termasuk lokasi aset setelah perpindahan URL.
+- Periksa judul, deskripsi, canonical, dan gambar preview dalam respons HTML.
+- Tanpa JavaScript, teks dan foto proyek tetap tersedia.
+- Gambar preview dapat diakses dengan tipe `image/jpeg`.
+- Di domain aktif, proyek memberi status 200, alamat yang tidak ada tetap 404, dan `www` beralih ke domain utama tanpa kehilangan path proyek.
+- `sitemap.xml` berisi homepage dan proyek publik, tanpa halaman index yang sudah dialihkan.
 
 ```sh
 npm run test:projects
 ```
 
-Kalau ngubah routing, tes alur browser lain yang kena juga. Tes Chromium di komputer bukan bukti udah aman di Safari/HP asli.
+Perubahan routing juga perlu tes alur browser yang terdampak. Chromium lokal belum mewakili Safari atau HP nyata. Hasil tes terdahulu ada di [riwayat pengembangan](migration-status.md).
 
-## Biar Google baca ulang
+## Pembaruan di Google dan WhatsApp
 
-Abis deployment terbaru dicek, buka Search Console. Kirim sitemap `https://jouandbou.com/sitemap.xml` kalau belum, terus minta pengindeksan halaman yang berubah. Buat nama situs dan favicon, mulai dari homepage.
+Setelah deployment diperiksa, kirim `https://jouandbou.com/sitemap.xml` melalui Search Console jika belum terdaftar. Minta pengindeksan halaman yang berubah; untuk nama situs dan favicon, mulai dari homepage.
 
-**Minta indexing bukan tombol buat langsung ganti hasil Google.** Google nentuin kapan baca ulang dan apa yang ditampilkan. WhatsApp juga bisa nyimpen preview lama; pesan yang udah dikirim belum tentu ikut berubah.
+Permintaan indexing tidak menjamin perubahan langsung. Google menentukan waktu crawl dan hasil yang ditampilkan. WhatsApp dapat menyimpan preview lama, termasuk pada pesan yang sudah dikirim.
 
-Jangan cuma nunggu cache kalau halaman aktifnya sendiri masih salah. Cek dulu deployment, metadata, redirect, dan file gambarnya.
+Sebelum menunggu cache, pastikan deployment, metadata, redirect, dan gambar pada website aktif sudah benar.

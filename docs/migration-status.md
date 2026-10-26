@@ -600,3 +600,8 @@ Public deployment safety: build now rejects environment files, repository intern
 - Sesuai permintaan pemilik, README, PRD, panduan fitur, operasional/handover, dan SEO ditulis dengan bahasa Indonesia sehari-hari yang lebih dekat ke gaya pemilik. Istilah teknis diberi penjelasan saat diperlukan.
 - Panduan SEO ditulis ulang berdasarkan perilaku aktif, menggantikan teks Inggris yang masih mencampur halaman index lama dan catatan implementasi.
 - Detail perintah, batas verifikasi, perbedaan branch, pemisahan Worker/Pages, dan checklist penerima tetap dipertahankan. Tidak ada perubahan kode atau visual website.
+
+### Gaya bahasa dokumentasi untuk presentasi
+- Revisi README kedua branch dan panduan aktif menjadi bahasa Indonesia yang sopan, ringkas, dan natural untuk presentasi agency.
+- Hapus sapaan/pronomina informal dan judul percakapan; pertahankan tujuan, status, tanggung jawab, langkah kerja, serta batas verifikasi.
+- Perubahan hanya dokumentasi, tanpa perubahan perilaku website atau deployment.

@@ -1,64 +1,64 @@
 # Jou and Bou
 
-Ini website buat nunjukin karya arsitektur dan interior Jou and Bou.
+Portofolio arsitektur dan desain interior Jou and Bou, studio yang berbasis di Jakarta.
 
-**Langsung buka: [jouandbou.com](https://jouandbou.com/)**
+**[jouandbou.com](https://jouandbou.com/)**
 
-Gue pengen orang bisa lihat karya, ngerti pendekatan desainnya, terus gampang ngajak ngobrol. Makanya ada peta 3D yang bisa dimainin, foto dan cerita proyek, sama akses ke WhatsApp.
+Website ini memperkenalkan karya dan pendekatan desain studio melalui peta 3D, foto, dan cerita proyek. Pengunjung dapat menjelajahi karya lalu menghubungi tim melalui WhatsApp.
 
-## Mau lanjut ngerjain? Mulai di sini
+## Panduan utama
 
-| Mau ngerti apa? | Buka ini |
+| Kebutuhan | Dokumen |
 | --- | --- |
-| Tujuan website dan mana yang perlu dikerjain dulu | [PRD](docs/prd.md) |
-| Cara fitur jalan dan tampilan yang perlu dijaga | [Panduan fitur dan desain](docs/perilaku-desain.md) |
-| Cara update, deploy, benerin error, sampai handover | [Panduan kerja dan handover](docs/operasional-handover.md) |
-| SEO, link proyek, dan gambar pas link dibagikan | [Panduan SEO](docs/project-seo.md) |
+| Tujuan, prioritas, dan indikator keberhasilan | [PRD](docs/prd.md) |
+| Perilaku fitur dan arah visual | [Panduan Fitur dan Desain](docs/perilaku-desain.md) |
+| Update, rilis, pemulihan, dan serah terima | [Panduan Pengelolaan](docs/operasional-handover.md) |
+| Link proyek, SEO, dan gambar preview | [Panduan SEO](docs/project-seo.md) |
 
-Baca panduan ini dulu. `docs/migration-status.md` itu riwayat pekerjaan, jadi ada keputusan lama yang sekarang udah diganti. Jangan sampai aturan lama kepakai lagi.
+Panduan ini menjadi acuan kerja saat ini. `docs/migration-status.md` menyimpan riwayat perubahan, termasuk keputusan lama yang sudah diganti.
 
-## Kodenya pakai yang mana?
+## Versi kode
 
-- **`migration/jou-and-bou`**: pengembangan website yang sekarang.
-- **`main`**: masih kode versi lama. README-nya udah dirapihin, tapi bukan berarti kode websitenya ikut sama.
+- **`migration/jou-and-bou`**: pengembangan website saat ini.
+- **`main`**: kode website versi lama; pembaruan README tidak menyamakan isi kedua branch.
 
-Branch itu versi kerja kode di GitHub. Sebelum deploy, cek Cloudflare ambil branch dan commit yang mana. Commit itu penanda satu versi perubahan.
+Branch adalah versi kerja kode. Sebelum rilis, cocokkan branch dan commit—penanda versi perubahan—dengan deployment Cloudflare.
 
-## Link penting
+## Link website
 
-[Peta proyek](https://jouandbou.com/#projects) · [About](https://jouandbou.com/#about) · [Bou Works](https://jouandbou.com/#bou-works) · [Rumah Anas](https://jouandbou.com/projects/rumah-anas/)
+[Peta Proyek](https://jouandbou.com/#projects) · [About](https://jouandbou.com/#about) · [Bou Works](https://jouandbou.com/#bou-works) · [Rumah Anas](https://jouandbou.com/projects/rumah-anas/)
 
-## Mau buka di komputer sendiri?
+## Menjalankan website
 
-Pasang **Node.js 24**, buka terminal di folder proyek, terus jalanin:
+Gunakan **Node.js 24**, lalu jalankan dari folder proyek:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Buka `http://localhost:5173`. Kalau abis edit kode, hentikan dengan `Ctrl+C`, terus jalanin `npm run dev` lagi. Belum ada auto-update pas ngedit.
+Buka `http://localhost:5173`. Setelah mengedit, hentikan server dengan `Ctrl+C` dan jalankan kembali `npm run dev`. Belum ada pembaruan otomatis saat kode diedit.
 
-Buat lihat hasil yang siap dipasang:
+Untuk memeriksa hasil build:
 
 ```sh
 npm run build
 npm run preview
 ```
 
-Buka `http://localhost:4173`. Hasilnya ada di `dist/`. **Edit sumbernya di `site/`, jangan di `dist/`**, karena isi `dist/` bakal dibuat ulang.
+Buka `http://localhost:4173`. Edit sumber di `site/`, bukan di `dist/`; folder hasil build akan dibuat ulang.
 
-## Biar nggak nyasar di folder
+## Struktur folder
 
-| Folder | Buat apa? |
+| Folder | Isi |
 | --- | --- |
 | `site/` | Kode website, foto, dan model 3D |
-| `cloudflare/` | Kode Worker favicon; deploy-nya terpisah |
-| `scripts/` | Alat buat build dan ngolah konten |
-| `tests/` | Tes fungsi dan file |
-| `docs/` | Panduan sama catatan pekerjaan |
-| `dist/` | Hasil build yang siap diunggah |
+| `cloudflare/` | Kode Worker favicon, dengan deployment terpisah |
+| `scripts/` | Alat build dan pengolahan konten |
+| `tests/` | Pemeriksaan fungsi dan aset |
+| `docs/` | Panduan dan catatan pengembangan |
+| `dist/` | Hasil build untuk deployment |
 
-Website ini belum butuh database atau server aplikasi. File website dilayani Cloudflare Pages, sementara pilihan favicon diurus Worker. Cara update dan ngeceknya ada di [panduan kerja](docs/operasional-handover.md).
+Website tidak memakai database atau server aplikasi. Cloudflare Pages melayani website, sementara Worker menangani pilihan favicon. Prosedurnya tersedia di [Panduan Pengelolaan](docs/operasional-handover.md).
 
-Kode awalnya dari website studio yang dipublikasikan lewat ChatGPT Sites, terus dikembangin di sini. Asal file dicatat di [manifest sumber](docs/source-manifest.json).
+Kode awal berasal dari website studio yang dipublikasikan melalui ChatGPT Sites, kemudian dikembangkan di repositori ini. Asal file dicatat dalam [manifest sumber](docs/source-manifest.json).

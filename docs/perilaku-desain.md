@@ -1,55 +1,57 @@
-# Fitur dan tampilannya harus gimana?
+# Panduan Fitur dan Desain
 
-Update 26 Oktober 2026. Baca bareng [PRD](prd.md). Ini pegangan biar pas dibenerin, karakter sama cara pakai websitenya nggak ikut berubah.
+26 Oktober 2026 · pendamping [PRD](prd.md).
 
-## Feel-nya tetap Jou and Bou
+Panduan ini menjaga karakter visual dan alur penggunaan saat website diperbarui.
 
-Gue pengen tampilannya tenang dan minimalis. Ada ruang kosong, teks gampang dibaca, kontrol simpel, dan peta tetap jadi pusat eksplor Jou.
+## Arah visual
 
-Pakai foto, logo, dan model asli studio. Warna rumah yang dipilih ikutin asetnya. Jangan nambah badge, kotak, atau animasi cuma biar rame. Kalau benerin satu komponen, jangan sekalian ganti font dan ukuran seluruh website.
+Tampilan tetap tenang dan minimalis: ruang kosong yang cukup, teks terbaca, kontrol sederhana, dan peta sebagai pusat eksplorasi Jou.
 
-Kalau perangkat minta animasi dikurangin, ikutin. Fitur penting tetap harus bisa dipakai.
+Gunakan foto, logo, dan model asli studio. Warna model terpilih mengikuti asetnya. Penambahan komponen atau animasi harus memiliki fungsi yang jelas. Perbaikan satu bagian tidak perlu mengubah font dan ukuran seluruh website.
 
-## Pertama buka homepage
+Hormati pengaturan pengurangan animasi perangkat. Fitur penting tetap dapat digunakan tanpa menunggu animasi selesai.
 
-| Lagi di tahap apa? | Yang kelihatan |
+## Homepage dan intro
+
+| Kondisi | Perilaku |
 | --- | --- |
-| Baru buka / refresh | Peta muncul dulu, terus intro `jou world` dan petunjuk singkat |
-| Intro aktif | Peta blur tipis, rumah berganti warna mulai dari Anas; nggak ada label/garis tambahan |
-| Orang mulai drag, tap, scroll, pakai keyboard, atau pindah halaman | Intro hilang, blur sama warna sementaranya dibersihin |
-| Menu HP dibuka | Teks homepage disembunyiin biar nggak numpuk di belakang menu |
+| Halaman baru / refresh | Peta muncul, diikuti intro `jou world` dan petunjuk singkat |
+| Intro aktif | Peta blur ringan; warna rumah berganti mulai dari Rumah Anas, tanpa label atau garis tambahan |
+| Drag, tap, scroll, keyboard, atau navigasi | Intro ditutup; blur dan warna sementara dibersihkan |
+| Menu HP dibuka | Teks homepage disembunyikan agar tidak bertumpuk dengan menu |
 
-Intro ada di HP dan desktop. Refresh bikin muncul lagi, tapi kalau udah ditutup dalam kunjungan yang sama, jangan diulang terus. Teks panduan lama juga jangan sempat kedip sebelum tampilan siap.
+Intro berlaku di HP dan desktop, muncul kembali pada refresh, dan tidak diulang setelah ditutup dalam kunjungan yang sama. Hindari kilatan teks panduan lama saat halaman mulai dimuat.
 
-## Dari peta ke proyek
+## Peta dan Explore 3D
 
-Alurnya: **pilih rumah → kamera mendekat dan rumah berwarna → bisa masuk Explore 3D atau buka detail yang tersedia**. Di detail ada cerita, foto, dan kontak.
+**Pilih rumah → kamera mendekat dan rumah berwarna → masuk Explore 3D atau buka detail yang tersedia.** Detail menampilkan cerita, foto, dan kontak.
 
-Dari menu HP, tombol **Projects milih Rumah Anas di peta**, bukan langsung masuk Explore 3D. Label proyek harus kebaca dan nggak nyangkut di bawah header, termasuk pas HP dimiringin.
+Pada menu HP, **Projects memilih Rumah Anas di peta**, bukan langsung masuk Explore 3D. Label proyek harus terbaca tanpa tertutup header, termasuk pada layar mendatar.
 
-Kameranya nyambung, nggak lompat pas model detail selesai loading. Orbit sama zoom di Explore 3D tetap pakai kontrol yang ada. Revisi video sosmed jangan otomatis diterapin ke website.
+Pergerakan kamera harus menyambung tanpa lompatan ketika model detail selesai dimuat. Orbit dan zoom memakai kontrol yang sudah ada. Revisi video sosial media tidak otomatis mengubah animasi website.
 
-## Search
+## Pencarian
 
-Ada di desktop dan menu HP. Di menu HP letaknya setelah Contact. Bisa cari Jou/Bou dari nama atau nomor yang dikenal, termasuk saran kalau salah ketik.
+Pencarian tersedia di desktop dan menu HP, setelah Contact. Hasil mencakup nama/nomor Jou dan Bou yang dikenal, termasuk saran salah ketik.
 
-Hasilnya harus menuju karya yang sesuai. Jangan bikin proyek atau cerita palsu buat ngisi hasil kosong. Pas ditutup, overlay-nya ikut hilang; di HP input jangan ketutup keyboard. Nggak perlu bikin halaman daftar proyek baru buat gantiin search.
+Hasil harus membuka karya yang sesuai. Jangan menambahkan proyek atau cerita tanpa materi asli. Overlay ditutup bersama pencarian, dan input tetap dapat digunakan saat keyboard HP terbuka. Tidak perlu halaman daftar proyek terpisah.
 
-## Bou Works dan tombol silang
+## Bou Works
 
-Kalau masuk dari homepage, tutupnya balik ke homepage. Kalau masuk dari About, balik ke About. Jangan bikin tombol silang selalu balik ke satu tempat tanpa lihat asalnya.
+Tombol tutup mempertahankan asal navigasi: masuk dari homepage kembali ke homepage; masuk dari About kembali ke About.
 
-Bou yang aktif sekarang tetap pakai konten yang ada. Bangunan interior berlapis masih konsep, belum jadi fiturnya.
+Bou Works aktif menggunakan konten yang sudah tersedia. Konsep interior berlapis belum menjadi fitur aktif.
 
 ## Detail dan foto
 
-Buka dari peta, URL langsung, atau link lama yang dikenal harus ketemu karya yang sama. Reload, Back, Forward, dan tombol tutup jangan bikin URL ngaco atau foto hilang.
+Pemilihan lewat peta, URL langsung, dan link lama yang dikenal harus menuju karya yang sama. Reload, Back, Forward, dan tombol tutup tidak boleh menghilangkan foto atau mengubah URL ke proyek lain.
 
-Galeri tetap enak dibuka/ditutup di HP tegak maupun mendatar. Konten teks/foto statis jadi cadangan kalau aplikasi belum siap, lalu hilang setelah detail normal kebuka. Jangan dua tampilan muncul bareng.
+Galeri dapat dibuka dan ditutup pada HP tegak maupun mendatar. Teks/foto statis menjadi cadangan sebelum aplikasi siap, lalu disembunyikan setelah detail normal terbuka.
 
-## `lets talk~`
+## Kontak proyek
 
-Tombol ini ada **di detail proyek aja**, nggak ditempel ke seluruh peta. Pesannya:
+Tombol **`lets talk~`** berada di detail proyek saja. Template pesannya:
 
 ```
 Halo Jou and Bou, saya tertarik dengan proyek [nama]. Boleh ngobrol lebih lanjut?
@@ -57,11 +59,11 @@ Halo Jou and Bou, saya tertarik dengan proyek [nama]. Boleh ngobrol lebih lanjut
 [link proyek]
 ```
 
-Nomor sama template ada di `site/project-inquiry.mjs`. Kalau ganti kontak, konfirmasi dulu ke pemilik studio, terus tes link WhatsApp-nya juga.
+Nomor dan template berada di `site/project-inquiry.mjs`. Perubahan kontak perlu dikonfirmasi pemilik studio dan diuji melalui link WhatsApp.
 
-## Nama dan link yang dipakai
+## Identitas dan URL
 
-| Bagian | Pakai ini |
+| Bagian | Acuan |
 | --- | --- |
 | Jou / peta | `/#projects` |
 | About | `/#about` |
@@ -69,20 +71,16 @@ Nomor sama template ada di `site/project-inquiry.mjs`. Kalau ganti kontak, konfi
 | Proyek publik | `/projects/.../` atau `/projects/bou/.../` |
 | Domain utama | `https://jouandbou.com` |
 | Nama situs dan judul homepage | `jou and bou studio` |
-| Favicon | Satu `/favicon.ico`, dipilih Worker; jangan ditimpa JavaScript |
+| Favicon | Satu `/favicon.ico`, dipilih Worker tanpa penggantian melalui JavaScript |
 
-Judul proyek tetap pakai nama karya. Deskripsi jelasin isi/layanan, bukan cuma ngulang nama studio. Gambar preview harus sesuai proyek yang dibagikan.
+Judul proyek tetap memakai nama karya. Deskripsi menjelaskan isi/layanan, dan gambar preview berasal dari proyek yang dibagikan.
 
-Browser dapat ikon putih, crawler yang dikenali dapat hitam berlatar putih. Bentuk dan ukuran mark sama. Google tetap punya keputusan dan cache sendiri. Detailnya di [panduan favicon](favicon-behavior.md).
+Worker menyajikan putih untuk browser dan hitam berlatar putih untuk crawler yang dikenali, dengan ukuran mark yang sama. Tampilan Google tetap bergantung pada pemilihan dan cache Google. Lihat [panduan favicon](favicon-behavior.md).
 
-## Kalau gagal loading
+## Gangguan dan pemeriksaan visual
 
-Link proyek dan kontak tetap harus bisa ditemukan lewat tampilan cadangan. Proyek publik juga punya teks dan foto yang kebaca tanpa JavaScript.
+Jika aplikasi gagal dimuat, link proyek dan kontak tetap tersedia melalui tampilan cadangan. Teks/foto proyek publik juga dapat dibaca tanpa JavaScript.
 
-Halaman kosong, salah karya, foto hilang, atau tombol kontak nggak bisa dipakai itu masalah fungsi. Jangan dianggap cuma beda tampilan.
+Halaman kosong, salah karya, foto hilang, dan kontak yang tidak bekerja termasuk masalah fungsi. Periksa alur yang sama pada HP kecil, HP mendatar, dan desktop. Simpan perbandingan sebelum/sesudah untuk perubahan kamera, intro, menu, atau posisi tombol.
 
-## Sebelum ubah desain
-
-Coba alur yang sama di HP kecil, HP mendatar, dan desktop. Kalau ngubah kamera, intro, menu, atau tombol, simpan screenshot/video sebelum dan sesudah. Satu screenshot bagus belum berarti semua device udah beres.
-
-Cara tes dan deploy lanjut di [panduan kerja](operasional-handover.md).
+Prosedur tes dan rilis ada di [Panduan Pengelolaan](operasional-handover.md).
