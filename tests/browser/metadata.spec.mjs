@@ -17,7 +17,7 @@ test('initial HTML contains the final brand and plain-text search metadata witho
  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content','1200');
  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content','1200');
  await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
- const favicon=await page.locator('link[rel="icon"]').first().getAttribute('href');expect(favicon).toBe('/assets/brand/jou-and-bou-solid-96-v4.png');
+ const favicon=await page.locator('link[rel="icon"]').first().getAttribute('href');expect(favicon).toBe('/assets/brand/jou-and-bou-solid-96-v5.png');
  const icon=await page.request.get(favicon);expect(icon.ok()).toBe(true);const iconBytes=await icon.body();expect(iconBytes.readUInt32BE(16)).toBe(96);
  await context.close();
 });
@@ -39,11 +39,11 @@ test('tab icon stays black until real interaction, then becomes white in both th
  for(const colorScheme of ['dark','light']){
   const context=await browser.newContext({colorScheme}),page=await context.newPage();await page.goto('/');
   const white=page.locator('#site-favicon');
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v4.png');
+  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
   await page.evaluate(()=>dispatchEvent(new PointerEvent('pointerdown')));
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v4.png');
+  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
   await page.waitForTimeout(500);
-  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v4.png');
+  await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
   await page.mouse.click(710,1200);
   await expect(white).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
   await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
@@ -58,7 +58,7 @@ test('interaction updates tab icon even while the 3D application is blocked',asy
  await page.route('**/app.mjs?*',async route=>{await gate;await route.continue();});
  try{
   await page.goto('/',{waitUntil:'commit'});
-  await expect(page.locator('#site-favicon')).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v4.png');
+  await expect(page.locator('#site-favicon')).toHaveAttribute('href','/assets/brand/jou-and-bou-solid-96-v5.png');
   await expect(page.locator('#site-favicon')).toHaveAttribute('data-tab-preference','interaction');
   await page.keyboard.press('Tab');
   await expect(page.locator('#site-favicon')).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');

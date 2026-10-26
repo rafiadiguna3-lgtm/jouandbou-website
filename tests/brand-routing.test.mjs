@@ -4,7 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {PNG} from 'pngjs';
 
 test('share and favicon images contain an opaque black logo on white',async()=>{
- for(const [path,size] of [['jou-and-bou-share-solid-v3.png',1200],['jou-and-bou-solid-96-v4.png',96]]){
+ for(const [path,size] of [['jou-and-bou-share-solid-v3.png',1200],['jou-and-bou-solid-96-v5.png',96]]){
   const image=PNG.sync.read(await readFile(`site/assets/brand/${path}`));assert.equal(image.width,size);assert.equal(image.height,size);
   let black=0,white=0;
   for(let i=0;i<image.data.length;i+=4){assert.equal(image.data[i+3],255);if(image.data[i]<40&&image.data[i+1]<40&&image.data[i+2]<40)black++;if(image.data[i]>245&&image.data[i+1]>245&&image.data[i+2]>245)white++;}
@@ -28,8 +28,15 @@ test('the restored white tab PNG retains transparent surroundings',async()=>{
  assert.ok(transparent>image.width*image.height*.3);assert.ok(white>image.width*image.height*.1);
 });
 
-test('new favicon has balanced margins and a smaller centered mark',async()=>{
- const p=PNG.sync.read(await readFile('site/assets/brand/jou-and-bou-solid-96-v4.png'));let l=96,r=0,t=96,b=0;
+test('black favicon matches the white tab mark scale and center',async()=>{
+ const p=PNG.sync.read(await readFile('site/assets/brand/jou-and-bou-solid-96-v5.png'));let l=96,r=0,t=96,b=0;
  for(let y=0;y<96;y++)for(let x=0;x<96;x++){const i=(y*96+x)*4;if(p.data[i]<128){l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y);}}
- assert.ok(b-t+1<=72);assert.ok(b-t+1>=66);assert.ok(Math.abs(l-(95-r))<=1);assert.ok(Math.abs(t-(95-b))<=1);
+ assert.ok(b-t+1<=86);assert.ok(b-t+1>=82);assert.ok(Math.abs(l-(95-r))<=1);assert.ok(Math.abs(t-(95-b))<=1);
+});
+
+test('48px black and white favicon shapes share the exact same bounds',async()=>{
+ const bounds=(p,white)=>{let l=48,r=0,t=48,b=0;for(let y=0;y<48;y++)for(let x=0;x<48;x++){const i=(y*48+x)*4;if(white?p.data[i+3]>128:p.data[i]<128){l=Math.min(l,x);r=Math.max(r,x);t=Math.min(t,y);b=Math.max(b,y);}}return {l,r,t,b};};
+ const black=PNG.sync.read(await readFile('site/assets/brand/jou-and-bou-solid-48-v5.png'));
+ const white=PNG.sync.read(await readFile('site/assets/brand/jou-and-bou-white-48-v143.png'));
+ assert.deepEqual(bounds(black,false),bounds(white,true));
 });

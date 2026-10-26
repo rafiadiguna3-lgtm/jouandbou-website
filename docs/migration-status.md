@@ -562,3 +562,12 @@ Public deployment safety: build now rejects environment files, repository intern
 - Tambah redirect 301 khusus URL proyek lama Jou/Bou yang cocok dengan katalog proyek, termasuk `/jou-works/rumasoka`, ke URL detail yang sudah ada. Versi www diarahkan langsung untuk menghindari redirect berantai pada URL tersebut. Tidak mengalihkan proyek tidak dikenal ke homepage.
 - Perubahan di Google masih memerlukan deploy dan crawl ulang; nama situs, pilihan favicon, dan cache hasil pencarian ditentukan Google. Akses produksi dari lingkungan ini masih diblokir proxy.
 - Validasi akhir: build berhasil; 9 tes aset/map/brand, 4 tes halaman/konfigurasi, dan 10 tes browser metadata/routing/SEO lulus. Mencakup nama homepage sesudah reload/Back/Forward, metadata 15 proyek tanpa JavaScript, margin ikon, ikon awal tanpa interaksi, penolakan event sintetis, serta pergantian ikon lewat mouse/keyboard saat aplikasi tertunda.
+
+### Penyamaan ukuran favicon dengan ikon tab
+- Atas permintaan pemilik, favicon hitam v5 memakai siluet PNG tab putih yang sama pada bidang persegi yang sama, bukan versi padding v4. Warna diubah saat build dan latar putih ditambahkan tanpa mengganti bentuk atau posisi.
+- Versi putih tab tetap memakai aset yang sudah ada. HTML awal tetap satu ikon hitam; pergantian setelah interaksi tetap berlaku.
+- Audit GitHub: hanya `main` dan `migration/jou-and-bou` yang terdaftar sebagai branch remote aktif. `main` masih snapshot lama dengan empat kandidat favicon; branch migration berisi perbaikan website. Ref branch perbaikan lain yang terlihat lokal adalah cache lama, bukan bukti branch aktif di GitHub.
+- Metadata homepage muncul di HTML awal, sumber metadata route, dan pengelola judul About. Nilai homepage saat ini sama; dua penulis judul JavaScript merupakan risiko pemeliharaan, bukan bukti keduanya menghasilkan respons Google berbeda.
+- Service worker hanya menyimpan foto proyek, tidak menyimpan HTML, kode, atau favicon. Aset logo arsip tidak menjadi kandidat hanya karena filenya ada.
+- Target production branch dan status deploy Cloudflare tidak tersedia dari Git. Pembacaan deployment via GitHub API diblokir jaringan; jangan menyimpulkan deployment aktif dari nama branch/default GitHub.
+- Daftarkan aset favicon v4/v5 ke manifest agar pemeriksaan build juga memverifikasi file baru tersebut. Validasi: 10 tes aset/brand/map dan 4 tes browser metadata lulus; ukuran dan posisi mark hitam/putih sama persis pada ukuran 48px.

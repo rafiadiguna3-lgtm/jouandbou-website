@@ -13189,8 +13189,8 @@
     },
     {
       "path": "favicon.ico",
-      "bytes": 4739,
-      "sha256": "7391eaa1776713a7498cab2e0d3aaa6d22451ac23bde60f61d70b4a6b73a772b",
+      "bytes": 5725,
+      "sha256": "325097084fb8dba9996194926952d1a77fd998f78bef165309e88c93c875b493",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.ico"
       ],
@@ -13202,8 +13202,8 @@
     },
     {
       "path": "favicon.png",
-      "bytes": 109511,
-      "sha256": "014445a7a168b0a8aaf8fa25de6e9e7ba969be1414d8d66f878a6f26532bb14f",
+      "bytes": 41806,
+      "sha256": "dbb520bd2e9c98c0c8e14b741b7a3f0cb5283f643d1c683d5b6de0184631829b",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.png"
       ],
@@ -13215,8 +13215,8 @@
     },
     {
       "path": "favicon.svg",
-      "bytes": 4135,
-      "sha256": "b6ed30478c325fa5b12638079b5d8e239937aac3802e2d144233a524961f3798",
+      "bytes": 5855,
+      "sha256": "42da5842574b9138f43004122a56139a70abaf86951a312509e4ef950a732c00",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.svg"
       ],
@@ -13314,7 +13314,7 @@
     {
       "path": "index.html",
       "bytes": 110610,
-      "sha256": "78552db730d5c457e65dd5f9eb48585c94956e4e8e347538cc4e1a4e330434c0",
+      "sha256": "578054898301bdc40aec954f1e154edfaabaaf110481d38ced3044c387fbf1f3",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -15110,6 +15110,168 @@
       "published_bytes": 157,
       "published_sha256": "f16fc6557d932a838f71040b51b6ea945aa3624205d32e680c3cd01ac4c2557b",
       "modified_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-16-v4.png",
+      "bytes": 454,
+      "sha256": "389ab87236f42dc7a1686d6e99ba693a9aee9ac44eb4742b9f3ab926cdfa9603",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-16-v5.png",
+      "bytes": 469,
+      "sha256": "422ff9ba792ba59a02ccecced33a1df6fa86879e3678821a1e2db577ac7c4387",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-180-v4.png",
+      "bytes": 17964,
+      "sha256": "bab82659832027ea796c7a6dcb2b783f9cbd7d2a2a9c8a84eebaa1c70e2db116",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-180-v5.png",
+      "bytes": 9926,
+      "sha256": "cee8f98b2ebced5ee55f9f8d7d7b5d391be6658af841685f75c3fd2fe681b3b8",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-192-v4.png",
+      "bytes": 20002,
+      "sha256": "903414703c9c6a8fd1df8ac25712e97392e50644784c24b77b012217c9847fed",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-192-v5.png",
+      "bytes": 10530,
+      "sha256": "fbc5eb0d6ac22273ccc51647c80e6bf38065aa0550b946bb38a6c4df01b969bd",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-32-v4.png",
+      "bytes": 953,
+      "sha256": "ff02fe976a37f179c33df17b2c9697c42c631ab9d69794b645ea3d0757ab9b21",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-32-v5.png",
+      "bytes": 987,
+      "sha256": "3c7d5dd0a3443e60bb1d9cdb2e75b7bf5777e07e2bd74c657a6ddf9af2be4c17",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-48-v4.png",
+      "bytes": 1324,
+      "sha256": "ea39156ea374818a1b8a64b061a860c548b7611fbb5dedd7e4e9dc73f913554b",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-48-v5.png",
+      "bytes": 1636,
+      "sha256": "a3c68c480c607b727de927ab856037db04ef62d4bcaafe484cb1f2d1b2c4a555",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-512-v4.png",
+      "bytes": 109511,
+      "sha256": "014445a7a168b0a8aaf8fa25de6e9e7ba969be1414d8d66f878a6f26532bb14f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-512-v5.png",
+      "bytes": 41806,
+      "sha256": "dbb520bd2e9c98c0c8e14b741b7a3f0cb5283f643d1c683d5b6de0184631829b",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-64-v4.png",
+      "bytes": 1938,
+      "sha256": "8d4e703ba65f361503d306c1b3a37834044b95bd1bd1b0808ffa477688b6f92f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-64-v5.png",
+      "bytes": 2563,
+      "sha256": "6f216c8e16380f5fe12cb021347cb7200377a370cd98b3be32fffa3c8ccdd15a",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-96-v4.png",
+      "bytes": 3004,
+      "sha256": "05c883e0e2224f475e46f48d59ea38e927962c9e99db98d9ce2f00c2c778586c",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-96-v5.png",
+      "bytes": 4294,
+      "sha256": "22687386540299fd5d7b1163fa5494a27b4ce8c076772498089ef2f37e2aee0f",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-v4.svg",
+      "bytes": 4135,
+      "sha256": "b6ed30478c325fa5b12638079b5d8e239937aac3802e2d144233a524961f3798",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-v5.svg",
+      "bytes": 5855,
+      "sha256": "42da5842574b9138f43004122a56139a70abaf86951a312509e4ef950a732c00",
+      "source_urls": [
+        "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
     }
   ],
   "previous_sources": [
