@@ -1,5 +1,5 @@
-:root{--jb-footer-height:30px}
-footer#site-footer{position:fixed;inset:auto var(--jb-footer-right,28px) 0 var(--jb-footer-left,34px);z-index:30;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:calc(var(--jb-footer-height) + env(safe-area-inset-bottom));margin:0;padding:7px 0 calc(7px + env(safe-area-inset-bottom));border-top:1px solid #797b7138;background:#fafafa;color:#72756c;font:400 11px/1.4 var(--jb-copy,Arial,sans-serif);letter-spacing:0;pointer-events:none}
+:root{--jb-footer-height:44px}
+footer#site-footer{position:fixed;inset:auto var(--jb-footer-right,28px) 0 var(--jb-footer-left,34px);z-index:30;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:calc(var(--jb-footer-height) + env(safe-area-inset-bottom));margin:0;padding:7px 0 calc(21px + env(safe-area-inset-bottom));border-top:1px solid #797b7138;background:#fafafa;color:#72756c;font:400 11px/1.4 var(--jb-copy,Arial,sans-serif);letter-spacing:0;pointer-events:none}
 footer#site-footer>*{margin:0;font:inherit;pointer-events:none}
 footer#site-footer small{white-space:nowrap;flex-shrink:0}
 footer#site-footer .site-footer-line{text-align:right;max-width:65%;text-wrap:balance}

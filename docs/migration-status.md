@@ -621,3 +621,4 @@ Public deployment safety: build now rejects environment files, repository intern
 - Halaman proyek statis, mode tanpa JavaScript, dan tampilan cadangan tetap menampilkan footer. Tidak mengganti metadata SEO atau teks cerita proyek.
 - Refinement padding: sejajarkan sisi kiri footer dengan mark logo header dan sisi kanan dengan garis hamburger, mengikuti perubahan ukuran layar. Header tetap memakai tinggi/posisi yang sudah ada.
 - Validasi: build dan 33 tes sumber lulus; 25 tes browser metadata/inquiry/SEO/responsif lulus. Setelah refinement padding, 26 kombinasi halaman/device, tiga Explore 3D, dan fallback gagal-aplikasi diperiksa; delapan regresi metadata/inquiry dan 10 tes aset/brand lulus kembali. Pemeriksaan visual memakai Chromium, bukan perangkat Safari asli.
+- Jarak bawah footer diperbesar agar teks tidak terlalu dekat tepi layar. Clearance kontrol/WhatsApp mengikuti tinggi footer baru; alignment horizontal tetap.
