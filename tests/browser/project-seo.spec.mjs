@@ -1,7 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {projects} from '../../site/project-catalog.mjs';
 
-const homeTitle='Jou and Bou | Architecture & Interior Design Studio';
+const homeTitle='jou and bou studio';
 test('every public project returns its own metadata and readable content without JavaScript',async({browser})=>{
  const context=await browser.newContext({javaScriptEnabled:false}),page=await context.newPage();
  for(const p of projects){

@@ -378,7 +378,7 @@ document.getElementById('map-zoom-in').onclick=()=>zoomBy(1.15);
 document.getElementById('map-zoom-out').onclick=()=>zoomBy(1/1.15);
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.setAttribute('aria-expanded','false');navigation.classList.remove('menu-open')}});
 
-await import("./about.mjs?v=149");
+await import("./about.mjs?v=150");
 syncProjectRoute();mapGuide=createPhoneMapGuide({ready:engine.firstReady||engine.ready,onChange:()=>{if(mapGuide&&!mapGuide.visible)hoverLevels.fill(0);start()},order:[...new Set([0,9,13,29,...glbIds,44,51])]});
 
 document.dispatchEvent(new Event('jou:app-ready'));

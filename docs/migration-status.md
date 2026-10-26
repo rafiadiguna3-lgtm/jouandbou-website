@@ -554,3 +554,11 @@ Public deployment safety: build now rejects environment files, repository intern
 - Per the user's correction, removed the added share controls and all new preview/construction status labels, restoring the previous project detail buttons, categories and house label sizing.
 - Retained only unified Jou/Bou search (including typo suggestions) and the in-place startup/no-JavaScript fallback. Existing project URLs, WhatsApp and SEO remain unchanged.
 - Scope-corrected validation: 19 browser checks and 6 source/project checks passed; three follow-up checks also confirmed fallback visibility from failed hash routes and absence of the removed controls.
+
+### Nama situs, favicon, dan URL proyek lama
+- Sesuai permintaan pemilik, judul homepage, Open Graph/Twitter title, `og:site_name`, dan nama WebSite menjadi “jou and bou studio”. Deskripsi layanan dan judul khusus tiap proyek dipertahankan.
+- Favicon hitam berlatar putih memakai file versi baru 96px dengan tinggi logo 72% dan margin seimbang; root ICO/PNG/SVG dan apple-touch mengikuti aset ini. Foto preview share tidak diganti.
+- Ikon tab putih baru aktif setelah interaksi nyata (pointer, keyboard, wheel). Render awal, termasuk JavaScript yang berjalan tanpa interaksi, tetap mempertahankan ikon hitam; tidak ada deteksi user-agent.
+- Tambah redirect 301 khusus URL proyek lama Jou/Bou yang cocok dengan katalog proyek, termasuk `/jou-works/rumasoka`, ke URL detail yang sudah ada. Versi www diarahkan langsung untuk menghindari redirect berantai pada URL tersebut. Tidak mengalihkan proyek tidak dikenal ke homepage.
+- Perubahan di Google masih memerlukan deploy dan crawl ulang; nama situs, pilihan favicon, dan cache hasil pencarian ditentukan Google. Akses produksi dari lingkungan ini masih diblokir proxy.
+- Validasi akhir: build berhasil; 9 tes aset/map/brand, 4 tes halaman/konfigurasi, dan 10 tes browser metadata/routing/SEO lulus. Mencakup nama homepage sesudah reload/Back/Forward, metadata 15 proyek tanpa JavaScript, margin ikon, ikon awal tanpa interaksi, penolakan event sintetis, serta pergantian ikon lewat mouse/keyboard saat aplikasi tertunda.

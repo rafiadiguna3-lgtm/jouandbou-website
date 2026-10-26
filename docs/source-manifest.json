@@ -44,8 +44,8 @@
     },
     {
       "path": "about.mjs",
-      "bytes": 8940,
-      "sha256": "6e75ee7e7bf660584bc13461cc95f0aef949c3dec53da844e1e4d0833c107e6a",
+      "bytes": 8907,
+      "sha256": "c231a82d015980ef6e067395735bc2c6068c4edf6bdebb5eb5248318d12c1129",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/about.mjs"
       ],
@@ -94,7 +94,7 @@
     {
       "path": "app.mjs",
       "bytes": 41988,
-      "sha256": "535d1294d0ff6496bdefd78f64c1b79013aaf5118c795ecc18ea21126a6429e8",
+      "sha256": "88fd7e645296771a5e32dd8c09aeebc3fc9ff39791d6fb7ef941a1bb716c7c70",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/app.mjs"
       ],
@@ -13189,8 +13189,8 @@
     },
     {
       "path": "favicon.ico",
-      "bytes": 5186,
-      "sha256": "26d31dea69cb93e99bfdd36b36be6a38cabd79c5bb5f1f718c8477ac0c19f996",
+      "bytes": 4739,
+      "sha256": "7391eaa1776713a7498cab2e0d3aaa6d22451ac23bde60f61d70b4a6b73a772b",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.ico"
       ],
@@ -13202,8 +13202,8 @@
     },
     {
       "path": "favicon.png",
-      "bytes": 120255,
-      "sha256": "6746d54767394f18ebfc3efd8eaf87d174a0c8d2425978d3089483c8d2ce5d32",
+      "bytes": 109511,
+      "sha256": "014445a7a168b0a8aaf8fa25de6e9e7ba969be1414d8d66f878a6f26532bb14f",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.png"
       ],
@@ -13215,8 +13215,8 @@
     },
     {
       "path": "favicon.svg",
-      "bytes": 2331,
-      "sha256": "853f7d05c480480aac3ece19a50c5e0b79ba5c7f410ecaedd92808b87f18f6eb",
+      "bytes": 4135,
+      "sha256": "b6ed30478c325fa5b12638079b5d8e239937aac3802e2d144233a524961f3798",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.svg"
       ],
@@ -13313,8 +13313,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 110707,
-      "sha256": "5f92492481259a79fd7ba671e99a556e9fc50dfb91e6834e73e5fd90c0728c39",
+      "bytes": 110610,
+      "sha256": "78552db730d5c457e65dd5f9eb48585c94956e4e8e347538cc4e1a4e330434c0",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14727,8 +14727,8 @@
     },
     {
       "path": "_redirects",
-      "bytes": 433,
-      "sha256": "8ed4ba1ea58d773ab9ebcc98fb31547239fa0451d827cee104dc0fe7bbb53a6e",
+      "bytes": 6565,
+      "sha256": "b6dde6fd9c1cfeae771b8e97dedd9ac954788589bf779bb936db82c68c27c999",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/_redirects"
       ],
@@ -14910,12 +14910,15 @@
     },
     {
       "path": "browser-tab-icon.mjs",
-      "bytes": 295,
-      "sha256": "30a05fa9a0cf5203f41f36e7bac88f621da1102c1779ce0913fc339ce68cc518",
+      "bytes": 695,
+      "sha256": "a4774c7428656328b8464a0e68767302d8f2e441a284714db837c269d935ef11",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/browser-tab-icon.mjs"
       ],
-      "authored_locally": true
+      "authored_locally": true,
+      "published_sha256": "30a05fa9a0cf5203f41f36e7bac88f621da1102c1779ce0913fc339ce68cc518",
+      "published_bytes": 295,
+      "modified_locally": true
     },
     {
       "path": "project-catalog.mjs",
@@ -14928,8 +14931,8 @@
     },
     {
       "path": "project-seo.mjs",
-      "bytes": 3266,
-      "sha256": "b3d4f956ec0e842a3229ea2b8cd7e588fd9b04f5c18be546c74e6959e78f6ed7",
+      "bytes": 3240,
+      "sha256": "67f81821ce96a82147e21211c6d8274768417c7a9a55176bf8cb9a66fcd5e07d",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/site/project-seo.mjs"
       ],

@@ -1,9 +1,12 @@
-# Favicon and share behavior
+# Ikon website dan tab browser
 
-- Initial HTML declares one `#site-favicon`: solid black on white, 48×48 PNG. Root ICO/PNG/SVG use the same solid treatment.
-- `browser-tab-icon.mjs` updates that existing link to the original white transparent 48×48 PNG. The module loads separately from the 3D app, in light and dark system themes.
-- `og:image`, Twitter image and WebSite image point to the 1200×1200 user-image rendition on white. Apple-touch remains its solid 180×180 PNG.
+- HTML awal memakai satu favicon hitam berlatar putih: `/assets/brand/jou-and-bou-solid-96-v4.png`.
+- Logo berada di tengah dengan tinggi sekitar 72% dari bidang. Root ICO/PNG/SVG dan ikon apple-touch memakai versi yang sama.
+- Modul `browser-tab-icon.mjs` baru mengganti ikon menjadi versi putih transparan setelah interaksi nyata: klik/sentuh, keyboard, atau scroll. Tanpa interaksi, ikon tetap hitam meskipun JavaScript berjalan. Tidak ada timer atau deteksi user-agent.
+- Gambar preview share tetap memakai aset 1200px berlatar putih yang sudah ada. Perubahan favicon tidak mengganti foto preview proyek.
 
-This removes competing static candidates. There is no special response based on user agent. A crawler reading initial HTML sees the solid icon; a crawler rendering JavaScript can observe the same white runtime preference as a browser. Google controls favicon selection and cache refresh; code cannot guarantee a separate Google icon. Requesting homepage recrawl in Search Console may help discovery after the deployment is confirmed, without guaranteeing timing or selection.
+Ini mengurangi kemungkinan crawler mengambil ikon putih ketika menjalankan JavaScript tanpa berinteraksi. Pemilihan ikon, nama situs, dan jadwal pembaruan cache tetap ditentukan Google; pemisahan tampilan Google dan browser tidak bisa dijamin mutlak.
 
-Run `npm run build`, `npm test` and `npx playwright test tests/browser/metadata.spec.mjs`. Tests verify metadata and DOM updates, not native tab chrome or Google's results. Production and www redirect still require live verification.
+Setelah deployment, periksa HTML homepage dan akses favicon, lalu minta crawl ulang homepage melalui Search Console. Permintaan crawl ulang tidak menjamin pembaruan langsung.
+
+Pemeriksaan lokal: `npm run build`, `npm test`, dan `npx playwright test tests/browser/metadata.spec.mjs`. Tes browser memeriksa DOM dan interaksi, bukan tampilan tab asli atau hasil Google.
