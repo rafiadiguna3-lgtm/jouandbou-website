@@ -20,6 +20,7 @@ Pembaruan README tidak menyamakan kode kedua branch. Untuk melanjutkan website t
 | Perilaku fitur dan arah visual | [Panduan Fitur](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/docs/perilaku-desain.md) |
 | Update, rilis, pemulihan, serah terima | [Panduan Pengelolaan](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/docs/operasional-handover.md) |
 | SEO dan preview link | [Panduan SEO](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/docs/project-seo.md) |
+| Pemeriksaan otomatis di GitHub | [Website Checks](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/docs/workflows.md) |
 
 Akses, penanggung jawab, dan deployment yang belum diverifikasi ditandai dalam panduan serah terima.
 
