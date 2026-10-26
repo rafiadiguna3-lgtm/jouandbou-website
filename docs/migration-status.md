@@ -595,3 +595,8 @@ Public deployment safety: build now rejects environment files, repository intern
 - Sertakan daftar akses/penanggung jawab yang belum diisi, pemisahan deploy Pages/Worker, sumber file, prosedur update, verifikasi rilis, rollback, dan latihan penerima handover.
 - Status produksi yang belum diverifikasi ditandai jelas. Dokumen device/SEO historis diberi penunjuk ke panduan aktif agar keputusan lama tidak dianggap aturan terkini.
 - Perubahan hanya dokumentasi; tidak mengubah website, deployment, atau pengaturan akun.
+
+### Bahasa panduan disederhanakan
+- Sesuai permintaan pemilik, README, PRD, panduan fitur, operasional/handover, dan SEO ditulis dengan bahasa Indonesia sehari-hari yang lebih dekat ke gaya pemilik. Istilah teknis diberi penjelasan saat diperlukan.
+- Panduan SEO ditulis ulang berdasarkan perilaku aktif, menggantikan teks Inggris yang masih mencampur halaman index lama dan catatan implementasi.
+- Detail perintah, batas verifikasi, perbedaan branch, pemisahan Worker/Pages, dan checklist penerima tetap dipertahankan. Tidak ada perubahan kode atau visual website.
