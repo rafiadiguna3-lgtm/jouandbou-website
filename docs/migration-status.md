@@ -614,11 +614,6 @@ Public deployment safety: build now rejects environment files, repository intern
 - Perubahan Markdown saja diabaikan pada push/PR; manifest JSON tetap memicu pemeriksaan. Pemeriksaan lama dibatalkan saat revisi baru masuk pada branch yang sama.
 - Validasi: `ci:source` berhasil dengan 33 tes; `CI=1 CHROMIUM_PATH=/usr/bin/chromium npm run ci:browser` lulus 32 tes, termasuk 11 skenario responsif. YAML, pemicu, hak baca, perintah npm, dan tautan dokumentasi diperiksa; SHA ketiga action dicocokkan dengan tag upstream. Ini hasil lokal, bukan klaim run GitHub sudah selesai.
 
-### Footer lintas section
-- Copy disetujui: “Elevating everyday life through design.”, diringkas dari narasi About tentang meningkatkan kualitas hidup melalui desain.
-- Tambahkan satu footer tipis: copyright kiri, jargon kanan. Berlaku pada homepage, About, Contact, Bou, Explore 3D, dan detail proyek. Footer mengikuti dialog detail ke modal top layer agar tetap terlihat, tanpa menggandakan node.
-- Hapus copyright lama yang berulang pada footer sosial; tautan sosial tetap ada. Sisakan ruang untuk WhatsApp, isi halaman, dan panel 3D mendatar di atas footer.
-- Halaman proyek statis, mode tanpa JavaScript, dan tampilan cadangan tetap menampilkan footer. Tidak mengganti metadata SEO atau teks cerita proyek.
-- Refinement padding: sejajarkan sisi kiri footer dengan mark logo header dan sisi kanan dengan garis hamburger, mengikuti perubahan ukuran layar. Header tetap memakai tinggi/posisi yang sudah ada.
-- Validasi: build dan 33 tes sumber lulus; 25 tes browser metadata/inquiry/SEO/responsif lulus. Setelah refinement padding, 26 kombinasi halaman/device, tiga Explore 3D, dan fallback gagal-aplikasi diperiksa; delapan regresi metadata/inquiry dan 10 tes aset/brand lulus kembali. Pemeriksaan visual memakai Chromium, bukan perangkat Safari asli.
-- Jarak bawah footer diperbesar agar teks tidak terlalu dekat tepi layar. Clearance kontrol/WhatsApp mengikuti tinggi footer baru; alignment horizontal tetap.
+### Footer tambahan dibatalkan
+- Sesuai arahan pemilik, hapus footer global dan jargon tambahan. Pulihkan layout, posisi kontrol/WhatsApp, serta copyright pada footer sosial yang sudah ada.
+- Batalkan seluruh perubahan footer terkait HTML, CSS, script, generator halaman, dan manifest. Fitur website, workflow, SEO, serta Worker favicon tetap seperti sebelum penambahan footer.

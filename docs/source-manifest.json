@@ -13313,8 +13313,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 110595,
-      "sha256": "9b23779dffd14b147fe8007df0e8816cb65f0d0c2694ac64921d9d6d4b8d91a6",
+      "bytes": 110502,
+      "sha256": "5d104971a4caa4fe258b8e35e84944db046a443305ec5db6ceae163416f8df1b",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -15258,39 +15258,6 @@
       "sha256": "42da5842574b9138f43004122a56139a70abaf86951a312509e4ef950a732c00",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
-      ],
-      "authored_locally": true
-    },
-    {
-      "path": "site-footer.css",
-      "bytes": 1884,
-      "sha256": "61cc10d184d233e0b408a2e2db385854158a4870dca191c0e896679dae09f75a",
-      "source_urls": [
-        "repository://rafiadiguna3-lgtm/jouandbou-website/site/site-footer.css"
-      ],
-      "authored_locally": true,
-      "published_sha256": "1b231fe3a1a296dbc28c45f914a6f59022e103866ef89a3ac7d10ce6772b66a9",
-      "published_bytes": 1725,
-      "modified_locally": true
-    },
-    {
-      "path": "site-footer.js",
-      "bytes": 1811,
-      "sha256": "52c666ed6bee78f15b80a7ab09e6e9eac4414c7d7d5b3127d89cfee84a9d6415",
-      "source_urls": [
-        "repository://rafiadiguna3-lgtm/jouandbou-website/site/site-footer.js"
-      ],
-      "authored_locally": true,
-      "published_sha256": "f2c96d95286338c4eb998b7ad226d6338e637f53122e299adb67837b40904556",
-      "published_bytes": 538,
-      "modified_locally": true
-    },
-    {
-      "path": "project-tools.css",
-      "bytes": 1183,
-      "sha256": "298f2b2eac14333f256d790424770c53a163a3ece1b041a26e7c76fc57d5be35",
-      "source_urls": [
-        "repository://rafiadiguna3-lgtm/jouandbou-website/site/project-tools.css"
       ],
       "authored_locally": true
     }
