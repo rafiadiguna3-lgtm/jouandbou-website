@@ -28,6 +28,16 @@ Versi kode di GitHub dipisahkan lewat **branch**, seperti folder kerja yang puny
 
 Mengubah README di `main` tidak memindahkan kode terbaru ke sini. Petunjuk di bawah khusus untuk kode yang saat ini ada di `main`.
 
+## Panduan untuk melanjutkan pekerjaan
+
+Panduan aktif ada pada branch pengembangan:
+
+- [Tujuan dan kebutuhan website / PRD](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/docs/prd.md)
+- [Perilaku fitur dan desain](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/docs/perilaku-desain.md)
+- [Update, rilis, pemulihan, dan checklist handover](https://github.com/rafiadiguna3-lgtm/jouandbou-website/blob/migration/jou-and-bou/docs/operasional-handover.md)
+
+Mulai dari PRD untuk memahami tujuan, lalu gunakan checklist handover untuk mencoba akses dan pekerjaan penerus. Data penanggung jawab dan deployment yang belum diverifikasi ditandai di sana.
+
 ## Menjalankan di komputer sendiri
 
 Pasang **Node.js versi 24**, lalu buka terminal di folder proyek dan jalankan:
