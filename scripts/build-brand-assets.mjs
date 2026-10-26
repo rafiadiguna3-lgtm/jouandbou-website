@@ -25,7 +25,8 @@ try{
  }
 }finally{await browser.close();}
 // PNG-compressed ICO entries are supported by current desktop browsers.
-const sizes=[16,32,48,64],buffers=await Promise.all(sizes.map(size=>readFile(`site/assets/brand/jou-and-bou-solid-${size}-v5.png`)));
+// White fallback for normal browsers when the edge Worker is unavailable.
+const sizes=[16,32,48],buffers=await Promise.all(sizes.map(size=>readFile(`site/assets/brand/jou-and-bou-white-${size}-v143.png`)));
 const header=Buffer.alloc(6+sizes.length*16);header.writeUInt16LE(1,2);header.writeUInt16LE(sizes.length,4);
 let offset=header.length;
 sizes.forEach((size,i)=>{const start=6+i*16;header[start]=size;header[start+1]=size;header.writeUInt16LE(1,start+4);header.writeUInt16LE(32,start+6);header.writeUInt32LE(buffers[i].length,start+8);header.writeUInt32LE(offset,start+12);offset+=buffers[i].length;});

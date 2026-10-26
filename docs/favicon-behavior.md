@@ -1,12 +1,47 @@
 # Ikon website dan tab browser
 
-- HTML awal memakai satu favicon hitam berlatar putih: `/assets/brand/jou-and-bou-solid-96-v5.png`.
-- Bentuk, posisi, dan ukuran logo disamakan dengan ikon tab putih yang sudah ada. Ikon hitam dibuat dari siluet PNG putih yang sama, lalu diberi latar putih. Root ICO/PNG/SVG dan ikon apple-touch memakai versi yang sama.
-- Modul `browser-tab-icon.mjs` langsung mengganti ikon menjadi putih transparan saat modul dimuat, tanpa menunggu klik, keyboard, atau scroll. Ini berlaku pada tema terang dan gelap, terpisah dari aplikasi 3D.
-- Gambar preview share tetap memakai aset 1200px berlatar putih yang sudah ada. Perubahan favicon tidak mengganti foto preview proyek.
+## Satu alamat favicon
 
-Sesuai prioritas pemilik, tab browser langsung memakai putih. HTML awal tetap hitam, tetapi crawler yang menjalankan JavaScript juga bisa melihat putih. Jadi kode ini tidak menjamin Google selalu memilih ikon hitam; pemilihan ikon dan jadwal cache tetap ditentukan Google.
+Homepage dan halaman proyek hanya mencantumkan satu ikon: `/favicon.ico`. Tidak ada JavaScript yang mengganti ikon setelah halaman terbuka.
 
-Setelah deployment, periksa HTML homepage dan akses favicon, lalu minta crawl ulang homepage melalui Search Console. Permintaan crawl ulang tidak menjamin pembaruan langsung.
+Worker Cloudflare memilih gambar untuk alamat yang sama:
+- Crawler yang dikenali, termasuk Googlebot dan Google Favicon: logo hitam berlatar putih, `assets/brand/jou-and-bou-solid-48-v5.png`.
+- Browser biasa: logo putih transparan, `assets/brand/jou-and-bou-white-48-v143.png`.
 
-Pemeriksaan lokal: `npm run build`, `npm test`, dan `npx playwright test tests/browser/metadata.spec.mjs`. Tes browser memeriksa DOM dan interaksi, bukan tampilan tab asli atau hasil Google.
+Bentuk, ukuran, dan posisi mark hitam/putih sama. Worker mengirim PNG dengan tipe `image/png`; ekstensi URL tetap `.ico`. Jika Worker tidak berjalan dan route menggunakan Fail open, file ICO statis berisi ikon putih tersedia sebagai cadangan.
+
+## Worker yang dipasang
+
+Kode tersimpan di [cloudflare/favicon-worker.mjs](../cloudflare/favicon-worker.mjs), sama dengan file yang disiapkan untuk editor Cloudflare. Worker ini terpisah dari deployment Pages; push kode website tidak otomatis memperbarui Worker.
+
+Pasang dua route, keduanya dengan **Fail open (proceed)**:
+
+```
+jouandbou.com/favicon.ico
+www.jouandbou.com/favicon.ico
+```
+
+Worker mengambil gambar dari `https://jouandbou-test.pages.dev` agar permintaan aset tidak berulang ke route favicon. Nama project Pages ini harus tetap sesuai deployment yang melayani aset tersebut. Jangan aktifkan Cloudflare Access pada favicon atau asetnya.
+
+Respons favicon memakai `no-store` untuk browser dan CDN. Jangan tambahkan aturan Cache Everything yang menimpa pengaturan ini. Identifikasi User-Agent hanya memilih gambar publik, bukan pemeriksaan keamanan. Sinyal verified bot dipakai jika tersedia, dengan pencocokan nama crawler sebagai cadangan.
+
+## Verifikasi setelah deployment
+
+1. Buka `https://jouandbou.com/favicon.ico` dan versi `www`. Browser biasa harus menerima PNG putih transparan, bukan teks Hello World atau halaman error.
+2. Uji alamat yang sama dengan User-Agent `Google Favicon` atau `Googlebot`: harus menerima logo hitam berlatar putih.
+3. Pastikan respons bertipe `image/png` dan memakai `Cache-Control: no-store`.
+4. Periksa HTML homepage dan proyek: hanya satu `rel="icon"`, mengarah ke `/favicon.ico`, tanpa script pengganti ikon.
+5. Minta crawl ulang homepage melalui Search Console.
+
+Worker mengatur gambar yang disajikan, bukan pilihan akhir atau waktu pembaruan Google. Favicon lama bisa tetap tersimpan sementara di browser dan Google. Cache hasil pencarian tidak dapat dihapus oleh kode website.
+
+## Pemeriksaan lokal
+
+```
+npm run build
+npm test
+node --test tests/favicon-worker.test.mjs
+npx playwright test tests/browser/metadata.spec.mjs tests/browser/project-seo.spec.mjs
+```
+
+Tes lokal memeriksa pilihan respons Worker dengan upstream tiruan, metadata HTML, dan navigasi. Server preview lokal tidak menjalankan Cloudflare Worker; `/favicon.ico` di sana adalah ICO cadangan putih. Pengujian lokal bukan bukti route/code Worker production sudah benar.

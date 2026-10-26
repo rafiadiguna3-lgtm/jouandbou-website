@@ -575,3 +575,11 @@ Public deployment safety: build now rejects environment files, repository intern
 ### Prioritas ikon tab: langsung putih
 - Pemilik menegaskan ikon tab hanya putih. Hapus mekanisme menunggu interaksi; modul kecil langsung memasang PNG putih tanpa bergantung pada aplikasi 3D atau tema.
 - HTML awal tetap mencantumkan favicon hitam v5 dengan skala sama. Namun crawler yang merender JavaScript dapat melihat putih juga. Keterbatasan ini dijelaskan kepada pemilik; jangan menjanjikan pemisahan Google/browser yang mutlak.
+
+### Hubungkan favicon melalui Worker Cloudflare
+- Pemilik menyatakan kedua route Worker telah ditambahkan. HTML awal kini menunjuk satu `/favicon.ico` pada homepage dan semua proyek hasil build.
+- Hapus modul `browser-tab-icon.mjs` beserta pemanggilannya dan entri manifest; tidak ada lagi penulis ikon di JavaScript halaman.
+- Simpan salinan kode Worker yang disiapkan untuk Cloudflare di `cloudflare/favicon-worker.mjs`, beserta tes pilihan crawler/browser dan kebijakan cache. Push repo tidak otomatis memasang kode Worker terpisah ini.
+- Root ICO menjadi cadangan putih untuk Fail open; gambar hitam untuk Worker tetap pada aset v5 dengan skala identik. Gambar share, apple-touch, metadata proyek, dan nama studio tetap.
+- Akses langsung produksi masih diblokir proxy. Pernyataan pemilik memastikan penambahan route, bukan bukti kode Worker/headers/aset sudah terverifikasi lewat jaringan.
+- Validasi akhir: build berhasil; 10 tes aset/brand/map, 4 tes Worker/fallback, dan 10 tes browser metadata/SEO/routing lulus. Tidak menganggap hasil mock/local sebagai verifikasi deployment Worker.

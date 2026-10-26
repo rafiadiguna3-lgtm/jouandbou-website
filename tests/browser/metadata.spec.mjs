@@ -17,8 +17,8 @@ test('initial HTML contains the final brand and plain-text search metadata witho
  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content','1200');
  await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content','1200');
  await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
- const favicon=await page.locator('link[rel="icon"]').first().getAttribute('href');expect(favicon).toBe('/assets/brand/jou-and-bou-solid-96-v5.png');
- const icon=await page.request.get(favicon);expect(icon.ok()).toBe(true);const iconBytes=await icon.body();expect(iconBytes.readUInt32BE(16)).toBe(96);
+ const favicon=await page.locator('link[rel="icon"]').first().getAttribute('href');expect(favicon).toBe('/favicon.ico');
+ const icon=await page.request.get(favicon);expect(icon.ok()).toBe(true);const iconBytes=await icon.body();expect(iconBytes.readUInt16LE(2)).toBe(1); // Local static server serves the white ICO fallback.
  await context.close();
 });
 
@@ -35,26 +35,27 @@ test('refresh keeps the homepage title while application JavaScript is delayed',
  await page.locator('header .brand').click();await expect(page).toHaveTitle('jou and bou studio');
 });
 
-test('tab uses only the white PNG immediately in both themes',async({browser})=>{
+test('one Worker favicon URL stays stable in both themes without runtime replacement',async({browser})=>{
  for(const colorScheme of ['dark','light']){
   const context=await browser.newContext({colorScheme}),page=await context.newPage();
   await page.goto('/');
   const icon=page.locator('#site-favicon');
-  await expect(icon).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
+  await expect(icon).toHaveAttribute('href','/favicon.ico');
   await expect(icon).toHaveAttribute('sizes','48x48');
   await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
+  await expect(page.locator('script[src*="browser-tab-icon"]')).toHaveCount(0);
   await page.mouse.click(710,1200);
-  await expect(icon).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
+  await expect(icon).toHaveAttribute('href','/favicon.ico');
   await context.close();
  }
 });
 
-test('white tab loads without interaction while the 3D application is blocked',async({page})=>{
+test('Worker favicon URL is available while the 3D application is blocked',async({page})=>{
  let release;const gate=new Promise(resolve=>release=resolve);
  await page.route('**/app.mjs?*',async route=>{await gate;await route.continue();});
  try{
   await page.goto('/',{waitUntil:'commit'});
-  await expect(page.locator('#site-favicon')).toHaveAttribute('href','/assets/brand/jou-and-bou-white-48-v143.png?v=browser-tab-3');
+  await expect(page.locator('#site-favicon')).toHaveAttribute('href','/favicon.ico');
   await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
   await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content','jou and bou studio');
  }finally{release();}

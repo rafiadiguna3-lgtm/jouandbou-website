@@ -13189,8 +13189,8 @@
     },
     {
       "path": "favicon.ico",
-      "bytes": 5725,
-      "sha256": "325097084fb8dba9996194926952d1a77fd998f78bef165309e88c93c875b493",
+      "bytes": 2441,
+      "sha256": "ffea62f5bdc20cd0d1c06a03d894c04e10e61273fd3915147b5a6f9b39a05e9f",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.ico"
       ],
@@ -13313,8 +13313,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 110610,
-      "sha256": "e90e09a3443afea750445cac4a273a9c27ae5fc7630685545d3f82c3730e7688",
+      "bytes": 110502,
+      "sha256": "5d104971a4caa4fe258b8e35e84944db046a443305ec5db6ceae163416f8df1b",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -14907,18 +14907,6 @@
         "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
       ],
       "authored_locally": true
-    },
-    {
-      "path": "browser-tab-icon.mjs",
-      "bytes": 311,
-      "sha256": "09e408b08de9337483a3799cffc27ad627474bf8346c858b2f0cd6dd9d00d599",
-      "source_urls": [
-        "repository://rafiadiguna3-lgtm/jouandbou-website/site/browser-tab-icon.mjs"
-      ],
-      "authored_locally": true,
-      "published_sha256": "30a05fa9a0cf5203f41f36e7bac88f621da1102c1779ce0913fc339ce68cc518",
-      "published_bytes": 295,
-      "modified_locally": true
     },
     {
       "path": "project-catalog.mjs",
