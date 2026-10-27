@@ -617,3 +617,7 @@ Public deployment safety: build now rejects environment files, repository intern
 ### Footer tambahan dibatalkan
 - Sesuai arahan pemilik, hapus footer global dan jargon tambahan. Pulihkan layout, posisi kontrol/WhatsApp, serta copyright pada footer sosial yang sudah ada.
 - Batalkan seluruh perubahan footer terkait HTML, CSS, script, generator halaman, dan manifest. Fitur website, workflow, SEO, serta Worker favicon tetap seperti sebelum penambahan footer.
+
+### 27 Oktober 2026 — Pengantar mobile ditahan
+- Menyembunyikan pilihan jou/bou works, layanan, dan ringkasan studio pada smartphone serta tablet. Konten dan akses proyek tetap tersedia; desktop tidak berubah.
+- Petunjuk interaksi map memakai “project” menggantikan “house”, tanpa mengubah nama atau kode proyek.

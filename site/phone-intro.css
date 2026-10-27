@@ -47,3 +47,8 @@
 @media(prefers-reduced-motion:reduce){
  .phone-intro .phone-work-links,.phone-intro .phone-services,.phone-intro-guide p,.home-summary p{animation:none!important}
 }
+
+/* Work/service landing copy is on hold on phones and tablets. */
+@media(max-width:1024px),(hover:none),(any-pointer:coarse){
+ #phone-intro,#home-summary,#phone-intro-guide{display:none!important}
+}

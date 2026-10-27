@@ -25,7 +25,7 @@ export function createPhoneMapGuide({onChange=()=>{},order=[0],ready=Promise.res
   const home=!routeHash()||routeHash()==='#projects';
   const eligible=home&&!document.body.matches('.model-view,.has-selection,.view-about,.view-bou,.view-contact,.search-open')&&!document.querySelector('dialog[open]')&&document.getElementById('menu-toggle')?.getAttribute('aria-expanded')!=='true';
   if(!eligible&&visible){dismiss({immediate:true});return;}
-  const spans=guide.querySelectorAll('.world-how span');spans[0].textContent=phone.matches?'Move the screen.':'Drag to move.';spans[1].textContent=phone.matches?'Tap a house.':'Click a house.';
+  const spans=guide.querySelectorAll('.world-how span');spans[0].textContent=phone.matches?'Move the screen.':'Drag to move.';spans[1].textContent=phone.matches?'Tap a project.':'Click a project.';
   if(eligible&&!visible){visible=true;guide.hidden=false;document.body.classList.add('phone-map-guided');document.documentElement.classList.remove('world-intro-pending');Promise.all([document.fonts.load('400 29px JouWorld').catch(()=>{}),Promise.resolve(ready).catch(()=>{})]).then(()=>{if(visible&&!dismissed)frame=requestAnimationFrame(animate);});}
  }
  const abort=new AbortController(),listen=(target,type,fn)=>target.addEventListener(type,fn,{capture:true,passive:true,signal:abort.signal});
