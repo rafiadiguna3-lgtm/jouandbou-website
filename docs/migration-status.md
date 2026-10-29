@@ -621,3 +621,7 @@ Public deployment safety: build now rejects environment files, repository intern
 ### 27 Oktober 2026 — Pengantar mobile ditahan
 - Menyembunyikan pilihan jou/bou works, layanan, dan ringkasan studio pada smartphone serta tablet. Konten dan akses proyek tetap tersedia; desktop tidak berubah.
 - Petunjuk interaksi map memakai “project” menggantikan “house”, tanpa mengubah nama atau kode proyek.
+
+### 29 Oktober 2026 — Ruang putih favicon Google
+- Logo hitam v6 memakai mark asli, tinggi 56% kanvas dan posisi tengah; ikon tab putih tidak berubah.
+- Payload hitam Worker diperbarui. Deployment Worker tetap terpisah dari push Pages dan perlu memasang kode terbaru di Cloudflare.

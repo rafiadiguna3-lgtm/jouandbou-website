@@ -5,10 +5,10 @@
 Homepage dan halaman proyek hanya mencantumkan satu ikon: `/favicon.ico`. Tidak ada JavaScript yang mengganti ikon setelah halaman terbuka.
 
 Worker Cloudflare memilih gambar untuk alamat yang sama:
-- Crawler yang dikenali, termasuk Googlebot dan Google Favicon: logo hitam berlatar putih, `assets/brand/jou-and-bou-solid-48-v5.png`.
+- Crawler yang dikenali, termasuk Googlebot dan Google Favicon: logo hitam berlatar putih, `assets/brand/jou-and-bou-solid-48-v6.png`.
 - Browser biasa: logo putih transparan, `assets/brand/jou-and-bou-white-48-v143.png`.
 
-Bentuk, ukuran, dan posisi mark hitam/putih sama. Worker mengirim PNG dengan tipe `image/png`; ekstensi URL tetap `.ico`. Jika Worker tidak berjalan dan route menggunakan Fail open, file ICO statis berisi ikon putih tersedia sebagai cadangan.
+Logo hitam versi v6 dipusatkan berdasarkan batas mark asli, dengan tinggi sekitar 56% kanvas agar ruang putihnya menyerupai avatar Instagram. Ikon tab putih tetap memakai aset sebelumnya. Worker mengirim PNG dengan tipe `image/png`; ekstensi URL tetap `.ico`. Jika Worker tidak berjalan dan route menggunakan Fail open, file ICO statis berisi ikon putih tersedia sebagai cadangan.
 
 ## Worker yang dipasang
 

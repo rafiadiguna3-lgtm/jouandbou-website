@@ -13202,8 +13202,8 @@
     },
     {
       "path": "favicon.png",
-      "bytes": 41806,
-      "sha256": "dbb520bd2e9c98c0c8e14b741b7a3f0cb5283f643d1c683d5b6de0184631829b",
+      "bytes": 103305,
+      "sha256": "70be041ff67829808e662ebe50f95fa724bff90a8a5936b0e0c524ec0841488a",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.png"
       ],
@@ -13215,8 +13215,8 @@
     },
     {
       "path": "favicon.svg",
-      "bytes": 5855,
-      "sha256": "42da5842574b9138f43004122a56139a70abaf86951a312509e4ef950a732c00",
+      "bytes": 3383,
+      "sha256": "dd9513bfd380a344810aa6019161b649ff1c7773742e5774277c193b29f2632c",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/favicon.svg"
       ],
@@ -13314,7 +13314,7 @@
     {
       "path": "index.html",
       "bytes": 110504,
-      "sha256": "28162dc3046cec7c4024c349919db036fb482ff927cb91ea42674b84e5748232",
+      "sha256": "4c15858c94b2454f7a9e75dd1f7f300bfd0a79594695ec1bd05dc9a3e4f4f80e",
       "source_urls": [
         "sites-source://appgprj_6ab09b8e6ae88191bf61717b47c9d5e2/b11a057b82e2f9002b280d0658bc1119f02db331/dist/index.html"
       ],
@@ -15258,6 +15258,87 @@
       "sha256": "42da5842574b9138f43004122a56139a70abaf86951a312509e4ef950a732c00",
       "source_urls": [
         "repository://rafiadiguna3-lgtm/jouandbou-website/scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-v6.svg",
+      "bytes": 3383,
+      "sha256": "dd9513bfd380a344810aa6019161b649ff1c7773742e5774277c193b29f2632c",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-16-v6.png",
+      "bytes": 365,
+      "sha256": "cfc84eb941adc4854b531e97da762f696fe3708f8e8d76e665bfbb8e6cf40d4a",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-192-v6.png",
+      "bytes": 18430,
+      "sha256": "92494e329129d04b1da527c447cc613e4a6279980149636e708436028651952d",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-96-v6.png",
+      "bytes": 2440,
+      "sha256": "e21f96f46aee1ac8a9640a9eb3cdc9c0a19428e3cd46ad817969e431f0c50132",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-48-v6.png",
+      "bytes": 944,
+      "sha256": "d776fe4426e806f28367b52e080747692d9cdbae9be3c7ad786adc3181f77128",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-32-v6.png",
+      "bytes": 701,
+      "sha256": "f9f5136e5cd1fe1a9d9b5f6ca8b11c5ae1f9c97e5e274e5c1efa64e18ec121cd",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-180-v6.png",
+      "bytes": 16548,
+      "sha256": "6448fbdd72baccd6f8b6bd35bfd51cfda248be483b03bcf749d60fd945c32b9e",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-512-v6.png",
+      "bytes": 103305,
+      "sha256": "70be041ff67829808e662ebe50f95fa724bff90a8a5936b0e0c524ec0841488a",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
+      ],
+      "authored_locally": true
+    },
+    {
+      "path": "assets/brand/jou-and-bou-solid-64-v6.png",
+      "bytes": 1459,
+      "sha256": "3efebbd8c6d74bb710c9d302821117f8db20889c3e8e67ef9b6cb1732b6bb183",
+      "source_urls": [
+        "repository://scripts/build-brand-assets.mjs"
       ],
       "authored_locally": true
     }

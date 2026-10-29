@@ -7,7 +7,7 @@ test('returns exact black/white PNGs without upstream requests and prevents shar
  const original=globalThis.fetch;
  globalThis.fetch=()=>{throw new Error('Favicon must never fetch an upstream');};
  try{
-  for(const [agent,file] of [['Google Favicon','jou-and-bou-solid-48-v5.png'],['Mozilla/5.0 (compatible; Googlebot/2.1)','jou-and-bou-solid-48-v5.png'],['Mozilla/5.0 Chrome/140.0','jou-and-bou-white-48-v143.png']]){
+  for(const [agent,file] of [['Google Favicon','jou-and-bou-solid-48-v6.png'],['Mozilla/5.0 (compatible; Googlebot/2.1)','jou-and-bou-solid-48-v6.png'],['Mozilla/5.0 Chrome/140.0','jou-and-bou-white-48-v143.png']]){
    const response=await worker.fetch(new Request('https://jouandbou.com/favicon.ico',{headers:{'User-Agent':agent}}));
    assert.equal(response.status,200);assert.equal(response.headers.get('Content-Type'),'image/png');
    assert.match(response.headers.get('Cache-Control'),/no-store/);assert.equal(response.headers.get('Vary'),'User-Agent');
@@ -20,7 +20,7 @@ test('HEAD and verified bots obey the same image and header contract',async()=>{
  const request=new Request('https://www.jouandbou.com/favicon.ico',{headers:{'User-Agent':'crawler'}});
  Object.defineProperty(request,'cf',{value:{botManagement:{verifiedBot:true}}});
  const response=await worker.fetch(request);
- assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile('site/assets/brand/jou-and-bou-solid-48-v5.png'));
+ assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile('site/assets/brand/jou-and-bou-solid-48-v6.png'));
  const head=await worker.fetch(new Request(request,{method:'HEAD'}));
  assert.equal(head.status,200);assert.equal(await head.text(),'');assert.equal(head.headers.get('Cloudflare-CDN-Cache-Control'),'no-store');
  assert.equal((await worker.fetch(new Request(request,{method:'POST'}))).status,405);
