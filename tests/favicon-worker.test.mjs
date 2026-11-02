@@ -32,3 +32,12 @@ test('non-favicon paths pass through and the failure fallback retains white icon
  const ico=await readFile('site/favicon.ico');assert.equal(ico.readUInt16LE(2),1);assert.equal(ico.readUInt16LE(4),3);
  for(let i=0;i<3;i++){const start=6+i*16,size=ico[start],length=ico.readUInt32LE(start+8),offset=ico.readUInt32LE(start+12);assert.deepEqual(ico.subarray(offset,offset+length),await readFile(`site/assets/brand/jou-and-bou-white-${size}-v143.png`));}
 });
+
+test('owner can preview the exact Google image with an ordinary browser',async()=>{
+ const response=await worker.fetch(new Request('https://jouandbou.com/favicon.ico?preview=google',{headers:{'User-Agent':'Mozilla/5.0'}}));
+ assert.equal(response.headers.get('X-JNB-Favicon-Version'),'v6-centered-20261029');
+ assert.equal(response.headers.get('X-JNB-Favicon-Variant'),'black');
+ assert.deepEqual(Buffer.from(await response.arrayBuffer()),await readFile('site/assets/brand/jou-and-bou-solid-48-v6.png'));
+ const normal=await worker.fetch(new Request('https://jouandbou.com/favicon.ico'));
+ assert.equal(normal.headers.get('X-JNB-Favicon-Variant'),'white');
+});

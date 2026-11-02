@@ -45,3 +45,7 @@ npx playwright test tests/browser/metadata.spec.mjs tests/browser/project-seo.sp
 ```
 
 Tes lokal memeriksa byte PNG kedua respons Worker tanpa mengizinkan fetch upstream, metadata HTML, dan navigasi. Server preview lokal tidak menjalankan Cloudflare Worker; `/favicon.ico` di sana adalah ICO cadangan putih. Pengujian lokal bukan bukti route/code Worker production sudah benar.
+
+## Memastikan Worker production memakai versi baru
+
+Buka `/favicon.ico?preview=google` dengan browser biasa. Worker terbaru mengirim ikon hitam v6 yang sama persis dengan respons Googlebot. URL tanpa query tetap putih. Respons menyertakan `X-JNB-Favicon-Version: v6-centered-20261029` dan varian black/white. Jika preview masih putih, periksa kode Worker aktif dan kedua route; jangan menganggapnya hanya cache Google.

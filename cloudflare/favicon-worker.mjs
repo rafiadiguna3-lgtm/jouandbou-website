@@ -4,13 +4,15 @@ const WHITE = 'iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEbklEQVR42tWaS6gcR
 
 export default {
   async fetch(request) {
-    if (new URL(request.url).pathname !== '/favicon.ico') return fetch(request);
+    const url = new URL(request.url);
+    if (url.pathname !== '/favicon.ico') return fetch(request);
     const headers = new Headers({
       'Content-Type': 'image/png',
       'Cache-Control': 'no-store, max-age=0',
       'CDN-Cache-Control': 'no-store',
       'Cloudflare-CDN-Cache-Control': 'no-store',
       Vary: 'User-Agent',
+      'X-JNB-Favicon-Version': 'v6-centered-20261029',
       'X-Content-Type-Options': 'nosniff'
     });
     if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -21,7 +23,10 @@ export default {
     // Classification chooses a public image, not authorization.
     const crawler = request.cf?.botManagement?.verifiedBot === true ||
       /Googlebot|Google Favicon|GoogleOther|Google-InspectionTool|bingbot|DuckDuckBot|Applebot|facebookexternalhit|Twitterbot|LinkedInBot/i.test(userAgent);
-    const bytes = Uint8Array.from(atob(crawler ? BLACK : WHITE), c => c.charCodeAt(0));
+    // Explicit public preview lets the owner inspect the crawler image in a browser.
+    const black = crawler || url.searchParams.get('preview') === 'google';
+    headers.set('X-JNB-Favicon-Variant', black ? 'black' : 'white');
+    const bytes = Uint8Array.from(atob(black ? BLACK : WHITE), c => c.charCodeAt(0));
     return new Response(request.method === 'HEAD' ? null : bytes, {status: 200, headers});
   }
 };
