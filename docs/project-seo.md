@@ -72,3 +72,11 @@ Setelah deployment diperiksa, kirim `https://jouandbou.com/sitemap.xml` melalui 
 Permintaan indexing tidak menjamin perubahan langsung. Google menentukan waktu crawl dan hasil yang ditampilkan. WhatsApp dapat menyimpan preview lama, termasuk pada pesan yang sudah dikirim.
 
 Sebelum menunggu cache, pastikan deployment, metadata, redirect, dan gambar pada website aktif sudah benar.
+
+## Judul dan sitelink Google
+
+Judul metadata ditulis lowercase, termasuk `about us`, `jou works`, dan `bou works`. Navigasi about dan proyek menggunakan tautan HTML; dua koleksi karya tetap mengarah ke bagian homepage yang sudah ada. Tidak ada halaman index tambahan.
+
+Google memilih sitelink secara otomatis. Website tidak dapat menetapkan tepat tiga sitelink atau melarang proyek tertentu menjadi sitelink sambil tetap menjaganya terindeks. Jangan menggunakan noindex, robots.txt, atau penghapusan Search Console untuk menyembunyikan proyek dari sitelink. URL fragmen tetap bagian dari homepage, bukan tiga halaman independen.
+
+Untuk ikon, periksa `/favicon.ico?preview=google` setelah memasang Worker terbaru. Preview hitam dengan ruang putih lega membuktikan aset Worker untuk crawler, bukan pembaruan cache Google.

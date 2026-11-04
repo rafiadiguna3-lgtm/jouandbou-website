@@ -625,3 +625,8 @@ Public deployment safety: build now rejects environment files, repository intern
 ### 29 Oktober 2026 — Ruang putih favicon Google
 - Logo hitam v6 memakai mark asli, tinggi 56% kanvas dan posisi tengah; ikon tab putih tidak berubah.
 - Payload hitam Worker diperbarui. Deployment Worker tetap terpisah dari push Pages dan perlu memasang kode terbaru di Cloudflare.
+
+### 4 November 2026 — Judul lowercase dan tautan bagian utama
+- Judul metadata proyek/koleksi serta judul route about/bou memakai lowercase dan brand studio yang konsisten. Nama proyek di isi halaman tetap.
+- About/proyek pada navigasi kini berupa anchor HTML; tautan koleksi dikelompokkan sebagai navigasi. Tidak ada halaman index baru atau penghapusan indeks proyek.
+- Sitelink Google tetap otomatis; jumlah, label akhir, dan pemilihan tiga bagian tidak dapat dijamin.

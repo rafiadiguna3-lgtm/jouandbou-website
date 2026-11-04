@@ -31,7 +31,7 @@ test('refresh keeps the homepage title while application JavaScript is delayed',
  }finally{release();}
  await page.waitForFunction(()=>document.querySelector('header [aria-current]'));
  await expect(page).toHaveTitle('jou and bou studio');
- await page.locator('#studio').click();await expect(page).toHaveTitle('jou and bou - about us');
+ await page.locator('#studio').click();await expect(page).toHaveTitle('about us | jou and bou studio');
  await page.locator('header .brand').click();await expect(page).toHaveTitle('jou and bou studio');
 });
 
