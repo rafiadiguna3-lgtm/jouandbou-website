@@ -15,7 +15,7 @@ test('Cloudflare preserves canonical host paths and redirects known legacy pages
  const rules=(await readFile('site/_redirects','utf8')).trim().split('\n').filter(line=>line&&!line.startsWith('#'));
  assert.ok(rules.includes('https://www.jouandbou.com/* https://jouandbou.com/:splat 301'));
  for(const path of ['/jou-works/rumasoka','/jou-works/rumasoka/','https://www.jouandbou.com/jou-works/rumasoka'])assert.ok(rules.includes(`${path} https://jouandbou.com/projects/rumasoka/ 301`));
- assert.ok(rules.includes('/about-us/ https://jouandbou.com/#about 301'));
+ assert.ok(rules.includes('/about-us https://jouandbou.com/about-us/ 301'));
  assert.ok(!rules.some(line=>line.startsWith('/jou-works/*')),'unknown project URLs must not be redirected to arbitrary content');
  const html=await readFile('site/index.html','utf8');assert.match(html,/<link rel="canonical" href="https:\/\/jouandbou.com\/"/);
  assert.ok(!rules.some(line=>line.startsWith('https://jouandbou.com/ ')),'canonical domain must not redirect to itself');

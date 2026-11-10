@@ -8,8 +8,8 @@ for (const mobile of [false, true]) {
     await expect(page.locator('#about-page')).toBeVisible();
     const footer = await page.locator('#about-page .about-footer').innerHTML();
     const header = await page.locator('header .brand').innerHTML();
-    await page.locator('.about-work[href="#bou-works"]').click();
-    await expect(page).toHaveURL(/#bou-works$/);
+    await page.locator('.about-work[href="/bou-works/"]').click();
+    await expect(page).toHaveURL(/\/bou-works\/$/);
     const panel=page.locator('#bou-page');
     await expect(panel).toBeVisible();
     expect(await panel.locator('.about-footer').innerHTML()).toBe(footer);
@@ -27,13 +27,13 @@ for (const mobile of [false, true]) {
       await expect.poll(()=>panel.locator('.bou-lead img').first().evaluate(img=>img.naturalWidth)).toBeGreaterThan(0);
       await panel.evaluate(el=>el.scrollTop=250);
       await page.locator('#bou-close').click();
-      await expect(page).toHaveURL(/#bou-works$/);
+      await expect(page).toHaveURL(/\/bou-works\/$/);
       await expect(panel.locator('.bou-project-picker')).toBeVisible();
       await expect.poll(async()=>Math.abs((await panel.evaluate(el=>el.scrollTop))-previousTop)).toBeLessThan(3);
       expect(await page.locator('header .brand').innerHTML()).toBe(header);
     }
     await page.locator('#bou-close').click();
-    await expect(page).toHaveURL(/#about$/);
+    await expect(page).toHaveURL(/\/about-us\/$/);
     await expect(page.locator('#about-page')).toBeVisible();
     await page.locator('#about-page').evaluate(el=>el.scrollTop=400);
     await page.evaluate(()=>location.hash='contact');
@@ -57,9 +57,9 @@ test('work collections have crawlable section links and hydrate the existing vie
  const staticContext=await browser.newContext({javaScriptEnabled:false});
  const staticPage=await staticContext.newPage();
  await staticPage.goto('/');
- await expect(staticPage.locator('#studio')).toHaveAttribute('href','#about');
- await expect(staticPage.locator('.about-work[href="#projects"]')).toContainText('jou works');
- await expect(staticPage.locator('.about-work[href="#bou-works"]')).toContainText('bou works');
+ await expect(staticPage.locator('#studio')).toHaveAttribute('href','/about-us/');
+ await expect(staticPage.locator('.about-work[href="/jou-works/"]')).toContainText('jou works');
+ await expect(staticPage.locator('.about-work[href="/bou-works/"]')).toContainText('bou works');
  await staticContext.close();
  const context=await browser.newContext(),page=await context.newPage();
  await page.goto('/#bou-works');await expect(page.locator('.bou-index')).toBeVisible();await expect(page.locator('#project-static-content')).toHaveCount(0);await expect(page).toHaveTitle('bou works | jou and bou studio');

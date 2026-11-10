@@ -27,7 +27,7 @@ Branch adalah versi kerja kode. Sebelum rilis, cocokkan branch dan commit—pena
 
 ## Link website
 
-[Peta Proyek](https://jouandbou.com/#projects) · [About](https://jouandbou.com/#about) · [Bou Works](https://jouandbou.com/#bou-works) · [Rumah Anas](https://jouandbou.com/projects/rumah-anas/)
+[jou works](https://jouandbou.com/jou-works/) · [about us](https://jouandbou.com/about-us/) · [bou works](https://jouandbou.com/bou-works/) · [Rumah Anas](https://jouandbou.com/projects/rumah-anas/)
 
 ## Menjalankan website
 
