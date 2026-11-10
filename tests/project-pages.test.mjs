@@ -16,17 +16,9 @@ test('published projects have unique real URLs, real artwork and no unfinished p
  const notFound=await readFile('site/404.html','utf8');assert.ok(notFound.includes('noindex,follow'));
 });
 
-test('three main sections are real indexable pages, with projects still available',async()=>{
+test('collection entry points redirect to existing sections without generated index pages',async()=>{
  const rules=await readFile('dist/_redirects','utf8');
- assert.ok(rules.includes('/projects/ https://jouandbou.com/#projects 301'));
- const sitemap=await readFile('dist/sitemap.xml','utf8');
- for(const path of ['about-us','jou-works','bou-works']){
-  const html=await readFile(`dist/${path}/index.html`,'utf8');
-  assert.ok(html.includes('id="section-static-content"'));
-  assert.ok(html.includes(`rel="canonical" href="https://jouandbou.com/${path}/"`));
-  assert.ok(sitemap.includes(`https://jouandbou.com/${path}/</loc>`));
-  assert.ok(!rules.split('\n').some(line=>line.startsWith('/'+path+'/ ')),'clean section must not redirect');
-  assert.ok(rules.includes(`/${path} https://jouandbou.com/${path}/ 301`));
- }
- await assert.rejects(access('dist/projects/index.html'));
+ for(const [path,hash] of [['/projects/','#projects'],['/jou-works/','#projects'],['/bou-works/','#bou-works'],['/about-us','#about']])assert.ok(rules.includes(`${path} https://jouandbou.com/${hash} 301`));
+ for(const path of ['projects','jou-works','bou-works'])await assert.rejects(access(`dist/${path}/index.html`));
+ const sitemap=await readFile('dist/sitemap.xml','utf8');for(const path of ['projects','jou-works','bou-works'])assert.ok(!sitemap.includes(`https://jouandbou.com/${path}/</loc>`));
 });

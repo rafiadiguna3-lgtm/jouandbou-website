@@ -74,7 +74,6 @@ Penggabungan kode atau pergantian branch deployment perlu ditinjau sebagai peker
 | Preview link | `scripts/build-project-previews.mjs` |
 | Intro peta | `site/phone-map-guide.mjs`, `site/world-guide.css` |
 | URL lama dan domain | `site/_redirects` |
-| Tiga bagian utama dan HTML sebelum aplikasi siap | `scripts/build-section-pages.mjs`, `site/project-routing.mjs`, `site/project-seo.mjs` |
 | Favicon | `cloudflare/favicon-worker.mjs` |
 | Foto | Folder proyek di `site/assets/` |
 

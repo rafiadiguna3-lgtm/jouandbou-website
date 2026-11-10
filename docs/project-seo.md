@@ -1,6 +1,6 @@
 # SEO dan Link Proyek
 
-10 November 2026 · panduan untuk versi website saat ini.
+26 Oktober 2026 · panduan untuk versi website saat ini.
 
 Tujuannya agar pengunjung dari Google atau link yang dibagikan tiba di karya yang tepat, dengan judul, deskripsi, dan gambar preview yang sesuai.
 
@@ -10,11 +10,10 @@ Ada **8 proyek Jou dan 7 konsep Bou** dengan URL publik, tercatat di `site/proje
 
 ## Struktur URL
 
-- Homepage: `https://jouandbou.com/`.
-- Tiga bagian utama: `/about-us/`, `/jou-works/`, dan `/bou-works/`, masing-masing berstatus 200 dengan konten dan canonical sendiri.
+- Homepage/peta: `https://jouandbou.com/#projects`.
 - Jou: `/projects/nama-proyek/`.
 - Bou: `/projects/bou/nama-proyek/`.
-- `/projects/` tetap diarahkan ke peta homepage. Tautan lama `/#about` dan `/#bou-works` dibuka sebagai bagian yang sesuai; `/#projects` tetap berfungsi untuk homepage.
+- `/projects/` dan `/jou-works/` diarahkan ke peta, bukan halaman index tambahan.
 - URL lama yang dikenal diarahkan ke karya yang sesuai melalui `site/_redirects`.
 
 Pertahankan URL yang sudah dibagikan saat judul karya berubah. Jika alamat harus diganti, tambahkan pengalihan ke tujuan yang benar.
@@ -58,7 +57,7 @@ Daftarkan aset baru dalam manifest sumber. Detailnya ada di [Panduan Pengelolaan
 - Tanpa JavaScript, teks dan foto proyek tetap tersedia.
 - Gambar preview dapat diakses dengan tipe `image/jpeg`.
 - Di domain aktif, proyek memberi status 200, alamat yang tidak ada tetap 404, dan `www` beralih ke domain utama tanpa kehilangan path proyek.
-- `sitemap.xml` berisi homepage, tiga bagian utama, dan 15 proyek publik.
+- `sitemap.xml` berisi homepage dan proyek publik, tanpa halaman index yang sudah dialihkan.
 
 ```sh
 npm run test:projects
@@ -76,15 +75,8 @@ Sebelum menunggu cache, pastikan deployment, metadata, redirect, dan gambar pada
 
 ## Judul dan sitelink Google
 
-Judul metadata ditulis lowercase, termasuk `about us`, `jou works`, dan `bou works`. Navigasi utama memakai tautan HTML ke tiga alamat di atas. Saat JavaScript aktif, masing-masing alamat memakai tampilan About, peta Jou, dan koleksi Bou yang sudah ada. Konten HTML tersedia sebelum aplikasi siap dan jika JavaScript gagal; tidak ada menu index baru yang ditambahkan ke peta.
+Judul metadata ditulis lowercase, termasuk `about us`, `jou works`, dan `bou works`. Navigasi about dan proyek menggunakan tautan HTML; dua koleksi karya tetap mengarah ke bagian homepage yang sudah ada. Tidak ada halaman index tambahan.
 
-Google memilih sitelink secara otomatis. Website tidak dapat menetapkan tepat tiga sitelink atau melarang proyek tertentu menjadi sitelink sambil tetap menjaganya terindeks. Jangan menggunakan noindex, robots.txt, atau penghapusan Search Console untuk menyembunyikan proyek dari sitelink. Tiga bagian kini punya URL dan canonical independen. Proyek dihubungkan ke koleksi yang sesuai lewat breadcrumb. Perubahan ini memperjelas struktur situs; bukan perintah kepada Google untuk menampilkan tepat tiga sitelink.
+Google memilih sitelink secara otomatis. Website tidak dapat menetapkan tepat tiga sitelink atau melarang proyek tertentu menjadi sitelink sambil tetap menjaganya terindeks. Jangan menggunakan noindex, robots.txt, atau penghapusan Search Console untuk menyembunyikan proyek dari sitelink. URL fragmen tetap bagian dari homepage, bukan tiga halaman independen.
 
 Untuk ikon, periksa `/favicon.ico?preview=google` setelah memasang Worker terbaru. Preview hitam dengan ruang putih lega membuktikan aset Worker untuk crawler, bukan pembaruan cache Google.
-
-## Setelah rilis tiga bagian utama
-
-1. Pastikan `/about-us/`, `/jou-works/`, dan `/bou-works/` mengembalikan 200 pada domain production, bukan redirect ke homepage.
-2. Periksa ketiga URL lewat Search Console, lalu minta pengindeksan.
-3. Kirim ulang `https://jouandbou.com/sitemap.xml`.
-4. Pantau status pengindeksan dan sitelink. Jangan menghapus proyek dari indeks untuk mengatur sitelink.

@@ -59,12 +59,12 @@ test('Bou project and back links keep SPA navigation without losing the root ass
  const link=page.locator('#bou-page a[href="/projects/bou/temu/"]');await link.click();
  await expect(page).toHaveURL(/\/projects\/bou\/temu\/$/);await expect(page.locator('.bou-project')).toBeVisible();
  await expect(page.locator('base')).toHaveAttribute('href','/');
- await page.locator('.bou-back').click();await expect(page).toHaveURL(/\/bou-works\/$/);await expect(page.locator('.bou-project-picker')).toBeVisible();expect(navigations).toEqual([]);
+ await page.locator('.bou-back').click();await expect(page).toHaveURL(/\/#bou-works$/);await expect(page.locator('.bou-project-picker')).toBeVisible();expect(navigations).toEqual([]);
  await page.goBack();await expect(page).toHaveURL(/\/projects\/bou\/temu\/$/);await expect(page.locator('.bou-project')).toBeVisible();
 });
 
 test('work collections use the existing homepage sections',async({page})=>{
  await page.goto('/#projects');await expect(page.locator('#map')).toBeVisible();await expect(page.locator('body')).not.toHaveClass(/model-view/);
- await page.goto('/#bou-works');await expect(page.locator('.bou-project-picker')).toBeVisible();await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href','https://jouandbou.com/bou-works/');
+ await page.goto('/#bou-works');await expect(page.locator('.bou-project-picker')).toBeVisible();await expect(page.locator('link[rel=canonical]')).toHaveAttribute('href','https://jouandbou.com/');
  await page.goto('/#about');await expect(page.locator('#about-page')).toBeVisible();await expect(page.getByText('view project index')).toHaveCount(0);
 });

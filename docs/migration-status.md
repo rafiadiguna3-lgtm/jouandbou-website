@@ -631,8 +631,7 @@ Public deployment safety: build now rejects environment files, repository intern
 - About/proyek pada navigasi kini berupa anchor HTML; tautan koleksi dikelompokkan sebagai navigasi. Tidak ada halaman index baru atau penghapusan indeks proyek.
 - Sitelink Google tetap otomatis; jumlah, label akhir, dan pemilihan tiga bagian tidak dapat dijamin.
 
-### 10 November 2026 — Tiga bagian utama bisa diindeks
-- `/about-us/`, `/jou-works/`, dan `/bou-works/` kini halaman 200 dengan title lowercase, metadata, canonical, schema, konten HTML, dan entri sitemap sendiri. Ini menggantikan keputusan redirect koleksi pada catatan sebelumnya.
-- Tampilan interaktif tetap memakai About, peta, dan koleksi Bou yang sudah ada. HTML awal bertahan jika aplikasi gagal, lalu dilepas ketika tampilan yang sesuai siap.
-- Navigasi utama serta breadcrumb proyek mengarah ke tiga bagian ini. Link proyek tetap aktif dan tetap masuk sitemap; `/projects/` masih kembali ke homepage.
-- Slug tanpa slash diarahkan ke bentuk dengan slash, sementara URL legacy hash tetap diterima. Pengaturan sitelink akhir tetap milik Google.
+### 10 November 2026 — Rollback struktur halaman SEO
+- Struktur halaman About/Jou/Bou independen pada commit 793aa0b ditarik kembali setelah laporan lag. Routing, navigasi, dan template kembali ke versi sebelum perubahan tersebut.
+- Judul lowercase dan favicon center tetap dipertahankan. Perubahan SEO lanjutan ditahan sampai keluhan performa selesai diperiksa.
+- Rollback merupakan pemulihan ke baseline sebelumnya, bukan bukti bahwa penyebab lag perangkat pengguna sudah teridentifikasi.

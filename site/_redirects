@@ -75,8 +75,11 @@ https://www.jouandbou.com/bou-works/raindeer https://jouandbou.com/projects/bou/
 https://www.jouandbou.com/bou-works/raindeer/ https://jouandbou.com/projects/bou/raindeer/ 301
 /bou-works/raindeer/ https://jouandbou.com/projects/bou/raindeer/ 301
 https://www.jouandbou.com/* https://jouandbou.com/:splat 301
-/about-us https://jouandbou.com/about-us/ 301
+/about-us https://jouandbou.com/#about 301
+/about-us/ https://jouandbou.com/#about 301
 /projects https://jouandbou.com/#projects 301
 /projects/ https://jouandbou.com/#projects 301
-/jou-works https://jouandbou.com/jou-works/ 301
-/bou-works https://jouandbou.com/bou-works/ 301
+/jou-works https://jouandbou.com/#projects 301
+/jou-works/ https://jouandbou.com/#projects 301
+/bou-works https://jouandbou.com/#bou-works 301
+/bou-works/ https://jouandbou.com/#bou-works 301

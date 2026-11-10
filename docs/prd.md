@@ -60,7 +60,7 @@ Jumlah model tidak sama dengan jumlah cerita proyek lengkap. Status implementasi
 
 ## Prinsip pengembangan
 
-- Pertahankan tampilan peta dan koleksi Bou sebagai pintu masuk karya. Sejak 10 November 2026, About, Jou, dan Bou punya URL yang bisa diindeks tanpa menambah menu index ke peta.
+- Pertahankan peta dan Bou Works sebagai pintu masuk karya, tanpa halaman index proyek tambahan.
 - Gunakan model, foto, dan logo asli studio.
 - Jaga visual minimalis; fitur baru harus memudahkan pengguna.
 - Pertahankan URL proyek yang dapat dibuka langsung, dibagikan, dan dibaca sebelum aplikasi 3D siap.

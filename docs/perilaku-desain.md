@@ -65,9 +65,9 @@ Nomor dan template berada di `site/project-inquiry.mjs`. Perubahan kontak perlu 
 
 | Bagian | Acuan |
 | --- | --- |
-| Jou / peta | `/jou-works/`; homepage tetap dapat dibuka lewat `/#projects` |
-| About | `/about-us/` |
-| Bou | `/bou-works/` |
+| Jou / peta | `/#projects` |
+| About | `/#about` |
+| Bou | `/#bou-works` |
 | Proyek publik | `/projects/.../` atau `/projects/bou/.../` |
 | Domain utama | `https://jouandbou.com` |
 | Nama situs dan judul homepage | `jou and bou studio` |
@@ -75,7 +75,7 @@ Nomor dan template berada di `site/project-inquiry.mjs`. Perubahan kontak perlu 
 
 Judul proyek tetap memakai nama karya. Deskripsi menjelaskan isi/layanan, dan gambar preview berasal dari proyek yang dibagikan.
 
-Worker menyajikan putih untuk browser dan hitam berlatar putih untuk crawler yang dikenali, dengan mark hitam lebih kecil dan ruang putih yang lebih lega. Tampilan Google tetap bergantung pada pemilihan dan cache Google. Lihat [panduan favicon](favicon-behavior.md).
+Worker menyajikan putih untuk browser dan hitam berlatar putih untuk crawler yang dikenali, dengan ukuran mark yang sama. Tampilan Google tetap bergantung pada pemilihan dan cache Google. Lihat [panduan favicon](favicon-behavior.md).
 
 ## Gangguan dan pemeriksaan visual
 

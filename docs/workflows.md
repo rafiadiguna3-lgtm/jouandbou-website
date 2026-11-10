@@ -15,7 +15,7 @@ Perubahan Markdown saja tidak memicu tes otomatis. Perubahan manifest JSON tetap
 | Tahap | Cakupan |
 | --- | --- |
 | Build dan tes sumber | Hash/aset, model, kamera, file publik, halaman proyek, konfigurasi, dan respons Worker |
-| Browser | Metadata, tiga halaman utama, URL proyek, search, fallback, WhatsApp, dan 11 ukuran/input layar |
+| Browser | Metadata, URL proyek, search, fallback, WhatsApp, dan 11 ukuran/input layar |
 | Laporan | Hasil Playwright; screenshot/trace tersedia jika pemeriksaan menghasilkan bukti tersebut |
 
 Worker diuji secara lokal dari kode repositori. Ini tidak membuktikan versi Worker yang terpasang di Cloudflare atau hasil Google sudah sama.
